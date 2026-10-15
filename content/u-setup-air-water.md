@@ -1,6 +1,6 @@
 ---
 title: Air, water quality, and robot vacuum
-aliases: [u-setup-air-water, air-water-setup]
+aliases: [ air-water-setup]
 tags: [u-setup, air-water]
 status: evergreen
 created: 2026-10-10

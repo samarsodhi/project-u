@@ -1,6 +1,6 @@
 ---
 title: Geysers, shower glass, ventilation, and mesh
-aliases: [u-setup-geysers, geysers-setup]
+aliases: [ geysers-setup]
 tags: [u-setup, geysers]
 status: evergreen
 created: 2026-10-10

@@ -1,6 +1,6 @@
 ---
 title: Joinery and materials spec sheet
-aliases: [u-setup-joinery, joinery-setup]
+aliases: [ joinery-setup]
 tags: [u-setup, joinery]
 status: evergreen
 created: 2026-10-10

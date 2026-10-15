@@ -1,6 +1,6 @@
 ---
 title: Kitchen worktop, sinks, and taps
-aliases: [u-setup-worktop, kitchen-worktop-setup]
+aliases: [ kitchen-worktop-setup]
 tags: [u-setup, worktop]
 status: evergreen
 created: 2026-10-10

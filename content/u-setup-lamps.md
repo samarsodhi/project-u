@@ -1,6 +1,6 @@
 ---
 title: Lamps and decorative lighting
-aliases: [u-setup-lamps, lamps-setup]
+aliases: [ lamps-setup]
 tags: [u-setup, lamps]
 status: evergreen
 created: 2026-10-10

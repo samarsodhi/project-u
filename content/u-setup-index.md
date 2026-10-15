@@ -1,6 +1,6 @@
 ---
 title: Index, decisions and budget
-aliases: [u-setup-index, u-index, olympus-setup-index]
+aliases: [ u-index, olympus-setup-index]
 tags: [u-setup, index]
 status: evergreen
 created: 2026-10-10

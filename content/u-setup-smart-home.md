@@ -1,6 +1,6 @@
 ---
 title: Smart home, Wi-Fi, smart switches
-aliases: [u-setup-smart-home, smart-home-setup]
+aliases: [ smart-home-setup]
 tags: [u-setup, smart-home]
 status: evergreen
 created: 2026-10-10

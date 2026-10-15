@@ -1,6 +1,6 @@
 ---
 title: "Interiors: Homz Interio, Design Scheme and Rooms Detail"
-aliases: [u-setup-interiors-detail, homz-interiors-detail]
+aliases: [ homz-interiors-detail]
 tags: [u-setup, interiors, homz]
 status: evergreen
 created: 2026-10-10

@@ -1,6 +1,6 @@
 ---
 title: Audio and TV
-aliases: [u-setup-audio, audio-setup]
+aliases: [ audio-setup]
 tags: [u-setup, audio]
 status: evergreen
 created: 2026-10-10

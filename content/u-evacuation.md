@@ -1,6 +1,6 @@
 ---
 title: Olympus B4206 High-Rise Evacuation & Power Protocol
-aliases: [u-evacuation, evacuation-plan, safety-readiness]
+aliases: [ evacuation-plan, safety-readiness]
 tags: [personal, real-estate, safety]
 created: 2026-10-04
 updated: 2026-10-13

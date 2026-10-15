@@ -1,10 +1,10 @@
 ---
 title: Interior finishes, materials, and joinery
-aliases: [u-setup-interiors, interiors-setup]
+aliases: [ interiors-setup]
 tags: [u-setup, interiors]
 status: evergreen
 created: 2026-10-10
-updated: 2026-10-14
+updated: 2026-10-15
 ---
 
 [[u-setup-index]]
@@ -63,5 +63,23 @@ updated: 2026-10-14
 | **BR-02 (Kabir's Room)** | **Misty Breeze (8307)** (`#B2C2CC`, LRV 54) | [View](assets/swatches/swatch-kabir-br02.png) | Desaturated coastal grey-blue. Playful nautical theme that grows gracefully with child; washable Teflon film. |
 | **BR-03 (Home Gurudwara)** | **Pure Milk (0942)** (`#F8F5EC`, LRV 86) | [View](assets/swatches/swatch-gurudwara-br03.png) | Pure, serene, sacred environment. Flat unadorned matte surface for respectful daily Prakash. |
 | **Kitchen & Utility** | **Royale Shyne Off-White** (`#F4F3ED`, LRV 82) | [View](assets/swatches/swatch-kitchen-utility.png) | Fungal-resistant, scrubbable high-durability finish resisting oil vapor and yellowing near cooking zones. |
+
+---
+
+### §7.3 Cabinetry & Wardrobe Palette & Finish Matrix (Designer & Reddit Standard)
+
+**Answer:** Two-tone low-glare architecture. High-touch base units use anti-fingerprint greige; overheads match wall tone; kids' room uses the 70/20/10 ageless framework.
+
+| Zone / Joinery Unit | Main Shutter Finish & Code | Accent / Niche Tone | Hardware & Profile Standard | Reddit & SME Failure-Mode Guardrail |
+| :--- | :--- | :--- | :--- | :--- |
+| **Kitchen Base Cabinets & Drawers** | [Greenlam AFX 108 / Merino Luvih 21091](https://www.greenlam.co.in) (Cashmere Greige Ultra-Matt, 1.0mm) | Steel Grey Granite Capping | Concealed black/champagne anodized Gola profile (no protruding handles) | Standard dark mattes show permanent oily fingerprints; non-AFX surfaces require abrasive degreasing that lifts edge bands. |
+| **Kitchen Overheads & Lofts** | [Merino 10001 Matt / Luvih Chalk](https://www.merinolaminates.com) (Warm Off-White, 1.0mm) | Open spice shelf in Natural Oak | Bottom overhang finger-pull (zero external hardware) | High-gloss acrylic yellows from cooking fumes; pure white overheads clash if cooler than wall paint (`#F4F3ED`). |
+| **Master Bedroom Wardrobe** | [Merino Luvih Cashmere Greige](https://www.merinolaminates.com) (Soft matte warm neutral) | Natural CP Teak fluted reveal in dressing niche | 1200mm slim profile edge-lip handles in brushed brass | Dark gloss wardrobes turn 13×13 bedroom into a dark cave; use warm low-sheen tones matching Dry Sage walls. |
+| **BR-01 Study / Guest Wardrobe** | [Merino 10001 Matt Canvas White](https://www.merinolaminates.com) (Seamless wall match) | Warm Oak floating internal desk reveal | Flush push-to-open magnetic catches or recessed J-pulls | High-contrast patterns create distracting visual noise on WFH video backgrounds; keep shutters monolithic with walls. |
+| **BR-02 Kabir's Wardrobe (70/20/10)** | [Merino 10001 Matt Chalk White](https://www.merinolaminates.com) (70% main shutter envelope) | [Merino 21055 Natural Oak](https://www.merinolaminates.com) (20% open book niche) + [Merino 21183 Denim Slate](https://www.merinolaminates.com) (10% lower drawers) | Rounded oak dowel handles or screw-on slate blue leather tabs | Saturated cartoon laminates cause regret within 3 years; keep 70% of shutter envelope neutral and isolate color to 2 modular drawer fronts. |
+| **BR-03 Gurudwara Storage** | [Merino Pure White Matt 10002](https://www.merinolaminates.com) (Pristine clean finish) | Kiln-dried CP Teak edge lip matching Palki Sahib | Concealed magnetic push latches (zero visual metal hardware) | Loud wood grains or dark colors distract from spiritual focus; keep storage completely silent and flush. |
+
+* **Edge-Banding Rule:** Apply 2.0 mm solid-color high-impact PVC edge tape via factory PUR hot-melt edge bander. Reject manual solvent glue on shutter edges.
+* **Cleaning Protocol:** Clean anti-fingerprint surfaces with microfiber cloths damp with 10% mild dish soap solution; reject acetone or chlorinated thinners.
 
 **Detail →** [[u-setup-interiors-detail]] · [[u-setup-rooms]]

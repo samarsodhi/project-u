@@ -1,6 +1,6 @@
 ---
 title: Safety and security
-aliases: [u-setup-safety, safety-setup]
+aliases: [ safety-setup]
 tags: [u-setup, safety]
 status: evergreen
 created: 2026-10-10

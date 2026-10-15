@@ -1,6 +1,6 @@
 ---
 title: Room by room -- furniture and fixtures
-aliases: [u-setup-rooms, rooms-setup]
+aliases: [ rooms-setup]
 tags: [u-setup, rooms]
 status: evergreen
 created: 2026-10-10

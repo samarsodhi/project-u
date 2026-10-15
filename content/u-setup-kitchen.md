@@ -1,10 +1,10 @@
 ---
 title: Kitchen appliances and laundry
-aliases: [u-setup-kitchen, kitchen-setup]
+aliases: [ kitchen-setup]
 tags: [u-setup, kitchen, laundry]
 status: evergreen
 created: 2026-10-10
-updated: 2026-10-14
+updated: 2026-10-15
 ---
 
 [[u-setup-index]]
@@ -44,6 +44,7 @@ updated: 2026-10-14
   * Heavy heating elements (dryer, oven, induction) must never run through extension boards or shared multi-plugs.
 * **Joinery & Cabinetry (Homz):**
   * 3-drawer Blum LEGRABOX bank in the former dishwasher bay sized for heavy pots, pans, and pantry dry goods (no internal trash bins).
+  * Shutter finishes follow [[u-setup-interiors#73-cabinetry--wardrobe-palette--finish-matrix]]: Cashmere Greige AFX base drawers + Warm Chalk White overheads with Gola channels.
   * Refrigerator niche must provide 594 mm counter depth + 50 mm rear ventilation clearance.
   * Rigid 6" circular chimney duct with $\le 2$ sweeping 90° bends; fit exterior gravity flap on utility louvre.
   * Laundry stack must stand directly on structural flooring, never on an elevated hollow wooden plinth. Secure heat-pump dryer to washer using the official Bosch stacking kit with pull-out laundry sorting shelf (WTZ27400 / WTZ11400) and anti-vibration foot pads.

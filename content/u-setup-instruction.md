@@ -1,6 +1,6 @@
 ---
 title: U Setup Instruction & Decision Brief
-aliases: [olympus-brief, Olympus brief, U brief, U setup brief, B4206 brief, u-setup-instruction]
+aliases: [olympus-brief, Olympus brief, U brief, U setup brief, B4206 brief]
 tags: [project, personal]
 created: 2026-10-02
 updated: 2026-10-13

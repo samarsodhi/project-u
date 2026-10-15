@@ -1,6 +1,6 @@
 ---
 title: BOM and Appendices A0-A5 Detail
-aliases: [u-setup-bom-detail, bom-detail]
+aliases: [ bom-detail]
 tags: [u-setup, bom, appendices]
 status: evergreen
 created: 2026-10-10
