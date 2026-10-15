@@ -1,0 +1,101 @@
+---
+title: Room by room -- furniture and fixtures
+aliases: [u-setup-rooms, rooms-setup]
+tags: [u-setup, rooms]
+status: evergreen
+created: 2026-10-10
+updated: 2026-10-14
+---
+
+[[u-setup-index]]
+
+### §12 Room by Room Loose Furniture & Millwork
+
+**Answer:** Homz provides factory modular cabinetry only (kitchen carcasses and standard wardrobes). Zero custom site carpentry from Homz. You procure all loose and statement furniture directly from dedicated makers: [Phantom Hands](https://phantomhands.in), [Alankaram](https://www.alankaram.in), [Spin](https://madewithspin.com), [Orange Tree](https://www.orangetree.in), and IKEA. **Every line item presents High-Quality VFM first, followed by High-Quality Unconstrained.**
+
+*Site Constraint:* Measure Olympus service lift car and corridor turns before ordering items $>2.1\text{ m}$. Mandate knock-down (KD) bolted assemblies for large tables and sofas to avoid stairwell jamming.
+*Finishes & Fixtures Reference:* Room wall colors reference [[u-setup-interiors#definitive-room-by-room-color-palette]]. BLDC ceiling fan sizing and siting rules reference [[u-setup-smart-home#bldc-ceiling-fan-specifications--siting-rules-designer--reddit-standard]].
+
+---
+
+#### 1. Drawing Room + Foyer (13'0" × 17'8", North Window)
+
+| Need                                  | Tier 1: High-Quality VFM                                                                                                                          | Tier 2: High-Quality Unconstrained                                                                                                                                                  | Top Failure Mode & Reddit Insight                                                                                                 |
+| :------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------- |
+| **Hero 3-Seat Sofa**                  | [Custom Seasoned CP Teak Sofa / Spin Native Couch](https://www.madewithspin.com/collections/sofas-loungers) (Solid timber/steel frame, clean lines, 40D HR foam, removable covers, ~₹78k–99k) | [Alankaram Mysig / Megah Teak Sofa](https://www.alankaram.in/collections/sofas) (Kiln-dried solid teak, clean lines, dense ergonomic supportive back, ₹1,75,000)                   | Unibody >2.1 m frames jam in elevators; mandate KD bolted frames. Spindle backs cause pressure-point spine pain; continuous timber frames with deep cushions ensure real lumbar comfort. |
+| **Armchairs ×2 ($\le 75\text{ cm}$)** | [Spin Arc Armchair / Lounger](https://www.madewithspin.com/collections/chairs) (Solid ash, powder-coated steel base, ₹24,000 ea)                                                | [Phantom Hands Easy Armchair](https://phantomhands.in/collections/project-chandigarh) (Reclaimed teak, cane back, padded leather seat, ₹78,000 ea)                                 | Children kneeling on cane punch through rattan mesh; keep cane strictly on vertical backrests and use high-density leather or solid wood seat bases. |
+| **Coffee Table**                      | [Orange Tree Dali Wooden Coffee Table](https://www.orangetree.in/collections/living-room-furniture) (Solid wood, brass inlay accents, ₹25,599)                                  | [Phantom Hands Tangāli / Chandigarh Coffee Table](https://phantomhands.in/collections/tables) (Solid reclaimed teak, architectural profile, ₹68,000)                                | Raw oiled finishes watermark within weeks; seal solid wood tops with clear matte polyurethane before daily tea service.            |
+| **Living / Drawing Area Rug**         | [Obeetee Varu Handwoven Wool & Jute (10×8 ft)](https://www.obeetee.in/products/varu-handwoven-wool-jute-rug-beige) (Dense low-pile geometric weave, ₹25,200)                    | [Jaipur Rugs Persian-Contemporary Pure Wool (8×10 ft)](https://www.jaipurrugs.com/in/collection/wool-rugs) (Hand-knotted/tufted dense weave, ₹42,000)                             | High-pile shags trap Hyderabad PM2.5 dust and shed fluff that chokes Dyson V15 cyclones; dense low-pile flatweaves vacuum cleanly. |
+| **Foyer Shoe Storage**                | [IKEA STÄLL 4-Compartment Shoe Cabinet](https://www.ikea.com/in/en/p/staell-shoe-cabinet-with-4-compartments-white-50532981/) (Slim 17cm depth, louvered ventilation, ₹19,980)   | [Orange Tree / Alankaram Slotted Teak Credenza](https://www.orangetree.in/collections/living-room-furniture) (Solid wood, louvered slats, brass hardware, ~₹45,000)                 | Sealed shoe cabinets trap damp odor and breed mold; mandate louvered vents and activated charcoal bags.                           |
+
+---
+
+#### 2. Living & Family Room (19'5" × 11'9", High-Traffic Child Zone)
+
+| Need                              | Tier 1: High-Quality VFM                                                                                                                                                                                   | Tier 2: High-Quality Unconstrained                                                                                                                                | Top Failure Mode & Reddit Insight                                                                                                                                            |
+| :-------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Family Sectional Sofa**         | [IKEA KIVIK 3-Seat + Chaise](https://www.ikea.com/in/en/p/kivik-3-seat-sofa-with-chaise-longue-tibbleby-beige-grey-s99440625/) (Pocket springs, 40°C machine-washable covers, ₹63,990 + ₹14k spare covers) | [Gulmohar Lane Long Island Slipcover Sofa](https://www.gulmoharlane.com/products/long-island-fabric-slipcover-sofa) (Kiln-dried hardwood, down-blend, ~₹1,65,000) | Fixed upholstery ruins with toddler spills; KIVIK removable washable slipcovers eliminate anxiety. Seat cushions need poly-fill restuffing after 3–4 years of child jumping. |
+| **Family Coffee Table / Ottoman** | [IKEA VIMLE Footstool with Storage](https://www.ikea.com/in/en/cat/vimle-series-37887/) (Washable cover, internal toy storage, soft edges, ₹29,990)                                                        | [Orange Tree Maeve Bouclé Storage Ottoman](https://www.orangetree.in/collections/living-room-furniture) (Solid ash base, deep disc cushion, ₹50,999)              | Hard marble or sharp glass edges injure active kids; storage ottomans double as soft play seating. Check internal gas stay / friction hinge quarterly to prevent lid slams.  |
+| **Media Console (Low Credenza)**  | [Orange Tree / Spin Minimal Low TV Unit](https://www.orangetree.in/collections/living-room-furniture) (Solid ash/oak, internal cable raceway, 200cm, ₹34,990)                                              | [Alankaram Bespoke Teak Media Console](https://www.alankaram.in/collections/storage-units) (Solid teak fluted facade, soft-close Blum, ~₹85,000)                  | Surface must provide $\ge 1.2\text{ m}$ unobstructed span for Sonos Arc Ultra (1,178mm wide); fluted millwork collects dust if unsealed.                                     |
+
+*South Wall Feature:* Mounts the owned framed **Persian Wall Carpet** (`assets/persian-wall-carpet.jpeg`, classical courtyard scene in sepia, walnut, and antique bronze). Illuminate via ceiling-recessed 3000K CRI 90+ deep gimbal spot at 30° incident angle ($\le 50\text{ lux}$ textile threshold per [[u-setup-lamps]]). Protected from direct East slider UV sun.
+
+---
+
+#### 3. Dining Space (13'10" × 11'9", East Balcony Slider)
+
+| Need | Tier 1: High-Quality VFM | Tier 2: High-Quality Unconstrained | Top Failure Mode & Reddit Insight |
+| :--- | :--- | :--- | :--- |
+| **8-Seat Dining Table** | [Custom Seasoned CP Teak 220cm Trestle Table](https://www.alankaram.in/collections/dining-tables) (Solid teak top, KD bolted legs, ~₹68,000) | [Alankaram Fusi 8-Seat Solid Teak Table](https://www.alankaram.in/products/fusi-eight-seater-teak-dining-table-compact-plain-top) (220×100cm solid teak slab, KD legs, ₹1,65,000) | 220 cm solid teak slabs expand across monsoons; require kiln seasoning (<12% moisture). Mandate knock-down legs for elevator clearance. |
+| **Dining Chairs ×6 (+2 Guests)** | [IKEA TONSTAD Upholstered Dining Chairs](https://www.ikea.com/in/en/p/tonstad-chair-fridtuna-light-beige-oak-effect-60489241/) (Washable slipcovers, padded back, ₹8,950 ea) | [Phantom Hands Dining Chair](https://phantomhands.in/collections/project-chandigarh) (Solid teak, cane back, padded leather seat, ₹31,500 ea) | Natural cane on seat pans splits under child knees; mandate cane on vertical backrest only and solid/leather for seat. |
+| **Over-Table Dining Pendant** | [IKEA AGUNNARYD 3-Lamp Pendant](https://www.ikea.com/in/en/p/agunnaryd-pendant-lamp-with-3-lamps-black-90439931/) (122cm black/brass, dimmable 2700K E27, ₹9,990) | [The Purple Turtles Handcrafted Brass Chandelier](https://thepurpleturtles.com/collections/hanging-lights) (Solid architectural brass, ~₹38,000) | Never wire smart bulbs behind phase dimmers; use dumb dimmable LED bulbs paired with Sonoff MINI-DIM trailing edge module. |
+
+---
+
+#### 4. Master Bedroom Suite (13'0" × 13'0" + Dressing Nook)
+
+| Need | Tier 1: High-Quality VFM | Tier 2: High-Quality Unconstrained | Top Failure Mode & Reddit Insight |
+| :--- | :--- | :--- | :--- |
+| **King Bed Frame (72×78 in)** | [IKEA MALM Ottoman Bed with Storage](https://www.ikea.com/in/en/cat/malm-series-19051/) (Tested gas struts, 800L storage under slatted base, ₹49,990) | [Alankaram Xira Solid Teak King Bed](https://www.alankaram.in/collections/beds) (Kiln-dried teak, clean architectural lines, ergonomic height, ~₹1,25,000) | Gas struts lift heavy mattresses effortlessly for 800L seasonal luggage storage; daily lifting becomes tedious, so store infrequent gear here. |
+| **Bedside Tables ×2** | [Spin Float Shelf / Wall-Hung Drawers](https://www.madewithspin.com/collections/bedroom-furniture) (Clear floor, solid wood, ₹14,000 pair) | [Alankaram Solid Teak Bedside](https://www.alankaram.in/collections/storage-units) (Solid wood drawer, brass hardware, ₹21,500 ea) | Bulky bedside tables block wardrobe swing doors and snag Dyson floor heads; wall-hung units clear floor completely (mount with Fischer nylon masonry plugs). |
+| **Dastar / Full-Length Mirror** | [IKEA HOVET Floor Mirror (78×196 cm)](https://www.ikea.com/in/en/p/hovet-mirror-aluminum-50035899/) (Brushed aluminum frame, safety film, ₹11,990) | [Alankaram Solid Teak Floor Mirror](https://www.alankaram.in/collections/accessories) (Handcrafted solid teak frame, ₹32,000) | Unanchored tall leaning mirrors on smooth vitrified tiles slip and shatter; mechanically bolt top brackets into masonry. |
+
+---
+
+#### 5. BR-01: WFH Study & Guest Room (13'0" × 13'0")
+
+| Need                         | Tier 1: High-Quality VFM                                                                                                                                                                                | Tier 2: High-Quality Unconstrained                                                                                                                                                                           | Top Failure Mode & Reddit Insight                                                                                                                                 |
+| :--------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Sofa-Bed for Guests**      | [IKEA HYLTARP 2-Seat Sofa-Bed](https://www.ikea.com/in/en/cat/hyltarp-series-55099/) (Pocket-sprung, opens to 140×200cm bed, ₹97,980)                                                                   | [Gulmohar Lane Berlin Fabric Sofa Cum Bed](https://www.gulmoharlane.com/products/berlin-fabric-sofa-cum-bed) (Kiln-dried hardwood, fold-out, ₹1,26,900; alt: [Innovation Living CozyPad](https://www.innovationliving.asia/products/by-type/sofa-beds/product-details/cozypad-sofa-bed-with-arms?fabric=595-Corduroy-Burnt-Orange) ~₹1.85L) | Cheap bi-fold futons cause severe lumbar pain; 5-zone pocket springs eliminate center support bars. Keep a 2-inch topper handy as European mattress feel is firm. |
+| **Study Library & Shelving** | [IKEA BILLY / OXBERG Bookcase with Glass Doors](https://www.ikea.com/in/en/cat/billy-system-inf05/) (Oak veneer, dust-proof glass, ₹22,490)                                                             | [Alankaram Modular Architectural Library](https://www.alankaram.in/collections/storage-units) (Solid wood uprights, dust-sealed glass panels, ~₹85,000)                                                      | Open shelving accumulates thick dust in 10 days; glass-fronted shutters cut dusting by 80%. Support heavy art books by reinforcing middle shelf pins.             |
+| **Monitor Task Light**       | [Baseus i-Wok Series Screen Hanging Light](https://baseusindiaofficial.com/products/baseus-i-wok-series-desktop-monitor-screen-light-led-lamp-black-dgiwk-b01) (Asymmetric optical design, USB, ₹2,899) | [BenQ ScreenBar Pro](https://www.amazon.in/dp/B0CZ94MB2R) (Auto-dimming, ultrasonic motion sensor, zero screen glare, ₹14,490)                                                                               | Baseus is a budget tester that can spill glare; BenQ ScreenBar Pro delivers true asymmetrical optics, auto-dimming, and presence sensing for long WFH shifts.     |
+
+---
+
+#### 6. BR-02: Kabir's Room (13'0" × 11'11", Harbour Theme)
+
+| Need                       | Tier 1: High-Quality VFM                                                                                                                                 | Tier 2: High-Quality Unconstrained                                                                                                                              | Top Failure Mode & Reddit Insight                                                                                                           |
+| :------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Child Daybed / Sleeper** | [IKEA BRIMNES Day-Bed Frame with 2 Drawers](https://www.ikea.com/in/en/cat/daybeds-19037/) (Converts to double bed, 2 deep storage drawers, ₹29,990)     | [Boingg Custom Teak Daybed with Trundle](https://boingg.in/collections/beds) (Solid wood, rounded child-safe bullnose edges, ~₹48,000)                          | Loft beds and mid-sleepers pose serious fall hazards for children under 8; low-profile daybeds with pull-out guest trundles eliminate risk. |
+| **Kids Reading Sofa / Sleeper** | [Gulmohar Lane Tumble Kids Sofa Cum Bed](https://www.gulmoharlane.com/products/tumble-kids-sofa-cum-bed) (Modular child floor sleeper, ₹22,500) | [Boingg Mini Lounger Sleeper](https://boingg.in/) (Solid frame toddler sleeper, ~₹32,000) | Pure polyfoam construction sags if adults sit on it regularly; reserve exclusively for child reading and sleepovers. |
+| **Ergonomic Study Desk**   | [IKEA BERGLÄRKA Tiltable Desk](https://www.ikea.com/in/en/cat/childrens-desks-45814/) (Manual crank 52–75cm, tiltable top, EN 17191 child-safe, ₹14,990) | [Moll Champion Ergonomic Children Desk](https://moll-funktion.com/en/shop/champion-children-desk/) (German precision gas lift, split tilt desk top, ~₹85,000)   | Motorized sit-stand desks have high minimum heights ($\ge 62\text{ cm}$) and pinch hazards; manual child-certified desks drop to 52 cm.     |
+| **Growth Desk Chair**      | [Fixed 4-Leg Padded Chair + Footrest](https://www.amazon.in/dp/B08L6XB7WN) (Zero rolling distraction for age 6, ₹1,999)                                  | [IKEA VIMUND Children Ergonomic Chair](https://www.ikea.com/in/en/cat/childrens-desk-chairs-45815/) (Pressure-sensitive brake castors, adjustable back, ₹6,990) | Free-rolling office swivel chairs turn into toys during homework sessions; brake-castors lock chair in place when seated.                   |
+
+---
+
+#### 7. BR-03: The Home Gurudwara (13'0" × 11'11", East Window)
+
+| Need | Tier 1: High-Quality VFM | Tier 2: High-Quality Unconstrained | Top Failure Mode & Reddit Insight |
+| :--- | :--- | :--- | :--- |
+| **Palki Sahib (Saroop Seat)** | [Handcrafted Solid Teak Manji Sahib + Chandoa](https://www.tradeindia.com) (Natural matte teak, ~₹28,000) | [Master Artisan Carved Teak Palki Sahib](https://www.tradeindia.com/products/wooden-palki-sahib-c956026.html) (3 ft wide, solid timber, brass inlay, ₹47,000 + freight) | Flashy high-gloss polyurethane varnish peels in direct sunlight; specify traditional natural wax or matte oil finish. Placed on North wall away from shared plumbing. |
+| **Sangat Floor Covering** | [Pure Cotton Dhurrie 6×9 ft + White Khes](https://dir.indiamart.com/hyderabad/cotton-durries.html) (Hand-woven, washable, ~₹4,500) | [Hand-Knotted Organic Cotton Floral Carpet](https://www.jaipurrugs.com/in) (Dense washable weave, ₹18,500) | Wool carpets absorb oil and are difficult to wash without chemical dry cleaning; 100% washable cotton durries ensure sacred purity. |
+
+---
+
+### Millwork Sourcing & Structural Safety
+* **Homz Modular Boundary:** Homz executes factory modular cabinetry only (kitchen carcasses and standard modular bedroom wardrobes). All loose furniture is procured from dedicated makers. Carcasses must use IS 710 BWP marine plywood.
+* **Wall Anchoring:** All tall wardrobes, bookshelves, and full-length mirrors must be anchored into RCC shear walls or solid brickwork using heavy-duty Fischer wall anchors.
+
+**Skip List:** Flat-pack particleboard beds, motorized adult desks for children, unanchored leaning mirrors, open un-ducted false ceilings.
+
+**Detail →** [[u-setup-interiors-detail]] · [[u-setup-bom-detail]]
