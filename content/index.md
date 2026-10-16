@@ -32,7 +32,7 @@ This folder is the master workspace for all decisions and execution planning rel
 | OLY-03 | **Modular Kitchen & Built-In Appliances** | `[STATE: DECIDED]` | Samar & Sonia | Light granite (owner-sourced), `3174 LU` / `#F4F2EB` off-white laminates, 9 tandem drawers, no dishwasher | 2026-11-15 |
 | OLY-04 | **Smart Home & Smart Switches** | `[STATE: PLANNED]` | Samar | Sonoff MINIR4M Matter relays behind existing plates + Echo Dot Max | 2026-11-15 |
 | OLY-05 | **Whole-Home Mesh WiFi & Audio** | `[STATE: PLANNED]` | Samar | Cat6 to 3 ceiling AP spots (2 APs at move-in) + Sonos Arc Ultra | 2026-12-01 |
-| OLY-06 | **Furniture & Living Spaces** | `[STATE: PLANNED]` | Samar & Sonia | Solid timber makers (Phantom Hands, Alankaram, Magari, Spin, Orange Tree) + IKEA KIVIK/HYLTARP | 2026-12-15 |
+| OLY-06 | **Furniture & Living Spaces** | `[STATE: PLANNED]` | Samar & Sonia | Drawing dual options (Magari Artisanal vs d'Interio Italian Leather) + Lounge Recliner & Bidirectional Jhoola | 2026-12-15 |
 
 ---
 
