@@ -46,6 +46,11 @@ updated: 2026-10-16
 * **Joinery & Cabinetry (Homz):**
   * Locked Drawer Layout: 2 tandem drawers below hob + 3 drawers on either side of sink unit (6 total) + 1 ventilated tandem drawer replacing wicker basket.
   * Locked Laminate Finishes: Base units in `3174 LU Brown Sugar`; Wall units and lofts in **Warm Off-White (`#F4F2EB`)**; internal laminate `0.8 mm off-white` (add waterproof mat inside sink cabinet).
+
+| Component | Finish Code & Material | Swatches (Color Harmony) | Siting & Specifications |
+| :--- | :--- | :--- | :--- |
+| **Kitchen Cabinets & Base Tandems (Two-Tone)** | **Base:** `3174 LU Brown Sugar`<br>**Wall & Lofts:** **Warm Off-White (`#F4F2EB`)** | <img src="assets/swatches/laminate-3174-brown-sugar.png" alt="Base: Brown Sugar 3174 LU" width="115"> <img src="assets/swatches/laminate-08-off-white.png" alt="Wall & Lofts: Warm Off-White #F4F2EB" width="115"> | 9 soft-close tandem drawers in base carcasses; wipeable warm off-white on overheads and ceiling lofts; paired with light-shade Indian granite worktop. |
+
   * Refrigerator niche must provide 594 mm counter depth + 50 mm rear ventilation clearance.
   * Rigid 6" circular chimney duct with $\le 2$ sweeping 90° bends; fit exterior gravity flap on utility louvre.
   * Laundry stack must stand directly on structural flooring, never on an elevated hollow wooden plinth. Secure heat-pump dryer to washer using the official Bosch stacking kit with pull-out laundry sorting shelf (WTZ27400 / WTZ11400) and anti-vibration foot pads.
