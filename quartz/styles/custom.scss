@@ -1,29 +1,33 @@
 @use "./base.scss";
 
-// Wide layout: Remove right sidebar, expand middle content
-@media all and (min-width: 1200px) {
-  .page {
-    max-width: 1750px !important;
-  }
-  #quartz-body {
-    grid-template-columns: 280px 1fr !important;
-    grid-template-areas:
-      "grid-sidebar-left grid-header"
-      "grid-sidebar-left grid-center"
-      "grid-sidebar-left grid-footer" !important;
-  }
+// Wide reading layout: Pushes middle page to the right, expands tables, keeps right margin
+.page {
+  max-width: 97vw !important;
+  width: 97vw !important;
+  margin-left: 1.5rem !important;
+  margin-right: auto !important;
 }
 
-@media all and (min-width: 800px) and (max-width: 1200px) {
+#quartz-body {
+  grid-template-columns: 280px minmax(0, 1fr) !important;
+  column-gap: 2.5rem !important;
+  grid-template-areas:
+    "grid-sidebar-left grid-header"
+    "grid-sidebar-left grid-center"
+    "grid-sidebar-left grid-footer" !important;
+  padding-right: 4.5rem !important; // Empty space on the right as margin
+}
+
+@media all and (max-width: 1000px) {
   .page {
     max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 1rem !important;
   }
   #quartz-body {
-    grid-template-columns: 250px 1fr !important;
-    grid-template-areas:
-      "grid-sidebar-left grid-header"
-      "grid-sidebar-left grid-center"
-      "grid-sidebar-left grid-footer" !important;
+    grid-template-columns: 100% !important;
+    padding-right: 0 !important;
   }
 }
 
@@ -31,14 +35,32 @@
   display: none !important;
 }
 
-// Hide standalone TOC since it is nested under the active page in Explorer
+.sidebar.left {
+  width: 280px !important;
+  min-width: 280px !important;
+}
+
+// Hide standalone TOC on the left since it is nested under the active page in Explorer
 .sidebar.left > .toc {
   display: none !important;
 }
 
-// Center reading pane max-width
-.center {
+// Center reading pane and article width
+.center,
+.center > article {
   max-width: 100% !important;
+  width: 100% !important;
+}
+
+// Wide tables for reduced vertical scroll
+table {
+  width: 100% !important;
+  display: table !important;
+  margin: 1.5rem 0 !important;
+}
+
+th, td {
+  padding: 0.6rem 0.8rem !important;
 }
 
 // Nested Table of Contents in Explorer
@@ -82,7 +104,7 @@
 
 // Inline Table Swatch Images
 table td img {
-  max-width: 135px !important;
+  max-width: 130px !important;
   height: auto !important;
   border-radius: 4px;
   display: inline-block;
