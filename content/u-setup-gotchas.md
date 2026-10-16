@@ -1,10 +1,10 @@
 ---
-title: High-Rise Gotchas, Failure Modes & Engineering Mitigations
+title: "14 · High-Rise Gotchas"
 aliases: [ olympus-gotchas, high-rise-mep-gotchas]
 tags: [u-setup, engineering, gotchas, failure-modes]
 status: evergreen
 created: 2026-10-15
-updated: 2026-10-15
+updated: 2026-10-16
 ---
 
 [[u-setup-index]] · [[u-setup-instruction]]
@@ -43,6 +43,9 @@ A consolidated compilation of non-obvious engineering gotchas, Reddit teardown f
 * **RCCB Nuisance Tripping (Type A vs Type AC):**
   * *Failure Mode:* Switched-mode power supplies (PCs, BLDC fans, LED drivers) generate DC residual currents that blind standard Type AC RCCBs.
   * *Mitigation:* Enforce **Type A or Type F 30mA RCCBs** on all sub-distribution circuits.
+* **110V US Robot Vacuum Auto-Empty Dock Burnout (`Roomba 505X`):**
+  * *Failure Mode:* US-purchased robot docks often have dual-voltage (100–240V) charging electronics for the robot, but a **110V-only 1200W AC universal motor** for the dustbin evacuation blower that smokes instantly on 230V Indian power.
+  * *Mitigation:* Inspect the dock baseplate amperage/voltage stamp before plugging into the Dining vanity bay; wire through a 1500VA 230V-to-110V step-down transformer if rated 110–120V.
 
 ---
 
@@ -68,6 +71,12 @@ A consolidated compilation of non-obvious engineering gotchas, Reddit teardown f
 * **Undermount Sink Mechanical Support:**
   * *Failure Mode:* Gluing heavy undermount granite or SS sinks with silicone/epoxy alone leads to sink detachment under a full basin of water and heavy cookware.
   * *Mitigation:* Fabricate a welded SS304 under-counter cradle bracket or install heavy-duty mechanical leveling jacks bolted into carcass sidewalls.
+* **Light Granite Capillary Staining (Turmeric & Oil):**
+  * *Failure Mode:* Light-shade Indian granites contain microscopic feldspar fissures that wick haldi, lemon, and tadka oil into permanent sub-surface stains if left unsealed.
+  * *Mitigation:* Test stone yard slab sample with turmeric paste + hot oil for 15 minutes before purchase; apply 2 coats of food-safe fluorochemical penetrating sealer (**Akemi Anti-Fleck Nano**) prior to commissioning.
+* **Hidden Door Hinge Sag & Dome Mirror Edge Corrosion:**
+  * *Failure Mode:* Cladding hidden doors (Puja/Store) with 18mm ply + `3163 SI` laminate adds ~20 kg, causing standard 3-hinge doors to sag and scrape floor tiles. Bonding dome mirrors with acidic acetoxy silicone corrodes silver backing into black edge rot within 12 months.
+  * *Mitigation:* Fit 4× SS304 ball-bearing hinges (or 80kg-rated 3D concealed Tectus hinges) on hidden doors; bond Saint-Gobain copper-free dome mirrors strictly with **neutral-cure alkoxy silicone**.
 
 ---
 

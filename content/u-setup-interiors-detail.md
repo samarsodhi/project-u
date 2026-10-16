@@ -1,10 +1,10 @@
 ---
-title: "Interiors: Homz Interio, Design Scheme and Rooms Detail"
+title: "15 · Homz Contract Rider"
 aliases: [ homz-interiors-detail]
 tags: [u-setup, interiors, homz]
 status: evergreen
 created: 2026-10-10
-updated: 2026-10-14
+updated: 2026-10-16
 ---
 
 [[u-setup-index]] · [[u-setup-interiors]] · [[u-setup-joinery]]
@@ -37,6 +37,10 @@ Paste these binding clauses as an annexure into the Homz agreement prior to sign
 6. **Payment Milestones:** 10% Advance $\rightarrow$ 30% Carcass Framework delivery $\rightarrow$ 30% Shutter Boarding & Plastering $\rightarrow$ 20% Painting & Hardware installation $\rightarrow$ 10% Final Snag Handover.
 7. **Legal Jurisdiction:** Exclusive jurisdiction under Courts of **Hyderabad** or binding arbitration under the Arbitration & Conciliation Act 1996 (reject Bangalore default).
 8. **Precedence Clause:** This rider supersedes all standard boilerplate terms and conditions.
+9. **Soft-Close Runner Inclusion:** All kitchen tandem drawers (2 below hob, 6 flanking sink, 1 replacing wicker basket) and wardrobe drawers must include Hettich/Blum soft-close channels within the ₹18L contract sum (overriding boilerplate normal-close default).
+10. **Fixed Calendar Completion:** "60/75/90 working days" boilerplate is capped at **75 calendar days** from site measurement sign-off, ensuring handover by 15 March 2027.
+11. **Scope Adjustments Locked:** Base quote deducts the removed L-shaped kitchen granite and dining console, and includes the store room overhead loft, bathroom SS304 curtain rods, and dome-top copper-free mirrors without post-measurement price escalation.
+12. **Refund & Cancellation Fairness:** Overrides "all payments non-refundable" clause; if Homz delays design or production >30 days past milestone dates, unexpended stage payments are 100% refundable.
 
 ---
 

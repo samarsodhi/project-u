@@ -1,9 +1,9 @@
 ---
-title: U Setup Instruction & Decision Brief
+title: "01 · Brief & Rules"
 aliases: [olympus-brief, Olympus brief, U brief, U setup brief, B4206 brief]
 tags: [project, personal]
 created: 2026-10-02
-updated: 2026-10-13
+updated: 2026-10-16
 status: evergreen
 ---
 
@@ -35,12 +35,12 @@ The master brief for [[u-setup-index]] (superseding archived [[olympus-house-set
 * **Aesthetic:** Japandi core with Modern Indian and Persian touches. Prioritize clean architectural lines, functional minimalism, and uncluttered visual calm. Layer warm natural hardwoods (teak/walnut/oak) with subtle brass accents, textured walls, and dense hand-woven textiles. Sophisticated, warm, layered, and open.
 
 ### Room Programme
-* **BR-01 (Study / Guest):** Owned standing desk + Steelcase chair; premium sofa-cum-bed; library shelving.
-* **BR-02 (Kabir Study & Play):** Ergonomic crank desk; back-up daybed. Kabir sleeps in Master bedroom.
-* **BR-03 (Baba ji's Room):** Home Gurudwara for Guru Granth Sahib. Low maintenance, serene, respectful.
-* **Master Bedroom:** Primary family sleeping suite. Incorporates transition sleep space for Kabir.
-* **Puja Room:** Converted to Walk-in Closet / Dressing with open storage and hidden door.
-* **Linen Room:** Converted to organized utility storage with hidden door.
+* **BR-01 / GBR (Study / Guest):** Owned standing desk + Steelcase chair; sofa-cum-bed; wardrobe (`3163 SI Beige Wool`) with single shutter shifted toward study unit and dome-top mirror above.
+* **BR-02 / KBR (Kabir Study & Play):** Ergonomic crank desk; back-up daybed. Kabir sleeps in Master bedroom. Wardrobe colors TBD.
+* **BR-03 / GBR-2 (Baba ji's Room):** Home Gurudwara for Guru Granth Sahib. Wardrobe in `3163 SI Beige Wool` with gold-framed clear glass middle shutter.
+* **Master Bedroom (MBR):** Primary family suite (`3163 SI Beige Wool`), tall dresser with full-height mirror, and textured bed-back wall.
+* **Puja Room:** Walk-in wardrobe (`3163 SI Beige Wool`) with room-matched hidden door panel.
+* **Store / Linen Room:** Includes Homz overhead loft storage and room-matched hidden door panel.
 
 ---
 
@@ -48,7 +48,8 @@ The master brief for [[u-setup-index]] (superseding archived [[olympus-house-set
 
 ### 3.1 Contractor & Commercials
 * **Turnkey Execution:** Homz Interio selected at **₹18.00 Lakh incl. GST**.
-* **Homz Modular Boundary:** Homz executes factory modular cabinetry only (kitchen carcasses and standard modular wardrobes). **Zero custom or bespoke site carpentry from Homz.** Procure all loose, statement, study, bed, and media furniture directly from dedicated makers.
+* **Homz Finalized Scope:** Factory modular joinery across Kitchen/Utility, Wardrobes (MBR, KBR, GBR-1, GBR-2, Walk-in), Store overhead loft, Living TV unit + sofa-back texture paint, Dining common vanity (with robot vacuum bay) + bookshelf, dome-top mirrors throughout, and room-matched hidden door panels. **No dining console unit.** Procure loose seating, beds, and dining tables from dedicated makers.
+* **Homz T&C Redlines:** Reject standard "normal-close" drawer channels (mandate soft-close tandem runners in baseline), override "60/75/90 working days" with a fixed calendar completion date, and deduct the removed L-shaped kitchen granite from the quote.
 * **Contract Rider:** Mandatory 12-point rider (milestone payments, GSTIN verification, price caps, snag holdbacks) required before deposit.
 * **Timeline:** Target move-in by mid-April 2027. Maintain lease flexibility through August 2027.
 
@@ -91,10 +92,10 @@ The master brief for [[u-setup-index]] (superseding archived [[olympus-house-set
 * **Networking:** Structured Cat6 cabling to 3 ceiling drops (deploy 2 APs at move-in). Gateway: owned GL.iNet Flint 2.
 
 ### 3.5 Appliances & Bathrooms
-* **Kitchen:** Builder provides no worktop; fabricate Indian dark granite (Steel Grey / Black Galaxy) on Homz base carcasses. Häfele Domino (Gas + Induction with joining rail) or built-in Bosch. **No dishwasher** (convert bay to standard Blum LEGRABOX 3-drawer storage). Freestanding single lidded trash can in open air (no dark closed-cabinetry waste pull-outs).
+* **Kitchen:** L-shaped granite removed from Homz scope; procure **light-shade Indian granite** directly and seal with fluorochemical nano-sealer. Layout locked: 2 tandem drawers below hob, 3 drawers on either side of sink, and tandem drawer replacing wicker basket (ventilate rear panel for dry produce). Finishes: `3174 LU Brown Sugar` base, `158 LU Taupe` overheads/lofts. **No dishwasher.**
 * **Laundry:** Stacked front-load washer + heat-pump dryer on structural floor in covered utility alcove (no hollow plinths).
 * **Water Heating:** 10L 2kW Wi-Fi storage geysers (Racold Omnis DG) across all 4 bathrooms (mild Hyderabad winters, 4 washrooms for 3 residents). Exclude 15L and 25L tanks.
-* **Showers:** 10mm toughened glass with SS304 fittings and glued bottom water bars (zero floor waterproofing penetrations).
+* **Showers & Washrooms:** Glass partitions removed to preserve bathroom spaciousness. Install wall-flanged **SS304 curtain rods** with weighted curtains and epoxy-glued floor water threshold bars. Washroom cabinet laminate colors TBD.
 
 ### 3.6 Safety & Ergonomics
 * **Balconies:** Full-height SS316 invisible grilles on all 4 balconies. High child locks on sliding doors.

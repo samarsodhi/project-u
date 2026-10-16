@@ -1,5 +1,5 @@
 ---
-title: Safety and security
+title: "13 · Safety & Grilles"
 aliases: [ safety-setup]
 tags: [u-setup, safety]
 status: evergreen

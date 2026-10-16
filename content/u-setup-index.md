@@ -1,13 +1,13 @@
 ---
-title: Index, decisions and budget
+title: "00 · Index & Budget"
 aliases: [ u-index, olympus-setup-index]
 tags: [u-setup, index]
 status: evergreen
 created: 2026-10-10
-updated: 2026-10-14
+updated: 2026-10-16
 ---
 
-[[README|← Back to U Workspace]]
+[[index|← Back to U Workspace]]
 
 # Index, Execution Map and Budget Ledger
 
@@ -23,7 +23,7 @@ Master execution index for [[my-home]] (B4206, Floor 42). Coordinates domain not
 | :--- | :--- | :--- | :--- |
 | **Living & Private Rooms** | Fixed joinery, loose furniture, bed frames, room palettes | [[u-setup-rooms]] | [[u-setup-joinery]] · [[u-setup-interiors]] |
 | **Kitchen & Wet Services** | Modular kitchen, hob/chimney, laundry, worktop, sinks | [[u-setup-kitchen]] | [[u-setup-worktop]] · [[u-setup-bom-detail]] |
-| **Bathrooms & HVAC** | 10L geysers, 10mm shower partitions, VRF interface | [[u-setup-geysers]] | [[u-setup-bom-detail]] |
+| **Bathrooms & HVAC** | 10L geysers, SS304 shower curtain rods, VRF interface | [[u-setup-geysers]] | [[u-setup-bom-detail]] |
 | **Smart Infrastructure** | In-wall Matter relays, Alexa controllers, dimmers | [[u-setup-smart-home]] | [[u-setup-lamps]] |
 | **Network & Audio** | Structured Cat6 cabling, dual APs, whole-home audio | [[u-setup-networking]] | [[u-setup-audio]] |
 | **Environmental & Safety** | 5 air purifiers, water RO/softener, balcony grilles | [[u-setup-air-water]] | [[u-setup-safety]] · [[u-evacuation]] |
@@ -41,17 +41,17 @@ Procurement operates within a doubled quality envelope (~₹41.00–64.00 Lakh) 
 | **BR-01 (Study / Guest)** | 60,500 | 26,000 | 27,000 | Owned desk/chair setup, sofa-cum-bed, library joinery |
 | **BR-02 (Kabir's Study)** | 45,900 | 20,000 | 34,600 | IKEA BERGLÄRKA crank desk, daybed, toy storage |
 | **BR-03 (Baba ji's Room)** | 47,000 | 20,000 | 5,000 | Palki Sahib, sangat seating mats, respectful storage |
-| **Kitchen & Laundry** | 2,90,500–3,24,500 | 1,28,500 | 46,800–77,700 | Häfele Domino hob, Elica BLDC chimney, Bosch washer |
-| **Bathrooms & Geysers** | 60,000–75,000 | 18,000 | 12,000 | 4× Racold 10L Wi-Fi geysers, 10mm glass enclosures |
+| **Kitchen & Laundry** | 2,88,000–3,22,000 | 1,28,500 | 46,800–77,700 | Light granite + Akemi seal, Häfele Domino hob, Bosch washer |
+| **Bathrooms & Geysers** | 52,000–58,000 | 12,000 | 12,000 | 4× Racold 10L Wi-Fi geysers, SS304 shower curtain rods + water bars |
 | **Smart Home & Lighting** | 27,900–29,000 | 51,700 | — | Sonoff MINIR4M Matter relays, Echo controllers |
 | **Networking & Wi-Fi** | 51,000 | — | 15,000 | Gateway Flint 2, 2× TP-Link EAP650 APs, Cat6 cabling |
 | **Audio & Media** | 1,00,000 | 22,000 | 1,32,000 | Sonos Arc Ultra for Living TV; optional ceiling pairs |
-| **Air, Water & Robot** | 86,600 | 65,000–1,98,400 | 81,400 | 5× Coway Airmega 150 purifiers, UTC RO, optional Dreame robot |
+| **Air, Water & Robot** | 86,600 | 15,000–85,000 | 1,29,999 | 5× Coway Airmega 150, owned Roomba 505X in dining vanity, scale control |
 | **Safety & Fall Protection** | 95,100–1,87,600 | 43,100–49,100 | 22,600 | SS316 balcony grilles, Aqara leak and smoke sensors |
 | **Admin, Moving & Cloud** | 39,000–94,900 | 61,400–95,800 | 5,700–14,800 | Transit insurance, RWA move-in deposit, subscription |
-| **Subtotal (Procurement)** | **~₹21.0–26.7L** | **~₹11.0–14.4L** | **~₹4.6–5.1L** | **Must + Should Envelope: ~₹32.0–41.1L** |
+| **Subtotal (Procurement)** | **~₹20.2–25.9L** | **~₹9.8–13.2L** | **~₹5.1–5.6L** | **Must + Should Envelope: ~₹30.0–39.1L** |
 | **Homz Interio Turnkey** | **₹18,00,000** | — | — | Fixed contract rider baseline (incl. GST) |
-| **Grand Total** | **~₹39.0–44.7L** | **~₹50.0–59.1L** (with Should) | **~₹54.6–64.2L** (Full) | **Comfortably inside ₹59–82L total cap** |
+| **Grand Total** | **~₹38.2–43.9L** | **~₹48.0–57.1L** (with Should) | **~₹53.1–62.7L** (Full) | **Comfortably inside ₹59–82L total cap** |
 
 *Excluded from ledger:* Art collection, king mattress, refundable RWA deposit (~₹25k–1L), and recurring filter maintenance (~₹20k/year).
 
@@ -86,6 +86,6 @@ Target move-in: **Mid-April 2027**. Design freeze: **15 November 2026**.
 
 * [[u-setup-instruction]] — Supreme governance brief, locked owner decisions, and site gates.
 * [[u-setup-gotchas]] — High-rise MEP engineering gotchas, PRV/SPD rules, and failure mitigations.
-* [[README|u-workspace-readme]] — High-level milestone tracker (`OLY-01` to `OLY-06`).
+* [[index|Overview & State]] — High-level milestone tracker (`OLY-01` to `OLY-06`).
 * [[my-home]] — Unit floor plan, dimensions, builder specifications, and orientation data.
 * [[u-handover]] — Statutory snag list and possession log.

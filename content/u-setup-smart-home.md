@@ -1,10 +1,10 @@
 ---
-title: Smart home, Wi-Fi, smart switches
+title: "09 · Smart Home & Fans"
 aliases: [ smart-home-setup]
 tags: [u-setup, smart-home]
 status: evergreen
 created: 2026-10-10
-updated: 2026-10-14
+updated: 2026-10-16
 ---
 
 [[u-setup-index]]
@@ -63,7 +63,7 @@ Single-source specification across all rooms and common zones:
 
 ### Electrical Pre-Wire & Site Requirements (Homz Scope)
 * **Backbox Depth:** Mandate **43 mm deep GI concealed switch boxes** across all rooms. Standard 25 mm shallow builder boxes cannot house relays behind mechanical plates.
-* **Neutral Wire Verification:** Ensure certified neutral wire is pulled to every switch gang (do not rely on ground loop returns).
+* **Neutral Wire & RCCB Loop Isolation:** Pull a certified neutral wire to every switch gang from that exact room's MCB circuit. Never borrow a neutral from an adjacent room or lighting loop, or the 30mA RCCB will nuisance-trip immediately.
 * **Conduit Infrastructure:** 20 mm dedicated PVC conduits from switch boxes to distribution board to facilitate future wire pulls.
 * **Surge Protection:** Equip primary distribution board with Type 2 SPD (Surge Protection Device) to safeguard sensitive micro-relays from grid spikes.
 

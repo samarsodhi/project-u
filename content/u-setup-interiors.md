@@ -1,10 +1,10 @@
 ---
-title: Interior finishes, materials, and joinery
+title: "03 · Finishes & Paint"
 aliases: [ interiors-setup]
 tags: [u-setup, interiors]
 status: evergreen
 created: 2026-10-10
-updated: 2026-10-15
+updated: 2026-10-16
 ---
 
 [[u-setup-index]]
@@ -66,19 +66,22 @@ updated: 2026-10-15
 
 ---
 
-### §7.3 Cabinetry & Wardrobe Palette & Finish Matrix (Designer & Reddit Standard)
+### §7.3 Locked Homz Laminate Schedule, Mirrors & Wall Textures
 
-**Answer:** Two-tone low-glare architecture. High-touch base units use anti-fingerprint greige; overheads match wall tone; kids' room uses the 70/20/10 ageless framework.
+**Answer:** Warm wood-grain and matte neutral laminate palette finalized with Homz Interio (`0.8 mm off-white` internal liner throughout; soft-close hinges standard excluding lofts).
 
 | Zone / Joinery Unit | Main Shutter Finish & Code | Accent / Niche Tone | Hardware & Profile Standard | Reddit & SME Failure-Mode Guardrail |
 | :--- | :--- | :--- | :--- | :--- |
-| **Kitchen Base Cabinets & Drawers** | [Greenlam AFX 108 / Merino Luvih 21091](https://www.greenlam.co.in) (Cashmere Greige Ultra-Matt, 1.0mm) | Steel Grey Granite Capping | Concealed black/champagne anodized Gola profile (no protruding handles) | Standard dark mattes show permanent oily fingerprints; non-AFX surfaces require abrasive degreasing that lifts edge bands. |
-| **Kitchen Overheads & Lofts** | [Merino 10001 Matt / Luvih Chalk](https://www.merinolaminates.com) (Warm Off-White, 1.0mm) | Open spice shelf in Natural Oak | Bottom overhang finger-pull (zero external hardware) | High-gloss acrylic yellows from cooking fumes; pure white overheads clash if cooler than wall paint (`#F4F3ED`). |
-| **Master Bedroom Wardrobe** | [Merino Luvih Cashmere Greige](https://www.merinolaminates.com) (Soft matte warm neutral) | Natural CP Teak fluted reveal in dressing niche | 1200mm slim profile edge-lip handles in brushed brass | Dark gloss wardrobes turn 13×13 bedroom into a dark cave; use warm low-sheen tones matching Dry Sage walls. |
-| **BR-01 Study / Guest Wardrobe** | [Merino 10001 Matt Canvas White](https://www.merinolaminates.com) (Seamless wall match) | Warm Oak floating internal desk reveal | Flush push-to-open magnetic catches or recessed J-pulls | High-contrast patterns create distracting visual noise on WFH video backgrounds; keep shutters monolithic with walls. |
-| **BR-02 Kabir's Wardrobe (70/20/10)** | [Merino 10001 Matt Chalk White](https://www.merinolaminates.com) (70% main shutter envelope) | [Merino 21055 Natural Oak](https://www.merinolaminates.com) (20% open book niche) + [Merino 21183 Denim Slate](https://www.merinolaminates.com) (10% lower drawers) | Rounded oak dowel handles or screw-on slate blue leather tabs | Saturated cartoon laminates cause regret within 3 years; keep 70% of shutter envelope neutral and isolate color to 2 modular drawer fronts. |
-| **BR-03 Gurudwara Storage** | [Merino Pure White Matt 10002](https://www.merinolaminates.com) (Pristine clean finish) | Kiln-dried CP Teak edge lip matching Palki Sahib | Concealed magnetic push latches (zero visual metal hardware) | Loud wood grains or dark colors distract from spiritual focus; keep storage completely silent and flush. |
+| **Living TV Unit & Panel** | Base: `424 1D Cinnamon Hickory` | Panel: `4929 LU Blanco Gold Marble` + Sofa-back texture paint | Soft-close drawers; concealed cable raceway for Sonos Arc Ultra | Route 50mm PVC conduit behind `4929 LU` panel before mounting; exposed HDMI/power cords ruin marble laminate visual. |
+| **Dining Vanity, Bookshelf & Walk-in** | Bookshelf: `424 1D Cinnamon Hickory` · Walk-in: `3163 SI Beige Wool` | Common vanity with **Robot Vacuum bay**; room-matched hidden doors | Zero-threshold bottom garage (`≥150mm` height + internal 6A socket) | Standard vanity plinths trap robot vacuums; omit bottom toe-kick at dock bay. Use 4× SS304 ball-bearing hinges on heavy hidden doors to prevent sagging. |
+| **Kitchen Base & Tandem Drawers** | `3174 LU Brown Sugar` (Base carcasses) | Light-shade Indian granite worktop (owner-sourced) | 2 tandem below hob + 3 drawers each side of sink + 1 tandem replacing wicker | Homz quotes normal-close channels as standard; mandate soft-close 50–70kg tandem runners in contract rider. Drill rear air vents in potato/onion drawer. |
+| **Kitchen Wall Units & Lofts** | `158 LU Taupe` (Overheads & lofts) | `0.8 mm Off-White` internal laminate | Soft-close hinges on wall units; standard stays on lofts | Seal sink-base floor panel with aluminum foil tape / PVC mat to protect `0.8 mm` liner from RO/trap drips. |
+| **Master Bedroom (MBR)** | `3163 SI Beige Wool` (Wardrobes & Dresser) | Tall dresser with full-height dome mirror + Bed-back texture paint | Soft-close hinges; internal tension straightener on tall doors | Anchor full-height dresser mirror to 12mm BWP ply backing with neutral-cure silicone. |
+| **GBR / BR-01 (Study Room)** | `3163 SI Beige Wool` | Single shutter shifted toward study unit + dome mirror above | Soft-close hinges; concealed wire pass-through at study edge | Ensure shifted shutter clears standing desk travel range (72–120 cm height) without collision. |
+| **GBR-2 / BR-03 (Gurudwara)** | `3163 SI Beige Wool` | Gold frame with clear glass middle shutter | Soft-close hinges; dust seal strip on glass frame | Toughened 5mm clear glass required inside gold profile to prevent rattle during balcony cross-breeze. |
+| **KBR (Kabir) & Washrooms** | **TBD** (Recommend 70/20/10 neutral rule for KBR) | Store room: Overhead loft included in scope | Child-safe soft-close dampers on all KBR drawers | Reject cartoon laminates in KBR; mandate BWP marine ply + waterproof PVC edge tape for all washroom vanity cabinets. |
 
+* **House-Wide Mirror Standard:** All mirrors feature a **dome-shaped top arch**. Use 5mm Saint-Gobain copper-free silver mirror bonded with neutral-cure alkoxy silicone (acidic silicone causes black edge rot).
 * **Edge-Banding Rule:** Apply 2.0 mm solid-color high-impact PVC edge tape via factory PUR hot-melt edge bander. Reject manual solvent glue on shutter edges.
 * **Cleaning Protocol:** Clean anti-fingerprint surfaces with microfiber cloths damp with 10% mild dish soap solution; reject acetone or chlorinated thinners.
 

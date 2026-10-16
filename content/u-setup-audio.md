@@ -1,10 +1,10 @@
 ---
-title: Audio and TV
+title: "11 · Audio & TV"
 aliases: [ audio-setup]
 tags: [u-setup, audio]
 status: evergreen
 created: 2026-10-10
-updated: 2026-10-14
+updated: 2026-10-16
 ---
 
 [[u-setup-index]]
@@ -27,10 +27,9 @@ updated: 2026-10-14
 
 ### Architectural & Site Integration Requirements
 
-#### 1. TV Panel & Millwork Coordination (Homz)
-* **Backing & Cleat:** 18 mm BWP plywood structural backing inside the TV feature wall to anchor the owned Sony 65" TV bracket securely.
-* **Concealed Conduit:** 50 mm wide smooth-bore internal PVC duct connecting the TV bracket cavity to the lower media console niche for invisible HDMI eARC and power routing.
-* **Surface Clearances:** Media console top must remain $\ge 1,200\text{ mm}$ unobstructed to allow unhindered upward and side-firing driver projection for the Arc Ultra.
+#### 1. Homz Living TV Unit (`424 1D` + `4929 LU`) Coordination
+* **Backing & Conduit:** Reinforce the `4929 LU Blanco Gold Marble` panel with 18 mm BWP plywood backing and a 50 mm concealed smooth-bore PVC conduit down into the `424 1D Cinnamon Hickory` base cabinet so HDMI 2.1 eARC and power cords stay 100% invisible.
+* **Atmos Acoustic Envelope:** Mount the 65" Sony TV with $\ge 150\text{ mm}$ clear vertical gap above the `424 1D` base deck, and position the Sonos Arc Ultra ($1,178\text{ mm}$ wide) near the front lip so the `4929 LU` panel overhang never blocks upward-firing height channels.
 
 #### 2. Network & Voice Integration
 * **Spectrum Allocation:** Sonos devices connect to 5 GHz Wi-Fi (supported by Omada AP-1 in Living room) to prevent competing with 2.4 GHz Matter lighting relays.

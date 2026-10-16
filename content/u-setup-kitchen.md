@@ -1,23 +1,23 @@
 ---
-title: Kitchen appliances and laundry
+title: "05 · Kitchen & Laundry"
 aliases: [ kitchen-setup]
 tags: [u-setup, kitchen, laundry]
 status: evergreen
 created: 2026-10-10
-updated: 2026-10-15
+updated: 2026-10-16
 ---
 
 [[u-setup-index]]
 
 ### §4 Kitchen and laundry appliances
 
-**Answer:** Procure appliances directly and provide cut-out sheets to Homz before joinery fabrication. Builder delivers no countertop; Homz frames carcasses for a new granite worktop. **Every line item presents High-Quality VFM first, followed by High-Quality Unconstrained.** **No dishwasher** (bay converted to standard cutlery and utensil storage). Freestanding rectangular step can with lid kept in open air for ventilation. Core VFM envelope ~₹2.35L Must; ~₹3.55L with stacked dryer + oven.
+**Answer:** Procure appliances directly and provide cut-out sheets to Homz before joinery fabrication. Builder delivers no countertop; Homz frames carcasses for an owner-sourced light-shade granite worktop. **Every line item presents High-Quality VFM first, followed by High-Quality Unconstrained.** **No dishwasher** (bay converted to standard cutlery and utensil storage). Freestanding rectangular step can with lid kept in open air for ventilation. Core VFM envelope ~₹2.35L Must; ~₹3.55L with stacked dryer + oven.
 
 #### Equipment & Appliance Matrix
 
 | Need                              | Tier 1: High-Quality VFM                                                                                                                     | Tier 2: High-Quality Unconstrained                                                                                                                                                                                                                                 | Top Failure Mode & Reddit Insight                                                                                                                                                                               |
 | :-------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Cabinetry & Drawer Casework**   | [Merino Luvih Greige Base + 10001 Chalk Overheads](https://www.merinolaminates.com) (1.0mm AFX matte, Gola profile, InnoTech, ~₹1.85L)     | [FENIX NTM 0718 Grigio Base + 0029 Bianco Overheads](https://www.fenixforinteriors.com) (Thermal healing nano-tech, Blum LEGRABOX 70kg, SERVO-DRIVE, ~₹3.40L)    | Acrylic turns yellow near chimney within 18 months; non-AFX dark matte traps greasy handprints. Cheap 25kg slides sag under cast iron; mandate 70kg Blum/Hettich runners for pots. |
+| **Cabinetry & Drawer Casework**   | Homz Locked Palette: `3174 LU Brown Sugar` Base + `158 LU Taupe` Wall/Lofts (`0.8mm` off-white liner, 9 tandem drawers, soft-close upgrade) | [FENIX NTM Base + Overheads](https://www.fenixforinteriors.com) (Thermal healing nano-tech, Blum LEGRABOX 70kg, SERVO-DRIVE, ~₹3.40L) | Homz defaults to normal-close channels; enforce soft-close tandem runners in rider. Tandem drawer replacing wicker basket needs rear ventilation holes so onions do not rot. |
 | **Hob (Hybrid)**                  | [Häfele Domino (Altius FS 230 Gas + Bella 30 Induction)](https://www.hafeleindia.com/en/p/domino-hob/53866610/) + Joining Rail (~₹54k)       | [Electrolux EHH957BE (Single-chassis 4-zone)](https://www.electrolux.in/appliances/hobs/ehh957be/) (~₹1.12L)                                                                                                                                                       | Single PCB failure disables all cooking on unibody hybrids; independent domino units isolate electrical and gas circuits entirely.                                                                              |
 | **Chimney (90cm BLDC)**           | [Elica FLAT FL 900 MAX BLDC](https://www.amazon.in/dp/B0FBWNF6D1) (₹17,249)                                                                  | [Bosch DWB97LM50I Serie 6](https://www.bosch-home.in/product/DWB97LM50I) (₹42,000)                                                                                                                                                                                 | Filterless centrifugal traps capture grease without mesh scrubbing, but thermal auto-clean is not magic: heavy tadka oil still polymerizes on blower blades over 12 months; requires rigid ducting and annual solvent service. Local franchise service responsiveness varies. |
 | **Under-sink RO**                 | [AO Smith Z2 Pro UTC](https://www.amazon.in/dp/B0HC7HFM66) (₹23,990)                                                                         | [3M DWS2000T / Safe Kitchen](https://www.3mindia.in) (~₹45,000)                                                                                                                                                                                                    | OEM proprietary cartridge lock-in; un-buffered bore grit destroys RO membrane. Mandate ₹500 external spun sediment candle.                                                                                      |
@@ -37,15 +37,15 @@ updated: 2026-10-15
 
 #### Trade Touchpoints & Site Requirements
 * **Civil & Plumbing:**
-  * Builder supplies no kitchen worktop; coordinate new granite slab cutouts and Häfele domino aperture with Homz carcasses.
+  * Builder supplies no kitchen worktop; coordinate owner-sourced light-shade granite slab cutouts and Häfele domino aperture with Homz carcasses.
   * Install an external ₹500 spun pre-filter candle upstream of under-sink RO to protect internal membrane from municipal/bore grit.
   * Floor drain and dedicated cold feed required in utility alcove for washer overflow.
 * **Electrical & Sockets:**
   * Dedicated 16A circuits for: (1) washer-dryer stack, (2) built-in oven, (3) microwave niche, (4) induction cooktop point.
   * Heavy heating elements (dryer, oven, induction) must never run through extension boards or shared multi-plugs.
 * **Joinery & Cabinetry (Homz):**
-  * 3-drawer Blum LEGRABOX bank in the former dishwasher bay sized for heavy pots, pans, and pantry dry goods (no internal trash bins).
-  * Shutter finishes follow [[u-setup-interiors#73-cabinetry--wardrobe-palette--finish-matrix]]: Cashmere Greige AFX base drawers + Warm Chalk White overheads with Gola channels.
+  * Locked Drawer Layout: 2 tandem drawers below hob + 3 drawers on either side of sink unit (6 total) + 1 ventilated tandem drawer replacing wicker basket.
+  * Locked Laminate Finishes: Base units in `3174 LU Brown Sugar`; Wall units and lofts in `158 LU Taupe`; internal laminate `0.8 mm off-white` (add waterproof mat inside sink cabinet).
   * Refrigerator niche must provide 594 mm counter depth + 50 mm rear ventilation clearance.
   * Rigid 6" circular chimney duct with $\le 2$ sweeping 90° bends; fit exterior gravity flap on utility louvre.
   * Laundry stack must stand directly on structural flooring, never on an elevated hollow wooden plinth. Secure heat-pump dryer to washer using the official Bosch stacking kit with pull-out laundry sorting shelf (WTZ27400 / WTZ11400) and anti-vibration foot pads.

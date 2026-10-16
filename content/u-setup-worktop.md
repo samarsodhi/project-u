@@ -1,23 +1,23 @@
 ---
-title: Kitchen worktop, sinks, and taps
+title: "06 · Worktop & Sinks"
 aliases: [ kitchen-worktop-setup]
 tags: [u-setup, worktop]
 status: evergreen
 created: 2026-10-10
-updated: 2026-10-14
+updated: 2026-10-16
 ---
 
 [[u-setup-index]]
 
 ### §9 Kitchen worktop, sinks and taps
 
-**Answer:** Builder provides no kitchen worktop. Homz builds full modular base carcasses, upon which you install a durable dark granite countertop. **Every line item presents High-Quality VFM first, followed by High-Quality Unconstrained.**
+**Answer:** L-shaped granite removed from Homz scope due to black color rejection. Procure a **light-shade Indian granite** slab directly from a Hyderabad stone yard and mount onto Homz `3174 LU Brown Sugar` base carcasses. **Every line item presents High-Quality VFM first, followed by High-Quality Unconstrained.**
 
 #### Worktop, Sink & Tap Matrix
 
 | Need                 | Tier 1: High-Quality VFM                                                                                                                       | Tier 2: High-Quality Unconstrained                                                                                   | Top Failure Mode & Reddit Insight                                                                                                                                                       |
 | :------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Worktop Surface**  | [Indian Dark Granite (Steel Grey / Black Galaxy)](https://www.hafeleindia.com) (20mm slab, leathered/polished, ~₹280–450/sq ft, ~₹28,000)       | [Imported Quartz / Sintered Stone (Caesarstone / Dekton)](https://www.caesarstone.in) (₹900–2,500/sq ft, ~₹85,000)   | Quartz resin scorches at ~150°C under hot Indian kadhais; sintered stone shatters if edge is struck during pan washing. Seam placement must remain $\ge 600\text{ mm}$ from hob cutout. |
+| **Worktop Surface**  | **Light-Shade Indian Granite** (Colonial White / Kashmir White / Sadaralli Grey, 20mm polished slab + Akemi Nano Sealer, ~₹220–420/sq ft, ~₹26,000) | [Caesarstone / Dekton Light Neutral](https://www.caesarstone.in) (Stain-proof non-porous surface, ₹900–2,500/sq ft, ~₹85,000) | Light natural granite is more porous than black gabbro and stains from haldi/lemon if unsealed. Test sample with turmeric + oil for 15 min; apply 2 coats of Akemi Anti-Fleck Nano sealer before use. |
 | **Kitchen Sink**     | [Nirali NG Orbis / Expell SS 304](https://niraling.com) (18-gauge 1.0mm, undermount, ₹8,500–12,000)                                            | [Carysil Carissa Quartz Composite](https://www.amazon.in/dp/B0GSMM9NH2) (80% granite quartz, Nera Black, ₹18,500)    | Pure silicone undermounts shear under weight of water and cast iron; leaks rot base cabinetry. Mandate mechanical support frame + Akemi epoxy seal. White composite stains from haldi.  |
 | **Mixer Tap**        | [Jaquar Florentine Prime Deck Mixer](https://www.jaquar.com) (Swivelling high-arch spout, ceramic cartridge, ₹4,500–6,800)                     | [Kohler July / Malleco Pull-Down](https://www.kohler.co.in) (ProMotion nylon hose, magnetic docking, ₹14,500–22,000) | Cheap zinc-alloy mixer bodies pit and snap in hard water within 2 years; pull-down spray counterweights snag on under-sink RO tubing. Mandate solid brass core.                         |
 | **Sink Accessories** | [Nirali SS 304 Waste Coupling + Strainer](https://niraling.com) (₹1,200)                                                                       | [Blum / Häfele Integrated In-Counter Dispenser](https://www.hafeleindia.com) (Brass pump, ₹3,800)                    | Plastic dispenser threads crack during refilling; cheap strainers trap food sludge and corrode from drainage chemicals.                                                                 |
