@@ -1,3 +1,98 @@
 @use "./base.scss";
 
-// put your custom CSS here!
+// Wide layout: Remove right sidebar, expand middle content
+@media all and (min-width: 1200px) {
+  .page {
+    max-width: 1750px !important;
+  }
+  #quartz-body {
+    grid-template-columns: 280px 1fr !important;
+    grid-template-areas:
+      "grid-sidebar-left grid-header"
+      "grid-sidebar-left grid-center"
+      "grid-sidebar-left grid-footer" !important;
+  }
+}
+
+@media all and (min-width: 800px) and (max-width: 1200px) {
+  .page {
+    max-width: 100% !important;
+  }
+  #quartz-body {
+    grid-template-columns: 250px 1fr !important;
+    grid-template-areas:
+      "grid-sidebar-left grid-header"
+      "grid-sidebar-left grid-center"
+      "grid-sidebar-left grid-footer" !important;
+  }
+}
+
+.sidebar.right {
+  display: none !important;
+}
+
+// Hide standalone TOC since it is nested under the active page in Explorer
+.sidebar.left > .toc {
+  display: none !important;
+}
+
+// Center reading pane max-width
+.center {
+  max-width: 100% !important;
+}
+
+// Nested Table of Contents in Explorer
+.toc-nested {
+  list-style: none !important;
+  padding-left: 0.9rem !important;
+  margin: 0.35rem 0 0.5rem 0 !important;
+  border-left: 1.5px solid var(--lightgray);
+  transition: all 0.2s ease;
+}
+
+.toc-nested.collapsed {
+  display: none !important;
+}
+
+.toc-nested-item {
+  margin: 0.25rem 0 !important;
+  line-height: 1.35 !important;
+}
+
+.toc-nested-link {
+  color: var(--darkgray) !important;
+  font-size: 0.82rem !important;
+  text-decoration: none !important;
+  display: block !important;
+  padding: 0.15rem 0 !important;
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.toc-nested-link:hover {
+  color: var(--secondary) !important;
+  transform: translateX(2px);
+}
+
+.toc-nested-item.depth-1,
+.toc-nested-item.depth-2 {
+  padding-left: 0.6rem !important;
+  font-size: 0.78rem !important;
+  opacity: 0.85;
+}
+
+// Inline Table Swatch Images
+table td img {
+  max-width: 135px !important;
+  height: auto !important;
+  border-radius: 4px;
+  display: inline-block;
+  margin: 2px 4px 2px 0;
+  vertical-align: middle;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  transition: transform 0.15s ease;
+}
+
+table td img:hover {
+  transform: scale(1.08);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}

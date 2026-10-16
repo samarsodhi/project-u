@@ -220,6 +220,49 @@ async function setupExplorer(currentSlug: FullSlug) {
     }
     explorerUl.insertBefore(fragment, explorerUl.firstChild)
 
+    // Nest current page Table of Contents under active item in explorer
+    const activeLink = explorerUl.querySelector("a.active") as HTMLAnchorElement | null
+    if (activeLink && activeLink.parentElement) {
+      const activeLi = activeLink.parentElement
+      const tocSource = document.querySelector(".sidebar.left .toc, .toc") as HTMLElement | null
+      if (tocSource) {
+        const tocItems = tocSource.querySelectorAll("li")
+        if (tocItems.length > 0) {
+          const nestedUl = document.createElement("ul")
+          nestedUl.className = "toc-nested open"
+          tocItems.forEach((item) => {
+            const a = item.querySelector("a")
+            if (a) {
+              const nestedLi = document.createElement("li")
+              nestedLi.className = `toc-nested-item ${item.className || ""}`
+              const nestedA = document.createElement("a")
+              nestedA.href = a.getAttribute("href") || "#"
+              nestedA.textContent = a.textContent || ""
+              nestedA.className = "toc-nested-link"
+              nestedA.addEventListener("click", (e) => {
+                e.stopPropagation()
+                const hash = nestedA.getAttribute("href")
+                if (hash && hash.startsWith("#")) {
+                  const target = document.getElementById(hash.slice(1))
+                  if (target) {
+                    target.scrollIntoView({ behavior: "smooth" })
+                  }
+                }
+              })
+              nestedLi.appendChild(nestedA)
+              nestedUl.appendChild(nestedLi)
+            }
+          })
+          activeLi.appendChild(nestedUl)
+
+          activeLink.addEventListener("click", (e) => {
+            e.preventDefault()
+            nestedUl.classList.toggle("collapsed")
+          })
+        }
+      }
+    }
+
     // restore explorer scrollTop position if it exists
     const scrollTop = sessionStorage.getItem("explorerScrollTop")
     if (scrollTop) {
