@@ -49,9 +49,10 @@ updated: 2026-10-14
   * Aqara Hub M2 handles offline Zigbee child devices independently of Wi-Fi router reboots.
 
 #### 3. Site Touchpoints & Pre-Boarding Protocol
+* **Builder In-Wall Cabling & Panasonic Plates:** Unit B4206 features pre-installed **Panasonic Vision / Roma modular plates** with dual RJ-45 and coaxial TV ports in every room. All drops home-run to the central telecom enclosure near the main distribution board.
 * **Conduit Separation:** Ensure Cat6 network conduit maintains $\ge 200\text{ mm}$ physical separation from high-voltage 230V AC electrical conduits to eliminate EMI induced packet drops.
 * **Fire Code Clearance:** Ceiling APs must sit $\ge 500\text{ mm}$ away from fire sprinkler heads and HVAC return grilles.
-* **Cable Verification:** Verify printed "Solid Bare Copper 23 AWG" on cable sheath prior to false ceiling closure.
+* **8-Pin Gigabit Verification:** Builders often punch only 4 of the 8 pins (limiting speeds to 100 Mbps). Test each room jack with an 8-LED network tester to confirm 1000 Mbps Gigabit continuity. Verify cable jacket text reads pure copper Cat6.
 
 **Skip List:** Wi-Fi 6E/7 consumer mesh pods (Deco/Orbi without Ethernet backhaul), powerline adapters, 19" enclosed server racks in utility.
 
