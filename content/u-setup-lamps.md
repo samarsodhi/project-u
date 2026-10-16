@@ -1,5 +1,5 @@
 ---
-title: "12 · Lighting & Lamps"
+title: "11 · Lighting & Lamps"
 aliases: [ lamps-setup]
 tags: [u-setup, lamps]
 status: evergreen

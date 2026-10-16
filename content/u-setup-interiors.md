@@ -1,5 +1,5 @@
 ---
-title: "03 · Finishes & Paint"
+title: "02 · Finishes & Paint"
 aliases: [ interiors-setup]
 tags: [u-setup, interiors]
 status: evergreen

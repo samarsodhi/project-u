@@ -1,5 +1,5 @@
 ---
-title: "15 · Homz Contract Rider"
+title: "14 · Homz Contract Rider"
 aliases: [ homz-interiors-detail]
 tags: [u-setup, interiors, homz]
 status: evergreen

@@ -1,5 +1,5 @@
 ---
-title: "05 · Kitchen & Laundry"
+title: "04 · Kitchen & Laundry"
 aliases: [ kitchen-setup]
 tags: [u-setup, kitchen, laundry]
 status: evergreen

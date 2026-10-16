@@ -1,5 +1,5 @@
 ---
-title: "08 · Air, Water & Robot"
+title: "07 · Air, Water & Robot"
 aliases: [ air-water-setup]
 tags: [u-setup, air-water]
 status: evergreen

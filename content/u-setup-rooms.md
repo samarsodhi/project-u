@@ -1,5 +1,5 @@
 ---
-title: "02 · Rooms & Furniture"
+title: "01 · Rooms & Furniture"
 aliases: [ rooms-setup]
 tags: [u-setup, rooms]
 status: evergreen

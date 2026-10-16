@@ -1,5 +1,5 @@
 ---
-title: "04 · Joinery & Hardware"
+title: "03 · Joinery & Hardware"
 aliases: [ joinery-setup]
 tags: [u-setup, joinery]
 status: evergreen

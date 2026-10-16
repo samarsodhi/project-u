@@ -38,21 +38,17 @@ This folder is the master workspace for all decisions and execution planning rel
 
 ## Quick Navigation
 
-- **[[u-setup-index|00 · Index & Budget]]** — Master execution map & budget ledger
-- **[[u-setup-instruction|01 · Brief & Rules]]** — Locked decisions & site gates
-- **[[u-setup-rooms|02 · Rooms & Furniture]]** — Room-by-room furniture & joinery
-- **[[u-setup-interiors|03 · Finishes & Paint]]** — Laminates, paint palette & curtains
-- **[[u-setup-joinery|04 · Joinery & Hardware]]** — Substrates, hinges & mirrors
-- **[[u-setup-kitchen|05 · Kitchen & Laundry]]** — Appliances & utility setup
-- **[[u-setup-worktop|06 · Worktop & Sinks]]** — Light granite, sinks & taps
-- **[[u-setup-geysers|07 · Bathrooms & Geysers]]** — Geysers, curtain rods & exhaust
-- **[[u-setup-air-water|08 · Air, Water & Robot]]** — Purifiers, RO & Roomba bay
-- **[[u-setup-smart-home|09 · Smart Home & Fans]]** — Matter relays & BLDC fans
-- **[[u-setup-networking|10 · Wi-Fi & Cabling]]** — Cat6 runs & ceiling APs
-- **[[u-setup-audio|11 · Audio & TV]]** — Sonos Arc Ultra & TV wall
-- **[[u-setup-lamps|12 · Lighting & Lamps]]** — Accent lighting & mirror halos
-- **[[u-setup-safety|13 · Safety & Grilles]]** — SS316 grilles & sensors
-- **[[u-setup-gotchas|14 · High-Rise Gotchas]]** — Floor 42 MEP failure modes
-- **[[u-setup-interiors-detail|15 · Homz Contract Rider]]** — 12-clause turnkey rider
-- **[[u-setup-bom-detail|16 · BoM Summary]]** — Dual-tier capital envelopes
-- **[[u-evacuation|17 · Floor 42 Evacuation]]** — High-rise life safety protocol
+- **[[u-setup-rooms|01 · Rooms & Furniture]]** — Room-by-room furniture & joinery
+- **[[u-setup-interiors|02 · Finishes & Paint]]** — Laminates, paint palette & curtains
+- **[[u-setup-joinery|03 · Joinery & Hardware]]** — Substrates, hinges & mirrors
+- **[[u-setup-kitchen|04 · Kitchen & Laundry]]** — Appliances & utility setup
+- **[[u-setup-worktop|05 · Worktop & Sinks]]** — Light granite, sinks & taps
+- **[[u-setup-geysers|06 · Bathrooms & Geysers]]** — Geysers, curtain rods & exhaust
+- **[[u-setup-air-water|07 · Air, Water & Robot]]** — Purifiers, RO & Roomba bay
+- **[[u-setup-smart-home|08 · Smart Home & Fans]]** — Matter relays & BLDC fans
+- **[[u-setup-networking|09 · Wi-Fi & Cabling]]** — Cat6 runs & ceiling APs
+- **[[u-setup-audio|10 · Audio & TV]]** — Sonos Arc Ultra & TV wall
+- **[[u-setup-lamps|11 · Lighting & Lamps]]** — Accent lighting & mirror halos
+- **[[u-setup-safety|12 · Safety & Grilles]]** — SS316 grilles & sensors
+- **[[u-setup-gotchas|13 · High-Rise Gotchas]]** — Floor 42 MEP failure modes
+- **[[u-setup-interiors-detail|14 · Homz Contract Rider]]** — 12-clause turnkey rider

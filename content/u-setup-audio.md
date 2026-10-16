@@ -1,5 +1,5 @@
 ---
-title: "11 · Audio & TV"
+title: "10 · Audio & TV"
 aliases: [ audio-setup]
 tags: [u-setup, audio]
 status: evergreen

@@ -1,5 +1,5 @@
 ---
-title: "07 · Bathrooms & Geysers"
+title: "06 · Bathrooms & Geysers"
 aliases: [ geysers-setup]
 tags: [u-setup, geysers]
 status: evergreen

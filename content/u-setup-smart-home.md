@@ -1,5 +1,5 @@
 ---
-title: "09 · Smart Home & Fans"
+title: "08 · Smart Home & Fans"
 aliases: [ smart-home-setup]
 tags: [u-setup, smart-home]
 status: evergreen

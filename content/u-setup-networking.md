@@ -1,5 +1,5 @@
 ---
-title: "10 · Wi-Fi & Cabling"
+title: "09 · Wi-Fi & Cabling"
 aliases: [ networking-setup]
 tags: [u-setup, networking]
 status: evergreen

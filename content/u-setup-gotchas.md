@@ -1,5 +1,5 @@
 ---
-title: "14 · High-Rise Gotchas"
+title: "13 · High-Rise Gotchas"
 aliases: [ olympus-gotchas, high-rise-mep-gotchas]
 tags: [u-setup, engineering, gotchas, failure-modes]
 status: evergreen

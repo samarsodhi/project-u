@@ -1,5 +1,5 @@
 ---
-title: "06 · Worktop & Sinks"
+title: "05 · Worktop & Sinks"
 aliases: [ kitchen-worktop-setup]
 tags: [u-setup, worktop]
 status: evergreen
