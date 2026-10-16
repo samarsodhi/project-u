@@ -40,6 +40,8 @@ updated: 2026-10-16
 
 *South Wall Feature:* Mounts the owned framed **Persian Wall Carpet** (`assets/persian-wall-carpet.jpeg`, classical courtyard scene in sepia, walnut, and antique bronze). Illuminate via ceiling-recessed 3000K CRI 90+ deep gimbal spot at 30° incident angle ($\le 50\text{ lux}$ textile threshold per [[u-setup-lamps]]). Protected from direct East slider UV sun.
 
+![Framed Persian Wall Carpet|320](assets/persian-wall-carpet.jpeg)
+
 ---
 
 #### 3. Dining Space (13'10" × 11'9", East Balcony Slider)
