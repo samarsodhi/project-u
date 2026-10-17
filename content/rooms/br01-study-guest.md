@@ -1,0 +1,29 @@
+---
+title: "03 · WFH Study & Guest"
+aliases: [rooms-br01, br-01, study-guest, wfh-study, u-br01]
+tags: [u-setup, rooms, study, guest-room]
+status: evergreen
+created: 2026-10-10
+updated: 2026-10-17
+---
+
+[[index|← Back to U Workspace]] · [[governance]]
+
+# BR-01: WFH Study & Guest Room (13'0" × 13'0")
+
+Primary workspace for Samar (SDM at Amazon) and flexible guest suite. Houses the owned standing desk, Steelcase ergonomic chair, library shelving, monitor task lighting, and a 5-zone pocket-sprung sofa-bed for visiting family.
+
+> **Clearance Rule:** Ensure the single shifted wardrobe shutter clears the standing desk across its full 72–120 cm vertical travel range.
+> **Finishes Reference:** Wall finish references [[soft-furnishings#definitive-room-by-room-color-palette]].
+
+---
+
+## Study & Guest Room Hardware
+
+| Need | Tier 1: High-Quality VFM | Tier 2: High-Quality Unconstrained | Top Failure Mode & Reddit Insight |
+| :--- | :--- | :--- | :--- |
+| **GBR / BR-01 Study Wardrobe** | **Homz Locked `3163 SI Beige Wool`** (Single shutter shifted toward study unit + dome-top mirror above shutter, included in ₹18L) / [Century Sainik 710 + Hettich Soft-Close](https://www.centuryply.com) (Included turnkey baseline) | [Century Club Prime BWP + Blum TIP-ON](https://www.centuryply.com) (Flush architectural shutters, integrated cable management, ~₹1.60L) / [Greenlam AFX + Blum LEGRABOX Study Integration](https://www.greenlam.co.in) (Hidden printer pull-out, ~₹1.85L) / [Alankaram Solid Teak & Cane Study Wardrobe](https://www.alankaram.in) (Custom millwork, ~₹2.30L) | Verify shifted shutter swing clears the owned standing desk across its full 72–120 cm vertical travel range before carpentry fabrication. |
+| **Sofa-Bed for Guests** | [IKEA HYLTARP 2-Seat Sofa-Bed](https://www.ikea.com/in/en/cat/hyltarp-series-55099/) (Pocket-sprung, opens to 140×200cm bed, ₹97,980) / [IKEA VIMLE 2-Seat Sofa-Bed](https://www.ikea.com/in/en/cat/vimle-series-37887/) (12cm HR foam mattress, washable cover, ₹74,990) / [Sleepyhead Ergonomic Folding Sofa-Bed](https://mysleepyhead.com) (High-density HR foam, washable cover, ₹28,999) | [Gulmohar Lane Berlin Fabric Sofa Cum Bed](https://www.gulmoharlane.com/products/berlin-fabric-sofa-cum-bed) (Kiln-dried hardwood, fold-out, ₹1,26,900) / [Innovation Living CozyPad](https://www.innovationliving.asia/products/by-type/sofa-beds/product-details/cozypad-sofa-bed-with-arms?fabric=595-Corduroy-Burnt-Orange) (Danish pocket springs, ~₹1.85L) / [BoConcept Osaka Sofa-Bed](https://www.boconcept.com) (Easy-lift mechanism, solid beech, ₹2.15L) | Cheap bi-fold futons cause severe lumbar pain; 5-zone pocket springs eliminate center support bars. Keep a 2-inch topper handy as European mattress feel is firm. |
+| **Study Library & Shelving** | [IKEA BILLY / OXBERG Bookcase with Glass Doors](https://www.ikea.com/in/en/cat/billy-system-inf05/) (Oak veneer, dust-proof glass, ₹22,490) / [IKEA HAVSTA Bookcase with Base](https://www.ikea.com/in/en/cat/havsta-system-44161/) (Solid pine, stained finish, glass doors, ₹34,990) / [Orange Tree Toshi Wooden Bookshelf](https://www.orangetree.in/collections/storage-cabinets) (Solid acacia, dust-sealed glass doors, ₹42,000) | [Alankaram Modular Architectural Library](https://www.alankaram.in/collections/storage-cabinets) (Solid wood uprights, dust-sealed glass panels, ~₹85,000) / [Magari Form Solid Ash Bookcase](https://www.magari.in) (Integrated warm LED channels, fluted backer, ~₹1.15L) / [Phantom Hands Cane Library Bookcase](https://phantomhands.in) (Solid reclaimed teak, cane shutter inserts, ₹1.45L) | Open shelving accumulates thick dust in 10 days; glass-fronted shutters cut dusting by 80%. Support heavy art books by reinforcing middle shelf pins. |
+| **Monitor Task Light** | [Baseus i-Wok Series Screen Hanging Light](https://baseusindiaofficial.com/products/baseus-i-wok-series-desktop-monitor-screen-light-led-lamp-black-dgiwk-b01) (Asymmetric optical design, USB, ₹2,899) / [Quntis ScreenBar Pro](https://www.amazon.in/dp/B08DKQ3JG1) (Auto-dimming, Ra95 eye-care optics, ₹4,599) / [Xiaomi Mi Computer Monitor Light Bar](https://www.amazon.in/dp/B08W2C5W59) (Wireless 2.4GHz rotary puck, magnetic mount, ₹3,499) | [BenQ ScreenBar Pro](https://www.amazon.in/dp/B0CZ94MB2R) (Auto-dimming, ultrasonic motion sensor, zero screen glare, ₹14,490) / [BenQ ScreenBar Halo](https://www.benq.com/en-in/lighting/monitor-light/screenbar-halo.html) (Wireless rotary controller, rear bias backlight, ₹19,990) / [Logitech Litra Beam LX Dual-Sided Key & Bias Light](https://www.logitech.com/en-in) (TrueSoft CRI 93 key light + rear ambient glow, ~₹16,500) | Budget light bars spill glare onto monitor glass; BenQ asymmetric optics illuminate only the desk surface while ultrasonic presence sensing saves power. |
+| **Window Reading Lounge Chair** | [IKEA EKENÄSET Armchair](https://www.ikea.com/in/en/p/ekenaeset-armchair-kilanda-light-beige-70533491/) (Solid beech frame, ₹16,990) / [Gulmohar Lane Woodstock Leather](https://www.gulmoharlane.com/products/woodstock-leather-lounge-chair) (Kiln-dried hardwood, top-grain leather, ₹63,130) / [IKEA HAVBERG Swivel + Footstool](https://www.ikea.com/in/en/p/havberg-swivel-armchair-and-footstool-lejde-grey-black-s39511696/) (Ergonomic recline, matching ottoman, ₹24,990) | [Alankaram Z-Chair](https://www.alankaram.in/products/z-chair) (Solid teak, raked recline, ₹67,500) / [Magari Riga Cane](https://magari.in/products/riga-cane-armchair) (Solid ash, cane back, ₹59,708) / [Magari Gola](https://magari.in/products/gola-armchair) (Ash/leather, ₹1,32,278) | EKENÄSET fixed fabric stains easily; spray Scotchgard. Woodstock leather needs beeswax conditioning next to South window. Solid teak and ash resist seasonal warping. |

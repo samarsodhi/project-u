@@ -1,19 +1,21 @@
 ---
-title: "03 · Joinery & Hardware"
-aliases: [ joinery-setup]
-tags: [u-setup, joinery]
+title: "08 · Joinery & Substrates"
+aliases: [u-setup- joinery-setup,  u-joinery]
+tags: [u-setup, joinery, millwork, hardware]
 status: evergreen
 created: 2026-10-10
 updated: 2026-10-17
 ---
 
-[[u-setup-index]]
+[[index|← Back to U Workspace]] · [[governance]] · [[setup/contract-rider-homz|Homz Contract Rider]]
 
-### §12 Joinery, Core Substrates & Hardware Specifications
+# Joinery, Core Substrates & Hardware Specifications
 
-**Answer:** Homz builds all fixed casework to this exact specification schedule, attached as the contractual joinery annexure. Check every board delivery against physical QR verification (CenturyPromise app) to eliminate site substitution fraud. **Every material and hardware line item presents High-Quality VFM first, followed by High-Quality Unconstrained.**
+Definitive material schedule for all fixed cabinetry executed by Homz Interio. Attached as the contractual technical specification to the turnkey agreement. Scan every delivered sheet with the CenturyPromise app to eliminate commercial-grade substitution.
 
-#### Core Materials & Hardware Specification Matrix
+---
+
+## Core Materials & Hardware Specification Matrix
 
 | Need | Tier 1: High-Quality VFM | Tier 2: High-Quality Unconstrained | Top Failure Mode & Reddit Insight |
 | :--- | :--- | :--- | :--- |
@@ -29,12 +31,8 @@ updated: 2026-10-17
 
 ---
 
-### Site Quality Control Protocol (Homz Contractual Scope)
+## Site Quality Control Protocol (Homz Contractual Scope)
 * **Plywood Verification:** Check the printed physical stamp on every board face before carpenter cutting; scan QR tags via manufacturer verification apps.
 * **Edge Banding Standard:** Mandate 2.0 mm thick high-impact PVC edge banding on all external shutter edges (applied via automated through-feed hot-melt machine at factory, not manual iron-on edge strips).
 * **Back-Panel Construction:** Cabinet backs must use minimum 9.0 mm BWP plywood sealed on both faces (never 3 mm or 6 mm MDF).
 * **Fastener Protocol:** SS 304 screws only in wet areas (under sink, bathroom vanity); zinc-plated drywall screws prohibited for hinge fixing.
-
-**Skip List:** Commercial MR (Moisture Resistant) plywood in kitchens, unbranded hydraulic gas struts on heavy overhead shutters, local copycat LeMans corner racks, manual hot-iron edge banding.
-
-**Detail →** [[u-setup-bom-detail]] · [[u-setup-rooms]]

@@ -1,0 +1,33 @@
+---
+title: "12 · Audio & TV"
+aliases: [u-setup- audio-setup,  u-audio]
+tags: [u-setup, audio, av, tv]
+status: evergreen
+created: 2026-10-10
+updated: 2026-10-17
+---
+
+[[index|← Back to U Workspace]] · [[governance]] · [[setup/procurement|Procurement Ledger]]
+
+# Audio, Soundbars, Multi-Room Speakers & TV Infrastructure
+
+Master technical specification for whole-home wireless audio and entertainment: Dolby Atmos soundbar (living room 65" TV), multi-room standalone music (Sonos Era 300), sacred room acoustic playback, and concealed AV cabling.
+
+---
+
+## Audio & AV Equipment Matrix
+
+| Need | Tier 1: High-Quality VFM | Tier 2: High-Quality Unconstrained | Top Failure Mode & Reddit Insight |
+| :--- | :--- | :--- | :--- |
+| **TV Soundbar (Living)** | [Sonos Beam (Gen 2)](https://avstore.in/products/sonos-beam-gen-2) (Dolby Atmos, compact 651mm, AirPlay 2, ₹54,999) / [Samsung HW-Q800D / Q930D](https://www.samsung.com/in/audio-devices/) (True 5.1.2 / 9.1.4 with wireless subwoofer included, ₹48,990–₹68,990) / [Sony HT-A5000 5.1.2ch Dolby Atmos Soundbar](https://www.sony.co.in) (Native Bravia Acoustic Center Sync with Sony X90CH, ₹64,990) | [Sonos Arc Ultra](https://www.sonos.com/en-in/shop/arc-ultra) (Sound Motion architecture, 9.1.4 Atmos, unified Sonos multi-room with Era 300, ₹89,999–₹99,999) / [Sennheiser AMBEO Soundbar Plus](https://www.sennheiser-hearing.com/en-IN/p/ambeo-soundbar-plus/) (7.1.4 virtualization, dual built-in 4" subwoofers, ₹99,990) / [Sony Bravia Theatre Bar 9 (HT-A9000)](https://www.sony.co.in) (13-speaker 360 Spatial Sound Mapping, ₹99,900) | Arc Ultra is 1,178 mm wide; media console top must provide $\ge 1.2\text{ m}$ clear span. TV must route eARC via HDMI 3; Alexa music playback on Sonos is geo-blocked in India (use AirPlay 2 / Sonos app). |
+| **Drawing Room Music** | **Retain Owned Sonos Era 300** (₹0 / ₹54,999 value) standalone on sofa plinth / [Audio Pro Addon C10 MkII Multi-Room Speaker](https://avstore.in) (Scandinavian audiophile AirPlay 2, ₹39,900) | [Dual Sonos Era 300 Stereo Pair](https://avstore.in/products/sonos-era-300) (Add 2nd Era 300 for true wide spatial stereo stage, ~₹54,999 incremental) / [KEF LSX II LT Wireless Hi-Fi Bookshelf Pair](https://in.kef.com) (11th-Gen Uni-Q coaxial drivers, 200W Class-D, AirPlay 2, ₹99,000) / [Devialet Phantom II 95 dB / Bowers & Wilkins Zeppelin Pro](https://avstore.in) (Sculptural hi-res acoustics, ₹79,900–₹1.29L) | Pairing Era 300 as TV surrounds permanently disables Bluetooth and 3.5mm line-in; keep standalone in Drawing room for music fidelity. |
+| **BR-03 Sacred Kirtan** | [Sonos Era 100](https://avstore.in/products/sonos-era-100) (Dual-tweeter stereo, physical rear mic hardware toggle OFF, ₹24,999–₹29,999) / [IKEA SYMFONISK Bookshelf / Picture Frame Wi-Fi Speaker (Powered by Sonos)](https://www.ikea.com/in/en) (Zero microphones built-in, native Sonos S2 & AirPlay 2, ₹12,990–₹22,990) / [Denon Home 150 NV (No-Voice Edition)](https://avstore.in) (Zero microphones, AirPlay 2, ₹24,900) | [Sonos Era 100 Stereo Pair](https://avstore.in/products/sonos-era-100) (Mic switches physically OFF, enveloping low-volume Gurbani clarity, ₹49,998–₹59,998) / [WiiM Amp + Dali Oberon 1 / Q Acoustics 3020i Passive Bookshelf Pair](https://avstore.in) (Zero microphones, warm wooden cabinetry, AirPlay 2, ₹62,000) / [Sonos Five High-Fidelity Speaker](https://avstore.in/products/sonos-five) (Zero built-in voice microphones, studio-grade vocal warmth, ₹59,999) | Microphone privacy in prayer room; Sonos Five, IKEA Symfonisk, and Denon 150 NV contain zero microphones physically, while Era 100 has a hard electrical disconnect switch on the rear. Mount on East shelf, never on Palki wall. |
+| **Balcony & Portable Sound** | [Sonos Roam 2](https://avstore.in/products/sonos-roam-2) (IP67 waterproof/dustproof, Wi-Fi AirPlay 2 + Bluetooth, ₹19,999) / [Bose SoundLink Flex (2nd Gen)](https://www.boseindia.com) (IP67, PositionIQ orientation audio, ₹15,900) / [B&O Beosound A1 (2nd Gen)](https://www.bang-olufsen.com) (Anodized pearl-blasted aluminum, IP67, aptX Adaptive, ₹24,990) | [Sonos Move 2](https://avstore.in/products/sonos-move-2) (24-hr replaceable battery, stereo acoustic architecture, Auto Trueplay, charging dock included, ₹44,999–₹49,999) / [Bang & Olufsen Beosolit 20 / Beosound Explore](https://www.bang-olufsen.com) (360° True360 sound, oak wood top tray, Qi pad, ~₹58,000) / [Dali Katch G2 Audiophile Portable](https://avstore.in) (Dual neodymium dome tweeters, 30-hr battery, ₹42,900) | Roam battery degrades if left on continuous trickle charge; Move 2 features a user-replaceable battery pack (₹7,500) that extends hardware lifespan past 8+ years. |
+| **TV Cabling & Mounting** | [Belkin UltraHD / Honeywell Certified HDMI 2.1 eARC Cable](https://www.amazon.in/dp/B08M9HND4F) (48 Gbps braided, 2m, ₹1,299) / [BlueRigger 8K HDMI 2.1 In-Wall CL3 Rated Cable](https://www.amazon.in) (Fire-retardant jacket for PVC conduits, 2m, ₹1,499) / [NB North Bayou P6 Full-Motion Heavy-Duty TV Mount](https://www.amazon.in/dp/B01M4I7R6B) (6-arm dual steel, 45kg load, ₹2,899) | [AudioQuest Pearl 48G / Forest 48G HDMI 2.1](https://avstore.in) (Solid Long-Grain Copper eARC conductors, directional RF drain, ₹5,500–₹9,500) / [Sanus VLT7 Advanced Tilt 4D / Elite Swivel TV Wall Mount](https://www.sanus.com) (ProSet post-install micro-leveling, 17cm pull-out for easy rear cable access, ~₹14,500) / [Vogel's COMFORT Tilt / Full-Motion TV Bracket](https://www.vogels.com) (TÜV certified to 3× weight load, ~₹12,000) | Running HDMI through wall without a conduit traps cables during upgrades; mandate 50mm internal PVC conduit with sweeping elbows in Homz TV panel. |
+
+---
+
+## Architectural & Site Integration Requirements
+* **Homz Living TV Unit (`424 1D` + `4929 LU`) Coordination:** Reinforce the `4929 LU Blanco Gold Marble` panel with 18 mm BWP plywood backing and a 50 mm concealed smooth-bore PVC conduit down into the `424 1D Cinnamon Hickory` base cabinet so HDMI 2.1 eARC and power cords stay 100% invisible.
+* **Atmos Acoustic Envelope:** Mount the 65" Sony TV with $\ge 150\text{ mm}$ clear vertical gap above the `424 1D` base deck, and position the Sonos Arc Ultra ($1,178\text{ mm}$ wide) near the front lip so the `4929 LU` panel overhang never blocks upward-firing height channels.
+* **Microphone Privacy:** Sacred prayer room (BR-03) requires speakers with zero microphones (Sonos Five / IKEA Symfonisk / Denon 150 NV) or physical hardware disconnect switch (Era 100).

@@ -1,19 +1,21 @@
 ---
-title: "12 · Safety & Grilles"
-aliases: [ safety-setup]
-tags: [u-setup, safety]
+title: "14 · Life Safety & Security"
+aliases: [u-setup-safety, safety-setup,  u-safety]
+tags: [u-setup, safety, security]
 status: evergreen
 created: 2026-10-10
 updated: 2026-10-17
 ---
 
-[[u-setup-index]]
+[[index|← Back to U Workspace]] · [[governance]] · [[evacuation]]
 
-### §8 Safety, security and child-safety
+# Life Safety, Fire Protection, Childproofing & Smart Locks
 
-**Answer:** Balcony child safety first: full-height high-tensile SS 316 invisible grilles and secondary keyed track locks on all sliding doors. Linked smoke detectors across all bedrooms, gas/heat detection in the kitchen, fire blanket, ABC extinguisher, and furniture anti-tip anchors. **Every line item presents High-Quality VFM first, followed by High-Quality Unconstrained.**
+Master technical specification for high-rise family protection: SS316 marine invisible grilles, secondary keyed slider locks, interlinked smoke detectors, methane detection, clean-agent extinguishers, and main-door biometric security.
 
-#### Safety & Security Infrastructure Matrix
+---
+
+## Safety & Security Infrastructure Matrix
 
 | Need | Tier 1: High-Quality VFM | Tier 2: High-Quality Unconstrained | Top Failure Mode & Reddit Insight |
 | :--- | :--- | :--- | :--- |
@@ -28,17 +30,8 @@ updated: 2026-10-17
 
 ---
 
-### Monthly Life Safety Inspection Schedule
-* **1st of Month:** Press physical test button on all 6 smoke detectors (confirms 85 dB alarm grouping). Inspect needle on VariEx / Ceasefire pressure gauge (must stand in green zone $>14\text{ bar}$).
-* **Quarterly:** Press yellow test button on 30 mA RCCB to confirm ground-fault trip. Touch moist cotton swab to Aqara water leak sensor pins to confirm M2 siren response.
-* **Semi-Annually:** Verify SS 316 invisible grille cable deflection ($<15\text{ mm}$ under manual force). Check thumb-screw tightness on SNOWIE SOFT window clamps.
-
-### High-Rise Egress & Childproofing Protocol
+## High-Rise Egress & Childproofing Protocol
 * **Primary Escape Path:** Main door $\rightarrow$ pressurized central fire stairwell.
 * **Secondary Refuge:** Drawing room sit-out balcony. Never install keyless deadlatches that can trap family members outside.
 * **Sprinkler Heads:** Maintain $\ge 500\text{ mm}$ clear envelope around all ceiling sprinkler nozzles; never paint or obscure heads.
 * **Geyser Temperature Limit:** Cap geyser thermostats at 55 °C (50 °C in Master) to eliminate instantaneous scalding risks for child Kabir.
-
-**Skip List:** Indoor security surveillance cameras (privacy risk), PNG gas solenoid valves (gas utility property; private tampering prohibited), magnetic baby cupboard latches (easily bypassed by toddlers).
-
-**Detail →** [[u-setup-bom-detail]] · [[u-setup-smart-home]]
