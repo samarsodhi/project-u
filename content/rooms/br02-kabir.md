@@ -29,3 +29,44 @@ Dedicated study, reading, and creative play space for Kabir (age 6, Grade 1 at K
 | **Growth Desk Chair** | [Fixed 4-Leg Padded Chair + Footrest](https://www.amazon.in/dp/B08L6XB7WN) (Zero rolling distraction for age 6, ₹1,999) / [IKEA LOBERGET / SIBBEN Children Desk Chair](https://www.ikea.com/in/en/p/loberget-sibben-childrens-desk-chair-white-s79337746/) (Adjustable seat height 32–43 cm, zero wheels, ₹2,490) | [IKEA VIMUND Children Ergonomic Chair](https://www.ikea.com/in/en/search/?q=VIMUND+Children+Ergonomic+Chair) (Pressure-sensitive brake castors, adjustable back, ₹6,990) / [Moll Maximo 15 Ergonomic Growth Chair](https://moll-funktion.com/en/product/maximo/) (German 3D adjustment, washable cushions, lockable swivel, ~₹45,000) | Free-rolling office swivel chairs turn into toys during homework sessions; brake-castors lock chair in place when seated. |
 | **South Wall 3D World Map** | [Woodsify 3D Wooden World Map Multicolor (Non-LED, Size L)](https://www.woodsify.com/products/3d-wooden-world-map-multicolour?variant=42093391315150) (150×90 cm, birch plywood, ₹9,540) / [WoodScape 3D Multilayer Birch Map](https://www.amazon.in/s?k=WoodScape+3D+Multilayer+Birch+Map) (140×85 cm, natural wood stains, ₹8,990) | [Enjoy The Wood 3D Birch Map with Push Pins](https://enjoythewood.com/products/3d-wooden-world-map-multicolor) (~$249 / ₹21,000, non-toxic stains, flag pins) / [MiMi Innovations 3D Solid Hardwood Topographic World Map](https://www.amazon.in/s?k=MiMi+Innovations+3D+Hardwood+Topographic+World+Map) (Hand-stained oak/walnut relief, ~₹26,000) | Direct adhesive tape ruins paint during removal; mount onto 6mm BWP ply backer board with French cleats. Detail in [[art-styling]]. |
 | **Wardrobe & Tandem Pulls (Wood Elephant)** | [Look Mumma Solid Acacia Elephant Handles](https://www.amazon.in/gp/product/B0FJFXNG7K) (10" pair, dual-screw mount, ₹2,999) / [Pinch of Pretty Wood & Cane Elephant](https://pinchofpretty.com/products/elephant-wood-cane-cupboard-handles) (10" wood + woven cane, ₹2,999) | [Homz Bespoke Teak Elephant Bar Pull](https://www.etsy.com/in-en/search?q=wooden+elephant+cabinet+handles) (Solid CP teak offcuts, 96mm CTC, M4 brass inserts, ~₹1,600 labor) / [Mantara W-0024 Beech Knob](https://mantara.in/products/mantara-w-0024-elephant) (Solid beech, 50mm, auxiliary drawers only, ₹649) | Tandem drawer dampers pull out wood screws; retrofit M4 machine bolts into brass threaded inserts. 10" scale provides two-hand grip for wardrobe shutters. |
+
+---
+
+## [Suggestions] Vastu-Compliant Room Layout
+
+Vastu orientation for 13'0" × 11'11" footprint balancing academic focus, restful sleep, and floor 42 child-safety clearances:
+
+* **Sleep Alignment (Head to East):** Daybed with pull-out guest trundle placed along South-East / East zone. Kabir sleeps with head strictly to the East (solar bio-rhythm alignment for memory and rejuvenation) and feet pointing West. Eliminates nocturnal fall hazards and prevents feet pointing toward entry door.
+* **Study Alignment (Seated Facing East):** IKEA BERGLÄRKA tiltable desk positioned against West wall. Kabir sits facing East with a solid masonry wall backing for focus and grounding. Indirect glare-free North daylight enters over his left shoulder. Desk power adapters and task lamp transformer placed in South-East (Agni) worktop corner.
+* **Heavy Storage (South-West / Nairutya):** Homz 70/20/10 wardrobe anchored in South-West quadrant. Carcass in `3163 SI Beige Wool` with `424 1D Warm Oak` niche and `22102 Trooper Blue` drawers. Shutters swing North and East. Dressing mirror mounted strictly on inner shutter face (never reflecting the bed).
+* **Reading & Wisdom Nook (East Wall):** Three shallow front-facing book ledges (40 cm, 75 cm, 110 cm) mounted on East wall (Saraswati quadrant). Paired with floor-level IKEA KOMPISHÄNG or SLÄKT tri-fold pouffe below.
+* **Vision & Growth Wall (North / North-East):** Woodsify 3D Birch World Map mounted via French cleats on North/North-East wall on 6mm BWP ply backer board. 90×60 cm oak-framed cork pinboard placed adjacent to desk for timetables and artwork.
+* **Circadian & Task Lighting:** Dual 3000K deep-recessed CRI 95+ COB spots in circulation paths (never over pillows). Clamp-mounted IKEA TERTIAL task lamp on desk. 2700K indirect warm amber bedtime LED strip with 20-minute fade-to-off automation via Shelly Plus 1.
+* **Clear North & Brahmasthan:** 900 mm clear perimeter walk maintained along North window sill (no climbable furniture). Central room floor remains 100% open and unweighted for free circulation.
+
+```
+                                      [ NORTH ]
+               [ North Glazing - Clear Walkway / Zero Furniture Against Sill ]
+       +-------------------------------------------------------------------------+
+       |                                                    [ North-East Corner ]|
+       |                                                    Light, open space    |
+       |                                                    [ 3D World Map ]     |
+       |  [ Study Station ]                                 Woodsify Birch Map   |
+       |  IKEA BERGLÄRKA Desk                               on French cleats     |
+[WEST] |  Fixed 4-leg chair                                                      | [EAST]
+       |  KABIR FACES EAST                                  [ Reading Ledge Nook]|
+       |  Solid West wall behind back                       MOSSLANDA Ledges     |
+       |  (Task light in SE desk corner)                    + KOMPISHÄNG Pouffe  |
+       |                                                                         |
+       |                       [ BRAHMASTHAN / OPEN CENTER ]                     |
+       |                       100% clear floor for open play                    |
+       |                                                                         |
+       |  [ Heavy Storage ]                                 [ Daybed / Sleeper ] |
+       |  Homz 70/20/10 Wardrobe                            Low daybed + trundle |
+       |  South-West corner anchor                          HEAD TO EAST         |
+       |  Shutters swing North/East                         Feet point West      |
+       |                                                                         |
+       |                     [ Entry Door ]                                      |
+       +-------------------------------------------------------------------------+
+                                      [ SOUTH ]
+```
