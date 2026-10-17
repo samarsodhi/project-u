@@ -52,3 +52,4 @@ This folder is the master workspace for all decisions and execution planning rel
 - **[[u-setup-safety|12 · Safety & Grilles]]** — SS316 grilles & sensors
 - **[[u-setup-gotchas|13 · High-Rise Gotchas]]** — Floor 42 MEP failure modes
 - **[[u-setup-interiors-detail|14 · Homz Contract Rider]]** — 12-clause turnkey rider
+- **[[u-setup-art-decor|15 · Art & Decor]]** — Curated artwork, maps & sacred murti

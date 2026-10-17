@@ -1,5 +1,5 @@
 ---
-title: Art, Wall Accents, and Decorative Pieces
+title: "15 · Art & Decor"
 aliases: [ art-decor, u-decor]
 tags: [u-setup, decor, art]
 status: draft
