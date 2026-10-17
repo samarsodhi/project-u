@@ -32,6 +32,26 @@ Definitive material schedule for all fixed cabinetry executed by Homz Interio. A
 
 ---
 
+## Bedroom Wardrobe & Joinery Hardware Schedule
+
+Master hardware schedule for all bedroom wardrobes and built-in casegoods. Sourced from [Spruce & Pop Claro Solid Brass Collection](https://spruceandpop.com/products/claro-antique-brass-knurled-cabinet-drawer-knob-and-handle) (solid forged brass with knurled collars and smooth center). Shutter pulls mount through-bolted with M4 machine screws into 18mm BWP ply.
+
+| Room | Item / Shutter Zone | Hardware Model | Finish | Dimensions (CC × Total L) | Unit Cost | Quantity | Fastener / Mounting Protocol |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **Master Suite** | Mid Swing Shutters (1.8m) | Spruce & Pop Claro Pull | Brushed Satin Brass PVD | 256mm CC (295mm L × 35mm P) | ₹2,275 | 4 | Through-bolt M4 with rear flush countersunk washer |
+| **Master Suite** | Bottom External Drawers | Spruce & Pop Claro Pull | Brushed Satin Brass PVD | 128mm CC (165mm L × 35mm P) | ₹1,275 | 2 | Through-bolt M4 |
+| **Master Suite** | Top Lofts (550mm) | Touch Latch | Concealed / Internal | Push-to-Open Mechanical | Included | 4 | Häfele / Blum Tip-On concealed mechanical latches |
+| **Master Suite** | Tall Dresser Unit | Spruce & Pop Claro Knob | Brushed Satin Brass PVD | 28mm Ø × 30mm H | ₹675 | 3 | Through-bolt M4 |
+| **BR-01 Study** | Mid Swing Shutters (1.8m) | Spruce & Pop Claro Pull | Antique Smoked Bronze | 256mm CC (295mm L × 35mm P) | ₹2,275 | 3 | Through-bolt M4 (bridges Beige Wool & Cinnamon Hickory) |
+| **BR-01 Study** | Bottom External Drawers | Spruce & Pop Claro Pull | Antique Smoked Bronze | 128mm CC (165mm L × 35mm P) | ₹1,275 | 2 | Through-bolt M4 |
+| **BR-01 Study** | Top Lofts (550mm) | Touch Latch | Concealed / Internal | Push-to-Open Mechanical | Included | 3 | Häfele / Blum Tip-On concealed mechanical latches |
+| **BR-03 Gurudwara** | GBR-2 Laminate Swing Doors | Spruce & Pop Claro Pull | Brushed Warm Gold PVD | 256mm CC (295mm L × 35mm P) | ₹2,275 | 2 | Through-bolt M4 (matches central gold profile shutter) |
+| **BR-03 Gurudwara** | GBR-2 Center Glass Door | Slim Anodized Profile Edge | Warm Gold Anodized | Integrated 20mm Aluminum Extrusion | Included | 1 | Integrated J-pull / profile edge in 45mm frame |
+| **BR-03 Gurudwara** | GBR-2 Top Lofts (550mm) | Touch Latch | Concealed / Internal | Push-to-Open Mechanical | Included | 3 | Häfele / Blum Tip-On concealed mechanical latches |
+| **BR-02 Kabir** | Mid Swing Shutters | Look Mumma Carved Elephant | Natural Waxed Acacia Wood | 120mm W × 95mm H | ₹1,450 / pair | 2 pairs | Dual rear machine bolts, rounded toddler-safe edges |
+
+---
+
 ## Site Quality Control Protocol (Homz Contractual Scope)
 * **Plywood Verification:** Check the printed physical stamp on every board face before carpenter cutting; scan QR tags via manufacturer verification apps.
 * **Edge Banding Standard:** Mandate 2.0 mm thick high-impact PVC edge banding on all external shutter edges (applied via automated through-feed hot-melt machine at factory, not manual iron-on edge strips).

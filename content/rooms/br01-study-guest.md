@@ -68,3 +68,10 @@ Configured layout: NE entrance door, SW washroom door, North wall sofa-bed, East
                                                  [ South Window (3'11" Glazing) ]
                                       [ SOUTH ]
 ```
+
+---
+
+### BR-01 Wardrobe & Study Hardware Specification
+* **Mid Swing Shutters (×3):** [Spruce & Pop Claro Solid Brass Pull](https://spruceandpop.com/products/claro-antique-brass-knurled-cabinet-drawer-knob-and-handle) in **Antique Smoked Bronze** (256mm CC / 295mm Total Length, ₹2,275 ea). Warm deep tone bridges `3163 SI Beige Wool` wardrobe doors with the `424 1D Cinnamon Hickory` fluted library return.
+* **Bottom Drawers (×2):** [Spruce & Pop Claro Pull](https://spruceandpop.com/products/claro-antique-brass-knurled-cabinet-drawer-knob-and-handle) in **Antique Smoked Bronze** (128mm CC / 165mm Total Length, ₹1,275 ea).
+* **Top Lofts (×3):** Concealed push-to-open Tip-On mechanical latches.
