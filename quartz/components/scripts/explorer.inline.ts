@@ -248,6 +248,12 @@ async function setupExplorer(currentSlug: FullSlug) {
                     target.scrollIntoView({ behavior: "smooth" })
                   }
                 }
+                const parentExplorer = nestedA.closest(".explorer") as HTMLElement | null
+                if (parentExplorer && parentExplorer.querySelector(".mobile-explorer")?.checkVisibility()) {
+                  parentExplorer.classList.add("collapsed")
+                  parentExplorer.setAttribute("aria-expanded", "false")
+                  document.documentElement.classList.remove("mobile-no-scroll")
+                }
               })
               nestedLi.appendChild(nestedA)
               nestedUl.appendChild(nestedLi)
