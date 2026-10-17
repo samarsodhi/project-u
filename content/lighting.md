@@ -1,5 +1,5 @@
 ---
-title: "09 · Lighting & Lamps"
+title: "Lighting & Ambience"
 aliases: [u-setup-lamps, lamps-setup,  u-lighting]
 tags: [u-setup, lighting, lamps]
 status: evergreen
@@ -7,7 +7,7 @@ created: 2026-10-10
 updated: 2026-10-17
 ---
 
-[[index|← Back to U Workspace]] · [[governance]] · [[setup/procurement|Procurement Ledger]]
+[[index|← Back to Home Overview]]
 
 # Architectural, Art Accent & Luminaire Specifications
 

@@ -1,5 +1,5 @@
 ---
-title: "16 · Art & Sacred Accents"
+title: "Art & Wall Decor"
 aliases: [u-setup-art-decor, art-decor, u-decor,  u-art]
 tags: [u-setup, decor, art, styling]
 status: evergreen
@@ -7,7 +7,7 @@ created: 2026-10-16
 updated: 2026-10-17
 ---
 
-[[index|← Back to U Workspace]] · [[governance]] · [[lighting]]
+[[index|← Back to Home Overview]] · [[lighting]]
 
 # Art, Styling, Sacred Craft & Wall Accents
 

@@ -1,5 +1,5 @@
 ---
-title: "02 · Master Suite"
+title: "Master Bedroom"
 aliases: [rooms-  master-bedroom, u-master-suite]
 tags: [u-setup, rooms, master-bedroom]
 status: evergreen
@@ -7,7 +7,7 @@ created: 2026-10-10
 updated: 2026-10-17
 ---
 
-[[index|← Back to U Workspace]] · [[governance]]
+[[index|← Back to Home Overview]]
 
 # Master Bedroom Suite (13'0" × 13'0" + Dressing Nook)
 

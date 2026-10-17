@@ -1,5 +1,5 @@
 ---
-title: "12 · Audio & TV"
+title: "Audio & Entertainment"
 aliases: [u-setup- audio-setup,  u-audio]
 tags: [u-setup, audio, av, tv]
 status: evergreen
@@ -7,7 +7,7 @@ created: 2026-10-10
 updated: 2026-10-17
 ---
 
-[[index|← Back to U Workspace]] · [[governance]] · [[setup/procurement|Procurement Ledger]]
+[[index|← Back to Home Overview]]
 
 # Audio, Soundbars, Multi-Room Speakers & TV Infrastructure
 

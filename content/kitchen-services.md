@@ -1,5 +1,5 @@
 ---
-title: "06 · Kitchen & Laundry"
+title: "Kitchen & Laundry"
 aliases: [u-setup-kitchen, kitchen-setup, u-setup-worktop, kitchen-worktop-setup,  u-kitchen]
 tags: [u-setup, kitchen, laundry, worktop]
 status: evergreen
@@ -7,7 +7,7 @@ created: 2026-10-10
 updated: 2026-10-17
 ---
 
-[[index|← Back to U Workspace]] · [[governance]] · [[setup/procurement|Procurement Ledger]]
+[[index|← Back to Home Overview]]
 
 # Kitchen, Worktop, Appliances & Laundry Services
 

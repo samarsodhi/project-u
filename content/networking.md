@@ -1,5 +1,5 @@
 ---
-title: "11 · Wi-Fi & Cabling"
+title: "Wi-Fi & Internet"
 aliases: [u-setup- networking-setup,  u-networking]
 tags: [u-setup, networking, wifi]
 status: evergreen
@@ -7,7 +7,7 @@ created: 2026-10-10
 updated: 2026-10-17
 ---
 
-[[index|← Back to U Workspace]] · [[governance]] · [[setup/procurement|Procurement Ledger]]
+[[index|← Back to Home Overview]]
 
 # Structured Cabling, Low-Voltage Infrastructure & Wi-Fi
 

@@ -1,5 +1,5 @@
 ---
-title: "15 · Drapery & Paint"
+title: "Curtains, Paint & Finishes"
 aliases: [u-setup-interiors, interiors-setup,  u-soft-furnishings]
 tags: [u-setup, interiors, soft-furnishings, paint]
 status: evergreen
@@ -7,7 +7,7 @@ created: 2026-10-10
 updated: 2026-10-17
 ---
 
-[[index|← Back to U Workspace]] · [[governance]] · [[setup/procurement|Procurement Ledger]]
+[[index|← Back to Home Overview]]
 
 # Soft Furnishings, Window Drapery, Solar Glazing & Paints
 

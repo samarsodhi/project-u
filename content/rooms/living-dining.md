@@ -1,5 +1,5 @@
 ---
-title: "01 · Living & Dining"
+title: "Living & Dining"
 aliases: [rooms-  drawing-room, u-living-dining]
 tags: [u-setup, rooms, living, dining]
 status: evergreen
@@ -7,7 +7,7 @@ created: 2026-10-10
 updated: 2026-10-17
 ---
 
-[[index|← Back to U Workspace]] · [[governance]]
+[[index|← Back to Home Overview]]
 
 # Living, Drawing & Dining Spaces
 

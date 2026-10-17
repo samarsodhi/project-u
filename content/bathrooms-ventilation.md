@@ -1,5 +1,5 @@
 ---
-title: "07 · Bathrooms & Ventilation"
+title: "Bathrooms & Ventilation"
 aliases: [u-setup-geysers, geysers-setup,  u-bathrooms]
 tags: [u-setup, bathrooms, geysers, ventilation]
 status: evergreen
@@ -7,7 +7,7 @@ created: 2026-10-10
 updated: 2026-10-17
 ---
 
-[[index|← Back to U Workspace]] · [[governance]] · [[setup/procurement|Procurement Ledger]]
+[[index|← Back to Home Overview]]
 
 # Bathrooms, Geysers, Shower Separation & Ventilation
 

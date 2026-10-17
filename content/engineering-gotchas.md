@@ -1,5 +1,5 @@
 ---
-title: "17 · High-Rise Gotchas"
+title: "High-Rise Engineering Gotchas"
 aliases: [u-setup-gotchas, olympus-gotchas, high-rise-mep-gotchas]
 tags: [u-setup, engineering, gotchas, failure-modes]
 status: evergreen
@@ -7,7 +7,7 @@ created: 2026-10-15
 updated: 2026-10-17
 ---
 
-[[index|← Back to U Workspace]] · [[governance]]
+[[index|← Back to Home Overview]]
 
 # High-Rise Gotchas, Failure Modes & Field Mitigations
 

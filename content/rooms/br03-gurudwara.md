@@ -1,5 +1,5 @@
 ---
-title: "05 · Home Gurudwara"
+title: "Home Gurudwara"
 aliases: [rooms-br03, br-03, gurudwara-room, baba-ji-room, u-br03]
 tags: [u-setup, rooms, sacred, gurudwara]
 status: evergreen
@@ -7,7 +7,7 @@ created: 2026-10-10
 updated: 2026-10-17
 ---
 
-[[index|← Back to U Workspace]] · [[governance]]
+[[index|← Back to Home Overview]]
 
 # BR-03: The Home Gurudwara (13'0" × 11'11", East Window)
 

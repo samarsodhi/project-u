@@ -1,5 +1,5 @@
 ---
-title: "13 · Air, Water & Robot"
+title: "Air, Water & Cleaning"
 aliases: [u-setup- air-water-setup,  u-air-water]
 tags: [u-setup, air-water, robotics]
 status: evergreen
@@ -7,7 +7,7 @@ created: 2026-10-10
 updated: 2026-10-17
 ---
 
-[[index|← Back to U Workspace]] · [[governance]] · [[setup/procurement|Procurement Ledger]]
+[[index|← Back to Home Overview]]
 
 # Air, Water Quality, Dehumidification & Floor Robotics
 

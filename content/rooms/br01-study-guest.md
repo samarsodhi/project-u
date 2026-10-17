@@ -1,5 +1,5 @@
 ---
-title: "03 · WFH Study & Guest"
+title: "Study & Guest Room"
 aliases: [rooms-br01, br-01, study-guest, wfh-study, u-br01]
 tags: [u-setup, rooms, study, guest-room]
 status: evergreen
@@ -7,7 +7,7 @@ created: 2026-10-10
 updated: 2026-10-17
 ---
 
-[[index|← Back to U Workspace]] · [[governance]]
+[[index|← Back to Home Overview]]
 
 # BR-01: WFH Study & Guest Room (13'0" × 13'0")
 

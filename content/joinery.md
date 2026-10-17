@@ -1,5 +1,5 @@
 ---
-title: "08 · Joinery & Substrates"
+title: "Cabinetry & Woodwork"
 aliases: [u-setup- joinery-setup,  u-joinery]
 tags: [u-setup, joinery, millwork, hardware]
 status: evergreen
@@ -7,7 +7,7 @@ created: 2026-10-10
 updated: 2026-10-17
 ---
 
-[[index|← Back to U Workspace]] · [[governance]] · [[setup/contract-rider-homz|Homz Contract Rider]]
+[[index|← Back to Home Overview]]
 
 # Joinery, Core Substrates & Hardware Specifications
 

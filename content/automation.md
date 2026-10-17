@@ -1,5 +1,5 @@
 ---
-title: "10 · Smart Home & Fans"
+title: "Smart Home & Automation"
 aliases: [u-setup-smart-home, smart-home-setup,  u-automation]
 tags: [u-setup, smart-home, automation]
 status: evergreen
@@ -7,7 +7,7 @@ created: 2026-10-10
 updated: 2026-10-17
 ---
 
-[[index|← Back to U Workspace]] · [[governance]] · [[setup/procurement|Procurement Ledger]]
+[[index|← Back to Home Overview]]
 
 # Smart Home, IoT Relays, Voice Controllers & BLDC Fans
 

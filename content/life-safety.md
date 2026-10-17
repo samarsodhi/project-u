@@ -1,5 +1,5 @@
 ---
-title: "14 · Life Safety & Security"
+title: "Safety & Security"
 aliases: [u-setup-safety, safety-setup,  u-safety]
 tags: [u-setup, safety, security]
 status: evergreen
@@ -7,7 +7,7 @@ created: 2026-10-10
 updated: 2026-10-17
 ---
 
-[[index|← Back to U Workspace]] · [[governance]] · [[evacuation]]
+[[index|← Back to Home Overview]]
 
 # Life Safety, Fire Protection, Childproofing & Smart Locks
 

@@ -1,5 +1,5 @@
 ---
-title: "04 · Kabir's Study & Play"
+title: "Kabir's Room (Study & Play)"
 aliases: [rooms-br02, br-02, kabirs-room, u-br02]
 tags: [u-setup, rooms, kids-room, study]
 status: evergreen
@@ -7,7 +7,7 @@ created: 2026-10-10
 updated: 2026-10-17
 ---
 
-[[index|← Back to U Workspace]] · [[governance]]
+[[index|← Back to Home Overview]]
 
 # BR-02: Kabir's Room (13'0" × 11'11", Harbour Theme)
 
