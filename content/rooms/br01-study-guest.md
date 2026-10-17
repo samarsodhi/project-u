@@ -11,19 +11,58 @@ updated: 2026-10-17
 
 # BR-01: WFH Study & Guest Room (13'0" × 13'0")
 
-Primary workspace for Samar (SDM at Amazon) and flexible guest suite. Houses the owned standing desk, Steelcase ergonomic chair, library shelving, monitor task lighting, and a 5-zone pocket-sprung sofa-bed for visiting family.
+Primary workspace for Samar (SDM at Amazon) and flexible guest suite. Houses the owned standing desk, Steelcase ergonomic chair, integrated wardrobe end-shelf library, monitor task lighting, and the Gulmohar Lane Berlin sofa-bed.
 
-> **Clearance Rule:** Ensure the single shifted wardrobe shutter clears the standing desk across its full 72–120 cm vertical travel range.
+> **Clearance Rule:** Position the standing desk along the East wall facing North. Maintain 100 cm buffer behind the desk chair and verify South window blackout drapery eliminates screen backlight glare.
 > **Finishes Reference:** Wall finish references [[soft-furnishings#definitive-room-by-room-color-palette]].
 
 ---
 
-## Study & Guest Room Hardware
+## Study & Guest Room Hardware & Furnishings
 
 | Need | Tier 1: High-Quality VFM | Tier 2: High-Quality Unconstrained | Top Failure Mode & Reddit Insight |
 | :--- | :--- | :--- | :--- |
-| **GBR / BR-01 Study Wardrobe** | **Homz Locked `3163 SI Beige Wool`** (Single shutter shifted toward study unit + dome-top mirror above shutter, included in ₹18L) / [Century Sainik 710 + Hettich Soft-Close](https://www.amazon.in/s?k=Century+Sainik+710+%2B+Hettich+Soft-Close) (Included turnkey baseline) | [Century Club Prime BWP + Blum TIP-ON](https://www.amazon.in/s?k=Century+Club+Prime+BWP+%2B+Blum+TIP-ON) (Flush architectural shutters, integrated cable management, ~₹1.60L) / [Greenlam AFX + Blum LEGRABOX Study Integration](https://www.amazon.in/s?k=Greenlam+AFX+%2B+Blum+LEGRABOX+Study+Integration) (Hidden printer pull-out, ~₹1.85L) | Verify shifted shutter swing clears the owned standing desk across its full 72–120 cm vertical travel range before carpentry fabrication. |
-| **Sofa-Bed for Guests** | [IKEA HYLTARP 2-Seat Sofa-Bed](https://www.ikea.com/in/en/search/?q=HYLTARP+2-Seat+Sofa-Bed) (Pocket-sprung, opens to 140×200cm bed, ₹97,980) / [IKEA VIMLE 2-Seat Sofa-Bed](https://www.ikea.com/in/en/search/?q=VIMLE+2-Seat+Sofa-Bed) (12cm HR foam mattress, washable cover, ₹74,990) | [Gulmohar Lane Berlin Fabric Sofa Cum Bed](https://www.gulmoharlane.com/search?q=Berlin+Fabric+Sofa+Cum+Bed) (Kiln-dried hardwood, fold-out, ₹1,26,900) / [Innovation Living CozyPad](https://www.innovationliving.asia/products/by-type/sofa-beds/product-details/cozypad-sofa-bed-with-arms?fabric=595-Corduroy-Burnt-Orange) (Danish pocket springs, ~₹1.85L) | Cheap bi-fold futons cause severe lumbar pain; 5-zone pocket springs eliminate center support bars. Keep a 2-inch topper handy as European mattress feel is firm. |
-| **Study Library & Shelving** | [IKEA BILLY / OXBERG Bookcase with Glass Doors](https://www.ikea.com/in/en/search/?q=BILLY) (Oak veneer, dust-proof glass, ₹22,490) / [IKEA HAVSTA Bookcase with Base](https://www.ikea.com/in/en/search/?q=HAVSTA+Bookcase+with+Base) (Solid pine, stained finish, glass doors, ₹34,990) | [Alankaram Modular Architectural Library](https://www.alankaram.in/?s=Architectural+Library&post_type=product) (Solid wood uprights, dust-sealed glass panels, ~₹85,000) / [Magari Form Solid Ash Bookcase](https://magari.in/search?q=Form+Ash+Bookcase) (Integrated warm LED channels, fluted backer, ~₹1.15L) | Open shelving accumulates thick dust in 10 days; glass-fronted shutters cut dusting by 80%. Support heavy art books by reinforcing middle shelf pins. |
-| **Monitor Task Light** | [Baseus i-Wok Series Screen Hanging Light](https://baseusindiaofficial.com/products/baseus-i-wok-series-desktop-monitor-screen-light-led-lamp-black-dgiwk-b01) (Asymmetric optical design, USB, ₹2,899) / [Quntis ScreenBar Pro](https://www.amazon.in/dp/B08DKQ3JG1) (Auto-dimming, Ra95 eye-care optics, ₹4,599) | [BenQ ScreenBar Pro](https://www.amazon.in/dp/B0CZ94MB2R) (Auto-dimming, ultrasonic motion sensor, zero screen glare, ₹14,490) / [BenQ ScreenBar Halo](https://www.amazon.in/s?k=BenQ+ScreenBar+Halo) (Wireless rotary controller, rear bias backlight, ₹19,990) | Budget light bars spill glare onto monitor glass; BenQ asymmetric optics illuminate only the desk surface while ultrasonic presence sensing saves power. |
-| **Window Reading Lounge Chair** | [IKEA EKENÄSET Armchair](https://www.ikea.com/in/en/p/ekenaeset-armchair-kilanda-light-beige-70533491/) (Solid beech frame, ₹16,990) / [Gulmohar Lane Woodstock Leather](https://www.gulmoharlane.com/search?q=Woodstock+Leather) (Kiln-dried hardwood, top-grain leather, ₹63,130) | [Alankaram Z-Chair](https://www.alankaram.in/?s=Z-Chair&post_type=product) (Solid teak, raked recline, ₹67,500) / [Magari Riga Cane](https://magari.in/search?q=Riga+Cane) (Solid ash, cane back, ₹59,708) | EKENÄSET fixed fabric stains easily; spray Scotchgard. Woodstock leather needs beeswax conditioning next to South window. Solid teak and ash resist seasonal warping. |
+| **BR-01 Wardrobe & End-Cap Library** | **Homz Locked `3163 SI Beige Wool`** (Wardrobe carcass with 35 cm integrated East-facing oak end-shelf library facing window nook, included in ₹18L) | [Century Club Prime BWP + Blum TIP-ON + Fluted Oak Bookcase](https://www.amazon.in/s?k=Century+Club+Prime+BWP+%2B+Blum+TIP-ON) (Integrated LED shelf channels, dust-sealed glass returns, ~₹1.85L) | Open high-rise end-shelves gather fine dust; seal bottom 2 tiers with fluted glass shutters and reserve top open tiers for active reading books. |
+| **Sofa-Bed for Guests** | [IKEA HYLTARP 2-Seat Sofa-Bed](https://www.ikea.com/in/en/search/?q=HYLTARP+2-Seat+Sofa-Bed) (Pocket-sprung, opens to 140×200cm bed, washable cover, ₹97,980) / [IKEA VIMLE 2-Seat Sofa-Bed](https://www.ikea.com/in/en/search/?q=VIMLE+2-Seat+Sofa-Bed) (12cm HR foam mattress, ₹74,990) | [Gulmohar Lane Berlin Fabric Sofa Cum Bed](https://www.gulmoharlane.com/products/berlin-fabric-sofa-cum-bed) (Kiln-dried hardwood frame, 188×193cm bed, ₹1,26,900) / [Innovation Living CozyPad](https://www.innovationliving.asia/products/by-type/sofa-beds/product-details/cozypad-sofa-bed-with-arms?fabric=595-Corduroy-Burnt-Orange) (Danish pocket springs, ~₹1.85L) | Heavy steel pull-out mechanisms gouge wooden floors; fit dense felt glides. Fabric covers soil on guest spills; spray Scotchgard hydrophobic barrier before first use. |
+| **Window Reading Lounge Chair** | [IKEA EKENÄSET Armchair](https://www.ikea.com/in/en/p/ekenaeset-armchair-kilanda-light-beige-70533491/) (Solid beech frame, compact 86×78 cm, ₹16,990) / [Gulmohar Lane Woodstock Leather](https://www.gulmoharlane.com/search?q=Woodstock+Leather) (Kiln-dried hardwood, top-grain leather, ₹63,130) | [Alankaram Z-Chair](https://www.alankaram.in/?s=Z-Chair&post_type=product) (Solid teak, raked recline, ₹67,500) / [Magari Riga Cane](https://magari.in/search?q=Riga+Cane) (Solid ash, natural cane back, ₹59,708) | South window UV dries out leather; condition Woodstock leather bi-annually with beeswax. Fixed EKENÄSET fabric stains easily; Scotchgard immediately. |
+| **Monitor Task Light** | [Baseus i-Wok Series Screen Hanging Light](https://baseusindiaofficial.com/products/baseus-i-wok-series-desktop-monitor-screen-light-led-lamp-black-dgiwk-b01) (Asymmetric optical design, USB, ₹2,899) / [Quntis ScreenBar Pro](https://www.amazon.in/dp/B08DKQ3JG1) (Auto-dimming, Ra95 eye-care optics, ₹4,599) | [BenQ ScreenBar Pro](https://www.amazon.in/dp/B0CZ94MB2R) (Auto-dimming, ultrasonic motion sensor, zero screen glare, ₹14,490) / [BenQ ScreenBar Halo](https://www.amazon.in/s?k=BenQ+ScreenBar+Halo) (Wireless rotary controller, rear bias backlight, ₹19,990) | Budget light bars spill glare onto monitor glass; BenQ asymmetric optics illuminate only desk surface while rear bias light reduces eye strain in dark rooms. |
+| **Executive Standing Desk & Seating** | Owned Motorized Sit-Stand Desk (Dual-motor frame, 150×75 cm top) + [Steelcase Gesture / Leap V2](https://www.steelcase.com) (Owned ergonomic task seating) | Custom Solid White Oak Desktop on Linak DL6 Dual-Motor Frame (~₹85,000) + Herman Miller Embody (~₹1.65L) | Running sit-stand cables along baseboards pinches cords during elevation; mount an under-desk cable spine and surge strip to travel with the desktop. |
+
+---
+
+## [Suggestions] Room Layout & Spatial Architecture
+
+Configured layout: NE entrance door, SW washroom door, North wall sofa-bed, East wall standing desk (facing North), and SE window reading nook with wardrobe end-cap library:
+
+* **Executive Workspace (East Wall, Samar Sits Facing North):** Standing desk positioned against the East wall with Samar seated south of it facing North toward the entrance door. This command orientation provides direct visual control over entry without camera exposure to bed areas. Dual-layer drapery (sheer + blackout) on the South window stops midday screen reflection.
+* **Guest Sleeping Zone (North Wall):** Gulmohar Lane Berlin Sofa Cum Bed placed flush along the North wall (188 cm wide). Fits cleanly within the 296 cm stretch west of the NE entrance swing. Expanding to 193 cm bed mode leaves 203 cm of walk clearance to the South wardrobe.
+* **Integrated End-Cap Library (South Wall, East End):** South wardrobe terminates before the window reveal into a 35 cm wide, 60 cm deep open/fluted oak return bookcase facing East into the room. Eliminates a flat laminate gable end next to the window while housing 80+ books at zero floor footprint penalty.
+* **Window Reading Nook (South-East Alcove):** IKEA EKENÄSET or Gulmohar Lane Woodstock lounge chair placed in the SE corner by the window, angled 45° toward the room. Natural South daylight for reading, direct arm-reach access to the wardrobe end-shelf library, and 110 cm clearance from the desk chair.
+* **Bathroom Circulation (West Wall):** Direct, unencumbered 120 cm walking corridor runs from the NE entrance down the West wall straight into the SW ensuite washroom.
+* **Brahmasthan:** Generous 180×160 cm open central floor zone kept clear of static furniture.
+
+```
+                                      [ NORTH ]
+                  [ North Wall (296 cm Clear Stretch) ]          [ NE Entrance Door ]
++-----------------------------------------------------------------------------------+
+| [ Guest Lounge & Sleeper ]                                     | (Inward Door     |
+| Gulmohar Lane Berlin Sofa Cum Bed                              |  Swing along     |
+| 188 cm W × 104 cm D (Closed) / 193 cm D (Open Bed)             |  East Wall)      |
+|                                                                +------------------+
+|                                                                                   |
+|                                                                [ Study Station ]  |
+|                                                                Executive Sit-Stand|
+| [ WEST ]                                                       SAMAR SITS FACING  |
+| Clear Circulation Corridor                                     NORTH              |
+| Direct access to SW Bathroom                                   (Command View)     | [ EAST ]
+|                                                                Screens face South |
+|                                                                                   |
+|                                                                [ SE Reading Nook ]|
+|                                                                Lounge Armchair    |
+| [ SW Bathroom Door ]                                           (EKENÄSET/Woodstock|
+| (Ensuite 5'0" × 7'11")   [ South Wardrobe ]    [ End-Cap Lib ] Natural light      |
+| Door swings West         Homz 3163 Beige Wool  35cm Oak Return |                  |
++--------------------------======================+---------------+------------------+
+                                                 [ South Window (3'11" Glazing) ]
+                                      [ SOUTH ]
+```
