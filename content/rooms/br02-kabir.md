@@ -33,36 +33,35 @@ Dedicated study, reading, and creative play space for Kabir (age 6, Grade 1 at K
 
 ## [Suggestions] Vastu-Compliant Room Layout
 
-Vastu orientation for 13'0" × 11'11" footprint factoring in SE entrance door, NW washroom door, and floor 42 child-safety clearances:
+Configured layout: SE entrance door, NW washroom door, NE wardrobe, North wall desk (right of window), and NW reading nook:
 
-* **Sleep Alignment (South Wall, Head to East):** Daybed with pull-out guest trundle sits along South wall, buffered from the SE entrance door swing by a 30 cm privacy baffle. Kabir sleeps with head strictly to the East (solar bio-rhythm alignment) and feet pointing West toward the wardrobe.
-* **Study Alignment (East Wall, Seated Facing East):** IKEA BERGLÄRKA desk positioned on the East wall. Kabir sits facing East against a solid wall, with indirect North daylight entering over his left shoulder. Completely clear of NW washroom door path.
-* **Heavy Storage & Washroom Access (South-West / Nairutya):** Homz 70/20/10 wardrobe anchored in South-West corner (shutters open East). Leaves an unhindered 1.0 m clear walkway along the West wall to the NW washroom door.
-* **Reading & Wisdom Nook (North-East / Ishan):** Three shallow front-facing MOSSLANDA book ledges and KOMPISHÄNG floor pouffe in the North-East quadrant (Saraswati zone).
-* **Vision & Growth Wall (North / North-East):** Woodsify 3D Birch World Map mounted on the solid North-East wall segment via French cleats on 6mm BWP ply backer board.
+* **Sleep Alignment (South Wall, Head to East):** Daybed with pull-out guest trundle lined along South wall, buffered from the SE entrance door swing by a 30 cm privacy wing. Kabir sleeps with head strictly to the East (classical student bio-rhythm alignment) and feet pointing West.
+* **Study Alignment (North Wall, Right of Window):** IKEA BERGLÄRKA desk lined against the solid North wall to the right of the window. Kabir sits facing North. Glare-free North daylight enters over his left shoulder without hand shadows.
+* **Reading Nook (North-West, Left of Window):** Low-profile IKEA KOMPISHÄNG tri-fold pouffe/mattress positioned in the NW zone by the glazing. Natural reading light; preserves clear 900 mm walk to NW washroom door.
+* **Wardrobe (North-East, Along East Wall):** Homz 70/20/10 wardrobe placed in North-East corner running length across East wall (shutters open West). Light `3163 SI Beige Wool` finish and open oak niche reflect North light.
+* **Activity Zone & World Map (South-West / West Wall):** Clear floor area in South-West for play and movement; Woodsify 3D Birch World Map mounted on solid West wall via French cleats on 6mm BWP ply backer board.
 * **Circadian & Task Lighting:** Dual 3000K deep-recessed CRI 95+ COB spots in circulation paths (never over pillows). Clamp-mounted IKEA TERTIAL task lamp on desk. 2700K indirect warm amber bedtime LED strip with 20-minute fade-to-off automation via Shelly Plus 1.
-* **Clear North & Brahmasthan:** 900 mm clear perimeter walk maintained along North window sill (no climbable furniture). Central room floor remains 100% open and unweighted for free circulation.
+* **Clear North & Brahmasthan:** Central room floor remains 100% open and unweighted for free circulation.
 
 ```
                                       [ NORTH ]
-               [ North Glazing - Clear Walkway / Zero Furniture Against Sill ]
-       +-------------------------------------------------------------------------+
-[WASH- | [ NW Washroom Door ]                               [ NE Wisdom Corner ] |
- ROOM] | (Clear 1.0m swing & walk)                          MOSSLANDA Ledges     |
-       |                                                    + KOMPISHÄNG Pouffe  |
-       |                                                                         |
-       |                                                    [ Study Station ]    |
-[WEST] |                                                    IKEA BERGLÄRKA Desk  | [EAST]
-       |                                                    KABIR FACES EAST     |
-       |                                                    (Solid East wall)    |
+[WASH-         [ North Glazing / Window ]             [ North Wall (Right of Window) ]
+ ROOM] +-------------------------------------------------------------------------+
+ (Door)| [ NW Reading Nook ]                          [ Study Station ]          |
+       | IKEA KOMPISHÄNG Pouffe                       IKEA BERGLÄRKA Desk        |
+       | Natural reading light                        KABIR SITS FACING NORTH    | [NE Wardrobe]
+       | (Clear NW door walk)                         (Window to his left)       | Homz 70/20/10
+       |                                                                         | Length on East
+[WEST] |                                                                         | (Shutters West)
+       |                                                                         | [EAST]
        |                                                                         |
        |                       [ BRAHMASTHAN / OPEN CENTER ]                     |
-       |                       100% clear floor for open play                    |
+       |                       Generous open central floor                       |
        |                                                                         |
-       |  [ Heavy Storage ]              [ Daybed / Sleeper ]                    |
-       |  Homz 70/20/10 Wardrobe         Daybed with Trundle  [ SE Entrance Door]|
-       |  South-West corner anchor       HEAD TO EAST         (Clear entry swing)|
-       |  (Shutters open East)           Feet point West                         |
+       |  [ SW Activity Zone ]           [ Daybed / Sleeper ]                    |
+       |  Open play & movement floor     Daybed with Trundle  [ SE Entrance Door]|
+       |  3D World Map on West wall      HEAD TO EAST         (Clear entry swing)|
+       |                                 Feet point West                         |
        +-------------------------------------------------------------------------+
                                       [ SOUTH ]
 ```
