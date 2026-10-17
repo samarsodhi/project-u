@@ -34,13 +34,13 @@ Dedicated study, reading, and creative play space for Kabir (age 6, Grade 1 at K
 
 ## [Suggestions] Vastu-Compliant Room Layout
 
-Vastu orientation for 13'0" × 11'11" footprint balancing academic focus, restful sleep, and floor 42 child-safety clearances:
+Vastu orientation for 13'0" × 11'11" footprint factoring in SE entrance door, NW washroom door, and floor 42 child-safety clearances:
 
-* **Sleep Alignment (Head to East):** Daybed with pull-out guest trundle placed along South-East / East zone. Kabir sleeps with head strictly to the East (solar bio-rhythm alignment for memory and rejuvenation) and feet pointing West. Eliminates nocturnal fall hazards and prevents feet pointing toward entry door.
-* **Study Alignment (Seated Facing East):** IKEA BERGLÄRKA tiltable desk positioned against West wall. Kabir sits facing East with a solid masonry wall backing for focus and grounding. Indirect glare-free North daylight enters over his left shoulder. Desk power adapters and task lamp transformer placed in South-East (Agni) worktop corner.
-* **Heavy Storage (South-West / Nairutya):** Homz 70/20/10 wardrobe anchored in South-West quadrant. Carcass in `3163 SI Beige Wool` with `424 1D Warm Oak` niche and `22102 Trooper Blue` drawers. Shutters swing North and East. Dressing mirror mounted strictly on inner shutter face (never reflecting the bed).
-* **Reading & Wisdom Nook (East Wall):** Three shallow front-facing book ledges (40 cm, 75 cm, 110 cm) mounted on East wall (Saraswati quadrant). Paired with floor-level IKEA KOMPISHÄNG or SLÄKT tri-fold pouffe below.
-* **Vision & Growth Wall (North / North-East):** Woodsify 3D Birch World Map mounted via French cleats on North/North-East wall on 6mm BWP ply backer board. 90×60 cm oak-framed cork pinboard placed adjacent to desk for timetables and artwork.
+* **Sleep Alignment (South Wall, Head to East):** Daybed with pull-out guest trundle sits along South wall, buffered from the SE entrance door swing by a 30 cm privacy baffle. Kabir sleeps with head strictly to the East (solar bio-rhythm alignment) and feet pointing West toward the wardrobe.
+* **Study Alignment (East Wall, Seated Facing East):** IKEA BERGLÄRKA desk positioned on the East wall. Kabir sits facing East against a solid wall, with indirect North daylight entering over his left shoulder. Completely clear of NW washroom door path.
+* **Heavy Storage & Washroom Access (South-West / Nairutya):** Homz 70/20/10 wardrobe anchored in South-West corner (shutters open East). Leaves an unhindered 1.0 m clear walkway along the West wall to the NW washroom door.
+* **Reading & Wisdom Nook (North-East / Ishan):** Three shallow front-facing MOSSLANDA book ledges and KOMPISHÄNG floor pouffe in the North-East quadrant (Saraswati zone).
+* **Vision & Growth Wall (North / North-East):** Woodsify 3D Birch World Map mounted on the solid North-East wall segment via French cleats on 6mm BWP ply backer board.
 * **Circadian & Task Lighting:** Dual 3000K deep-recessed CRI 95+ COB spots in circulation paths (never over pillows). Clamp-mounted IKEA TERTIAL task lamp on desk. 2700K indirect warm amber bedtime LED strip with 20-minute fade-to-off automation via Shelly Plus 1.
 * **Clear North & Brahmasthan:** 900 mm clear perimeter walk maintained along North window sill (no climbable furniture). Central room floor remains 100% open and unweighted for free circulation.
 
@@ -48,25 +48,22 @@ Vastu orientation for 13'0" × 11'11" footprint balancing academic focus, restfu
                                       [ NORTH ]
                [ North Glazing - Clear Walkway / Zero Furniture Against Sill ]
        +-------------------------------------------------------------------------+
-       |                                                    [ North-East Corner ]|
-       |                                                    Light, open space    |
-       |                                                    [ 3D World Map ]     |
-       |  [ Study Station ]                                 Woodsify Birch Map   |
-       |  IKEA BERGLÄRKA Desk                               on French cleats     |
-[WEST] |  Fixed 4-leg chair                                                      | [EAST]
-       |  KABIR FACES EAST                                  [ Reading Ledge Nook]|
-       |  Solid West wall behind back                       MOSSLANDA Ledges     |
-       |  (Task light in SE desk corner)                    + KOMPISHÄNG Pouffe  |
+[WASH- | [ NW Washroom Door ]                               [ NE Wisdom Corner ] |
+ ROOM] | (Clear 1.0m swing & walk)                          MOSSLANDA Ledges     |
+       |                                                    + KOMPISHÄNG Pouffe  |
+       |                                                                         |
+       |                                                    [ Study Station ]    |
+[WEST] |                                                    IKEA BERGLÄRKA Desk  | [EAST]
+       |                                                    KABIR FACES EAST     |
+       |                                                    (Solid East wall)    |
        |                                                                         |
        |                       [ BRAHMASTHAN / OPEN CENTER ]                     |
        |                       100% clear floor for open play                    |
        |                                                                         |
-       |  [ Heavy Storage ]                                 [ Daybed / Sleeper ] |
-       |  Homz 70/20/10 Wardrobe                            Low daybed + trundle |
-       |  South-West corner anchor                          HEAD TO EAST         |
-       |  Shutters swing North/East                         Feet point West      |
-       |                                                                         |
-       |                     [ Entry Door ]                                      |
+       |  [ Heavy Storage ]              [ Daybed / Sleeper ]                    |
+       |  Homz 70/20/10 Wardrobe         Daybed with Trundle  [ SE Entrance Door]|
+       |  South-West corner anchor       HEAD TO EAST         (Clear entry swing)|
+       |  (Shutters open East)           Feet point West                         |
        +-------------------------------------------------------------------------+
                                       [ SOUTH ]
 ```
