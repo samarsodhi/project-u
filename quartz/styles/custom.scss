@@ -426,3 +426,27 @@ table td img:hover {
     }
   }
 }
+
+// ---------------------------------------------------------
+// 7. Architectural & MEP Drawings Link (Bottom of Left Pane)
+// ---------------------------------------------------------
+.explorer li:has(a[href*="builder-drawings"]) {
+  margin-top: 1.25rem !important;
+  padding-top: 0.75rem !important;
+  border-top: 1px solid var(--lightgray) !important;
+
+  a {
+    font-size: 0.82rem !important;
+    opacity: 0.85 !important;
+    color: var(--darkgray) !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.4rem !important;
+
+    &:hover {
+      opacity: 1 !important;
+      color: var(--secondary) !important;
+    }
+  }
+}
+

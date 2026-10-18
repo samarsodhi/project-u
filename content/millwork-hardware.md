@@ -1,5 +1,5 @@
 ---
-title: "Millwork Substrates & Wardrobe Hardware"
+title: "Cabinetry & Woodwork"
 aliases: [u-setup-joinery, joinery-setup, joinery, u-joinery,  wardrobe-hardware]
 tags: [u-setup, joinery, millwork, hardware, wardrobes]
 status: evergreen

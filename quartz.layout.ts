@@ -14,7 +14,7 @@ const explorerConfig = {
     const order: Record<string, number> = {
       // Phase 1: High-Rise Engineering & Irreversible Services
       "engineering-gotchas": 10,
-      "joinery": 20,
+      "millwork-hardware": 20,
       "kitchen-services": 30,
       "bathrooms-ventilation": 40,
       "lighting": 50,
@@ -37,6 +37,9 @@ const explorerConfig = {
 
       // Phase 4: Art & Styling
       "art-styling": 130,
+
+      // Separate bottom section: Floor plans & technical drawings
+      "builder-drawings": 999,
     }
 
     const orderA = order[a.slugSegment] ?? 999

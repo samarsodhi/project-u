@@ -1,6 +1,6 @@
 ---
-title: "Unit B4206 Architectural, HVAC, Electrical & Plumbing Drawings"
-aliases: [u-drawings,  mep-drawings, unit-b4206-drawings, b4206-mep]
+title: "Floor Plans & Drawings"
+aliases: [u-drawings,  mep-drawings, floor-plans, drawings, b4206-drawings]
 tags: [u-setup, architecture, mep, hvac, electrical, plumbing, drawings]
 status: evergreen
 created: 2026-10-18
@@ -9,7 +9,7 @@ updated: 2026-10-18
 
 [[index|← Back to Home Overview]] · [[engineering-gotchas]]
 
-# Unit B4206 Architectural, HVAC, Electrical & Plumbing Drawings
+# Floor Plans & Architectural Drawings
 
 Definitive Good-For-Construction (GFC) engineering records for Unit B-6 (B4206, Floor 42, Tower B, Sumadhura The Olympus). SBUA is 2880 sft with West facing orientation. Sourced directly from builder technical submittals.
 
@@ -17,12 +17,21 @@ Definitive Good-For-Construction (GFC) engineering records for Unit B-6 (B4206, 
 
 ## 1. Master Drawing Inventory & Assets
 
-| Discipline | Drawing Title | Source File | Sheet Size & Scale | GFC Date | Key Focus |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **Architectural Floor Plan** | 100-TOWER-A&B TYPICAL PLANS | [floor-b6.pdf](assets/builder-drawings/floor-b6.pdf) | A3 (ZWCAD) | 2024-04-19 | Clear room mm dimensions, doors, windows, balconies |
-| **HVAC (VRV Layout)** | MEP DRAWING TOWER-B FLOOR PLAN | [hvac-b6.pdf](assets/builder-drawings/hvac-b6.pdf) | A3 (AutoCAD) | 2023-08-24 | 10 HP Daikin VRV, 7 IDUs, copper sizes, condensate drains |
-| **Plumbing & Sanitary** | PLUMBING TOWER-B FLOOR PLAN | [plumbing-b6.pdf](assets/builder-drawings/plumbing-b6.pdf) | A4 (2 Sheets) | 2026-04-08 | 7 plumbing shafts, DWS/MWS/FWS, soil/waste risers |
-| **Electrical & Low Voltage** | ELECTRICAL TOWER-B FLOOR PLAN | [electrical-b6.pdf](assets/builder-drawings/electrical-b6.pdf) | A4 (3 Sheets) | 2026-04-08 | DB, CJB, 20A geysers, 16A power drops, lighting conduits |
+| Discipline | Drawing Title | Source File (Vector PDF) | High-Res Preview (PNG / JPG) | Sheet Size & Scale | GFC Date | Key Focus |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **Brochure Floor Plan (2880 SFT)** | Sumadhura Olympus 2880 Plan | — | [house-plan-2880.jpeg](assets/builder-drawings/house-plan-2880.jpeg) | JPEG (High-Res) | 2021 | Marketing layout with furniture circulation |
+| **Architectural GFC Plan** | 100-TOWER-A&B TYPICAL PLANS | [floor-b6.pdf](assets/builder-drawings/floor-b6.pdf) | [floor-b6.png](assets/builder-drawings/floor-b6.png) | A3 (ZWCAD) | 2024-04-19 | Clear room mm dimensions, doors, windows, balconies |
+| **HVAC (VRV Layout)** | MEP DRAWING TOWER-B FLOOR PLAN | [hvac-b6.pdf](assets/builder-drawings/hvac-b6.pdf) | [hvac-b6.png](assets/builder-drawings/hvac-b6.png) | A3 (AutoCAD) | 2023-08-24 | 10 HP Daikin VRV, 7 IDUs, copper sizes, condensate drains |
+| **Plumbing & Sanitary** | PLUMBING TOWER-B FLOOR PLAN | [plumbing-b6.pdf](assets/builder-drawings/plumbing-b6.pdf) | [plumbing-b6.png](assets/builder-drawings/plumbing-b6.png) | A4 (2 Sheets) | 2026-04-08 | 7 plumbing shafts, DWS/MWS/FWS, soil/waste risers |
+| **Electrical & Low Voltage** | ELECTRICAL TOWER-B FLOOR PLAN | [electrical-b6.pdf](assets/builder-drawings/electrical-b6.pdf) | [electrical-b6.png](assets/builder-drawings/electrical-b6.png) | A4 (3 Sheets) | 2026-04-08 | DB, CJB, 20A geysers, 16A power drops, lighting conduits |
+
+---
+
+### Architectural Floor Plan Previews
+
+![Unit B4206 GFC Architectural Plan](assets/builder-drawings/floor-b6.png)
+
+![Unit B4206 2880 SFT Furniture Floor Plan](assets/builder-drawings/house-plan-2880.jpeg)
 
 ---
 
