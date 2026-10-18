@@ -29,6 +29,7 @@ jobs:
         run: npm ci
       - name: Build Quartz
         run: |
+          set -o pipefail
           npx quartz build --verbose 2>&1 | tee build.log || {
             echo "### Build Error Log" >> $GITHUB_STEP_SUMMARY
             echo '```' >> $GITHUB_STEP_SUMMARY
