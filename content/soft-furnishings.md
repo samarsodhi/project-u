@@ -4,29 +4,18 @@ aliases: [u-setup-interiors, interiors-setup,  u-soft-furnishings]
 tags: [u-setup, interiors, soft-furnishings, paint]
 status: evergreen
 created: 2026-10-10
-updated: 2026-10-17
+updated: 2026-10-18
 ---
 
 [[index|← Back to Home Overview]]
 
 # Soft Furnishings, Window Drapery, Solar Glazing & Paints
 
-Master specification for ceiling-recessed double-channel drapery, East-facing solar UV protection films, whole-home low-sheen paint palette, and Homz laminate finishes.
+Master specification for whole-home low-sheen paint palette, Homz laminate finishes, ceiling-recessed double-channel drapery, and East-facing solar UV protection films.
 
 ---
 
-## 1. Window Treatments & Solar Glazing Matrix
-
-| Need | Tier 1: High-Quality VFM | Tier 2: High-Quality Unconstrained | Top Failure Mode & Reddit Insight |
-| :--- | :--- | :--- | :--- |
-| **Window Drapery (6 Openings)** | [D'Decor / Sarom Performance Fabrics](https://www.ddecor.com/search?q=D%27Decor) (Blue Wool 6+ lightfastness, 2.25× pinch pleat + detachable 3-pass blackout, ~₹1.1L–1.5L via Bhavani Furnishings) / [GM Fabrics / RR Decor Textured Slub Weaves + Voile Sheers](https://www.amazon.in/s?k=GM+Fabrics) (~₹1.05L) | [Pure European Linen + 3-Pass Acoustic Thermal Blackout](https://www.amazon.in/s?k=Pure+European+Linen+%2B+3-Pass+Acoustic+Thermal+Blackout) (Belgian/Italian flax linen, lead-weighted bottom hems, S-wave / Euro pleat, ~₹2.2L–2.8L via Bhavani / Neo Fabrique) / [Atmosphere / Nilaya by Asian Paints Luxury Drapery](https://www.amazon.in/s?k=Atmosphere) (~₹2.5L) | Ready-made online panels (250cm) fall 30cm short of high-rise 2.8m finished drops; cheap non-woven blackout linings disintegrate after 2 laundry cycles. Always demand detachable 3-pass woven blackout lining. |
-| **Curtain Track System** | [IKEA VIDGA Double Curtain Track Rail](https://www.ikea.com/in/en/search/?q=VIDGA+Double+Curtain+Track+Rail) (Ceiling mounted aluminum, UV-stabilized nylon gliders, draw wands, ₹180–250/ft) / [MAC / Marvel Heavy-Duty Powder-Coated Hospital/Hotel Ripple-Fold Track](https://www.amazon.in/s?k=MAC) (Ball-bearing wheeled runners, ₹240/ft) | [Silent Gliss 6870 / 3840 Recessed Architectural Profile](https://www.amazon.in/s?k=Silent+Gliss+6870) (Swiss 2-component 2C gliders, zero acoustic friction, silicone-lubricated channel, ₹850/ft) / [Forest KS / DS-XL Recessed S-Wave Track System](https://www.amazon.in/s?k=Forest+KS) (Dutch patented easyflex wave tape carrier, ₹680/ft) | Fastening heavy lined drapes directly into unreinforced gypsum board pulls screws out; tracks must screw into 18mm BWP ply backing inside Homz pelmet. |
-| **Master Suite Automated Drapery** | [Aqara Curtain Driver E1 (Track Version) ×2](https://www.aqara.com/en/product/curtain-driver-e1/) (Clips onto U/I-rail in 30s, USB-C 1-yr battery, Zigbee 3.0 + built-in light sensor, ₹15,220 pair) / [SwitchBot Curtain 3 (U-Rail Edition) ×2 + Solar Panel](https://www.amazon.in/s?k=SwitchBot+Curtain+3+%C3%972+%2B+Solar+Panel) (QuietDrift <25dB mode, Matter via Hub 2, ₹16,500 pair) | [Somfy Glydea Ultra 60e RTS / Zigbee Motorized Track](https://www.amazon.in/s?k=Somfy+Glydea+Ultra+60e+RTS) (Concealed 230V wired motor, whisper-quiet <30dB, touch-motion tug start, manual override on outage, ₹38,500) / [Aqara Smart Curtain Motor C3 / ZNCLDJ12LM Hardwired Track](https://www.amazon.in/s?k=Aqara+Smart+Curtain+Motor+C3) (2.0 Nm high-torque 230V motor + custom belt track, ₹28,500) | Pulling heavy 2.25× lined blackouts drains clip-on battery motors in 6–10 weeks if gliders bind; spray dry PTFE teflon lubricant in track channel or route 230V power to pelmet for Somfy wired motor. |
-| **Solar Heat & UV Glazing (East Glass)** | [Garware Suncontrol High-Performance Ice Cool / Daylight Film](https://www.amazon.in/s?k=Garware+Suncontrol+High-Performance+Ice+Cool) (70% VLT clear light, 55% TSER heat rejection, 99% UV block, ₹180/sq ft) / [Llumar / Eastman N1065 Natural Spectrally Selective Film](https://www.amazon.in/s?k=Llumar) (Low interior reflectance, ₹260/sq ft) | [3M Prestige 70 Exterior/Interior Spectrally Selective Film](https://www.3mindia.in/3M/en_IN/p/d/v000080644/) (200+ non-metallic nano-layers, 97% infrared heat rejection, 99.9% UV block to protect Persian carpet, zero night mirror effect, ₹580/sq ft) / [Saint-Gobain Solar Gard Panorama Hilite 70](https://www.amazon.in/s?k=Saint-Gobain+Solar+Gard+Panorama+Hilite+70) (Invisible ceramic heat shield, ₹520/sq ft) | Dark tinted or aluminized mirror films cause thermal stress cracking on double-glazed low-E glass and violate RWA facade rules; specify clear non-metallic spectrally selective films (70% VLT) only. |
-
----
-
-## 2. Interior Wall Paint & Color Palette
+## 1. Interior Wall Paint & Color Palette
 
 Cohesive Japandi architectural palette calibrated for Floor 42 high-rise natural light (combining North diffuse light and East morning glare). Pure stark whites cause clinical glare; all tones are warm low-sheen off-whites and organic neutrals (LRV 70–78).
 
@@ -46,7 +35,7 @@ Cohesive Japandi architectural palette calibrated for Floor 42 high-rise natural
 
 ---
 
-## 3. Locked Homz Laminate Palette & Mirrors
+## 2. Locked Homz Laminate Palette & Mirrors
 
 ![Project U Cabinet & Joinery Laminate Palette](assets/u-cabinet-laminate-palette.png)
 
@@ -68,3 +57,14 @@ Consolidating the base band to CenturyLaminates eliminates split-procurement bet
 | **2. High Contrast** | **Century `249 SU` Navy Blue** (1.0 mm Suede) | <img src="assets/swatches/laminate-249-navy-blue.png" alt="Navy Blue" width="135"> | Deep midnight navy (`#122230`). Direct 1:1 match to Merino 22102 Trooper Blue. Maximum kick-scuff concealment. | **Sharpness:** High visual jump against Beige Wool; less subtle than smoky indigo. Universal local stock. |
 | **3. Tonal Coastal** | **Century `3252 SU` Shore Blue** (1.0 mm Suede) | <img src="assets/swatches/laminate-3252-shore-blue.png" alt="Shore Blue" width="135"> | Soft muted coastal mid-blue (`#4A6B82`). Direct color family match with Misty Breeze walls for a gentle, playful feel. | **Scuff visibility:** Lighter mid-tone shows dirt and shoe scuffs much faster than dark navy or indigo. |
 | **Baseline Benchmark** | **Merino `22102` Trooper Blue** (1.0 mm Matt) | <img src="assets/swatches/laminate-22102-trooper-blue.png" alt="Trooper Blue" width="135"> | Deep maritime navy (`#1D3341`). Original baseline spec. | **Procurement friction:** Splits order to a separate Merino distributor for just two sheets while all other millwork is Century. |
+
+---
+
+## 3. Window Treatments & Solar Glazing Matrix
+
+| Need | Tier 1: High-Quality VFM | Tier 2: High-Quality Unconstrained | Top Failure Mode & Reddit Insight |
+| :--- | :--- | :--- | :--- |
+| **Window Drapery (6 Openings)** | [D'Decor / Sarom Performance Fabrics](https://www.ddecor.com/search?q=D%27Decor) (Blue Wool 6+ lightfastness, 2.25× pinch pleat + detachable 3-pass blackout, ~₹1.1L–1.5L via Bhavani Furnishings) / [GM Fabrics / RR Decor Textured Slub Weaves + Voile Sheers](https://www.amazon.in/s?k=GM+Fabrics) (~₹1.05L) | [Pure European Linen + 3-Pass Acoustic Thermal Blackout](https://www.amazon.in/s?k=Pure+European+Linen+%2B+3-Pass+Acoustic+Thermal+Blackout) (Belgian/Italian flax linen, lead-weighted bottom hems, S-wave / Euro pleat, ~₹2.2L–2.8L via Bhavani / Neo Fabrique) / [Atmosphere / Nilaya by Asian Paints Luxury Drapery](https://www.amazon.in/s?k=Atmosphere) (~₹2.5L) | Ready-made online panels (250cm) fall 30cm short of high-rise 2.8m finished drops; cheap non-woven blackout linings disintegrate after 2 laundry cycles. Always demand detachable 3-pass woven blackout lining. |
+| **Curtain Track System** | [IKEA VIDGA Double Curtain Track Rail](https://www.ikea.com/in/en/search/?q=VIDGA+Double+Curtain+Track+Rail) (Ceiling mounted aluminum, UV-stabilized nylon gliders, draw wands, ₹180–250/ft) / [MAC / Marvel Heavy-Duty Powder-Coated Hospital/Hotel Ripple-Fold Track](https://www.amazon.in/s?k=MAC) (Ball-bearing wheeled runners, ₹240/ft) | [Silent Gliss 6870 / 3840 Recessed Architectural Profile](https://www.amazon.in/s?k=Silent+Gliss+6870) (Swiss 2-component 2C gliders, zero acoustic friction, silicone-lubricated channel, ₹850/ft) / [Forest KS / DS-XL Recessed S-Wave Track System](https://www.amazon.in/s?k=Forest+KS) (Dutch patented easyflex wave tape carrier, ₹680/ft) | Fastening heavy lined drapes directly into unreinforced gypsum board pulls screws out; tracks must screw into 18mm BWP ply backing inside Homz pelmet. |
+| **Master Suite Automated Drapery** | [Aqara Curtain Driver E1 (Track Version) ×2](https://www.aqara.com/en/product/curtain-driver-e1/) (Clips onto U/I-rail in 30s, USB-C 1-yr battery, Zigbee 3.0 + built-in light sensor, ₹15,220 pair) / [SwitchBot Curtain 3 (U-Rail Edition) ×2 + Solar Panel](https://www.amazon.in/s?k=SwitchBot+Curtain+3+%C3%972+%2B+Solar+Panel) (QuietDrift <25dB mode, Matter via Hub 2, ₹16,500 pair) | [Somfy Glydea Ultra 60e RTS / Zigbee Motorized Track](https://www.amazon.in/s?k=Somfy+Glydea+Ultra+60e+RTS) (Concealed 230V wired motor, whisper-quiet <30dB, touch-motion tug start, manual override on outage, ₹38,500) / [Aqara Smart Curtain Motor C3 / ZNCLDJ12LM Hardwired Track](https://www.amazon.in/s?k=Aqara+Smart+Curtain+Motor+C3) (2.0 Nm high-torque 230V motor + custom belt track, ₹28,500) | Pulling heavy 2.25× lined blackouts drains clip-on battery motors in 6–10 weeks if gliders bind; spray dry PTFE teflon lubricant in track channel or route 230V power to pelmet for Somfy wired motor. |
+| **Solar Heat & UV Glazing (East Glass)** | [Garware Suncontrol High-Performance Ice Cool / Daylight Film](https://www.amazon.in/s?k=Garware+Suncontrol+High-Performance+Ice+Cool) (70% VLT clear light, 55% TSER heat rejection, 99% UV block, ₹180/sq ft) / [Llumar / Eastman N1065 Natural Spectrally Selective Film](https://www.amazon.in/s?k=Llumar) (Low interior reflectance, ₹260/sq ft) | [3M Prestige 70 Exterior/Interior Spectrally Selective Film](https://www.3mindia.in/3M/en_IN/p/d/v000080644/) (200+ non-metallic nano-layers, 97% infrared heat rejection, 99.9% UV block to protect Persian carpet, zero night mirror effect, ₹580/sq ft) / [Saint-Gobain Solar Gard Panorama Hilite 70](https://www.amazon.in/s?k=Saint-Gobain+Solar+Gard+Panorama+Hilite+70) (Invisible ceramic heat shield, ₹520/sq ft) | Dark tinted or aluminized mirror films cause thermal stress cracking on double-glazed low-E glass and violate RWA facade rules; specify clear non-metallic spectrally selective films (70% VLT) only. |
