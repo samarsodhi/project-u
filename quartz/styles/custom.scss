@@ -428,24 +428,35 @@ table td img:hover {
 }
 
 // ---------------------------------------------------------
-// 7. Architectural & MEP Drawings Link (Bottom of Left Pane)
+// 7. Plans & Drawings Dedicated Bottom Link
 // ---------------------------------------------------------
-.explorer li:has(a[href*="builder-drawings"]) {
-  margin-top: 1.25rem !important;
-  padding-top: 0.75rem !important;
+.sidebar-drawings-link {
+  margin-top: auto !important;
+  padding-top: 0.85rem !important;
   border-top: 1px solid var(--lightgray) !important;
 
-  a {
-    font-size: 0.82rem !important;
-    opacity: 0.85 !important;
-    color: var(--darkgray) !important;
+  .drawings-link-btn {
     display: flex !important;
     align-items: center !important;
-    gap: 0.4rem !important;
+    gap: 0.45rem !important;
+    font-size: 0.78rem !important;
+    color: var(--darkgray) !important;
+    text-decoration: none !important;
+    padding: 0.35rem 0.5rem !important;
+    border-radius: 4px !important;
+    transition: all 0.15s ease !important;
+
+    svg {
+      opacity: 0.7 !important;
+    }
 
     &:hover {
-      opacity: 1 !important;
       color: var(--secondary) !important;
+      background-color: var(--lightgray) !important;
+
+      svg {
+        opacity: 1 !important;
+      }
     }
   }
 }

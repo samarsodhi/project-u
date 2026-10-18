@@ -1,6 +1,6 @@
 ---
-title: "Floor Plans & Drawings"
-aliases: [u-drawings,  mep-drawings, floor-plans, drawings, b4206-drawings]
+title: "Plans & Drawings"
+aliases: [u-drawings,  mep-drawings, floor-plans, drawings, b4206-drawings, plans-drawings]
 tags: [u-setup, architecture, mep, hvac, electrical, plumbing, drawings]
 status: evergreen
 created: 2026-10-18
@@ -9,7 +9,7 @@ updated: 2026-10-18
 
 [[index|← Back to Home Overview]] · [[engineering-gotchas]]
 
-# Floor Plans & Architectural Drawings
+# Plans & Drawings
 
 Definitive Good-For-Construction (GFC) engineering records for Unit B-6 (B4206, Floor 42, Tower B, Sumadhura The Olympus). SBUA is 2880 sft with West facing orientation. Sourced directly from builder technical submittals.
 
@@ -27,15 +27,17 @@ Definitive Good-For-Construction (GFC) engineering records for Unit B-6 (B4206, 
 
 ---
 
-### Architectural Floor Plan Previews
+## 2. Floor Plan Drawings
 
-![Unit B4206 GFC Architectural Plan](assets/builder-drawings/floor-b6.png)
-
+### 2880 SFT Furniture Floor Plan
 ![Unit B4206 2880 SFT Furniture Floor Plan](assets/builder-drawings/house-plan-2880.jpeg)
+
+### Good-For-Construction (GFC) Architectural Plan
+![Unit B4206 GFC Architectural Plan](assets/builder-drawings/floor-b6.png)
 
 ---
 
-## 2. Architectural Dimension Schedule (Clear Internal)
+## 3. Architectural Dimension Schedule (Clear Internal)
 
 | Space | Dimensions (mm) | Dimensions (ft / in) | Shutter / Window Schedule | Attached Features |
 | :--- | :--- | :--- | :--- | :--- |

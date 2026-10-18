@@ -1,10 +1,32 @@
 import { PageLayout, SharedLayout } from "./quartz/cfg"
 import * as Component from "./quartz/components"
+import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "./quartz/components/types"
+import { resolveRelative, FullSlug } from "./quartz/util/path"
+
+const DrawingsLink: QuartzComponent = ({ fileData }: QuartzComponentProps) => {
+  const href = resolveRelative(fileData.slug!, "builder-drawings" as FullSlug)
+  return (
+    <div class="sidebar-drawings-link">
+      <a href={href} class="drawings-link-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+          <line x1="3" y1="9" x2="21" y2="9"/>
+          <line x1="9" y1="21" x2="9" y2="9"/>
+        </svg>
+        <span>Plans & Drawings</span>
+      </a>
+    </div>
+  )
+}
+const DrawingsLinkComponent: QuartzComponentConstructor = () => DrawingsLink
 
 const explorerConfig = {
   title: "Specifications",
   folderDefaultState: "open" as const,
   folderClickBehavior: "collapse" as const,
+  filterFn: (node: any) => {
+    return node.slugSegment !== "builder-drawings"
+  },
   mapFn: (node: any) => {
     if (node.slugSegment === "rooms") {
       node.displayName = "Spaces & Rooms"
@@ -94,6 +116,7 @@ export const defaultContentPageLayout: PageLayout = {
     }),
     Component.Explorer(explorerConfig),
     Component.DesktopOnly(Component.TableOfContents()),
+    DrawingsLinkComponent(),
   ],
   right: [],
 }
@@ -114,6 +137,7 @@ export const defaultListPageLayout: PageLayout = {
       ],
     }),
     Component.Explorer(explorerConfig),
+    DrawingsLinkComponent(),
   ],
   right: [],
 }
