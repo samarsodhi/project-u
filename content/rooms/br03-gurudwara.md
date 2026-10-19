@@ -1,15 +1,15 @@
 ---
 title: "Home Gurudwara"
-aliases: [rooms-br03, br-03, gurudwara-room, baba-ji-room, u-br03]
+aliases: [rooms-br03, br-03, gurudwara-room, baba-ji-room, u-br03, home-gurudwara]
 tags: [u-setup, rooms, sacred, gurudwara]
 status: evergreen
 created: 2026-10-10
-updated: 2026-10-17
+updated: 2026-10-19
 ---
 
 [[index|← Back to Home Overview]]
 
-# BR-03: The Home Gurudwara (13'0" × 11'11", East Window)
+# Home Gurudwara (13'0" × 11'11")
 
 Dedicated sacred space for the Prakash of Sri Guru Granth Sahib Ji. Designed with the utmost reverence, acoustic serenity, low maintenance, and authentic traditional Sikh craft. Placed on the North wall away from shared wet plumbing.
 

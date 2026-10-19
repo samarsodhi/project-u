@@ -1,15 +1,15 @@
 ---
 title: "Study & Guest Room"
-aliases: [rooms-br01, br-01, study-guest, wfh-study, u-br01]
+aliases: [rooms-br01, br-01, study-guest, wfh-study, u-br01, study-guest-room]
 tags: [u-setup, rooms, study, guest-room]
 status: evergreen
 created: 2026-10-10
-updated: 2026-10-17
+updated: 2026-10-19
 ---
 
 [[index|← Back to Home Overview]]
 
-# BR-01: WFH Study & Guest Room (13'0" × 13'0")
+# Study & Guest Room (13'0" × 13'0")
 
 Primary workspace for Samar (SDM at Amazon) and flexible guest suite. Houses the owned standing desk, Steelcase ergonomic chair, integrated wardrobe end-shelf library, monitor task lighting, and the Gulmohar Lane Berlin sofa-bed.
 

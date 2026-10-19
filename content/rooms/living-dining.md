@@ -4,12 +4,12 @@ aliases: [rooms-  drawing-room, u-living-dining]
 tags: [u-setup, rooms, living, dining]
 status: evergreen
 created: 2026-10-10
-updated: 2026-10-17
+updated: 2026-10-19
 ---
 
 [[index|← Back to Home Overview]]
 
-# Living, Drawing & Dining Spaces
+# Living & Dining
 
 Covers loose seating, dining table, bidirectional jhoola, foyer storage, and architectural media joinery across the main entertainment and family zones.
 

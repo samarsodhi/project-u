@@ -4,12 +4,12 @@ aliases: [rooms-  master-bedroom, u-master-suite]
 tags: [u-setup, rooms, master-bedroom]
 status: evergreen
 created: 2026-10-10
-updated: 2026-10-17
+updated: 2026-10-19
 ---
 
 [[index|← Back to Home Overview]]
 
-# Master Bedroom Suite (13'0" × 13'0" + Dressing Nook)
+# Master Bedroom (13'0" × 13'0" + Dressing Nook)
 
 Primary family suite for Samar and Sonia. Kabir sleeps here during primary school years. Focuses on acoustic isolation, dust-sealed wardrobe storage, ergonomic mattress support, and full-height dressing mirror.
 

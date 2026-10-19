@@ -1,6 +1,6 @@
 ---
 title: "Finalized Appliances & AV"
-aliases: [ u- u-purchases]
+aliases: [ u- u-purchases, finalized-appliances-av]
 tags: [u-setup, procurement, appliances, av]
 status: evergreen
 created: 2026-10-19
@@ -9,7 +9,7 @@ updated: 2026-10-19
 
 [[index|← Back to Home Overview]] · [[kitchen-services]] · [[audio]]
 
-# Finalized Major Appliance & AV Purchases
+# Finalized Appliances & AV
 
 Locked high-ticket hardware commitments for Unit B4206. Total committed procurement envelope across these 7 units is **₹4,30,278** (GST-inclusive).
 

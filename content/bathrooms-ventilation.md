@@ -4,12 +4,12 @@ aliases: [u-setup-geysers, geysers-setup,  u-bathrooms]
 tags: [u-setup, bathrooms, geysers, ventilation]
 status: evergreen
 created: 2026-10-10
-updated: 2026-10-17
+updated: 2026-10-19
 ---
 
 [[index|← Back to Home Overview]]
 
-# Bathrooms, Geysers, Shower Separation & Ventilation
+# Bathrooms & Ventilation
 
 Master technical specification for the 4 bathrooms: 10L smart storage geysers, non-cramped shower containment (SS304 flanged curtain rods + floor water bars), whisper-quiet ventilation exhaust, and high-rise insect fenestration.
 

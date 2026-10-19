@@ -1,15 +1,15 @@
 ---
 title: "Lighting & Ambience"
-aliases: [u-setup-lamps, lamps-setup,  u-lighting]
+aliases: [u-setup-lamps, lamps-setup,  u- lighting-ambience]
 tags: [u-setup, lighting, lamps]
 status: evergreen
 created: 2026-10-10
-updated: 2026-10-17
+updated: 2026-10-19
 ---
 
 [[index|← Back to Home Overview]]
 
-# Architectural, Art Accent & Luminaire Specifications
+# Lighting & Ambience
 
 Layered lighting strategy combining museum-grade CRI 95+ recessed ceiling spots for fine art, 24V dot-free COB mirror halos, solid timber bedside reading lamps, and smart E27 ambient bulbs.
 

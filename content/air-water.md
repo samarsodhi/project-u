@@ -1,15 +1,15 @@
 ---
 title: "Air, Water & Cleaning"
-aliases: [u-setup- air-water-setup,  u-air-water]
+aliases: [u-setup- air-water-setup,  u- air-water-cleaning]
 tags: [u-setup, air-water, robotics]
 status: evergreen
 created: 2026-10-10
-updated: 2026-10-17
+updated: 2026-10-19
 ---
 
 [[index|← Back to Home Overview]]
 
-# Air, Water Quality, Dehumidification & Floor Robotics
+# Air, Water & Cleaning
 
 Master technical specification for whole-home environmental wellness: 5 dedicated True HEPA purifiers, optical NDIR CO₂ monitoring, walk-in closet dehumidification, water hardness treatment, and the owned Roomba 505X vanity garage.
 

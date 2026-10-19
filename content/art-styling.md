@@ -1,15 +1,15 @@
 ---
 title: "Art & Wall Decor"
-aliases: [u-setup-art-decor, art-decor, u-decor,  u-art]
+aliases: [u-setup-art-decor, art-decor, u-decor,  u-art, art-wall-decor]
 tags: [u-setup, decor, art, styling]
 status: evergreen
 created: 2026-10-16
-updated: 2026-10-17
+updated: 2026-10-19
 ---
 
 [[index|← Back to Home Overview]] · [[lighting]]
 
-# Art, Styling, Sacred Craft & Wall Accents
+# Art & Wall Decor
 
 Master specification for curated art, GI-certified authentic Indian craft, museum glazing, and sacred Gurudwara decor.
 

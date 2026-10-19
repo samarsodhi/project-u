@@ -1,15 +1,15 @@
 ---
 title: "Audio & Entertainment"
-aliases: [u-setup- audio-setup,  u-audio]
+aliases: [u-setup- audio-setup,  u- audio-entertainment]
 tags: [u-setup, audio, av, tv]
 status: evergreen
 created: 2026-10-10
-updated: 2026-10-17
+updated: 2026-10-19
 ---
 
 [[index|← Back to Home Overview]]
 
-# Audio, Soundbars, Multi-Room Speakers & TV Infrastructure
+# Audio & Entertainment
 
 Master technical specification for whole-home wireless audio and entertainment: Dolby Atmos soundbar (living room 65" TV), multi-room standalone music (Sonos Era 300), sacred room acoustic playback, and concealed AV cabling.
 

@@ -1,15 +1,15 @@
 ---
 title: "Curtains, Paint & Finishes"
-aliases: [u-setup-interiors, interiors-setup,  u-soft-furnishings]
+aliases: [u-setup-interiors, interiors-setup,  u- curtains-paint-finishes]
 tags: [u-setup, interiors, soft-furnishings, paint]
 status: evergreen
 created: 2026-10-10
-updated: 2026-10-18
+updated: 2026-10-19
 ---
 
 [[index|← Back to Home Overview]]
 
-# Soft Furnishings, Window Drapery, Solar Glazing & Paints
+# Curtains, Paint & Finishes
 
 Master specification for whole-home low-sheen paint palette, Homz laminate finishes, ceiling-recessed double-channel drapery, and East-facing solar UV protection films.
 

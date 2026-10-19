@@ -1,15 +1,15 @@
 ---
 title: "Kitchen & Laundry"
-aliases: [u-setup-kitchen, kitchen-setup, u-setup-worktop, kitchen-worktop-setup,  u-kitchen]
+aliases: [u-setup-kitchen, kitchen-setup, u-setup-worktop, kitchen-worktop-setup,  u-kitchen, kitchen-laundry]
 tags: [u-setup, kitchen, laundry, worktop]
 status: evergreen
 created: 2026-10-10
-updated: 2026-10-17
+updated: 2026-10-19
 ---
 
 [[index|← Back to Home Overview]]
 
-# Kitchen, Worktop, Appliances & Laundry Services
+# Kitchen & Laundry
 
 Master technical specification for modular kitchen cabinetry, owner-sourced light granite worktop, undermount sinks, hybrid cooking hobs, BLDC extraction, under-sink RO, freestanding waste management, and laundry utility.
 

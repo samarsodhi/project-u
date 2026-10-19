@@ -1,15 +1,15 @@
 ---
 title: "Wi-Fi & Internet"
-aliases: [u-setup- networking-setup,  u-networking]
+aliases: [u-setup- networking-setup,  u- wifi-internet]
 tags: [u-setup, networking, wifi]
 status: evergreen
 created: 2026-10-10
-updated: 2026-10-17
+updated: 2026-10-19
 ---
 
 [[index|← Back to Home Overview]]
 
-# Structured Cabling, Low-Voltage Infrastructure & Wi-Fi
+# Wi-Fi & Internet
 
 Master technical specification for whole-home low-voltage data infrastructure: GL.iNet Flint 2 router (OpenWrt, dual-WAN failover), 3 ceiling PoE access points (deploying 2 at move-in), pure copper Cat6 home runs, and battery backup.
 

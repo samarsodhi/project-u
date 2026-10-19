@@ -1,15 +1,15 @@
 ---
 title: "Kabir's Room (Study & Play)"
-aliases: [rooms-br02, br-02, kabirs-room, u-br02]
+aliases: [rooms-br02, br-02, kabirs-room, u-br02, kabir-room]
 tags: [u-setup, rooms, kids-room, study]
 status: evergreen
 created: 2026-10-10
-updated: 2026-10-17
+updated: 2026-10-19
 ---
 
 [[index|← Back to Home Overview]]
 
-# BR-02: Kabir's Room (13'0" × 11'11", Harbour Theme)
+# Kabir's Room (Study & Play — 13'0" × 11'11")
 
 Dedicated study, reading, and creative play space for Kabir (age 6, Grade 1 at Keystone). Features ergonomic growth furniture (manual crank desk, non-rolling study chair), child-safe low daybed with guest trundle, and the South wall 3D wooden world map.
 

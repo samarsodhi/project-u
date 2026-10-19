@@ -1,15 +1,15 @@
 ---
 title: "Safety & Security"
-aliases: [u-setup-safety, safety-setup,  u-safety]
+aliases: [u-setup-safety, safety-setup,  u-safety, safety-security]
 tags: [u-setup, safety, security]
 status: evergreen
 created: 2026-10-10
-updated: 2026-10-17
+updated: 2026-10-19
 ---
 
 [[index|← Back to Home Overview]]
 
-# Life Safety, Fire Protection, Childproofing & Smart Locks
+# Safety & Security
 
 Master technical specification for high-rise family protection: SS316 marine invisible grilles, secondary keyed slider locks, interlinked smoke detectors, methane detection, clean-agent extinguishers, and main-door biometric security.
 

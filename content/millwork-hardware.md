@@ -1,15 +1,15 @@
 ---
 title: "Cabinetry & Woodwork"
-aliases: [u-setup-joinery, joinery-setup, joinery, u-joinery,  wardrobe-hardware]
+aliases: [u-setup-joinery, joinery-setup, joinery, u-joinery,  wardrobe-hardware, cabinetry-woodwork]
 tags: [u-setup, joinery, millwork, hardware, wardrobes]
 status: evergreen
 created: 2026-10-10
-updated: 2026-10-17
+updated: 2026-10-19
 ---
 
 [[index|← Back to Home Overview]]
 
-# Millwork Substrates & Wardrobe Hardware Specifications
+# Cabinetry & Woodwork
 
 Definitive material schedule for fixed millwork substrates and bedroom wardrobe hardware executed by Homz Interio. Scan every delivered sheet with the CenturyPromise app to eliminate commercial-grade substitution.
 

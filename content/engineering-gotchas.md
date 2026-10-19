@@ -4,12 +4,12 @@ aliases: [u-setup-gotchas, olympus-gotchas, high-rise-mep-gotchas]
 tags: [u-setup, engineering, gotchas, failure-modes]
 status: evergreen
 created: 2026-10-15
-updated: 2026-10-17
+updated: 2026-10-19
 ---
 
 [[index|← Back to Home Overview]]
 
-# High-Rise Gotchas, Failure Modes & Field Mitigations
+# High-Rise Engineering Gotchas
 
 A consolidated compilation of non-obvious engineering gotchas, Reddit teardown failure modes, and master trade protocols for Floor 42 unit fit-out.
 

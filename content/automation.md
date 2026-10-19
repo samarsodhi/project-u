@@ -1,15 +1,15 @@
 ---
 title: "Smart Home & Automation"
-aliases: [u-setup-smart-home, smart-home-setup,  u-automation]
+aliases: [u-setup-smart-home, smart-home-setup,  u- smart-home-automation]
 tags: [u-setup, smart-home, automation]
 status: evergreen
 created: 2026-10-10
-updated: 2026-10-17
+updated: 2026-10-19
 ---
 
 [[index|← Back to Home Overview]]
 
-# Smart Home, IoT Relays, Voice Controllers & BLDC Fans
+# Smart Home & Automation
 
 Master technical specification for the local-first automation layer: in-wall Matter/Shelly micro-relays behind builder switch plates, Alexa voice controllers, Aqara safety hub, video doorbell, and BLDC ceiling fans.
 
