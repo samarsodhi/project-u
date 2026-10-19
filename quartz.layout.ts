@@ -7,7 +7,11 @@ const explorerConfig = {
   folderDefaultState: "open" as const,
   folderClickBehavior: "collapse" as const,
   filterFn: (node: any) => {
-    return node.slugSegment !== "plans-drawings"
+    return (
+      node.slugSegment !== "plans-drawings" &&
+      node.slugSegment !== "finalized-appliances-av" &&
+      node.slugSegment !== "finalized-purchases"
+    )
   },
   mapFn: (node: any) => {
     if (node.slugSegment === "rooms") {

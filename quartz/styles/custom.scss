@@ -428,31 +428,49 @@ table td img:hover {
 }
 
 // ---------------------------------------------------------
-// 7. Plans & Drawings Dedicated Bottom Link
+// 7. Dedicated Execution & Blueprints Sidebar Links
 // ---------------------------------------------------------
+.sidebar-special-links,
 .sidebar-drawings-link {
   margin-top: auto !important;
   padding-top: 0.85rem !important;
+  margin-bottom: 0.5rem !important;
   border-top: 1px solid var(--lightgray) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.35rem !important;
 
+  .sidebar-special-btn,
   .drawings-link-btn {
     display: flex !important;
     align-items: center !important;
-    gap: 0.45rem !important;
-    font-size: 0.78rem !important;
+    gap: 0.5rem !important;
+    font-size: 0.8rem !important;
+    font-weight: 500 !important;
     color: var(--darkgray) !important;
     text-decoration: none !important;
-    padding: 0.35rem 0.5rem !important;
-    border-radius: 4px !important;
+    padding: 0.4rem 0.6rem !important;
+    border-radius: 6px !important;
     transition: all 0.15s ease !important;
 
     svg {
-      opacity: 0.7 !important;
+      opacity: 0.75 !important;
+      flex-shrink: 0 !important;
     }
 
     &:hover {
       color: var(--secondary) !important;
       background-color: var(--lightgray) !important;
+
+      svg {
+        opacity: 1 !important;
+      }
+    }
+
+    &.active {
+      color: var(--secondary) !important;
+      background-color: var(--lightgray) !important;
+      font-weight: 600 !important;
 
       svg {
         opacity: 1 !important;
