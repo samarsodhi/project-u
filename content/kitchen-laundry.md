@@ -1,6 +1,6 @@
 ---
 title: "Kitchen & Laundry"
-aliases: [u-setup-kitchen, kitchen-setup, u-setup-worktop, kitchen-worktop-setup,  u-kitchen, kitchen-laundry]
+aliases: [u-setup-kitchen, kitchen-setup, u-setup-worktop, kitchen-worktop-setup, kitchen-services, u-kitchen]
 tags: [u-setup, kitchen, laundry, worktop]
 status: evergreen
 created: 2026-10-10

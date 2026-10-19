@@ -1,13 +1,13 @@
 ---
 title: "Finalized Appliances & AV"
-aliases: [ u- u-purchases, finalized-appliances-av]
+aliases: [finalized-purchases, u-finalized-purchases, u-purchases]
 tags: [u-setup, procurement, appliances, av]
 status: evergreen
 created: 2026-10-19
 updated: 2026-10-19
 ---
 
-[[index|← Back to Home Overview]] · [[kitchen-services]] · [[audio]]
+[[index|← Back to Home Overview]] · [[kitchen-laundry]] · [[audio-entertainment]]
 
 # Finalized Appliances & AV
 

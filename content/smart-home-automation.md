@@ -1,6 +1,6 @@
 ---
 title: "Smart Home & Automation"
-aliases: [u-setup-smart-home, smart-home-setup,  u- smart-home-automation]
+aliases: [u-setup-smart-home, smart-home-setup, automation, u-automation]
 tags: [u-setup, smart-home, automation]
 status: evergreen
 created: 2026-10-10

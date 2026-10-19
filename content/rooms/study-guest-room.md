@@ -1,6 +1,6 @@
 ---
 title: "Study & Guest Room"
-aliases: [rooms-br01, br-01, study-guest, wfh-study, u-br01, study-guest-room]
+aliases: [rooms-br01, br-01, study-guest, wfh-study, u-br01]
 tags: [u-setup, rooms, study, guest-room]
 status: evergreen
 created: 2026-10-10

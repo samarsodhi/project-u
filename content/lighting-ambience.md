@@ -1,6 +1,6 @@
 ---
 title: "Lighting & Ambience"
-aliases: [u-setup-lamps, lamps-setup,  u- lighting-ambience]
+aliases: [u-setup-lamps, lamps-setup, lighting, u-lighting]
 tags: [u-setup, lighting, lamps]
 status: evergreen
 created: 2026-10-10

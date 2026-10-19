@@ -1,6 +1,6 @@
 ---
 title: "Curtains, Paint & Finishes"
-aliases: [u-setup-interiors, interiors-setup,  u- curtains-paint-finishes]
+aliases: [u-setup-interiors, interiors-setup, soft-furnishings, u-soft-furnishings]
 tags: [u-setup, interiors, soft-furnishings, paint]
 status: evergreen
 created: 2026-10-10

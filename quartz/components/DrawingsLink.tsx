@@ -2,7 +2,7 @@ import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } fro
 import { resolveRelative, FullSlug } from "../util/path"
 
 const DrawingsLink: QuartzComponent = ({ fileData }: QuartzComponentProps) => {
-  const href = resolveRelative(fileData.slug!, "builder-drawings" as FullSlug)
+  const href = resolveRelative(fileData.slug!, "plans-drawings" as FullSlug)
   return (
     <div class="sidebar-drawings-link">
       <a href={href} class="drawings-link-btn">

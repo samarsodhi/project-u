@@ -1,6 +1,6 @@
 ---
 title: "High-Rise Engineering Gotchas"
-aliases: [u-setup-gotchas, olympus-gotchas, high-rise-mep-gotchas]
+aliases: [u-setup-gotchas, olympus-gotchas, high-rise-mep-gotchas, engineering-gotchas]
 tags: [u-setup, engineering, gotchas, failure-modes]
 status: evergreen
 created: 2026-10-15

@@ -7,7 +7,7 @@ const explorerConfig = {
   folderDefaultState: "open" as const,
   folderClickBehavior: "collapse" as const,
   filterFn: (node: any) => {
-    return node.slugSegment !== "builder-drawings"
+    return node.slugSegment !== "plans-drawings"
   },
   mapFn: (node: any) => {
     if (node.slugSegment === "rooms") {
@@ -17,34 +17,34 @@ const explorerConfig = {
   sortFn: (a: any, b: any) => {
     const order: Record<string, number> = {
       // Phase 1: High-Rise Engineering & Irreversible Services
-      "engineering-gotchas": 10,
-      "millwork-hardware": 20,
-      "kitchen-services": 30,
-      "finalized-purchases": 35,
+      "high-rise-engineering-gotchas": 10,
+      "cabinetry-woodwork": 20,
+      "kitchen-laundry": 30,
+      "finalized-appliances-av": 35,
       "bathrooms-ventilation": 40,
-      "lighting": 50,
-      "automation": 60,
-      "networking": 70,
+      "lighting-ambience": 50,
+      "smart-home-automation": 60,
+      "wifi-internet": 70,
 
       // Phase 2: Spaces & Rooms
       "rooms": 80,
       "living-dining": 81,
-      "master-suite": 82,
-      "br01-study-guest": 83,
-      "br02-kabir": 84,
-      "br03-gurudwara": 85,
+      "master-bedroom": 82,
+      "study-guest-room": 83,
+      "kabir-room": 84,
+      "home-gurudwara": 85,
 
       // Phase 3: Environmental Protection, Comfort & Safety
-      "life-safety": 90,
-      "air-water": 100,
-      "soft-furnishings": 110,
-      "audio": 120,
+      "safety-security": 90,
+      "air-water-cleaning": 100,
+      "curtains-paint-finishes": 110,
+      "audio-entertainment": 120,
 
       // Phase 4: Art & Styling
-      "art-styling": 130,
+      "art-wall-decor": 130,
 
       // Separate bottom section: Floor plans & technical drawings
-      "builder-drawings": 999,
+      "plans-drawings": 999,
     }
 
     const orderA = order[a.slugSegment] ?? 999

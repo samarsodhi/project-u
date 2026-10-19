@@ -1,6 +1,6 @@
 ---
 title: "Master Bedroom"
-aliases: [rooms-  master-bedroom, u-master-suite]
+aliases: [rooms-master-suite, master-suite,  u-master-suite]
 tags: [u-setup, rooms, master-bedroom]
 status: evergreen
 created: 2026-10-10

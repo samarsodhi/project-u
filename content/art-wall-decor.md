@@ -1,13 +1,13 @@
 ---
 title: "Art & Wall Decor"
-aliases: [u-setup-art-decor, art-decor, u-decor,  u-art, art-wall-decor]
+aliases: [u-setup-art-decor, art-decor, u-decor, art-styling, u-art]
 tags: [u-setup, decor, art, styling]
 status: evergreen
 created: 2026-10-16
 updated: 2026-10-19
 ---
 
-[[index|← Back to Home Overview]] · [[lighting]]
+[[index|← Back to Home Overview]] · [[lighting-ambience]]
 
 # Art & Wall Decor
 

@@ -1,6 +1,6 @@
 ---
 title: "Home Gurudwara"
-aliases: [rooms-br03, br-03, gurudwara-room, baba-ji-room, u-br03, home-gurudwara]
+aliases: [rooms-br03, br-03, gurudwara-room, baba-ji-room, u-br03]
 tags: [u-setup, rooms, sacred, gurudwara]
 status: evergreen
 created: 2026-10-10

@@ -1,6 +1,6 @@
 ---
 title: "Wi-Fi & Internet"
-aliases: [u-setup- networking-setup,  u- wifi-internet]
+aliases: [u-setup-networking, networking-setup, networking, u-networking]
 tags: [u-setup, networking, wifi]
 status: evergreen
 created: 2026-10-10

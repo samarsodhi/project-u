@@ -1,13 +1,13 @@
 ---
 title: "Plans & Drawings"
-aliases: [u-drawings,  mep-drawings, floor-plans, drawings, b4206-drawings, plans-drawings]
+aliases: [u-drawings, builder-drawings, mep-drawings, floor-plans, drawings, b4206-drawings]
 tags: [u-setup, architecture, mep, hvac, electrical, plumbing, drawings]
 status: evergreen
 created: 2026-10-18
 updated: 2026-10-18
 ---
 
-[[index|← Back to Home Overview]] · [[engineering-gotchas]]
+[[index|← Back to Home Overview]] · [[high-rise-engineering-gotchas]]
 
 # Plans & Drawings
 

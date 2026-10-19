@@ -1,6 +1,6 @@
 ---
 title: "Air, Water & Cleaning"
-aliases: [u-setup- air-water-setup,  u- air-water-cleaning]
+aliases: [u-setup-air-water, air-water-setup, air-water, u-air-water]
 tags: [u-setup, air-water, robotics]
 status: evergreen
 created: 2026-10-10

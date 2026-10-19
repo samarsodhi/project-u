@@ -1,6 +1,6 @@
 ---
 title: "Cabinetry & Woodwork"
-aliases: [u-setup-joinery, joinery-setup, joinery, u-joinery,  wardrobe-hardware, cabinetry-woodwork]
+aliases: [u-setup-joinery, joinery-setup, joinery, u-joinery, millwork-hardware, wardrobe-hardware]
 tags: [u-setup, joinery, millwork, hardware, wardrobes]
 status: evergreen
 created: 2026-10-10
