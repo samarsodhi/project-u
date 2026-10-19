@@ -20,6 +20,7 @@ const explorerConfig = {
       "engineering-gotchas": 10,
       "millwork-hardware": 20,
       "kitchen-services": 30,
+      "finalized-purchases": 35,
       "bathrooms-ventilation": 40,
       "lighting": 50,
       "automation": 60,
