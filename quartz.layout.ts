@@ -1,5 +1,6 @@
 import { PageLayout, SharedLayout } from "./quartz/cfg"
 import * as Component from "./quartz/components"
+import PurchasesLink from "./quartz/components/PurchasesLink"
 import DrawingsLink from "./quartz/components/DrawingsLink"
 
 const explorerConfig = {
@@ -100,6 +101,7 @@ export const defaultContentPageLayout: PageLayout = {
         { Component: Component.ReaderMode() },
       ],
     }),
+    PurchasesLink(),
     Component.Explorer(explorerConfig),
     Component.DesktopOnly(Component.TableOfContents()),
     DrawingsLink(),
@@ -122,6 +124,7 @@ export const defaultListPageLayout: PageLayout = {
         { Component: Component.Darkmode() },
       ],
     }),
+    PurchasesLink(),
     Component.Explorer(explorerConfig),
     DrawingsLink(),
   ],

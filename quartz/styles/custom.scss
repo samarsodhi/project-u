@@ -428,34 +428,79 @@ table td img:hover {
 }
 
 // ---------------------------------------------------------
-// 7. Dedicated Execution & Blueprints Sidebar Links
+// 7. Finalized Purchases Dedicated Button (Above Specifications)
 // ---------------------------------------------------------
-.sidebar-special-links,
+.sidebar-purchases-link {
+  margin-top: 0.85rem !important;
+  margin-bottom: 0.65rem !important;
+
+  .purchases-link-btn {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.55rem !important;
+    font-size: 0.82rem !important;
+    font-weight: 600 !important;
+    color: var(--dark) !important;
+    background-color: var(--lightgray) !important;
+    border: 1px solid var(--gray) !important;
+    text-decoration: none !important;
+    padding: 0.45rem 0.65rem !important;
+    border-radius: 6px !important;
+    transition: all 0.18s ease !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+
+    svg {
+      color: var(--secondary) !important;
+      opacity: 0.9 !important;
+      flex-shrink: 0 !important;
+    }
+
+    &:hover {
+      background-color: var(--highlight) !important;
+      border-color: var(--secondary) !important;
+      color: var(--secondary) !important;
+      transform: translateY(-1px) !important;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08) !important;
+
+      svg {
+        opacity: 1 !important;
+      }
+    }
+
+    &.active {
+      background-color: var(--secondary) !important;
+      color: var(--light) !important;
+      border-color: var(--secondary) !important;
+
+      svg {
+        color: var(--light) !important;
+        opacity: 1 !important;
+      }
+    }
+  }
+}
+
+// ---------------------------------------------------------
+// 8. Plans & Drawings Dedicated Bottom Link
+// ---------------------------------------------------------
 .sidebar-drawings-link {
   margin-top: auto !important;
   padding-top: 0.85rem !important;
-  margin-bottom: 0.5rem !important;
   border-top: 1px solid var(--lightgray) !important;
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 0.35rem !important;
 
-  .sidebar-special-btn,
   .drawings-link-btn {
     display: flex !important;
     align-items: center !important;
-    gap: 0.5rem !important;
-    font-size: 0.8rem !important;
-    font-weight: 500 !important;
+    gap: 0.45rem !important;
+    font-size: 0.78rem !important;
     color: var(--darkgray) !important;
     text-decoration: none !important;
-    padding: 0.4rem 0.6rem !important;
-    border-radius: 6px !important;
+    padding: 0.35rem 0.5rem !important;
+    border-radius: 4px !important;
     transition: all 0.15s ease !important;
 
     svg {
-      opacity: 0.75 !important;
-      flex-shrink: 0 !important;
+      opacity: 0.7 !important;
     }
 
     &:hover {
