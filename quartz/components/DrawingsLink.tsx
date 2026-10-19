@@ -2,7 +2,7 @@ import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } fro
 import { resolveRelative, FullSlug } from "../util/path"
 
 const DrawingsLink: QuartzComponent = ({ fileData }: QuartzComponentProps) => {
-  const purchasesHref = resolveRelative(fileData.slug!, "finalized-appliances-av" as FullSlug)
+  const purchasesHref = resolveRelative(fileData.slug!, "finalized-purchases" as FullSlug)
   const drawingsHref = resolveRelative(fileData.slug!, "plans-drawings" as FullSlug)
 
   const isPurchasesActive =

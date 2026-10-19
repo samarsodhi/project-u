@@ -22,7 +22,7 @@ Pre-ceiling and pre-flooring infrastructure. Failure to sequence these before ar
 * **[[cabinetry-woodwork|Cabinetry & Woodwork]]** — IS 710 BWP plywood, calibrated cores, wardrobe hardware schedule, and ceiling plasterboard.
 * **[[plans-drawings|Plans & Drawings]]** — Unit B4206 architectural floor plan, Daikin VRV 10 HP HVAC, plumbing shafts, and electrical DB.
 * **[[kitchen-laundry|Kitchen & Laundry]]** — Modular cabinetry, light Indian granite, undermount sinks, hybrid domino hob, 32A lines, and stacked laundry.
-* **[[finalized-appliances-av|Finalized Appliances & AV]]** — Committed major appliances, AV envelope (₹4.30L), dedicated 16A radials, and joinery clearances.
+* **[[finalized-purchases|Finalized Purchases]]** — Committed major appliances, AV envelope (₹4.30L), dedicated 16A radials, and joinery clearances.
 * **[[bathrooms-ventilation|Bathrooms & Ventilation]]** — 10L smart geysers, SS304 flanged curtain rods, floor threshold water bars, silent exhaust CFM, and insect mesh.
 * **[[lighting-ambience|Lighting & Ambience]]** — Architectural CRI 95+ COB spots, 3000K CCT zoning, remote driver enclosures, and 24V dot-free mirror halos.
 * **[[smart-home-automation|Smart Home & Automation]]** — In-wall Matter/Shelly relays, 43mm deep backboxes, neutral line runs, and BLDC fan regulator bypass.
