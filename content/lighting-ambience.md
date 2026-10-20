@@ -4,10 +4,10 @@ aliases: [u-setup-lamps, lamps-setup, lighting, u-lighting]
 tags: [u-setup, lighting, lamps]
 status: evergreen
 created: 2026-10-10
-updated: 2026-10-19
+updated: 2026-10-20
 ---
 
-[[index|← Back to Home Overview]]
+[[index|← Back to Home Overview]] · [[false-ceiling-lighting|False Ceiling Lighting]]
 
 # Lighting & Ambience
 
@@ -32,6 +32,7 @@ Layered lighting strategy combining museum-grade CRI 95+ recessed ceiling spots 
 ---
 
 ## Architectural Coordination & Lux Limits
+* **False Ceiling Lighting Standard:** For ambient recessed ceiling downlights, perimeter cove illumination, and trimless mud-in profiles, refer directly to [[false-ceiling-lighting]].
 * **Art Illumination Limits:** Maintain illuminance $\le 150\text{ lux}$ for oil canvases and $\le 50\text{ lux}$ for delicate paper/watercolors to prevent thermal or photochemical fading.
 * **Electrical Switching:** Electrician must wire art ceiling spots on a dedicated switch leg routed through a Sonoff MINI-DIM module.
 * **Driver Dimmability:** Bench-test sample LED spotlight driver with the trailing-edge dimmer prior to ceiling installation to verify zero low-end acoustic buzzing.
