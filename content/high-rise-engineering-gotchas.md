@@ -4,7 +4,7 @@ aliases: [u-setup-gotchas, olympus-gotchas, high-rise-mep-gotchas, engineering-g
 tags: [u-setup, engineering, gotchas, failure-modes]
 status: evergreen
 created: 2026-10-15
-updated: 2026-10-19
+updated: 2026-10-23
 ---
 
 [[index|← Back to Home Overview]]
@@ -19,7 +19,7 @@ A consolidated compilation of non-obvious engineering gotchas, Reddit teardown f
 
 * **Hydrostatic Pressure Spikes (The PRV Rule):**
   * *Failure Mode:* High-rise PHE hydro-pneumatic pumping stacks deliver erratic line pressures ($>5.0\text{ bar}$) during peak switching hours. Surges rupture RO push-fit John Guest fittings, blow out washing machine hoses, and cause continuous weeping on 10L geyser safety valves.
-  * *Mitigation:* Install an adjustable **Pressure Reducing Valve (PRV)** (Honeywell Braukmann or Watts 1/2" brass) with a downstream pressure gauge on the main inlet supply line. Dial down entire flat pressure to **2.5–3.0 bar**.
+  * *Mitigation:* Install an adjustable **Pressure Reducing Valve (PRV)** (Honeywell Braukmann or Watts brass) with a downstream pressure gauge at the **`P-SHAFT-74` (Service Balcony `32 mm Water Meter feed`)** header (or individual shaft branch inlets if toilets drop independently). Dial down flat pressure to **2.5–3.0 bar**.
 * **Angle Cock Thread Shearing:**
   * *Failure Mode:* Zinc-alloy (zamak) or thin brass builder valves undergo dezincification in chlorinated water, snapping clean off inside wall elbows during filter maintenance.
   * *Mitigation:* Replace all under-sink, geyser, and toilet stopcocks with **forged DZR lead-free brass** valves (Kohler, Grohe, or heavy Jaquar) before cabinetry closes.

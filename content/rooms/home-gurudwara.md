@@ -13,7 +13,7 @@ updated: 2026-10-19
 
 Dedicated sacred space for the Prakash of Sri Guru Granth Sahib Ji. Designed with the utmost reverence, acoustic serenity, low maintenance, and authentic traditional Sikh craft. Placed on the North wall away from shared wet plumbing.
 
-> **Sacred Protocol:** Natural beeswax or matte oiled timber finishes (reject synthetic polyurethane gloss). 100% washable cotton floor coverings. Low-glare 2700K indirect ambient lighting. Detail in [[art-styling#5-br-03-the-home-gurudwara-sacred-art--architectural-craft]].
+> **Sacred Protocol:** Natural beeswax or matte oiled timber finishes (reject synthetic polyurethane gloss). 100% washable cotton floor coverings. Low-glare 2700K indirect ambient lighting. Detail in [[art-wall-decor#2-private-suites--spaces]].
 
 ---
 

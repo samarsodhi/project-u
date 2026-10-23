@@ -4,7 +4,7 @@ aliases: [u-drawings, builder-drawings, mep-drawings, floor-plans, drawings, b42
 tags: [u-setup, architecture, mep, hvac, electrical, plumbing, drawings]
 status: evergreen
 created: 2026-10-18
-updated: 2026-10-18
+updated: 2026-10-23
 ---
 
 [[index|← Back to Home Overview]] · [[high-rise-engineering-gotchas]]
@@ -98,4 +98,4 @@ System driven by a single **10 HP Daikin VRV Outdoor Unit (ODU)** on the Service
 * **Communication Junction Box (CJB):** Recessed next to DB. Terminates Cat6 internet drops, TV coax, and building intercom lines.
 * **Geyser Circuits:** Dedicated 20A isolator switches wired to 20A 3-pin sockets in Master Toilet, BR-01 Toilet, BR-02 Toilet, and BR-03 Toilet.
 * **Power Outlets (15A/16A):** Kitchen counter loop (hob, chimney, oven, microwave), Utility laundry stack (washer/dryer), and refrigerator niche.
-* **Lighting & Fans:** 1200 mm sweep fan hooks centered in all bedrooms and living zones; 305 mm exhaust fan cutouts in all toilets and kitchen.
+* **Lighting & Fans:** 1200 mm sweep fan hooks centered in all bedrooms and living zones; 150 mm exhaust fan cutouts in all 4 washrooms.

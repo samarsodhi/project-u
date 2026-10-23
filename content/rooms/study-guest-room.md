@@ -14,7 +14,7 @@ updated: 2026-10-19
 Primary workspace for Samar (SDM at Amazon) and flexible guest suite. Houses the owned standing desk, Steelcase ergonomic chair, integrated wardrobe end-shelf library, monitor task lighting, and the Gulmohar Lane Berlin sofa-bed.
 
 > **Clearance Rule:** Position the standing desk along the East wall facing North. Maintain 100 cm buffer behind the desk chair and verify South window blackout drapery eliminates screen backlight glare.
-> **Finishes Reference:** Wall finish references [[soft-furnishings#definitive-room-by-room-color-palette]].
+> **Finishes Reference:** Wall finish references [[curtains-paint-finishes#definitive-room-by-room-color-palette]].
 
 ---
 

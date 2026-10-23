@@ -13,7 +13,7 @@ updated: 2026-10-19
 
 Primary family suite for Samar and Sonia. Kabir sleeps here during primary school years. Focuses on acoustic isolation, dust-sealed wardrobe storage, ergonomic mattress support, and full-height dressing mirror.
 
-> **Finishes Reference:** Wall finish references [[soft-furnishings#definitive-room-by-room-color-palette]]. BLDC ceiling fan rules reference [[automation#bldc-ceiling-fan-specifications--siting-rules]].
+> **Finishes Reference:** Wall finish references [[curtains-paint-finishes#definitive-room-by-room-color-palette]]. BLDC ceiling fan rules reference [[smart-home-automation#bldc-ceiling-fan-specifications--siting-rules]].
 
 ---
 
