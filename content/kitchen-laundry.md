@@ -62,6 +62,11 @@ The #1 cause of kitchen cabinet rot is adhesive-only undermount failure.
 - Stack heat-pump dryer over front-load washer using the official Bosch stacking kit (WTZ27400).
 - Mount directly on structural tile floor using heavy rubber anti-vibration isolation pads. Never place on elevated hollow wooden plinths.
 
+### Utility Parapet Enclosure (Floor 42 Engineering & FM Rider)
+- **FM Façade Mandate & Community Precedent:** Sumadhura FM permits enclosing the utility aperture strictly using **White uPVC** matching the tower exterior elevation (disallowing non-matching aluminium; see [[olympus-community-qa#4-balcony-grilles-safety--mosquito-screens]]). Verified vendor lead: UPVC Works (Kukatpally via S V V Satyanarayana in [[olympus-vendor-directory]]).
+- **High-Rise Structural Spec:** Enforce **$\ge 1.5\text{ mm}$ hot-dip galvanized steel core reinforcement** inside all uPVC chambers and **$\ge 6\text{ mm}$ clear toughened glass** (IS 875 wind-load compliance). Anchor frame into RCC lintel and concrete parapet with Fischer sleeve anchors ($\le 450\text{ mm}$ pitch). Bottom sill track must feature factory weep holes with external gravity flaps.
+- **3-Track Ventilation Geometry:** Mandate a **3-track system (2 glass sliders + 1 SS304 mesh)**. Never install fixed, non-openable glass. Sashes must slide open to mesh during Bosch heat-pump dryer cycles (preventing ambient temps $>38^\circ\text{C}$) and to comply with PNGRB gas meter ventilation rules.
+
 ---
 
 ## 4. Execution Action Items & Site TODOs
@@ -104,3 +109,4 @@ The #1 cause of kitchen cabinet rot is adhesive-only undermount failure.
 - [ ] **Direct Oven Circuit:** Verify direct, unshared 16A radial line from DB with Type A RCCB for Bosch `HBF011BA1I`.
 - [ ] **Chimney Ducting:** Run 150 mm rigid ducting with minimal bends from Faber BLDC hood to external ventilation shaft.
 - [ ] **Laundry Isolation:** Place Bosch washer and heat-pump dryer directly on bare tile floor over dense rubber anti-vibration pads (never on hollow joinery plinths).
+- [ ] **Utility Parapet UPVC Fit-out:** Commission 3-track White uPVC system (1.5mm GI steel core, 6mm toughened glass, SS304 mesh, drainage flaps) via Kukatpally workshop or tier-1 system house (Aparna/Fenesta) anchored to RCC boundaries.

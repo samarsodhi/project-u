@@ -4,7 +4,7 @@ aliases: [u-setup-joinery, joinery-setup, joinery, u-joinery, millwork-hardware,
 tags: [u-setup, joinery, millwork, hardware, wardrobes]
 status: evergreen
 created: 2026-10-10
-updated: 2026-10-19
+updated: 2026-10-25
 ---
 
 [[index|← Back to Home Overview]]
@@ -51,3 +51,4 @@ Master hardware schedule for all bedroom wardrobes and built-in casegoods. Sourc
 * **Edge Banding Standard:** Mandate 2.0 mm thick high-impact PVC edge banding on all external shutter edges (applied via automated through-feed hot-melt machine at factory, not manual iron-on edge strips).
 * **Back-Panel Construction:** Cabinet backs must use minimum 9.0 mm BWP plywood sealed on both faces (never 3 mm or 6 mm MDF).
 * **Fastener Protocol:** SS 304 screws only in wet areas (under sink, bathroom vanity); zinc-plated drywall screws prohibited for hinge fixing.
+* **Fire Sprinkler Clashes (Wardrobes Take Priority):** Never compromise wardrobe dimensions or notch loft shutters around clashing sprinkler heads. Keep lofts full-height and have FM relocate the sprinkler into the open ceiling/walkway (confirmed ₹5,000 FM fee); carpenters are strictly prohibited from touching fire lines.
