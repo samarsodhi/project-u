@@ -40,9 +40,9 @@ A consolidated compilation of non-obvious engineering gotchas, Reddit teardown f
 * **Analog Fan Regulator Burnout:**
   * *Failure Mode:* Operating BLDC fans behind analog rotary rheostats chops the AC waveform, destroying the internal bridge rectifier and microcontroller.
   * *Mitigation:* 100% bypass of analog wall regulators in the switchboard. Control fan power via standard mechanical toggle switches and speeds via Alexa / RF remote.
-* **Concealed Switch Box Depth:**
-  * *Failure Mode:* Standard builder 25 mm shallow boxes crush in-wall micro-relays (Sonoff MINIR4M, Shelly Gen3) behind switch plates, causing heat buildup and wire pinching.
-  * *Mitigation:* Mandate **43 mm deep GI concealed switch boxes** across all rooms before closing walls.
+* **Concealed Switch Box Depth & Wire Dressing:**
+  * *Failure Mode:* In generic construction, 25 mm shallow boxes crush in-wall micro-relays. In Olympus, builder boxes are deep 50 mm GI boxes, but chaotic loop wiring leaves insufficient center pocket clearance behind switch mechanisms.
+  * *Mitigation:* Zero box replacement or wall-chasing is required. Enforce clean perimeter wire dressing: fold loop-in phase and neutral lines along back box corners to preserve a clear $\ge 20\text{ mm}$ center pocket directly behind the switch plate for 16.8 mm relay bodies.
 * **RCCB Nuisance Tripping (Type A vs Type AC):**
   * *Failure Mode:* Switched-mode power supplies (PCs, BLDC fans, LED drivers) generate DC residual currents that blind standard Type AC RCCBs.
   * *Mitigation:* Enforce **Type A or Type F 30mA RCCBs** on all sub-distribution circuits.
