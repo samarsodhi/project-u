@@ -70,6 +70,7 @@ The #1 cause of kitchen cabinet rot is adhesive-only undermount failure.
 - [ ] **Lock Elitehaus Package (Quote #20102026, ₹3.09L):** Finalize 6-appliance bundle (Fridge `KCP88E256I`, Washer `WGA254ZSIN` 1400 RPM, Dryer `WQG2520XIN`, Oven `HBF011BA1I`, Häfele Altius FS 230 + Bella 30) conditioned on free Floor 42 delivery, open-box inspection for transit damage before sign-off, and bundled joining hardware.
 - [ ] **Bosch Dryer Stacking Kit:** Source official Bosch `WTZ27400` / `WTZ27410` stacking kit with pull-out shelf for washer/dryer vertical column.
 - [ ] **External Spun Pre-Filter:** Procure ₹500 external 10-inch spun polypropylene candle filter to buffer raw borewell grit before the under-sink RO.
+- [ ] **Basement 3 Tile Requisition:** Collect 1–2 boxes of matching builder floor and wall tiles from the Sumadhura B3 maintenance stockpile before granite demolition begins.
 
 ### Worktop & Domino Hob Fit-Out
 - [ ] **Slab Nano-Sealing:** Treat owner-sourced light granite with 2 saturating coats of **Akemi Anti-Fleck Nano Sealer** before cutting appliance openings.
@@ -78,6 +79,8 @@ The #1 cause of kitchen cabinet rot is adhesive-only undermount failure.
   - **Alternative (Joining Rail):** If using single cutout with Häfele joining strip, execute a stepped cut ($475\text{ mm}$ depth left, $490\text{ mm}$ depth right) and seal seams with Dow Corning 736 high-temp silicone.
   - **Stress Relief:** Ensure all internal cutout corners are diamond-cored with $\ge 5\text{ mm}$ radius.
 - [ ] **Cabinet Thermal Separation:** Install a 12 mm fire-retardant ply baffle between the gas bay and induction bay. Maintain $\ge 50\text{ mm}$ drop clearance and 5 mm front intake air gap for Bella 30 fan.
+- [ ] **Concrete Drainage Curb Skirting Bridge:** Prohibit chiseling the existing raised floor curb encasing the 75 mm sink drain line; instruct Homz carpenter to frame base cabinet skirting to bridge over it.
+- [ ] **BGL Gas Carcass Ventilation:** Cut 50 mm circular ventilated grommets into the rear carcass where the PNG line passes to ensure BGL commissioning approval.
 
 ### Under-Sink RO & Wet Services
 - [ ] **MEP Relocation into Sink Base:** Relocate builder's high-level RO water inlet and 6A power socket from the splashback down inside the sink base cabinet.

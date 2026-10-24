@@ -86,6 +86,12 @@ A consolidated compilation of non-obvious engineering gotchas, Reddit teardown f
 * **Kitchen Gas Leak Sensor Retention & Drawer Framing:**
   * *Failure Mode:* Discarding or cutting builder-installed gas leak detection sensors to fit modular base drawers voids high-rise fire insurance and central BMS alarm compliance.
   * *Mitigation:* Retain 100% of OEM gas leak sensors. Relocate sensor upward to the ceiling zone or tucked under the chimney canopy (PNG is lighter than air and rises), or frame bottom modular drawers with a 75 mm setback clearance notch.
+* **Kitchen Sink Concrete Drainage Curb (Zero Demolition):**
+  * *Failure Mode:* Chiseling or hacking the existing raised concrete floor step along the kitchen wall to seat modular base cabinets flush to bare tile shatters the embedded 75 mm PVC waste drainage line running to `P-SHAFT-61` and breaches floor waterproofing.
+  * *Mitigation:* 100% ban on chiseling the concrete curb. Homz joinery must frame the 100 mm cabinet skirting / toe-kick to bridge over and conceal the concrete curb cleanly.
+* **BGL Piped Gas Carcass Air Circulation:**
+  * *Failure Mode:* Enclosing the yellow copper PNG pipe inside an airtight modular carcass causes BGL technicians to reject commissioning and allows gas to accumulate undetected in an unventilated cavity.
+  * *Mitigation:* Mill 50 mm circular ventilated grommets/slots in the rear of any carcass through which the gas pipe passes; maintain unobstructed airflow under the cooktop.
 
 ---
 
@@ -105,3 +111,9 @@ A consolidated compilation of non-obvious engineering gotchas, Reddit teardown f
 * **RCC Shear Wall Chipping & Core Cutting Penalties:**
   * *Failure Mode:* Chipping or coring into structural RCC shear walls or beams for additional electrical switchboards or plumbing drops damages structural reinforcement, triggering immediate FM work stoppage and forfeiture of the ₹9k–13k interior caution bond.
   * *Mitigation:* Enforce strict ban on cutting structural RCC members. Restrict all electrical conduit chasing to non-structural AAC block infill walls; route additional wiring across ceiling slabs inside GI/heavy PVC conduits concealed behind false ceiling plasterboard.
+* **Basement 3 Matching Tile Stockpile (Pre-Demolition Sourcing):**
+  * *Failure Mode:* Stripping builder granite and adjusting plumbing/electrical points damages wall dado and floor vitrified tiles; commercial retail tiles have mismatched dye lots resulting in visible, patchy repairs.
+  * *Mitigation:* Requisition 1–2 boxes of matching builder floor and wall tiles directly from the Sumadhura site maintenance stockpile in **Basement 3 (B3)** before Homz begins demolition.
+* **Reversed Socket Polarity (Switch on Neutral Hazard):**
+  * *Failure Mode:* Builder electricians frequently invert phase and neutral wiring in wall switchboards, causing switches to cut neutral while socket pins remain permanently energized at 230V, creating shock hazards and malfunctioning smart relays.
+  * *Mitigation:* Enforce a 100% 3-pin socket polarity check with an HT107 socket tester across all 6A/16A outlets before clearing the electrical handover snag list.
