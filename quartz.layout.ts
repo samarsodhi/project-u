@@ -22,6 +22,7 @@ const explorerConfig = {
   sortFn: (a: any, b: any) => {
     const order: Record<string, number> = {
       // Phase 1: High-Rise Engineering & Irreversible Services
+      "gotchas-and-tips": 10,
       "high-rise-engineering-gotchas": 10,
       "cabinetry-woodwork": 20,
       "kitchen-laundry": 30,

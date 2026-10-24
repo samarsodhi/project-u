@@ -18,7 +18,7 @@ This site hosts the architectural specifications, verified product recommendatio
 
 Pre-ceiling and pre-flooring infrastructure. Failure to sequence these before architectural closures risks catastrophic flooding, electrical board failures, or tearing down finished ceilings:
 
-* **[[high-rise-engineering-gotchas|High-Rise Engineering Gotchas]]** — Pressure Reducing Valves (PRV 3.0–3.5 bar), Type 2 Surge Protection (SPD), DG harmonics, and high-rise wind mitigations.
+* **[[gotchas-and-tips|Gotchas & Field Protips]]** — Pressure Reducing Valves (PRV 3.0–3.5 bar), Type 2 Surge Protection (SPD), DG harmonics, local sourcing, and FM rules.
 * **[[cabinetry-woodwork|Cabinetry & Woodwork]]** — IS 710 BWP plywood, calibrated cores, wardrobe hardware schedule, and ceiling plasterboard.
 * **[[plans-drawings|Plans & Drawings]]** — Unit B4206 architectural floor plan, Daikin VRV 10 HP HVAC, plumbing shafts, and electrical DB.
 * **[[kitchen-laundry|Kitchen & Laundry]]** — Modular cabinetry, light Indian granite, undermount sinks, hybrid domino hob, 32A lines, and stacked laundry.

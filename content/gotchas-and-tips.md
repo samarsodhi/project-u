@@ -1,7 +1,7 @@
 ---
-title: "High-Rise Engineering Gotchas"
-aliases: [u-setup-gotchas, olympus-gotchas, high-rise-mep-gotchas, engineering-gotchas]
-tags: [u-setup, engineering, gotchas, failure-modes]
+title: "Gotchas & Field Protips"
+aliases: [ high-rise-engineering-gotchas, engineering-gotchas, u-setup-gotchas, olympus-gotchas, gotchas-and-protips]
+tags: [u-setup, engineering, gotchas, failure-modes, protips]
 status: evergreen
 created: 2026-10-15
 updated: 2026-10-24
@@ -9,9 +9,9 @@ updated: 2026-10-24
 
 [[index|← Back to Home Overview]]
 
-# High-Rise Engineering Gotchas
+# Gotchas & Field Protips
 
-A consolidated compilation of non-obvious engineering gotchas, Reddit teardown failure modes, and master trade protocols for Floor 42 unit fit-out.
+A consolidated compilation of non-obvious engineering gotchas, resident community field tips, Reddit teardown post-mortems, and master trade protocols for Unit B4206.
 
 ---
 
@@ -117,3 +117,26 @@ A consolidated compilation of non-obvious engineering gotchas, Reddit teardown f
 * **Reversed Socket Polarity (Switch on Neutral Hazard):**
   * *Failure Mode:* Builder electricians frequently invert phase and neutral wiring in wall switchboards, causing switches to cut neutral while socket pins remain permanently energized at 230V, creating shock hazards and malfunctioning smart relays.
   * *Mitigation:* Enforce a 100% 3-pin socket polarity check with an HT107 socket tester across all 6A/16A outlets before clearing the electrical handover snag list.
+
+---
+
+## 7. Local Sourcing, Logistics & FM Rules
+
+* **Piped Gas (BGL) Day-1 Booking Rule:**
+  * *Protip:* Submit the BGL connection and relocation ticket (`bglgas.com` / `wecare@bglgas.com`) on Day 1 of possession. BGL response times can stretch to 8–10 weeks; missing early booking stalls kitchen handover.
+  * *Proscription:* Never allow private gas mechanics to modify or extend copper piping. BGL tests the entire line before meter installation and rejects tampered lines.
+* **East Gate Wet Cutting Yard:**
+  * *Rule:* Zero wet granite, quartz, or tile cutting inside the flat or balconies. FM strictly mandates wet cutting at the designated East Gate contractor yard. Violations incur immediate work stoppage and forfeiture of the ₹9k–13k interior deposit.
+* **Local Neighborhood Spares (300m Gate Radius):**
+  * *Electrical Spares:* **Laxmi Electricals** (300 m from North/East Gate) stocks exact builder-spec **Panasonic modular plates and switches**.
+  * *Geyser Plumbing Stock:* **Ganesh Plywood & Sanitary** (Road No. 2, Opp. Ratnadeep) stocks both LHS and RHS horizontal geyser variants matching Olympus shaft configurations.
+* **Corridor Fire Egress (Zero Wooden Cabinets):**
+  * *Rule:* External wooden shoe cabinets in common lift lobbies violate fire safety bylaws. Only narrow, flush metal shoe racks within the flat's threshold entrance niche are permitted.
+
+---
+
+## 8. Life Safety & Ceremonies
+
+* **Grah Pravesh Hawan vs. Central Fire Alarms:**
+  * *Failure Mode:* The smoke plume from an indoor homam / hawan kund triggers central optical smoke detectors, sounding building-wide fire alarms and mobilizing security.
+  * *Mitigation:* Notify FM in advance. Temporarily shield ceiling smoke alarms with fitted dust covers during the ritual, fully open balcony sliders for cross-ventilation, and position the hawan kund away from direct sprinkler heat heads. Remove covers immediately upon completion.
