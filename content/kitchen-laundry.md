@@ -4,7 +4,7 @@ aliases: [u-setup-kitchen, kitchen-setup, u-setup-worktop, kitchen-worktop-setup
 tags: [u-setup, kitchen, laundry, worktop]
 status: evergreen
 created: 2026-10-10
-updated: 2026-10-23
+updated: 2026-10-24
 ---
 
 [[index|← Back to Home Overview]]
@@ -81,6 +81,14 @@ The #1 cause of kitchen cabinet rot is adhesive-only undermount failure.
 - [ ] **Cabinet Thermal Separation:** Install a 12 mm fire-retardant ply baffle between the gas bay and induction bay. Maintain $\ge 50\text{ mm}$ drop clearance and 5 mm front intake air gap for Bella 30 fan.
 - [ ] **Concrete Drainage Curb Skirting Bridge:** Prohibit chiseling the existing raised floor curb encasing the 75 mm sink drain line; instruct Homz carpenter to frame base cabinet skirting to bridge over it.
 - [ ] **BGL Gas Carcass Ventilation:** Cut 50 mm circular ventilated grommets into the rear carcass where the PNG line passes to ensure BGL commissioning approval.
+- [ ] **BGL Meter Verification & Account Setup:** Submit meter photo, Sr. No. `20250602206`, and baseline reading `000000.013 m³` to `wecare@bglgas.com` for account registration.
+
+### Piped Gas (BGL) Meter Specifications
+- **Operator:** Bhagyanagar Gas Limited (BGL)
+- **Meter Make & Model:** Pietro Fiorentini `RS1.2IND` (Size `G 1.6`, Type `I-2142-MI002-TG038`)
+- **Serial Number:** `20250602206` (Mfg `06/25`)
+- **Baseline Reading:** `000000.013 m³` (Flow: $L \to R$, $P_{\max} = 0.5\text{ bar}$, $Q_{\max} = 2.5\text{ m}^3/\text{h}$)
+- **Standards:** EN 1359:2017 Class 1.5, CE M25 2142, W&M Reg `IND/09/24/538`
 
 ### Under-Sink RO & Wet Services
 - [ ] **MEP Relocation into Sink Base:** Relocate builder's high-level RO water inlet and 6A power socket from the splashback down inside the sink base cabinet.
