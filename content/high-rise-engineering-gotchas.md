@@ -4,7 +4,7 @@ aliases: [u-setup-gotchas, olympus-gotchas, high-rise-mep-gotchas, engineering-g
 tags: [u-setup, engineering, gotchas, failure-modes]
 status: evergreen
 created: 2026-10-15
-updated: 2026-10-23
+updated: 2026-10-24
 ---
 
 [[index|← Back to Home Overview]]
@@ -26,6 +26,9 @@ A consolidated compilation of non-obvious engineering gotchas, Reddit teardown f
 * **RO Wastewater Siphon Backflow:**
   * *Failure Mode:* Pushing RO reject pipes directly into sink waste drains without an air gap risks siphoning sewer bacteria straight into drinking water filtration stages during sink clogs.
   * *Mitigation:* Enforce a dedicated mechanical drain saddle with a physical air-gap adapter positioned $\ge 50\text{ mm}$ above the sink P-trap weir.
+* **Low False Ceiling Horizontal Geysers & Port Handing (LHS vs RHS):**
+  * *Failure Mode:* Vertical geysers clash with false ceiling drops. Purchasing horizontal geysers without verifying plumbing shaft inlet/outlet orientation forces crossed, pinched flexible hoses, hot water reverse siphon, and blocked service trapdoor access.
+  * *Mitigation:* Mandate 10L–15L horizontal geysers only (Racold / Havells). Inspect the exact plumbing shaft stub-out in each bathroom (LHS vs RHS cold/hot ports) prior to procurement to guarantee direct, uncrossed hookups aligned with the ceiling hatch.
 
 ---
 
@@ -77,6 +80,12 @@ A consolidated compilation of non-obvious engineering gotchas, Reddit teardown f
 * **Hidden Door Hinge Sag & Dome Mirror Edge Corrosion:**
   * *Failure Mode:* Cladding hidden doors (Puja/Store) with 18mm ply + `3163 SI` laminate adds ~20 kg, causing standard 3-hinge doors to sag and scrape floor tiles. Bonding dome mirrors with acidic acetoxy silicone corrodes silver backing into black edge rot within 12 months.
   * *Mitigation:* Fit 4× SS304 ball-bearing hinges (or 80kg-rated 3D concealed Tectus hinges) on hidden doors; bond Saint-Gobain copper-free dome mirrors strictly with **neutral-cure alkoxy silicone**.
+* **BGL Piped Gas Relocation Sequencing (The 2-Month Standstill):**
+  * *Failure Mode:* Core cutting or modifying cabinetry before BGL technician pre-inspection causes BGL to reject connection, stalling kitchen handovers for 8–10 weeks.
+  * *Mitigation:* Sequence strictly: (1) Raise relocation ticket via `bglgas.com` / `wecare@bglgas.com`, (2) BGL technician pre-inspects and marks core cut, (3) Execute specialized core cut, (4) BGL fabricates copper line extension, tests pressure, and commissions.
+* **Kitchen Gas Leak Sensor Retention & Drawer Framing:**
+  * *Failure Mode:* Discarding or cutting builder-installed gas leak detection sensors to fit modular base drawers voids high-rise fire insurance and central BMS alarm compliance.
+  * *Mitigation:* Retain 100% of OEM gas leak sensors. Relocate sensor upward to the ceiling zone or tucked under the chimney canopy (PNG is lighter than air and rises), or frame bottom modular drawers with a 75 mm setback clearance notch.
 
 ---
 
@@ -88,3 +97,11 @@ A consolidated compilation of non-obvious engineering gotchas, Reddit teardown f
 * **Invisible Grille Tensile Metallurgy:**
   * *Failure Mode:* Grade 202 cables pit and rust in humid monsoon winds.
   * *Mitigation:* Mandate **SS316 marine-grade cables** with high-density nylon casing, tensioned to $\ge 120\text{ kg}$ pull-force at $\le 75\text{ mm}$ cable spacing.
+
+---
+
+## 6. Civil & Structural Boundaries
+
+* **RCC Shear Wall Chipping & Core Cutting Penalties:**
+  * *Failure Mode:* Chipping or coring into structural RCC shear walls or beams for additional electrical switchboards or plumbing drops damages structural reinforcement, triggering immediate FM work stoppage and forfeiture of the ₹9k–13k interior caution bond.
+  * *Mitigation:* Enforce strict ban on cutting structural RCC members. Restrict all electrical conduit chasing to non-structural AAC block infill walls; route additional wiring across ceiling slabs inside GI/heavy PVC conduits concealed behind false ceiling plasterboard.
