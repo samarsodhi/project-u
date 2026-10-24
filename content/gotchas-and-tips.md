@@ -49,6 +49,9 @@ A consolidated compilation of non-obvious engineering gotchas, resident communit
 * **110V US Robot Vacuum Auto-Empty Dock Burnout (`Roomba 505X`):**
   * *Failure Mode:* US-purchased robot docks often have dual-voltage (100–240V) charging electronics for the robot, but a **110V-only 1200W AC universal motor** for the dustbin evacuation blower that smokes instantly on 230V Indian power.
   * *Mitigation:* Inspect the dock baseplate amperage/voltage stamp before plugging into the Dining vanity bay; wire through a 1500VA 230V-to-110V step-down transformer if rated 110–120V.
+* **Dummy Conduit Route Preservation:**
+  * *Failure Mode:* Painters skim plaster flush over builder dummy junction boxes, permanently entombing wire-pull routes.
+  * *Mitigation:* Cap all unused dummy boxes with matching Panasonic modular blanking plates. Photograph and log box measurements before wall painting.
 
 ---
 
@@ -63,6 +66,9 @@ A consolidated compilation of non-obvious engineering gotchas, resident communit
 * **Ducted VRF Access Trapdoors:**
   * *Failure Mode:* Plastering over or boxing in VRF units prevents cleaning nylon filters and servicing secondary condensate drain pumps.
   * *Mitigation:* Require a clean, unobstructed $600 \times 600\text{ mm}$ magnetic-latch access panel directly beneath each unit's service bay.
+* **Fire Sprinkler Droppers in False Ceilings:**
+  * *Failure Mode:* Contractors shifting or boxing in sprinkler heads risk high-pressure ($>6\text{ bar}$) water blowouts and fire NOC cancellation.
+  * *Mitigation:* Frame false ceilings around existing sprinkler heads using certified two-piece escutcheon rings. Route height modifications strictly through the FM fire team.
 
 ---
 
@@ -109,14 +115,14 @@ A consolidated compilation of non-obvious engineering gotchas, resident communit
 ## 6. Civil & Structural Boundaries
 
 * **RCC Shear Wall Chipping & Core Cutting Penalties:**
-  * *Failure Mode:* Chipping or coring into structural RCC shear walls or beams for additional electrical switchboards or plumbing drops damages structural reinforcement, triggering immediate FM work stoppage and forfeiture of the ₹9k–13k interior caution bond.
-  * *Mitigation:* Enforce strict ban on cutting structural RCC members. Restrict all electrical conduit chasing to non-structural AAC block infill walls; route additional wiring across ceiling slabs inside GI/heavy PVC conduits concealed behind false ceiling plasterboard.
+  * *Failure Mode:* Chipping RCC shear walls cuts structural steel rebars. FM halts work immediately and forfeits the ₹9k–13k caution bond.
+  * *Mitigation:* Ban cutting structural RCC members. Chase conduits only in non-structural AAC block walls; route ceiling runs inside conduits behind gypsum boards.
 * **Basement 3 Matching Tile Stockpile (Pre-Demolition Sourcing):**
   * *Failure Mode:* Stripping builder granite and adjusting plumbing/electrical points damages wall dado and floor vitrified tiles; commercial retail tiles have mismatched dye lots resulting in visible, patchy repairs.
   * *Mitigation:* Requisition 1–2 boxes of matching builder floor and wall tiles directly from the Sumadhura site maintenance stockpile in **Basement 3 (B3)** before Homz begins demolition.
 * **Reversed Socket Polarity (Switch on Neutral Hazard):**
-  * *Failure Mode:* Builder electricians frequently invert phase and neutral wiring in wall switchboards, causing switches to cut neutral while socket pins remain permanently energized at 230V, creating shock hazards and malfunctioning smart relays.
-  * *Mitigation:* Enforce a 100% 3-pin socket polarity check with an HT107 socket tester across all 6A/16A outlets before clearing the electrical handover snag list.
+  * *Failure Mode:* Inverted phase-neutral wiring cuts neutral at the switch. Sockets remain hot at 230V when switched off, causing shock hazards.
+  * *Mitigation:* Audit every 6A/16A socket with an HT107 socket polarity tester during handover before releasing final contractor payouts.
 
 ---
 
