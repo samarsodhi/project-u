@@ -4,7 +4,7 @@ aliases: [u-setup-smart-home, smart-home-setup, automation, u-automation]
 tags: [u-setup, smart-home, automation]
 status: evergreen
 created: 2026-10-10
-updated: 2026-10-23
+updated: 2026-10-24
 ---
 
 [[index|← Back to Home Overview]]
@@ -48,3 +48,4 @@ Master technical specification for the local-first automation layer: in-wall Mat
 
 ## Electrical Pre-Wire & Site Requirements (Homz Scope)
 * **MEP & Surge Protection Standards:** Enforce 43 mm deep GI switch boxes, room-isolated neutral wires, Type A/F 30mA RCCBs, and primary DB Type 2 40kA SPD per [[high-rise-engineering-gotchas#2-electrical-grid-surges--inverter-pcb-protection]].
+* **Dummy Conduit Route Preservation:** Never allow painters to skim plaster flush over builder dummy electrical/data conduits and junction boxes. Fit matching flush modular blanking plates (Panasonic spec from Laxmi Electricals) and log photo measurements before wall closing so future Cat6 or smart home wiring can be pulled without destructive wall chasing.
