@@ -4,7 +4,7 @@ aliases: [rooms-br01, br-01, study-guest, wfh-study, u-br01]
 tags: [u-setup, rooms, study, guest-room]
 status: evergreen
 created: 2026-10-10
-updated: 2026-10-19
+updated: 2026-10-25
 ---
 
 [[index|← Back to Home Overview]]
@@ -27,6 +27,7 @@ Primary workspace for Samar (SDM at Amazon) and flexible guest suite. Houses the
 | **Window Reading Lounge Chair** | **[Recommended]** [IKEA EKENÄSET Armchair](https://www.ikea.com/in/en/p/ekenaeset-armchair-kilanda-light-beige-70533491/) (Solid beech frame, compact 86×78 cm, ₹16,990) / [Gulmohar Lane Woodstock Leather](https://www.google.com/search?q=Gulmohar+Lane+Woodstock+Leather) (Kiln-dried hardwood, top-grain leather, ₹63,130) | [Alankaram Z-Chair](https://www.google.com/search?q=Alankaram+Z-Chair) (Solid teak, raked recline, ₹67,500) / [Magari Riga Cane](https://www.google.com/search?q=Magari+Riga+Cane) (Solid ash, natural cane back, ₹59,708) | South window UV dries out leather; condition Woodstock leather bi-annually with beeswax. Fixed EKENÄSET fabric stains easily; Scotchgard immediately. |
 | **Monitor Task Light** | [Baseus i-Wok Series Screen Hanging Light](https://baseusindiaofficial.com/products/baseus-i-wok-series-desktop-monitor-screen-light-led-lamp-black-dgiwk-b01) (Asymmetric optical design, USB, ₹2,899) / [Quntis ScreenBar Pro](https://www.amazon.in/dp/B08DKQ3JG1) (Auto-dimming, Ra95 eye-care optics, ₹4,599) | **[Recommended]** [BenQ ScreenBar Pro](https://www.amazon.in/dp/B0CZ94MB2R) (Auto-dimming, zero screen glare, ₹14,490) / [BenQ ScreenBar Halo](https://www.google.com/search?q=BenQ+ScreenBar+Halo) (Wireless rotary controller, rear bias backlight, ₹19,990) | Budget light bars spill glare onto monitor glass; BenQ patented asymmetric optics illuminate only desk surface while rear bias light cuts eye strain in dark rooms. |
 | **Executive Standing Desk & Seating** | **[Recommended]** Owned Motorized Sit-Stand Desk (Dual-motor frame, 150×75 cm top) + [Steelcase Gesture / Leap V2](https://www.google.com/search?q=Steelcase+Gesture+%2F+Leap+V2) (Owned ergonomic task seating) | Custom Solid White Oak Desktop on Linak DL6 Dual-Motor Frame (~₹85,000) + Herman Miller Embody (~₹1.65L) | Running sit-stand cables along baseboards pinches cords during elevation; mount an under-desk cable spine and surge strip to travel with the desktop. |
+| **Study & Home Office Printer** | **[Recommended]** [Brother HL-1211W Compact Wi-Fi Laser](https://www.amazon.in/dp/B00V4SML06) (₹9,990, 340×238×189 mm, dry toner never dries out, monochrome 20 ppm, Reddit BIFL baseline) / [Brother HL-L2321D](https://www.amazon.in/dp/B00O91Y60A) (Auto-duplex, ₹11,999) | [Epson EcoTank L3252 / L3250 Wi-Fi All-in-One](https://www.amazon.in/dp/B09N3LHV2X) (₹13,999, flatbed A4 scanner to digitize documents/school artwork, ultra-low-cost color tank) / [Canon imageCLASS LBP6030w](https://www.amazon.in/dp/B00KCMZ4I0) (₹13,200) | Liquid inkjet printheads clog if unused for 2–3 weeks; Brother dry-powder laser toner never dries out, even over 6-month idle stretches. Position in Study next to WFH desk to keep Kabir's room clear and avoid ink spillage risks. |
 
 ---
 
