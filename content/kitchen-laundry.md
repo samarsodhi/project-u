@@ -4,7 +4,7 @@ aliases: [u-setup-kitchen, kitchen-setup, u-setup-worktop, kitchen-worktop-setup
 tags: [u-setup, kitchen, laundry, worktop]
 status: evergreen
 created: 2026-10-10
-updated: 2026-10-24
+updated: 2026-10-25
 ---
 
 [[index|← Back to Home Overview]]
@@ -81,9 +81,11 @@ The #1 cause of kitchen cabinet rot is adhesive-only undermount failure.
 - [ ] **Cabinet Thermal Separation:** Install a 12 mm fire-retardant ply baffle between the gas bay and induction bay. Maintain $\ge 50\text{ mm}$ drop clearance and 5 mm front intake air gap for Bella 30 fan.
 - [ ] **Concrete Drainage Curb Skirting Bridge:** Prohibit chiseling the existing raised floor curb encasing the 75 mm sink drain line; instruct Homz carpenter to frame base cabinet skirting to bridge over it.
 - [ ] **BGL Gas Carcass Ventilation:** Cut 50 mm circular ventilated grommets into the rear carcass where the PNG line passes to ensure BGL commissioning approval.
-- [ ] **BGL Meter Verification & Account Setup:** Submit meter photo, Sr. No. `20250602206`, and baseline reading `000000.013 m³` to `wecare@bglgas.com` for account registration.
+- [x] **BGL PNG Application & Relocation Initiation:** Submitted dual-track 2026-10-25 via `mypng.gov.in` (App No: `PNG-2026-03527151`) and email to `wecare@bglgas.com`. Awaiting technician on-site marking for inlet lowering (~700 mm FFL).
 
 ### Piped Gas (BGL) Meter Specifications
+- **Application Number:** `PNG-2026-03527151` (`mypng.gov.in`, submitted 2026-10-25)
+- **Email Ticket Reference:** *"Application for New Domestic PNG Connection & Gas Inlet Lowering — Flat B4206, Sumadhura The Olympus"* sent to `wecare@bglgas.com`
 - **Operator:** Bhagyanagar Gas Limited (BGL)
 - **Meter Make & Model:** Pietro Fiorentini `RS1.2IND` (Size `G 1.6`, Type `I-2142-MI002-TG038`)
 - **Serial Number:** `20250602206` (Mfg `06/25`)
