@@ -11,7 +11,7 @@ updated: 2026-10-25
 
 # Finalized Purchases
 
-Locked high-ticket hardware commitments for Unit B4206. Total committed procurement envelope across these 8 units is **₹4,45,269** (GST-inclusive; includes owned Sonos Arc Ultra).
+Locked high-ticket hardware commitments for Unit B4206. Total committed procurement envelope across these 8 units is **₹4,30,283** (GST-inclusive; reflects ₹85,004 actual delivered price for Sonos Arc Ultra).
 
 Top reasons to reject or alter any of these selections:
 1. Site dimension mismatches (e.g. lift opening narrower than crate, or countertop cutout lacking radiused stress relief).
@@ -24,7 +24,7 @@ Top reasons to reject or alter any of these selections:
 
 | Domain & Item | Model & Key Specifications | Locked Price (INR) | Primary Source | Top Failure Mode & Site Reality |
 | :--- | :--- | :--- | :--- | :--- |
-| **TV Soundbar (Living)** | **Sonos Arc Ultra**<br>Sound Motion 9.1.4 Atmos, eARC *(Owned & Delivered Oct 21, 2026)* | ₹99,990 (Owned) | Shipped & Delivered | Unit is 1,178 mm wide. Requires $\ge 1.2\text{ m}$ console deck span and $\ge 150\text{ mm}$ clearance below TV for upward drivers. Run HDMI via 50mm in-wall conduit. |
+| **TV Soundbar (Living)** | **Sonos Arc Ultra**<br>Sound Motion 9.1.4 Atmos, eARC *(Owned & Delivered Oct 21, 2026)* | ₹85,004 (Owned) | Amazon India (Delivered) | Unit is 1,178 mm wide. Requires $\ge 1.2\text{ m}$ console deck span and $\ge 150\text{ mm}$ clearance below TV for upward drivers. Run HDMI via 50mm in-wall conduit. |
 | **Study & Home Office Printer** | **Brother HL-L2440DW**<br>Wi-Fi, Auto-Duplex Monochrome Laser, 30 ppm, 3,000-page inbox toner | ₹14,990 | [Amazon.in](https://www.amazon.in/dp/B0D86RH9K2) | Single-function monochrome laser. Position in Study near WFH desk with direct 6A power; print over Wi-Fi or in-wall Cat6 wall port without cables to laptop. |
 | **Hob (Hybrid)** | **Häfele Domino Pair**<br>Altius FS 230 Gas + Bella 30 Induction + Joining Rail | ~₹54,000 | [Häfele India](https://www.hafeleindia.com/en/p/domino-hob/53866610/) | Single PCB failure risk eliminated by separate dominos. Granite cutout requires radiused internal corners to prevent heat-stress cracking. |
 | **French-Door Fridge** | **Bosch KCP88E256I Serie 6**<br>503L, 594mm flush counter-depth, VitaFresh Plus | ₹94,000 | [Bosch Home](https://www.bosch-home.in/product/KCP88E256I) | Flush 594mm cabinet profile eliminates aisle blockage. Check tower lift clearance (crate dimensions: 2,018 × 902 × 656 mm) before delivery. |
