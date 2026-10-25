@@ -11,7 +11,7 @@ updated: 2026-10-25
 
 # Finalized Purchases
 
-Locked high-ticket hardware commitments for Unit B4206. Total committed procurement envelope across these 8 units is **₹4,30,283** (GST-inclusive; reflects ₹85,004 actual delivered price for Sonos Arc Ultra).
+Locked high-ticket hardware commitments for Unit B4206. Total committed procurement envelope across these 7 units is **₹3,37,484** (GST-inclusive; reflects ₹85,004 actual delivered price for Sonos Arc Ultra; excludes Samsung Bespoke 650L fridge pending final dealer quote).
 
 Top reasons to reject or alter any of these selections:
 1. Site dimension mismatches (e.g. lift opening narrower than crate, or countertop cutout lacking radiused stress relief).
