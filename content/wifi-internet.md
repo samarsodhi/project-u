@@ -4,19 +4,19 @@ aliases: [u-setup-networking, networking-setup, networking, u-networking]
 tags: [u-setup, networking, wifi]
 status: evergreen
 created: 2026-10-10
-updated: 2026-10-24
+updated: 2026-10-31
 ---
 
 [[index|← Back to Home Overview]]
 
 # Wi-Fi & Internet
 
-Master technical specification for whole-home low-voltage data infrastructure: owned GL.iNet Flint 2 router (OpenWrt, dual-WAN failover), secondary wired-backhaul node, 100% utilization of builder pre-wired in-wall Cat6 room drops, zero ceiling cuts, zero PoE switches, and battery backup.
+Master technical specification for whole-home low-voltage data infrastructure: 100% GL.iNet ecosystem using the owned GL.iNet Flint 2 gateway (OpenWrt, dual-WAN failover) + owned GL.iNet Beryl AX in 1-click Wired AP mode, direct utilization of builder pre-wired in-wall Cat6 room drops, zero external switches, zero ceiling cuts, and inline DC battery backup.
 
 ### Locked Architectural Constraints (Non-Negotiable)
 * **Zero Ceiling Penetrations:** Prohibit cutting gypsum ceiling boards or pulling overhead conduits for ceiling APs. Ceiling cavities remain reserved exclusively for VRF copper, lighting, and fire sprinklers.
-* **Builder In-Wall Cat6 Utilization:** Connect stationary high-bandwidth devices (Living TV, Study WFH desk, Master AP) directly into the pre-installed Panasonic RJ45 wall plates at 1,000 Mbps.
-* **Zero Dedicated PoE Switch Footprint:** Ban standalone PoE+ switches. The owned Flint 2 router's 5 integrated LAN ports (1× 2.5 GbE + 4× 1 GbE) patch all 4 pre-wired rooms directly.
+* **Builder In-Wall Cat6 Utilization:** Connect stationary endpoints (Study WFH dock, Master Beryl AX AP, Living Aqara Hub M3 / Apple TV) directly into the pre-installed Panasonic RJ45 wall plates at 1,000 Mbps.
+* **Zero External Switches:** Ban standalone PoE and leaf switches. The owned Flint 2 router's 5 integrated LAN ports patch all 4 pre-wired rooms directly. At the Living TV console, the single wall port hardwires the Aqara Hub M3 (or Apple TV 4K), while the Sony 65" TV (whose RJ45 port is capped at 100 Mbps) and Sonos Arc Ultra run faster and cleaner over 5 GHz Wi-Fi 6 + HDMI eARC.
 * **Local-First OpenWrt Standard:** Reject cloud-dependent mesh systems (Deco, Eero) requiring mandatory vendor cloud logins and telemetry. All routing, WireGuard VPN (900 Mbps), and AdGuard Home DNS run locally.
 
 ---
@@ -25,8 +25,8 @@ Master technical specification for whole-home low-voltage data infrastructure: o
 
 | Need | Tier 1: High-Quality VFM | Tier 2: High-Quality Unconstrained | Top Failure Mode & Reddit Insight |
 | :--- | :--- | :--- | :--- |
-| **Wi-Fi Coverage & Nodes** | **[Recommended] Owned Flint 2 (GL-MT6000) Gateway + 2nd Flint 2 / Beryl AX Wired AP** (~₹12,500 new for 2nd node / ₹0 test via owned Beryl AX) / [TP-Link Archer AX72 Pro in AP Mode](https://www.google.com/search?q=Archer+AX72+Pro) (₹8,999) | [TP-Link Deco XE75 Wi-Fi 6E 2-Pack in AP Mode](https://www.amazon.in/dp/B0B68L8XF9) (Triband 6GHz backhaul, ₹14,999) / [Ubiquiti UniFi Express Desktop Pair](https://www.google.com/search?q=UniFi+Express) (Managed layer-2 plane, ₹24,500) | Consumer mesh pucks (Deco/Eero) force cloud logins and hide channel controls. OpenWrt wired backhaul delivers unthrottled 1,000 Mbps throughput; enable 802.11k/v/r fast transition and calibrate 5GHz transmit power in LuCI to prevent sticky clients. |
-| **Network Switching** | **[Recommended] Direct Flint 2 Integrated 5-Port LAN Switch (₹0)** / [TP-Link TL-SG105 5-Port Gigabit Unmanaged Switch](https://www.amazon.in/dp/B000BC7QMM) (₹899, fanless 2W metal case) | [Netgear GS308 8-Port Gigabit Unmanaged](https://www.amazon.in/dp/B07PFYM5MZ) (₹1,599) / [TP-Link TL-SG108 8-Port Gigabit](https://www.amazon.in/dp/B00A121WN6) (₹1,499) | PoE switches draw 15-20W idle heat and add ₹5k-11k unnecessary expense when every room has wall power. Flint 2's onboard 2.5G + 4x 1G LAN ports directly patch all 4 rooms without external hardware. |
+| **Wi-Fi Coverage & Nodes** | **[Recommended] Owned GL.iNet Flint 2 (GL-MT6000) Gateway + Owned GL.iNet Beryl AX (GL-MT3000) in Wired AP Mode (₹0)** | **Owned GL.iNet Flint 2 Gateway + 2nd GL.iNet Flint 2 Wired AP** (~₹12,500) / [Ubiquiti UniFi Express Desktop Pair](https://www.google.com/search?q=UniFi+Express) (₹24,500) | Consumer mesh pucks (Deco/Eero) force cloud logins. Setting the owned Beryl AX to 1-click "Wired Access Point" mode in the GL.iNet UI delivers 1,000 Mbps wired backhaul in the Master Suite for ₹0; upgrade to a 2nd Flint 2 only if 4×4 MIMO is desired later. |
+| **Network Switching** | **[Recommended] Direct GL.iNet Flint 2 Integrated 5-Port Switch (₹0, Zero External Switches)** / [TP-Link TL-SG105 5-Port Gigabit Switch](https://www.amazon.in/dp/B000BC7QMM) (₹899, optional) | [Netgear GS305 / GS308 Unmanaged Metal Gigabit Switch](https://www.amazon.in/dp/B07PFYM5MZ) (₹1,299–₹1,599) / [TP-Link TL-SG108 8-Port Gigabit](https://www.amazon.in/dp/B00A121WN6) (₹1,499) | Sony Bravia `X90CH` Ethernet is capped at 100 Mbps (slower than 5 GHz Wi-Fi), and wiring one Sonos speaker while others use Wi-Fi triggers STP broadcast loops on OpenWrt. Keep TV and Sonos on Wi-Fi 6 and plug the single Living wall port directly into the Aqara Hub M3. |
 | **Network Backup UPS** | [APC BX600C-IN 600VA](https://www.amazon.in/dp/B016XVRKZM) (Line-interactive, ₹3,599) / **[Recommended]** [Cuzor Pro 12V 3A + PoE Inline DC Mini-UPS Pair](https://www.google.com/search?q=Cuzor+Pro+12V+3A+%2B+PoE+Inline+DC+Mini-UPS+Pair) (Zero transfer lag during DG switchover, 6-hr Li-ion runtime, ₹2,199 ea) | [CyberPower CP1000EPFCLCD 1000VA](https://www.cyberpower.com/eu/en/product/sku/cp1000epfclcd) (Pure Sine Wave, active PFC, USB NUT monitoring, ₹12,990) / [APC Back-UPS Pro BR1000G-IN 1000VA/600W](https://www.google.com/search?q=APC+Back-UPS+Pro+BR1000G-IN+1000VA) (AVR voltage regulation, LCD runtime readout, ₹14,500) | Stepped sine-wave AC UPS units hum and waste 30% battery in DC-AC-DC conversion; pairing a Pure Sine Wave UPS or inline DC LiFePO4 UPS prevents router reboots during DG cutover. |
 | **Ethernet Patching** | **[Recommended] Builder Pre-Wired In-Wall Cat6 (₹0)** + [Cat6 Molded Patch Cords 0.5m ×6](https://www.amazon.in/dp/B00HEM613W) (₹900) | [Molex PowerCat 6 Patch Leads](https://www.google.com/search?q=Molex+PowerCat+6+Patch) (₹1,800) / [Ubiquiti UniFi Thin Patch Cables](https://www.google.com/search?q=Ubiquiti+UniFi+Thin+Patch) (₹1,500) | Bulk 305m drums are obsolete since rooms are already cabled. Punch down room drops into RJ45 plugs or a compact 6-port bracket inside the low-voltage DB. |
 | **Primary Internet** | **[Recommended]** [ACT Fibernet 300–500 Mbps](https://www.google.com/search?q=ACT+Fibernet+300%E2%80%93500+Mbps) (Low latency routing in Kokapet/Financial District, ~₹1,050–1,500/mo) / [Airtel Xstream Fiber 300 Mbps](https://www.google.com/search?q=Airtel+Xstream+Fiber+300+Mbps) (Symmetric GPON, bridge-mode friendly ONT, ₹1,499/mo) | [Airtel Xstream Fiber 1 Gbps VIP](https://www.google.com/search?q=Airtel+Xstream+Fiber+1+Gbps+VIP) (Priority SLA, dedicated GPON port, ~₹3,999/mo) / [ACT GIGA 1 Gbps Fibernet](https://www.google.com/search?q=ACT+GIGA+1+Gbps+Fibernet) (1 Gbps wired throughput, 5TB FUP, ₹2,999/mo) | Single-ISP downtime halts work-from-home; verify physical fibre drop into Tower B distribution frame before move-in and request ISP bridge mode on ONT to avoid Double-NAT on Flint 2. |
@@ -40,8 +40,8 @@ Master technical specification for whole-home low-voltage data infrastructure: o
 * **Flint 2 Router (GL-MT6000):**
   * *WAN 1 (2.5 GbE):* Primary ISP (ACT Fibernet GPON ONT in bridge mode).
   * *WAN 2 (2.5 GbE):* Secondary ISP failover (Airtel fiber line).
-  * *LAN 1 (GbE):* Wall Drop — Living TV Console (Sony 65" / Apple TV 4K / Sonos Arc Ultra).
-  * *LAN 2 (GbE):* Wall Drop — Master Bedroom (Secondary AP: Flint 2 / Beryl AX in wired AP mode).
+  * *LAN 1 (GbE):* Wall Drop — Living TV Console (Direct to Aqara Hub M3 or Apple TV 4K; Sony 65" TV & Sonos Arc Ultra run on 5 GHz Wi-Fi 6 + HDMI eARC).
+  * *LAN 2 (GbE):* Wall Drop — Master Bedroom (Owned GL.iNet Beryl AX in 1-click Wired AP mode).
   * *LAN 3 (GbE):* Wall Drop — Study / Guest Room (WFH workstation dock).
   * *LAN 4 (GbE):* Wall Drop — Kabir Room (Study desk / printer).
 

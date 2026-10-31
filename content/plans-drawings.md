@@ -7,7 +7,7 @@ created: 2026-10-18
 updated: 2026-10-23
 ---
 
-[[index|← Back to Home Overview]] · [[high-rise-engineering-gotchas]]
+[[index|← Back to Home Overview]] · high-rise-engineering-gotchas
 
 # Plans & Drawings
 

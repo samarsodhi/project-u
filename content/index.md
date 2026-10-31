@@ -26,8 +26,8 @@ Pre-ceiling and pre-flooring infrastructure. Failure to sequence these before ar
 * **[[bathrooms-ventilation|Bathrooms & Ventilation]]** — 10L smart geysers, SS304 flanged curtain rods, floor threshold water bars, silent exhaust CFM, and insect mesh.
 * **[[lighting-ambience|Lighting & Ambience]]** — Architectural CRI 95+ COB spots, 3000K CCT zoning, remote driver enclosures, and 24V dot-free mirror halos.
 * **[[false-ceiling-lighting|False Ceiling Lighting]]** — Recessed COB downlights, perimeter cove strips, trimless slots, and driver service hatches.
-* **[[smart-home-automation|Smart Home & Automation]]** — In-wall Matter/Shelly relays, 43mm deep backboxes, neutral line runs, and BLDC fan regulator bypass.
-* **[[wifi-internet|Wi-Fi & Internet]]** — Pure copper Cat6 cabling, ceiling PoE access points, OpenWrt gateway, and DC UPS backup.
+* **[[smart-home-automation|Smart Home & Automation]]** — In-wall Zigbee 3.0 relays, 50mm deep backboxes, neutral line runs, and BLDC fan regulator bypass.
+* **[[wifi-internet|Wi-Fi & Internet]]** — Owned GL.iNet Flint 2 + Beryl AX wired AP over in-wall Cat6, OpenWrt gateway, and DC UPS backup.
 
 ---
 
@@ -35,7 +35,7 @@ Pre-ceiling and pre-flooring infrastructure. Failure to sequence these before ar
 
 Core spatial planning, room ergonomics, bespoke furniture, and functional daily habitats:
 
-* **[[rooms/living-dining|Living & Dining Spaces]]** — Low platform sofas, solid teak dining, bidirectional jhoola, and foyer storage.
+* **[[rooms/living-dining|Living & Dining Spaces]]** — Low platform sofas, solid teak dining, foyer storage, and media joinery.
 * **[[rooms/master-bedroom|Master Bedroom Suite]]** — Solid timber king bed, gas-strut storage, full-height dome dresser, and bedside units.
 * **[[rooms/study-guest-room|Study & Guest Room]]** — Ergonomic standing desk, Steelcase seating, 5-zone pocket-sprung sofa-bed, and library.
 * **[[rooms/kabir-room|Kabir's Room (Study & Play)]]** — BERGLÄRKA manual crank growth desk, posture-lock chair, daybed, and 3D world map.

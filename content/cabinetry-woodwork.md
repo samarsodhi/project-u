@@ -4,7 +4,7 @@ aliases: [u-setup-joinery, joinery-setup, joinery, u-joinery, millwork-hardware,
 tags: [u-setup, joinery, millwork, hardware, wardrobes]
 status: evergreen
 created: 2026-10-10
-updated: 2026-10-25
+updated: 2026-10-31
 ---
 
 [[index|← Back to Home Overview]]
@@ -51,4 +51,5 @@ Master hardware schedule for all bedroom wardrobes and built-in casegoods. Sourc
 * **Edge Banding Standard:** Mandate 2.0 mm thick high-impact PVC edge banding on all external shutter edges (applied via automated through-feed hot-melt machine at factory, not manual iron-on edge strips).
 * **Back-Panel Construction:** Cabinet backs must use minimum 9.0 mm BWP plywood sealed on both faces (never 3 mm or 6 mm MDF).
 * **Fastener Protocol:** SS 304 screws only in wet areas (under sink, bathroom vanity); zinc-plated drywall screws prohibited for hinge fixing.
+* **Hidden Door Cladding & Acoustic Seals (BR-01 & BR-03):** Clad the 40 mm Puja and Linen Store hidden doors strictly with **6.0 mm calibrated BWP plywood + 1.0 mm laminate** (total 47 mm thickness; ban 18 mm ply cladding which creates a binding 59 mm slab) hung on 4× SS304 ball-bearing hinges. Mortise automatic drop-down acoustic bottom door seals (**Häfele / Planet**, -42 dB rating) into the bottom rail of BR-01 (Study) and BR-03 (Gurudwara) to block Living Room noise across the 15 mm floor undercut.
 * **Fire Sprinkler Clashes (Wardrobes Take Priority):** Never compromise wardrobe dimensions or notch loft shutters around clashing sprinkler heads. Keep lofts full-height and have FM relocate the sprinkler into the open ceiling/walkway (confirmed ₹5,000 FM fee); carpenters are strictly prohibited from touching fire lines.

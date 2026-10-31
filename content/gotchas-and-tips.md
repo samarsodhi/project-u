@@ -4,7 +4,7 @@ aliases: [ high-rise-engineering-gotchas, engineering-gotchas, u-setup-gotchas, 
 tags: [u-setup, engineering, gotchas, failure-modes, protips]
 status: evergreen
 created: 2026-10-15
-updated: 2026-10-24
+updated: 2026-10-31
 ---
 
 [[index|← Back to Home Overview]]
@@ -87,8 +87,8 @@ A consolidated compilation of non-obvious engineering gotchas, resident communit
   * *Failure Mode:* Enclosing the yellow copper PNG pipe inside an airtight modular carcass causes BGL technicians to reject commissioning and allows gas to accumulate undetected in an unventilated cavity.
   * *Mitigation:* Mill 50 mm circular ventilated grommets/slots in the rear of any carcass through which the gas pipe passes; maintain unobstructed airflow under the cooktop.
 * **Hidden Door Hinge Sag & Dome Mirror Edge Corrosion [Score: 8.8/10]:**
-  * *Failure Mode:* Cladding hidden doors (Puja/Store) with 18mm ply + `3163 SI` laminate adds ~20 kg, causing standard 3-hinge doors to sag and scrape floor tiles. Bonding dome mirrors with acidic acetoxy silicone corrodes silver backing into black edge rot within 12 months.
-  * *Mitigation:* Fit 4× SS304 ball-bearing hinges (or 80kg-rated 3D concealed Tectus hinges) on hidden doors; bond Saint-Gobain copper-free dome mirrors strictly with **neutral-cure alkoxy silicone**.
+  * *Failure Mode:* Cladding 40 mm hidden doors (Puja/Store) with 18 mm ply + `3163 SI` laminate creates a 59 mm thick slab (+22 kg) that binds against door stops and sags standard hinges, while 15 mm door undercuts leak Living Room noise into BR-01 Study and BR-03 Gurudwara. Bonding dome mirrors with acidic acetoxy silicone corrodes silver backing into black edge rot within 12 months.
+  * *Mitigation:* Clad hidden doors with **6 mm calibrated BWP ply + 1 mm laminate** (47 mm total) on 4× SS304 ball-bearing hinges; mortise **Häfele / Planet automatic drop-down acoustic seals** (-42 dB) into BR-01 and BR-03 door bottom rails; bond Saint-Gobain copper-free dome mirrors strictly with **neutral-cure alkoxy silicone**.
 * **Light Granite Capillary Staining (Turmeric & Oil) [Score: 8.6/10]:**
   * *Failure Mode:* Light-shade Indian granites contain microscopic feldspar fissures that wick haldi, lemon, and tadka oil into permanent sub-surface stains if left unsealed.
   * *Mitigation:* Test stone yard slab sample with turmeric paste + hot oil for 15 minutes before purchase; apply 2 coats of food-safe fluorochemical penetrating sealer (**Akemi Anti-Fleck Nano**) prior to commissioning.
