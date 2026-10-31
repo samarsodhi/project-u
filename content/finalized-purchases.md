@@ -11,7 +11,7 @@ updated: 2026-10-25
 
 # Finalized Purchases
 
-Locked high-ticket hardware commitments for Unit B4206. Total committed procurement envelope across these 8 units is **~₹4,82,484** (GST-inclusive; reflects ₹85,004 actual delivered price for Sonos Arc Ultra and ₹1,45,000 retail benchmark for Samsung Bespoke 650L fridge pending final dealer quote).
+Locked high-ticket hardware commitments for Unit B4206. Total committed procurement envelope across these 8 units is **~₹4,45,484** (GST-inclusive; reflects ₹85,004 actual delivered price for Sonos Arc Ultra and ₹1,08,000 retail benchmark for Bosch Serie 6 XXL KDN86AID0I fridge pending final dealer quote).
 
 Top reasons to reject or alter any of these selections:
 1. Site dimension mismatches (e.g. lift opening narrower than crate, or countertop cutout lacking radiused stress relief).
@@ -31,7 +31,7 @@ Top reasons to reject or alter any of these selections:
 | **Dryer (Heat Pump)** | **Bosch WQG2520XIN Serie 4**<br>10kg Heat Pump, AutoDry sensors, 600W | ₹64,000 | Elitehaus (Quote #20102026) | Micro-lint bypasses primary filter if secondary foam seal is unwashed. Ambient room temps $>35^\circ\text{C}$ extend cycles. Stack using WTZ27400 kit. |
 | **Microwave** | **LG MJ2887BIUM**<br>28L Charcoal Convection, 360° rotisserie, tact/dial controls, SS cavity | ₹16,490 | [Amazon.in](https://www.amazon.in/dp/B0CQSYPFSQ) | In-house LG magnetron outlasts outsourced OEMs. Rotary dial avoids steam membrane failure. House on pantry shelf with $\ge 100\text{ mm}$ rear and top clearance. |
 | **Built-in Oven** | **Bosch HBF011BA1I Serie 2**<br>66L, 3D HotAir, mechanical rotary dials, 3.3 kW | ₹52,000 | Elitehaus (Quote #20102026) | High continuous current melts standard daisy-chained sockets. Demands dedicated 16A radial drop from DB and 550mm deep ventilated niche. |
-| **French-Door Refrigerator** | **Samsung Bespoke 650L 4-Door (`RF65DB90BD12TL`)**<br>521L fresh volume (396L fridge + 125L FlexZone door), Clean White glass, Triple Cooling | ~₹1,45,000 (Benchmark) | Retail Benchmark / Dealer Quotes Pending | 912 mm body width requires $\ge 980\text{ mm}$ niche width and $\ge 750\text{ mm}$ depth so French doors clear adjacent 600mm countertops when swinging past 90°. Provide dedicated 6A/16A surge-protected socket at 1,200 mm AFF. |
+| **Primary Refrigerator** | **Bosch Serie 6 XXL 641L Top Freezer (`KDN86AID0I`)**<br>493L native fresh food volume (77:23 ratio), 148L top freezer, VarioInverter, Dual Cooling, anti-fingerprint brushed steel | ~₹1,08,000 (Benchmark) | Retail Benchmark / Dealer Quotes Pending (Elitehaus / Bosch Direct) | 860 mm body width fits 980 mm niche with 60 mm lateral airflow clearance. Perfect Fit flush hinges open 90° clear of 600 mm adjacent counters. Crate is 1,920×910×890 mm: passes service lift (800×2,100 mm door) depth-first. Provide dedicated 16A surge-protected socket at 1,200 mm AFF. |
 
 ---
 
