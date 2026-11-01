@@ -4,7 +4,7 @@ aliases: [u-setup-audio, audio-setup, audio, u-audio]
 tags: [u-setup, audio, av, tv]
 status: evergreen
 created: 2026-10-10
-updated: 2026-10-19
+updated: 2026-11-01
 ---
 
 [[index|← Back to Home Overview]]
@@ -28,6 +28,6 @@ Master technical specification for whole-home wireless audio and entertainment: 
 ---
 
 ## Architectural & Site Integration Requirements
-* **Homz Living TV Unit (`424 1D` + `4929 LU`) Coordination:** Reinforce the `4929 LU Blanco Gold Marble` panel with 18 mm BWP plywood backing and a 50 mm concealed smooth-bore PVC conduit down into the `424 1D Cinnamon Hickory` base cabinet so HDMI 2.1 eARC and power cords stay 100% invisible.
-* **Atmos Acoustic Envelope:** Mount the 65" Sony TV with $\ge 150\text{ mm}$ clear vertical gap above the `424 1D` base deck, and position the Sonos Arc Ultra ($1,178\text{ mm}$ wide) near the front lip so the `4929 LU` panel overhang never blocks upward-firing height channels.
+* **Homz Living TV Unit Coordination:** Drop the faux-marble `4929 LU` panel and black accent boxes. Finish TV back wall in `Morning Glory (0765)` mineral limewash. Mount monolithic floating credenza (`424 1D Cinnamon Hickory`, 18mm BWP marine ply) on M10 expansion French cleats at 200–220mm FFL. Run a 50mm smooth-bore internal PVC conduit from TV bracket to cabinet interior.
+* **Atmos Acoustic Envelope:** Mount the 65" Sony TV with $\ge 150\text{ mm}$ clear vertical gap above the console deck. Isolate the Sonos Arc Ultra ($1,178\text{ mm}$ wide) on the front deck with zero decorative clutter so upward Sound Motion Atmos channels stay 100% unobstructed.
 * **Microphone Privacy:** Sacred prayer room (BR-03) requires speakers with zero microphones (Sonos Five / IKEA Symfonisk / Denon 150 NV) or physical hardware disconnect switch (Era 100).

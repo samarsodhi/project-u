@@ -4,7 +4,7 @@ aliases: [u-setup-interiors, interiors-setup, soft-furnishings, u-soft-furnishin
 tags: [u-setup, interiors, soft-furnishings, paint]
 status: evergreen
 created: 2026-10-10
-updated: 2026-10-31
+updated: 2026-11-01
 ---
 
 [[index|← Back to Home Overview]]
@@ -29,7 +29,7 @@ Cohesive Japandi architectural palette calibrated for Floor 42 high-rise natural
 
 | Room / Zone | Recommended Tone & Code (Asian Paints) | Swatch (Color) | Interior Designer Rationale & Cabinet Synergy |
 | :--- | :--- | :--- | :--- |
-| **Whole-Home Base Envelope**<br>(Foyer, Living, Dining, Drawing, Master Bed, Study BR-01, Gurudwara BR-03) | **Morning Glory (0765)**<br>(`#F0EFE8`, LRV 74) | <img src="assets/swatches/swatch-living-dining.png" alt="Morning Glory" width="140"> | Primary Japandi neutral canvas in Royale Luxury Emulsion (Soft Matte). Unifies all social and private spaces, harmonizes with `424 Cinnamon Hickory`, `3163 Beige Wool`, and Persian carpet.<br><br>**Living Room Accent Note:** If you want subtle depth without coarse grit, apply a smooth, burnished limewash or mineral Roman clay. This gives a delicate, cloudy suede feel with zero grit, zero glare, and zero dust trapping. |
+| **Whole-Home Base Envelope**<br>(Foyer, Living, Dining, Drawing, Master Bed, Study BR-01, Gurudwara BR-03) | **Morning Glory (0765)**<br>(`#F0EFE8`, LRV 74) | <img src="assets/swatches/swatch-living-dining.png" alt="Morning Glory" width="140"> | Primary Japandi neutral canvas in Royale Luxury Emulsion (Soft Matte). Unifies all social and private spaces, harmonizes with `424 Cinnamon Hickory`, `3163 Beige Wool`, and Persian carpet.<br><br>**Living Room Sheen Strategy:** Split sheen across parallel walls using identical `0765` tint. TV Media Wall: burnished mineral limewash / Roman clay (cloudy suede texture, zero glare). Opposite Sofa Wall (Persian carpet): Royale Luxury Emulsion Soft Matte (scrubbable, protects against sofa rub, quiet gallery plane). |
 | **Kitchen & Utility** | **Morning Glory (0765)**<br>(`#F0EFE8`, LRV 74) · Royale Shyne | <img src="assets/swatches/swatch-living-dining.png" alt="Morning Glory" width="140"> | Identical color formula in high-scrub formulation. Cleanly links `3174 Brown Sugar` base and `#F4F2EB` off-white overheads/lofts without color breaks. |
 | **BR-02 (Kabir's Room)** | **Misty Breeze (8307)**<br>(`#B2C2CC`, LRV 54) | <img src="assets/swatches/swatch-kabir-br02.png" alt="Misty Breeze" width="140"> | Light, desaturated coastal grey-blue. Dedicated playful accent paired with `424 Cinnamon Hickory` and blue tandem base; washable Teflon emulsion. |
 
@@ -41,7 +41,7 @@ Cohesive Japandi architectural palette calibrated for Floor 42 high-rise natural
 
 | Zone / Joinery Unit | Main Shutter Finish & Code | Swatch (Color) | Accent / Niche Tone | Hardware & Profile Standard |
 | :--- | :--- | :--- | :--- | :--- |
-| **Living TV Unit & Panel** | Base & Fluted Panel: `424 1D Cinnamon Hickory` | <img src="assets/swatches/laminate-424-cinnamon-hickory.png" alt="Cinnamon Hickory" width="115"> | Back Wall: `Morning Glory (0765)` mineral limewash (faux-marble `4929 LU` dropped to honor Persian carpet) | Push-to-open / recessed edge pulls + 50mm concealed PVC eARC conduit |
+| **Living TV Unit & Panel** | Monolithic Floating Base: `424 1D Cinnamon Hickory` | <img src="assets/swatches/laminate-424-cinnamon-hickory.png" alt="Cinnamon Hickory" width="115"> | Back Wall: `Morning Glory (0765)` mineral limewash (faux-marble `4929 LU` and black flank boxes dropped). Opposite sofa wall: Royale Soft Matte. | 18mm BWP ply French cleat + M10 anchors + slatted acoustic flaps + 200–220mm floor clearance + 50mm in-wall PVC conduit |
 | **Dining Vanity & Bookshelf** | Bookshelf: `424 1D Cinnamon Hickory` · Walk-in: `3163 SI Beige Wool` | <img src="assets/swatches/laminate-424-cinnamon-hickory.png" alt="Cinnamon Hickory" width="115"> <img src="assets/swatches/laminate-3163-beige-wool.png" alt="Beige Wool" width="115"> | Common vanity with **Robot Vacuum bay**; 6mm BWP ply + 1mm laminate hidden doors (47mm total) | 4× SS304 ball-bearing hinges on hidden doors + copper-free dome mirror |
 | **Kitchen Cabinets** | **Base:** `3174 LU Brown Sugar`<br>**Wall & Lofts:** **Warm Off-White (`#F4F2EB`)** | <img src="assets/swatches/laminate-3174-brown-sugar.png" alt="Base: Brown Sugar 3174 LU" width="115"> <img src="assets/swatches/laminate-08-off-white.png" alt="Wall & Lofts: Off-White #F4F2EB" width="115"> | Light-shade Indian granite worktop (owner-sourced) + `0.8 mm Off-White` liner | 9× Hettich/Blum soft-close tandem drawers + G-profile / edge pulls |
 | **Master Suite & Wardrobes** | `3163 SI Beige Wool` (Wardrobes & Dresser) | <img src="assets/swatches/laminate-3163-beige-wool.png" alt="Beige Wool" width="115"> | Tall dresser with full-height dome mirror + Bed-back texture paint | [Spruce & Pop Claro Solid Brass](https://spruceandpop.com/products/claro-antique-brass-knurled-cabinet-drawer-knob-and-handle) in Brushed Satin Brass (256mm doors, 128mm drawers) + Blum soft-close |
