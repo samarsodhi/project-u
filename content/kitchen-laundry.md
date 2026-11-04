@@ -4,7 +4,7 @@ aliases: [u-setup-kitchen, kitchen-setup, u-setup-worktop, kitchen-worktop-setup
 tags: [u-setup, kitchen, laundry, worktop]
 status: evergreen
 created: 2026-10-10
-updated: 2026-11-04
+updated: 2026-11-05
 ---
 
 [[index|← Back to Home Overview]]
@@ -108,7 +108,7 @@ The #1 cause of kitchen cabinet rot is adhesive-only undermount failure.
 - [ ] **Undermount Sink Mechanical Frame:** Bolt welded SS angle-iron support cradle to cabinet sidewalls before lowering granite; seal rim with Akemi two-part epoxy fillet.
 - [ ] **Air-Gap Drain Saddle:** Mount RO reject line to drain tailpiece via dedicated air gap $\ge 50\text{ mm}$ above P-trap weir.
 - [ ] **Flood Containment:** Line sink base carcass floor with an ABS/aluminum drip tray; place an **Aqara Water Leak Sensor** on the tray linked to smart shutoff.
-- [ ] **Pressure Regulation:** Confirm flat main PRV is regulated to 2.5–3.0 bar before connecting RO John Guest fittings.
+- [ ] **Pressure Regulation (Protect Vulnerable Appliances at Point-of-Use):** Install dedicated inline 1/4" plastic PRV (capped at 2.5–3.0 bar) directly ahead of RO John Guest fittings rather than relying on building riser pressure.
 
 ### Electrical & Utility Commissioning
 - [ ] **Direct Oven Circuit:** Verify direct, unshared 16A radial line from DB with Type A RCCB for Bosch `HBF011BA1I`.

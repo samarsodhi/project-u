@@ -17,9 +17,9 @@ A consolidated compilation of non-obvious engineering gotchas, resident communit
 
 ## 1. Plumbing, Hydrostatic Pressure & Wet Services
 
-* **Hydrostatic Pressure Spikes (The PRV / Pressure Reducing Valve Rule) [Score: 9.8/10]:**
-  * *Failure Mode:* High-rise PHE (Public Health Engineering) booster pumping stacks deliver erratic line pressures ($>5.0\text{ bar}$) during peak switching hours. Surges rupture RO (Reverse Osmosis) push-fit fittings, blow out washing machine hoses, and weep geyser safety valves.
-  * *Mitigation:* Install an adjustable **Pressure Reducing Valve (PRV)** (Honeywell Braukmann or Watts brass) with a downstream pressure gauge at the **`P-SHAFT-74` (Service Balcony `32 mm Water Meter feed`)** header (or individual shaft branch inlets if toilets drop independently). Dial down flat pressure to **2.5–3.0 bar**.
+* **Hydrostatic Pressure Spikes (Protect Vulnerable Appliances at Point-of-Use) [Score: 9.8/10]:**
+  * *Failure Mode:* High-rise PHE booster pumping stacks deliver erratic line pressures ($>5.0\text{ bar}$) during pump switching. Surges rupture plastic RO push-fit fittings, burst washing machine inlet hoses, and cause continuous weeping on geyser Multi-Function Valves (MFVs).
+  * *Mitigation:* Reject complex per-shaft brass PRV retrofits across 5 bathroom shafts. **Protect vulnerable appliances at point-of-use**: (1) Inline plastic 1/4" PRV (₹300) on the Kitchen Under-Sink RO, (2) Burst-rated SS304 braided inlet hose (20 bar rated) on the Utility washing machine, and (3) Clamped vinyl drain tubes on geyser MFVs above false ceilings. Install an adjustable brass PRV (Honeywell Braukmann D06F) strictly at **`P-SHAFT-74` (Service Balcony)** only if the utility/kitchen meter feed tests $>4.5\text{ bar}$.
 * **RO Wastewater Siphon Backflow [Score: 9.2/10]:**
   * *Failure Mode:* Pushing RO reject pipes directly into sink waste drains without an air gap risks siphoning sewer bacteria straight into drinking water filtration stages during sink clogs.
   * *Mitigation:* Enforce a dedicated mechanical drain saddle with a physical air-gap adapter positioned $\ge 50\text{ mm}$ above the sink P-trap weir.

@@ -4,7 +4,7 @@ aliases: [u-setup-geysers, geysers-setup,  u-bathrooms]
 tags: [u-setup, bathrooms, geysers, ventilation]
 status: evergreen
 created: 2026-10-10
-updated: 2026-10-24
+updated: 2026-11-05
 ---
 
 [[index|← Back to Home Overview]]
@@ -35,6 +35,7 @@ Master technical specification for the 4 bathrooms: 10L / 15L horizontal storage
 * **10L Benchmark (A. O. Smith Elegance Slim Neo):** Heats from 20 °C to 55 °C in ~11 minutes at 2.0 kW. Provides ~3.5–4.5 minutes of continuous hot shower flow at 6 L/min. Ideal for compact false ceiling voids (310 mm diameter) and quick individual showers.
 * **15L Benchmark (A. O. Smith HAS-X1 / Havells Adonia):** Heats from 20 °C to 55 °C in ~17 minutes at 2.0 kW. Provides ~5.5–6.5 minutes of continuous hot shower flow at 6 L/min. Requires 340–355 mm vertical ceiling clearance.
 * **Electrical Load Management:** Stagger wake-up heating schedules by 15 minutes across the 4 bathrooms to keep concurrent electrical load within DG backup capacity.
+* **False Ceiling Geyser Leak Protocol (MFV vs Local PRV):** Factory-supplied Multi-Function Valves (MFVs) are mandatory. Reject local brass PRVs above false ceilings (hidden weep hazard). Plumber must clamp a 10 mm heat-resistant vinyl tube to the MFV discharge spout and route it through the ceiling into the shower area; never leave MFV spouts open over plastic ceiling panels.
 
 ### 2. Shower Curtain & Wet-Zone Containment Protocol
 * **Hardware Mandate:** Screw-mounted AISI 304 stainless steel flanged rods (1.2 mm wall thickness); reject spring-tension rods and chrome-plated mild steel.
