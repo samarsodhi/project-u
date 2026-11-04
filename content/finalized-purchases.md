@@ -4,14 +4,14 @@ aliases: [ u- u-purchases, finalized-appliances-av]
 tags: [u-setup, procurement, appliances, av]
 status: evergreen
 created: 2026-10-19
-updated: 2026-10-25
+updated: 2026-11-04
 ---
 
 [[index|← Back to Home Overview]] · [[kitchen-laundry]] · [[audio-entertainment]]
 
 # Finalized Purchases
 
-Locked high-ticket hardware commitments for Unit B4206. Total committed procurement envelope across these 8 units is **~₹4,45,484** (GST-inclusive; reflects ₹85,004 actual delivered price for Sonos Arc Ultra and ₹1,08,000 retail benchmark for Bosch Serie 6 XXL KDN86AID0I fridge pending final dealer quote).
+Locked high-ticket hardware commitments for Unit B4206. Total committed procurement envelope across these 8 units is **~₹4,35,484** (GST-inclusive; reflects ₹85,004 actual delivered price for Sonos Arc Ultra and ₹1,08,000 retail benchmark for Bosch Serie 6 XXL KDN86AID0I fridge pending final dealer quote).
 
 Top reasons to reject or alter any of these selections:
 1. Site dimension mismatches (e.g. lift opening narrower than crate, or countertop cutout lacking radiused stress relief).
@@ -29,7 +29,7 @@ Top reasons to reject or alter any of these selections:
 | **Hob (Hybrid)** | **Häfele Domino Pair**<br>Altius FS 230 Gas (₹24,000) + Nero 30 Induction (₹37,000, replacing EOL Bella 30) + Joining Rail | ₹61,000 | Elitehaus (Quote #20102026) | Single PCB failure risk eliminated by separate dominos. Granite cutout requires radiused internal corners to prevent heat-stress cracking. |
 | **Washer (Front-load)** | **Bosch WGA254ZSIN Serie 6**<br>10kg, EcoSilence Drive, AntiStain, 1,400 RPM | ₹44,000 | Elitehaus (Quote #20102026) | 1,400 RPM extracts ~9% more moisture than 1,200 RPM, cutting heat-pump dryer cycles by ~25 min. Anchor directly to structural tile on rubber pads; dial down to 1,000 RPM for delicate shirts. |
 | **Dryer (Heat Pump)** | **Bosch WQG2520XIN Serie 4**<br>10kg Heat Pump, AutoDry sensors, 600W | ₹64,000 | Elitehaus (Quote #20102026) | Micro-lint bypasses primary filter if secondary foam seal is unwashed. Ambient room temps $>35^\circ\text{C}$ extend cycles. Stack using WTZ27400 kit. |
-| **Microwave** | **LG MJ2887BIUM**<br>28L Charcoal Convection, 360° rotisserie, tact/dial controls, SS cavity | ₹16,490 | [Amazon.in](https://www.amazon.in/dp/B0CQSYPFSQ) | In-house LG magnetron outlasts outsourced OEMs. Rotary dial avoids steam membrane failure. House on pantry shelf with $\ge 100\text{ mm}$ rear and top clearance. |
+| **Microwave** | **LG MS2043DB / Samsung MS23K3513AK**<br>20L–23L Solo Microwave, mechanical/tact controls, 800W | ₹6,490 | [Amazon.in](https://www.amazon.in/dp/B07MC84QPL) ([Samsung Alt](https://www.amazon.in/dp/B0798HL5NF)) | Bosch 66L oven handles all baking/roasting; microwave specialized for reheating/defrosting. 320–350mm depth fits 450mm shelf with 100mm rear breathing room. Escapes built-in replacement trap. |
 | **Built-in Oven** | **Bosch HBF011BA1I Serie 2**<br>66L, 3D HotAir, mechanical rotary dials, 3.3 kW | ₹52,000 | Elitehaus (Quote #20102026) | High continuous current melts standard daisy-chained sockets. Demands dedicated 16A radial drop from DB and 550mm deep ventilated niche. |
 | **Primary Refrigerator** | **Bosch Serie 6 XXL 641L Top Freezer (`KDN86AID0I`)**<br>493L native fresh food volume (77:23 ratio), 148L top freezer, VarioInverter, Dual Cooling, anti-fingerprint brushed steel | ~₹1,08,000 (Benchmark) | Retail Benchmark / Dealer Quotes Pending (Elitehaus / Bosch Direct) | 860 mm body width fits 980 mm niche with 60 mm lateral airflow clearance. Perfect Fit flush hinges open 90° clear of 600 mm adjacent counters. Crate is 1,920×910×890 mm: passes service lift (800×2,100 mm door) depth-first. Provide dedicated 16A surge-protected socket at 1,200 mm AFF. |
 
@@ -40,7 +40,7 @@ Top reasons to reject or alter any of these selections:
 ### Electrical & Cabling
 - **Living TV Console:** Provide a 50mm smooth-bore PVC conduit inside the TV panel down to the base unit. Ensure direct eARC connection to HDMI 3 on the Sony TV.
 - **Induction & Built-In Oven:** Pull two independent, unshared 16A radial circuits from the distribution board with individual 16A MCBs.
-- **Microwave Point:** Provide a 16A modular socket in the tall-unit appliance shelf for the microwave (1,950 W convection / 1,200 W grill peak).
+- **Microwave Point:** Provide a dedicated 16A/6A modular socket in the tall-unit appliance shelf for the solo microwave (~1,100 W input).
 - **Utility Room:** Provide dedicated 16A socket for washer (2,300 W peak) and separate 10A/16A socket for heat pump dryer (600 W).
 - **Study & Home Office Printer:** Provide a dedicated 6A point near Samar's WFH desk; onboard Brother HL-L2440DW to the Flint 2 wireless network.
 
