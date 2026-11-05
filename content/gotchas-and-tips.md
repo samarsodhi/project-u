@@ -4,7 +4,7 @@ aliases: [ high-rise-engineering-gotchas, engineering-gotchas, u-setup-gotchas, 
 tags: [u-setup, engineering, gotchas, failure-modes, protips]
 status: evergreen
 created: 2026-10-15
-updated: 2026-10-31
+updated: 2026-11-05
 ---
 
 [[index|← Back to Home Overview]]
@@ -29,6 +29,9 @@ A consolidated compilation of non-obvious engineering gotchas, resident communit
 * **Low False Ceiling Horizontal Geysers & Port Handing (LHS vs. RHS) [Score: 8.6/10]:**
   * *Failure Mode:* Vertical geysers clash with false ceiling drops. Purchasing horizontal geysers without verifying plumbing shaft inlet/outlet orientation forces crossed, pinched flexible hoses, hot water reverse siphon, and blocked service trapdoor access.
   * *Mitigation:* Mandate 10L–15L horizontal geysers only (Racold / Havells). Inspect the exact plumbing shaft stub-out in each bathroom (LHS / Left-Hand-Side vs. RHS / Right-Hand-Side cold/hot ports) prior to procurement to guarantee direct, uncrossed hookups aligned with the ceiling hatch.
+* **LG Purifier AMC Tax Bypass & Pre-Filter Protocol [Score: 9.1/10]:**
+  * *Failure Mode:* Standard corporate AMC contracts for LG PuriCare cost ₹4,500–₹5,500/year, replacing functional filters on an arbitrary 12-month calendar and inflating maintenance debt.
+  * *Mitigation:* (1) Decline the ₹5,000 annual AMC contract after Year 1. (2) Mount a 10-inch transparent external spun pre-filter bowl on the splashback line; swap the ₹100 spun candle quarterly to buffer 95% of silt and protect internal filters for 18–24 months. (3) Exploit zero RFID DRM on LG: reset the filter alert timer via a 3-second button hold on the front panel. (4) Order genuine LG filter replacements on-demand strictly when tested TDS or flow rate drops, cutting annual maintenance to ~₹1,800/year.
 
 ---
 
