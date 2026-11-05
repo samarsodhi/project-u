@@ -11,7 +11,7 @@ updated: 2026-11-04
 
 # Finalized Purchases
 
-Locked high-ticket hardware commitments for Unit B4206. Total committed procurement envelope across these 8 units is **~₹4,35,484** (GST-inclusive; reflects ₹85,004 actual delivered price for Sonos Arc Ultra and ₹1,08,000 retail benchmark for Bosch Serie 6 XXL KDN86AID0I fridge pending final dealer quote).
+Locked high-ticket hardware commitments for Unit B4206. Total committed procurement envelope across these 7 units is **~₹4,18,984** (GST-inclusive; reflects ₹85,004 actual delivered price for Sonos Arc Ultra and ₹1,08,000 retail benchmark for Bosch Serie 6 XXL KDN86AID0I fridge pending final dealer quote; drinking water purification reopened for hygiene-first evaluation between wall-mount SS304 and tankless direct-flow).
 
 Top reasons to reject or alter any of these selections:
 1. Site dimension mismatches (e.g. lift opening narrower than crate, or countertop cutout lacking radiused stress relief).
@@ -32,7 +32,6 @@ Top reasons to reject or alter any of these selections:
 | **Microwave** | **LG MS2043DB / Samsung MS23A3513AK/TL**<br>20L–23L Solo Microwave, mechanical/tact controls, 800W | ₹6,490 | [Amazon.in](https://www.amazon.in/dp/B07MC84QPL) ([Samsung Alt](https://www.amazon.in/dp/B09PV84DMX)) | Bosch 66L oven handles all baking/roasting; microwave specialized for reheating/defrosting. 320–350mm depth fits 450mm shelf with 100mm rear breathing room. Escapes built-in replacement trap. |
 | **Built-in Oven** | **Bosch HBF011BA1I Serie 2**<br>66L, 3D HotAir, mechanical rotary dials, 3.3 kW | ₹52,000 | Elitehaus (Quote #20102026) | High continuous current melts standard daisy-chained sockets. Demands dedicated 16A radial drop from DB and 550mm deep ventilated niche. |
 | **Primary Refrigerator** | **Bosch Serie 6 XXL 641L Top Freezer (`KDN86AID0I`)**<br>493L native fresh food volume (77:23 ratio), 148L top freezer, VarioInverter, Dual Cooling, anti-fingerprint brushed steel | ~₹1,08,000 (Benchmark) | Retail Benchmark / Dealer Quotes Pending (Elitehaus / Bosch Direct) | 860 mm body width fits 980 mm niche with 60 mm lateral airflow clearance. Perfect Fit flush hinges open 90° clear of 600 mm adjacent counters. Crate is 1,920×910×890 mm: passes service lift (800×2,100 mm door) depth-first. Provide dedicated 16A surge-protected socket at 1,200 mm AFF. |
-| **Drinking Water RO** | **Open-Standard 5-Stage Under-Sink Bracket RO (Pathway A)**<br>Steel frame, Kemflo 100 GPD pump, DuPont Filmtec 100 GPD membrane, 12L SS304 pressure tank, SS gooseneck tap, universal 10" cartridges | ₹16,500 | Watermaker / Hi-Tech RO bracket kit + DuPont direct stockist | Wall units rejected to protect granite backsplash line of sight. Sourced via turnkey bracket kit (Pathway A). ABS drip tray + Aqara leak sensor prevents cabinet ply rot; annual filter swap costs ₹1,500 with zero vendor lock-in. |
 
 ---
 
