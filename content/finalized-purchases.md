@@ -4,14 +4,14 @@ aliases: [ u- u-purchases, finalized-appliances-av]
 tags: [u-setup, procurement, appliances, av]
 status: evergreen
 created: 2026-10-19
-updated: 2026-11-04
+updated: 2026-11-05
 ---
 
 [[index|← Back to Home Overview]] · [[kitchen-laundry]] · [[audio-entertainment]]
 
 # Finalized Purchases
 
-Locked high-ticket hardware commitments for Unit B4206. Total committed procurement envelope across these 7 units is **~₹4,18,984** (GST-inclusive; reflects ₹85,004 actual delivered price for Sonos Arc Ultra and ₹1,08,000 retail benchmark for Bosch Serie 6 XXL KDN86AID0I fridge pending final dealer quote; drinking water purification reopened for hygiene-first evaluation between wall-mount SS304 and tankless direct-flow).
+Locked high-ticket hardware commitments for Unit B4206. Total committed procurement envelope across these 8 units is **~₹4,34,484** (GST-inclusive; locks in BlueLife Gigas SS304 Open-Standard Detachable SS304 Water Purifier at ₹15,500, Sonos Arc Ultra at ₹85,004 actual delivered price, and Bosch Serie 6 XXL KDN86AID0I fridge at ₹1,08,000 retail benchmark).
 
 Top reasons to reject or alter any of these selections:
 1. Site dimension mismatches (e.g. lift opening narrower than crate, or countertop cutout lacking radiused stress relief).
@@ -32,6 +32,7 @@ Top reasons to reject or alter any of these selections:
 | **Microwave** | **LG MS2043DB / Samsung MS23A3513AK/TL**<br>20L–23L Solo Microwave, mechanical/tact controls, 800W | ₹6,490 | [Amazon.in](https://www.amazon.in/dp/B07MC84QPL) ([Samsung Alt](https://www.amazon.in/dp/B09PV84DMX)) | Bosch 66L oven handles all baking/roasting; microwave specialized for reheating/defrosting. 320–350mm depth fits 450mm shelf with 100mm rear breathing room. Escapes built-in replacement trap. |
 | **Built-in Oven** | **Bosch HBF011BA1I Serie 2**<br>66L, 3D HotAir, mechanical rotary dials, 3.3 kW | ₹52,000 | Elitehaus (Quote #20102026) | High continuous current melts standard daisy-chained sockets. Demands dedicated 16A radial drop from DB and 550mm deep ventilated niche. |
 | **Primary Refrigerator** | **Bosch Serie 6 XXL 641L Top Freezer (`KDN86AID0I`)**<br>493L native fresh food volume (77:23 ratio), 148L top freezer, VarioInverter, Dual Cooling, anti-fingerprint brushed steel | ~₹1,08,000 (Benchmark) | Retail Benchmark / Dealer Quotes Pending (Elitehaus / Bosch Direct) | 860 mm body width fits 980 mm niche with 60 mm lateral airflow clearance. Perfect Fit flush hinges open 90° clear of 600 mm adjacent counters. Crate is 1,920×910×890 mm: passes service lift (800×2,100 mm door) depth-first. Provide dedicated 16A surge-protected socket at 1,200 mm AFF. |
+| **Drinking Water Purifier (Kitchen)** | **BlueLife Gigas SS304**<br>Open-Standard Detachable 8L/10L AISI 304 Stainless Tank, DuPont Filmtec 100 GPD membrane, Philips 11W UV-C, universal 10" sumps | ₹15,500 | [BlueLife Store / Direct](https://www.google.com/search?q=BlueLife+Gigas+SS304+water+purifier) | Detachable SS304 tank lifts out for hand-washing at sink, eliminating rubber bladder biofilm risk. Open-standard universal 10" sumps yield ₹1,500/yr upkeep with zero RFID DRM lockout. Plugs into builder splashback MEP (water bibcock + 6A socket), preserving continuous worktop slab without wet coring. Precede with transparent 10" sediment pre-filter and point-of-use PRV (Zoloto Art. 1040B / inline 1/4" PRV at 2.5–3.0 bar). |
 
 ---
 
@@ -54,3 +55,4 @@ Top reasons to reject or alter any of these selections:
 ### Plumbing & Water Safety
 - **Washer Inlet:** Minimum 0.3 bar, maximum 10 bar dynamic pressure.
 - **Scale Protection:** Install an inline polyphosphate or catalytic scale-prevention cartridge on the cold-water inlet line to prevent mineral crust on heater coils.
+- **Drinking Water RO Point:** Connect BlueLife Gigas SS304 to builder's high-level splashback bibcock and 6A power point. Fit an external transparent 10" spun polypropylene sediment pre-filter and point-of-use PRV (Zoloto Art. 1040B forged brass or inline 1/4" PRV set to 2.5–3.0 bar). Route reject water line to drain tailpiece with an air gap $\ge 50\text{ mm}$ above the P-trap weir.

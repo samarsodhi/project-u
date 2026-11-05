@@ -58,6 +58,13 @@ The #1 cause of kitchen cabinet rot is adhesive-only undermount failure.
 - **Granite Treatment:** Light Indian granite must be dry-treated with 2 saturating coats of **Akemi Anti-Fleck Nano Sealer** prior to hob/sink installation. Re-seal every 12–18 months.
 - **Hob Cutout:** Cutout for Häfele domino pair (555–557 × 475–477 mm) must have radiused (curved) internal corners. Square 90° cuts initiate stress fractures under thermal cycles.
 
+### Drinking Water RO Engineering & Hygiene Protocol
+- **Biofilm Disqualification:** Hydro-pneumatic under-sink pressure tanks store unchlorinated pure RO permeate against dark butyl rubber at 25–35°C. This develops bacterial biofilm within 6–12 months that cannot be mechanically cleaned. Disqualify all hydro-pneumatic rubber bladder tanks.
+- **Detachable SS304 Storage (Hygiene Benchmark):** The gold standard is a wall-mounted AISI 304 stainless steel tank that unlatches and lifts out for hand-washing in the sink with warm water (BlueLife Gigas SS304). Airtight sealed tanks (LG PuriCare) prevent airborne ingress but require chemical flushing kits.
+- **TDS Creep Protocol (Direct Tankless):** High-flux membranes (600–800 GPD) equilibrate salt ions across the barrier when idle. The first 250–500 ml dispensed after 4+ hours idle spikes to 200–350 ppm TDS. If installing tankless under-sink, run the tap for 15–20 seconds before filling a drinking glass.
+- **Anti-DRM Filter Mandate:** Ban all purifiers with RFID microchip cartridges (e.g. Aquaguard). These shut off water flow via internal timers to force proprietary filter sales. Require open-standard universal 10-inch drop-in sumps accepting standard spun polypropylene, block carbon, and 1812 DuPont Filmtec membranes (₹1,500/year upkeep).
+- **Point-of-Use Pressure Protection:** High-rise hydro-pneumatic water lines experience pressure surges (>4 bar) that blow plastic push-fit tubing. Mount an external transparent 10" sediment pre-filter and a dedicated point-of-use PRV (Zoloto Art. 1040B forged brass or inline 1/4" PRV calibrated to 2.5–3.0 bar) directly ahead of the purifier inlet.
+
 ### Laundry Stack Site Rules
 - Stack heat-pump dryer over front-load washer using the official Bosch stacking kit (WTZ27400).
 - Mount directly on structural tile floor using heavy rubber anti-vibration isolation pads. Never place on elevated hollow wooden plinths.
@@ -98,13 +105,13 @@ The #1 cause of kitchen cabinet rot is adhesive-only undermount failure.
 - **Standards:** EN 1359:2017 Class 1.5, CE M25 2142, W&M Reg `IND/09/24/538`
 
 ### Drinking Water Purification & Wet Services (Hygiene Standard)
-- [ ] **Hygiene-First Purifier Sourcing:** Procure Open-Standard wall-mounted surgical SS304 tank purifier (BlueLife Gigas SS304 with detachable steel tank / LG PuriCare WW184ETB), or Open-Standard 600 GPD tankless direct-flow RO (Hi-Tech 50 LPH bracket system). All hydro-pneumatic rubber bladder tanks rejected.
+- [ ] **Lock BlueLife Gigas SS304 Purifier:** Procure BlueLife Gigas SS304 (Open-Standard Detachable SS304 Tank, DuPont Filmtec 100 GPD, Philips 11W UV-C, universal 10" sumps, ₹15,500) from BlueLife Cherlapally / direct store. Eliminates rubber bladder biofilm risk with sink-washable steel tank.
 - [ ] **Builder Splashback MEP Utilization:** Retain builder's high-level RO water inlet and 6A power socket on the splashback for wall-mount installation, eliminating in-wall plumbing relocation and electrical chasing.
 - [ ] **Countertop Core Integrity:** Retain continuous worktop slab (granite / quartz / sintered stone); wall-mounted unit dispenses directly into sink basin, eliminating deck tap-hole wet-coring.
 - [ ] **Pre-Filter Sediment Trap:** Mount transparent 10" external spun polypropylene housing (~₹500) ahead of purifier inlet to buffer raw borewell grit.
 - [ ] **Undermount Sink Mechanical Frame:** Bolt welded SS angle-iron support cradle to cabinet sidewalls before lowering the worktop slab; seal rim with Akemi two-part epoxy fillet.
 - [ ] **Air-Gap Drain Saddle:** Mount RO reject line to drain tailpiece via dedicated air gap $\ge 50\text{ mm}$ above P-trap weir.
-- [ ] **Pressure Regulation (Protect Point-of-Use):** Install dedicated inline 1/4" plastic PRV (capped at 2.5–3.0 bar) directly ahead of purifier inlet rather than relying on building riser pressure.
+- [ ] **Pressure Regulation (Protect Point-of-Use):** Install dedicated point-of-use PRV (Zoloto Art. 1040B forged brass or inline 1/4" PRV capped at 2.5–3.0 bar) directly ahead of purifier inlet rather than relying on building riser pressure.
 
 ### Electrical & Utility Commissioning
 - [ ] **Direct Oven Circuit:** Verify direct, unshared 16A radial line from DB with Type A RCCB for Bosch `HBF011BA1I`.
