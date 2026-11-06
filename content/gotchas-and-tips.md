@@ -28,7 +28,7 @@ A consolidated compilation of non-obvious engineering gotchas, resident communit
   * *Mitigation:* Replace all under-sink, geyser, and toilet stopcocks with **forged DZR (Dezincification Resistant) lead-free brass** valves (Kohler, Grohe, or heavy Jaquar) before cabinetry closes.
 * **Low False Ceiling Horizontal Geysers & Port Handing (LHS vs. RHS) [Score: 8.6/10]:**
   * *Failure Mode:* Vertical geysers clash with false ceiling drops. Purchasing horizontal geysers without verifying plumbing shaft inlet/outlet orientation forces crossed, pinched flexible hoses, hot water reverse siphon, and blocked service trapdoor access.
-  * *Mitigation:* Mandate 10L–15L horizontal geysers only (Racold / Havells). Inspect the exact plumbing shaft stub-out in each bathroom (LHS / Left-Hand-Side vs. RHS / Right-Hand-Side cold/hot ports) prior to procurement to guarantee direct, uncrossed hookups aligned with the ceiling hatch.
+  * *Mitigation:* Mandate 1× 15L Horizontal Geyser (MBR) + 3× 10L Horizontal Geysers (secondary bathrooms) (A. O. Smith / Havells). Inspect the exact plumbing shaft stub-out in each bathroom (LHS / Left-Hand-Side vs. RHS / Right-Hand-Side cold/hot ports) prior to procurement to guarantee direct, uncrossed hookups aligned with the ceiling hatch.
 * **LG Purifier AMC Tax Bypass & Pre-Filter Protocol [Score: 9.1/10]:**
   * *Failure Mode:* Standard corporate AMC contracts for LG PuriCare cost ₹4,500–₹5,500/year, replacing functional filters on an arbitrary 12-month calendar and inflating maintenance debt.
   * *Mitigation:* (1) Decline the ₹5,000 annual AMC contract after Year 1. (2) Mount a 10-inch transparent external spun pre-filter bowl on the splashback line; swap the ₹100 spun candle quarterly to buffer 95% of silt and protect internal filters for 18–24 months. (3) Exploit zero RFID DRM on LG: reset the filter alert timer via a 3-second button hold on the front panel. (4) Order genuine LG filter replacements on-demand strictly when tested TDS or flow rate drops, cutting annual maintenance to ~₹1,800/year.
@@ -48,7 +48,7 @@ A consolidated compilation of non-obvious engineering gotchas, resident communit
   * *Mitigation:* Enforce **Type A or Type F 30mA RCCBs** on all sub-distribution circuits.
 * **Concealed Switch Box Depth & Wire Dressing [Score: 8.7/10]:**
   * *Failure Mode:* In generic construction, 25 mm shallow boxes crush in-wall micro-relays. In Olympus, builder boxes are deep 50 mm GI (Galvanized Iron) metal boxes, but chaotic loop wiring leaves insufficient center pocket clearance behind switch mechanisms.
-  * *Mitigation:* Zero box replacement or wall-chasing is required. Enforce clean perimeter wire dressing: fold loop-in phase and neutral lines along back box corners to preserve a clear $\ge 20\text{ mm}$ center pocket directly behind the switch plate for 16.8 mm relay bodies.
+  * *Mitigation:* Zero box replacement or wall-chasing is required. Enforce clean perimeter wire dressing: fold loop-in phase and neutral lines along back box corners to preserve a clear $\ge 20\text{ mm}$ center pocket directly behind the switch plate for 16.8 mm relay bodies (standardized on 100% Aqara T1/T2 Zigbee 3.0 modules).
 * **Dummy Conduit Route Preservation [Score: 8.4/10]:**
   * *Failure Mode:* Painters skim plaster flush over builder dummy junction boxes, permanently entombing wire-pull routes.
   * *Mitigation:* Cap all unused dummy boxes with matching Panasonic modular blanking plates. Photograph and log box measurements before wall painting.
@@ -92,9 +92,9 @@ A consolidated compilation of non-obvious engineering gotchas, resident communit
 * **Hidden Door Hinge Sag & Dome Mirror Edge Corrosion [Score: 8.8/10]:**
   * *Failure Mode:* Cladding 40 mm hidden doors (Puja/Store) with 18 mm ply + `3163 SI` laminate creates a 59 mm thick slab (+22 kg) that binds against door stops and sags standard hinges, while 15 mm door undercuts leak Living Room noise into BR-01 Study and BR-03 Gurudwara. Bonding dome mirrors with acidic acetoxy silicone corrodes silver backing into black edge rot within 12 months.
   * *Mitigation:* Clad hidden doors with **6 mm calibrated BWP ply + 1 mm laminate** (47 mm total) on 4× SS304 ball-bearing hinges; mortise **Häfele / Planet automatic drop-down acoustic seals** (-42 dB) into BR-01 and BR-03 door bottom rails; bond Saint-Gobain copper-free dome mirrors strictly with **neutral-cure alkoxy silicone**.
-* **Light Granite Capillary Staining (Turmeric & Oil) [Score: 8.6/10]:**
-  * *Failure Mode:* Light-shade Indian granites contain microscopic feldspar fissures that wick haldi, lemon, and tadka oil into permanent sub-surface stains if left unsealed.
-  * *Mitigation:* Test stone yard slab sample with turmeric paste + hot oil for 15 minutes before purchase; apply 2 coats of food-safe fluorochemical penetrating sealer (**Akemi Anti-Fleck Nano**) prior to commissioning.
+* **Light Granite Capillary Staining & Iron Garnet Rusting [Score: 8.9/10]:**
+  * *Failure Mode:* Light granites like Kashmir White or Colonial White contain internal iron garnet inclusions that oxidize into permanent orange rust blooms when exposed to moisture/acids, which no sealer can stop. Light granites also contain microscopic fissures that wick haldi, lemon, and tadka oil if unsealed.
+  * *Mitigation:* Disqualify Kashmir White / Colonial White. Select dense **Ivory Fantasy Indian granite** (or quartz/sintered stone). Test stone yard slab sample with turmeric paste + hot oil for 15 minutes before purchase; apply 2 coats of food-safe fluorochemical penetrating sealer (**Akemi Anti-Fleck Nano**) prior to commissioning.
 * **Hob vs. Ceiling Fan Cross-Drafts [Score: 8.5/10]:**
   * *Failure Mode:* Ceiling fans blowing over gas or induction hobs disrupt the chimney hood's thermal suction plume, scattering vaporized grease across cabinetry.
   * *Mitigation:* Offset kitchen ceiling fan $\ge 1.2\text{ m}$ from the hob center; interlock operation so the fan stays off during active frying.
