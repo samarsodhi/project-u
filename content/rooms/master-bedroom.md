@@ -31,5 +31,5 @@ Primary family suite for Samar and Sonia. Kabir sleeps here during primary schoo
 ### Master Suite Hardware Specification
 * **Mid Swing Shutters (×4):** [Spruce & Pop Claro Solid Brass Pull](https://spruceandpop.com/products/claro-antique-brass-knurled-cabinet-drawer-knob-and-handle) in **Brushed Satin Brass PVD** (256mm CC / 295mm Total Length, ₹2,275 ea). Through-bolted with M4 machine bolts.
 * **Bottom Drawers (×2):** [Spruce & Pop Claro Pull](https://spruceandpop.com/products/claro-antique-brass-knurled-cabinet-drawer-knob-and-handle) in **Brushed Satin Brass PVD** (128mm CC / 165mm Total Length, ₹1,275 ea).
-* **Top Lofts (×4):** Concealed push-to-open Tip-On mechanical latches (no surface hardware).
+* **Top Lofts (×4):** Concealed push-to-open Tip-On mechanical latches (strictly zero surface handles across all rooms).
 * **Tall Dresser Drawers (×3):** [Spruce & Pop Claro Solid Brass Knobs](https://spruceandpop.com/products/claro-antique-brass-knurled-cabinet-drawer-knob-and-handle) in **Brushed Satin Brass PVD** (28mm Ø, ₹675 ea).

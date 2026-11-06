@@ -30,4 +30,4 @@ Dedicated sacred space for the Prakash of Sri Guru Granth Sahib Ji. Designed wit
 ### GBR-2 Wardrobe Hardware Specification
 * **Mid Swing Shutters (×2):** [Spruce & Pop Claro Solid Brass Pull](https://spruceandpop.com/products/claro-antique-brass-knurled-cabinet-drawer-knob-and-handle) in **Brushed Warm Gold PVD** (256mm CC / 295mm Total Length, ₹2,275 ea). Through-bolted with M4 machine screws into 18mm BWP ply.
 * **Center Glass Display Shutter (×1):** Integrated slim warm gold anodized aluminum profile edge pull (integrated extrusion, zero surface bolt).
-* **Top Lofts (×3):** Tip-On mechanical touch-latches (clean monolithic elevation without exterior pulls).
+* **Top Lofts (×3):** Tip-On mechanical touch-latches (strictly zero surface handles across all rooms).
