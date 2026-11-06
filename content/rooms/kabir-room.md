@@ -4,7 +4,7 @@ aliases: [rooms-br02, br-02, kabirs-room, u-br02]
 tags: [u-setup, rooms, kids-room, study]
 status: evergreen
 created: 2026-10-10
-updated: 2026-11-06
+updated: 2026-11-07
 ---
 
 [[index|← Back to Home Overview]]
@@ -39,13 +39,13 @@ Dedicated study, reading, and creative play space for Kabir (age 6, Grade 1 at K
 Configured layout: SE entrance door, NW washroom door, NE wardrobe, North wall desk (right of window), and NW reading nook:
 
 * **Sleep Alignment (South Wall, Head to East):** Daybed with pull-out guest trundle lined along South wall, buffered from the SE entrance door swing by a 30 cm privacy wing. Kabir sleeps with head strictly to the East (classical student bio-rhythm alignment) and feet pointing West.
-* **Study Alignment (North Wall, Right of Window):** IKEA BERGLÄRKA desk lined against the solid North wall to the right of the window. Kabir sits facing North. Glare-free North daylight enters over his left shoulder without hand shadows. School worksheets and printing are managed centrally from [[study-guest-room]] to keep Kabir's desk and wardrobe niche free of cords and ink.
+* **Study Alignment (North Wall, Right of Window):** ErgoYou / Jin Office Kids Growth Desk lined against the solid North wall to the right of the window. Kabir sits facing North. Glare-free North daylight enters over his left shoulder without hand shadows. School worksheets and printing are managed centrally from [[study-guest-room]] to keep Kabir's desk and wardrobe niche free of cords and ink.
 * **Reading Nook (North-West, Left of Window):** Low-profile IKEA KOMPISHÄNG tri-fold pouffe/mattress positioned in the NW zone by the glazing. Natural reading light; preserves clear 900 mm walk to NW washroom door.
 * **Wardrobe (North-East, Along East Wall):** Homz wardrobe running length across East wall (shutters open West) in CenturyLaminates `3163 SI Beige Wool`. Leftmost (North) bay features a wall-to-wall open `424 1D Cinnamon Hickory` display niche beside Kabir's study desk housing open book shelves, free of bottom drawers. Mid swing shutters fitted with Mantara W-0024 solid beech elephant knobs (single center bolt; or Look Mumma 96mm CC exception); base band under closed wardrobe shutters fitted with 4 tandem drawers in CenturyLaminates `3267 SI Vintage Indigo` with Mantara W-0024 solid beech elephant knobs. Top lofts (×3) strictly prohibit surface handles, using concealed mechanical push-to-open touch latches.
 
 ![Kabir Wardrobe Locked North Niche](assets/decor/kabir-wardrobe-final-north-niche.png)
 * **Activity Zone & World Map (South-West / West Wall):** Clear floor area in South-West for play and movement; Woodsify 3D Birch World Map mounted on solid West wall via French cleats on 6mm BWP ply backer board.
-* **Circadian & Task Lighting:** Dual 3000K deep-recessed CRI 95+ COB spots in circulation paths (never over pillows). Weighted-base **IKEA FORSÅ steel work lamp** (enclosed springs; sits on fixed North niche shelf so tilting the `BERGLÄRKA` desktop never dislodges a clamp or pinches child fingers, rejecting exposed-spring `IKEA TERTIAL`). 2700K indirect warm amber bedtime LED strip with 20-minute fade-to-off automation using the native **[Aqara LED Strip T1](https://www.aqara.com/en/product/led-strip-t1/)** (Zigbee 3.0 + Matter via M3, tunable 2700K + RGBIC) or a ceiling-hatch `Shelly Dimmer Gen3 / Wozart` Matter phase-cut driver (reject third-party `Gledopto` Zigbee controllers which cannot pair to Aqara M3).
+* **Circadian & Task Lighting:** Dual 3000K deep-recessed CRI 95+ COB spots in circulation paths (never over pillows). Weighted-base **IKEA FORSÅ steel work lamp** (enclosed springs; sits on fixed North niche shelf so tilting the desk top never dislodges a clamp or pinches child fingers, rejecting exposed-spring `IKEA TERTIAL`). 2700K indirect warm amber bedtime LED strip with 20-minute fade-to-off automation using the native **[Aqara LED Strip T1](https://www.aqara.com/en/product/led-strip-t1/)** (Zigbee 3.0 + Matter via M3, tunable 2700K + RGBIC) or a ceiling-hatch `Shelly Dimmer Gen3 / Wozart` Matter phase-cut driver (reject third-party `Gledopto` Zigbee controllers which cannot pair to Aqara M3).
 * **Clear North & Brahmasthan:** Central room floor remains 100% open and unweighted for free circulation.
 
 ```
@@ -53,7 +53,7 @@ Configured layout: SE entrance door, NW washroom door, NE wardrobe, North wall d
 [WASH-         [ North Glazing / Window ]             [ North Wall (Right of Window) ]
  ROOM] +-------------------------------------------------------------------------+
  (Door)| [ NW Reading Nook ]                          [ Study Station ]          |
-       | IKEA KOMPISHÄNG Pouffe                       IKEA BERGLÄRKA Desk        |
+       | IKEA KOMPISHÄNG Pouffe                       ErgoYou Growth Desk        |
        | Natural reading light                        KABIR SITS FACING NORTH    | [NE Wardrobe]
        | (Clear NW door walk)                         (Window to his left)       | Homz 70/20/10
        |                                                                         | Length on East

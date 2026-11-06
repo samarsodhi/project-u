@@ -4,7 +4,7 @@ aliases: [u-setup-  ceiling-lighting, downlights]
 tags: [u-setup, lighting, false-ceiling, downlights]
 status: evergreen
 created: 2026-10-20
-updated: 2026-10-31
+updated: 2026-11-07
 ---
 
 [[index|← Back to Home Overview]] · [[lighting-ambience|Ambient & Accent Lighting]]
@@ -47,4 +47,7 @@ Reddit post-mortems from r/led, r/electricians, and r/drywall identify five crit
 * **Cove Light Orientation:** Mount cove LED channels vertically on the interior upstand lip pointing toward the ceiling center. Never lay strips flat on the horizontal dust shelf.
 * **Driver Consolidation:** Group drivers into 5 central ventilated zones (Foyer service hatch, Kitchen upper void, MBR walk-in hatch, KBR hatch, GBR hatch). Never scatter individual drivers loosely above the ceiling.
 * **Wiring Standard:** Strip AC and DC wire junctions must use WAGO 221 lever connectors inside fire-retardant junction boxes. Solder all LED tape terminations directly with dual-wall heat-shrink.
+* **Anti-Strobe Fan Clearance:** Maintain $\ge 600\text{ mm}$ horizontal clearance between any downlight aperture and ceiling fan blade tips. Placing downlights inside the fan rotational sweep causes stroboscopic shadow flicker.
+* **Mud-in Compound Mandate:** Embed trimless aluminum profile flanges using setting-type chemical compound (hot mud / Gyproc Pro-Fill) and fiberglass mesh tape before air-drying finish compound. Ready-mix drying mud shrinks and micro-fractures along aluminum edges within 6 months.
+* **Driver Potentiometer Trimming:** On `Mean Well ELG-150-24A` drivers, trim the internal voltage potentiometer (`Vo`) down to 22.5V–23.0V DC to cut junction operating temperatures and extend FCOB tape lifespan past 10 years.
 * **Fire Sprinkler Clash Protocol (Zero-Clash First + FM Riser Drain Fallback):** Never allow interior carpenters or plumbers to tamper with or shift pressurized sprinkler lines ($>6\text{ bar}$). Enforce a **zero-clash layout**: Homz must design false ceiling coves, curtain pelmets, and bulkheads with $\ge 150\text{ mm}$ clearance around existing droppers. If a shift is strictly unavoidable, route via FM: book the authorized fire technician, pay the confirmed **₹5,000 fee per point**, and let FM isolate/drain the floor riser before re-piping.
