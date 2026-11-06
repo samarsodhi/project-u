@@ -42,15 +42,15 @@ Definitive Good-For-Construction (GFC) engineering records for Unit B-6 (B4206, 
 | Space | Dimensions (mm) | Dimensions (ft / in) | Shutter / Window Schedule | Attached Features |
 | :--- | :--- | :--- | :--- | :--- |
 | **Drawing Room** | 4000 × 5400 | 13'1" × 17'8" | Main Door (MD) West, FG, W | Foyer transition, 2.08 TR concealed AC |
-| **Living Room** | 6000 × 3600 | 19'8" × 11'10" | Sliding Door (SD) to Sit-out | 1500 mm wide Sit-out balcony |
-| **Dining Room** | 4250 × 3600 | 13'11" × 11'10" | Open to living & kitchen corridor | 2.08 TR concealed AC, vanity transition |
+| **Living Room** | 6000 × 3600 | 19'8" × 11'10" | Open central family lounge | 1.32 TR concealed AC, between Drawing & Dining |
+| **Dining Room** | 4250 × 3600 | 13'11" × 11'10" | Sliding Door (SD) to East Sit-out | 1500 mm wide Sit-out balcony, 2.08 TR AC, vanity |
 | **Kitchen** | 4250 × 3980 | 13'11" × 13'1" | Corner Window (CW), KFG, D2 | 1500 mm Utility, P-SHAFT-61 |
 | **Puja Room** | 1850 × 1220 | 6'1" × 4'0" | D1 flush shutter | North of Master Bedroom |
-| **Master Bedroom** | 4000 × 4000 | 13'1" × 13'1" | SD2 to South balcony, D1 | 1500 mm private balcony, dressing nook |
+| **Master Bedroom** | 4000 × 4000 | 13'1" × 13'1" | SD2 to South balcony, Window W3 (West), D1 | 1500 mm private balcony, dressing nook |
 | **Master Toilet** | 2780 × 1850 | 9'1" × 6'1" | D2, Ventilator (V) | P-SHAFT-63, shower zone, 20A geyser |
 | **Bedroom-01 (Study/Guest)** | 4000 × 4000 | 13'1" × 13'1" | Window W2 (South), D1 | South window desk zone, attached ensuite |
 | **BR-01 Toilet** | 1550 × 2450 | 5'1" × 8'0" | D2, Ventilator (V) | P-SHAFT-62, 20A geyser |
-| **Bedroom-02 (Kabir)** | 4000 × 3650 | 13'1" × 12'0" | Window W1 (East), D1 | North niche wardrobe, attached ensuite |
+| **Bedroom-02 (Kabir)** | 4000 × 3650 | 13'1" × 12'0" | Window W1 (North), D1 | North niche wardrobe, attached ensuite |
 | **BR-02 Toilet** | 1550 × 2450 | 5'1" × 8'0" | D2, Ventilator (V) | P-SHAFT-59, 20A geyser |
 | **Bedroom-03 (Gurudwara)** | 4000 × 3630 | 13'1" × 11'11" | Window W1 (East), D1 | Dedicated sacred Prakash space |
 | **BR-03 Toilet** | 1550 × 2450 | 5'1" × 8'0" | D2, Ventilator (V) | P-SHAFT-58, 20A geyser |

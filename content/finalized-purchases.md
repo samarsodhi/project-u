@@ -47,7 +47,7 @@ Top reasons to reject or alter any of these selections:
 
 ### Joinery & Clearances
 - **Kitchen Hob Cutout:** Ensure internal cutout corners have a 5–10 mm radius. Avoid sharp 90° right angles in granite.
-- **Refrigerator Niche:** Minimum cabinet cavity: 980 mm (W) × 750 mm (D) × 1,980 mm (H). Maintain 50 mm rear air gap and 35 mm side gaps for full 110° door swing clear of 600 mm base cabinetry.
+- **Refrigerator Niche:** Minimum cabinet cavity: 980 mm (W) × 750 mm (D) × 1,980 mm (H) for Bosch `KDN86AID0I` (`1,860 × 860 × 810 mm`). Provides 60 mm lateral airflow clearance per side (`(980 - 860)/2`), 120 mm top clearance, and 50 mm rear air gap with Perfect Fit 90° flush door swing clear of 600 mm base cabinetry.
 - **Built-in Oven Niche:** Standard tall-unit niche: 575–597 mm (H) × 560 mm (W) × 550 mm (D) with open rear ventilation channel.
 - **Microwave Shelf:** Minimum clear shelf dimensions: 600 mm (W) × 450 mm (D) × 400 mm (H) with open front and rear ventilation gap.
 - **Laundry Stacking:** Secure dryer over washer using the official Bosch WTZ27400 stacking bracket. Never stack without mechanical coupling.
