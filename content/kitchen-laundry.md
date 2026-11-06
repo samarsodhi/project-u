@@ -116,6 +116,6 @@ Microbial hygiene is the primary non-negotiable selection criterion for drinking
 
 ### Electrical & Utility Commissioning
 - [ ] **Direct Oven Circuit:** Verify direct, unshared 16A radial line from DB with Type A RCCB for Bosch `HBF011BA1I`.
-- [ ] **Chimney Ducting (Discard Bundled Foil Pipe):** Discard the flimsy corrugated aluminum foil pipe bundled with the Faber hood; route 150 mm rigid PVC or smooth-bore metal pipe with $\le 2$ bends to the utility ventilation core-cut.
+- [ ] **Chimney Ducting (Discard Bundled Foil Pipe):** Discard the flimsy corrugated aluminum foil pipe bundled with the chimney hood; route 150 mm rigid PVC or smooth-bore metal pipe with $\le 2$ bends to the utility ventilation core-cut.
 - [ ] **Laundry Isolation:** Place Bosch washer and heat-pump dryer directly on bare tile floor over dense rubber anti-vibration pads (never on hollow joinery plinths).
 - [ ] **Utility Parapet UPVC Fit-out:** Commission 3-track White uPVC system (1.5mm GI steel core, 6mm toughened glass, SS304 mesh, drainage flaps) via Kukatpally workshop or tier-1 system house (Aparna/Fenesta) anchored to RCC boundaries.
