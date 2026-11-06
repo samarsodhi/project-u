@@ -4,7 +4,7 @@ aliases: [u-setup-smart-home, smart-home-setup, automation, u-automation]
 tags: [u-setup, smart-home, automation]
 status: evergreen
 created: 2026-10-10
-updated: 2026-10-31
+updated: 2026-11-06
 ---
 
 [[index|← Back to Home Overview]]
@@ -47,6 +47,6 @@ Master technical specification for the local-first automation layer: in-wall Zig
 ---
 
 ## Electrical Pre-Wire & Site Requirements (Homz Scope)
-* **MEP & Surge Protection Standards:** Utilize existing 50 mm deep builder GI backboxes (strictly enforce perimeter wire dressing; no box replacement or wall-chasing), room-isolated neutral wires, Type A/F 30mA RCCBs, and primary DB Type 2 40kA SPD per high-rise-engineering-gotchas.
+* **MEP & Surge Protection Standards:** Utilize existing 50 mm deep builder GI backboxes (strictly enforce perimeter wire dressing; no box replacement or wall-chasing), room-isolated neutral wires, Type A/F 30mA RCCBs, and primary DB Type 2 40kA SPD per [[gotchas-and-tips#2-electrical-grid-surges--inverter-pcb-protection]].
 * **Modular Switchgear Spec & Two-Tone Finish:** Builder-installed plates are **Panasonic** in a two-tone finish (brushed metallic silver frame + matte black/graphite modules). Source exact matching blanking plates and auxiliary switches from **Laxmi Electricals** (300 m from North/East Gate).
 * **Dummy Conduit Route Preservation:** Never allow painters to skim plaster flush over builder dummy electrical/data conduits and junction boxes. Fit matching Panasonic two-tone blanking plates and log photo measurements before wall closing so future Cat6 or smart home wiring can be pulled without destructive wall chasing.

@@ -4,14 +4,14 @@ aliases: [ u- u-purchases, finalized-appliances-av]
 tags: [u-setup, procurement, appliances, av]
 status: evergreen
 created: 2026-10-19
-updated: 2026-11-05
+updated: 2026-11-06
 ---
 
 [[index|← Back to Home Overview]] · [[kitchen-laundry]] · [[audio-entertainment]]
 
 # Finalized Purchases
 
-Locked high-ticket hardware commitments for Unit B4206. Total committed procurement envelope across these 8 units is **~₹4,47,974** (GST-inclusive; locks in LG PuriCare WW184ETB Stainless Steel Water Purifier at ₹28,990, Sonos Arc Ultra at ₹85,004 actual delivered price, and Bosch Serie 6 XXL KDN86AID0I fridge at ₹1,08,000 retail benchmark).
+Locked high-ticket hardware commitments for Unit B4206. Total committed procurement envelope across these 9 units is **₹4,64,474** (GST-inclusive; locks in LG PuriCare WW184ETB Stainless Steel Water Purifier at ₹28,990, Sonos Arc Ultra at ₹85,004 actual delivered price, and Bosch Serie 6 XXL KDN86AID0I fridge at ₹1,08,000 retail benchmark).
 
 Top reasons to reject or alter any of these selections:
 1. Site dimension mismatches (e.g. lift opening narrower than crate, or countertop cutout lacking radiused stress relief).

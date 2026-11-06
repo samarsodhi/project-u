@@ -4,7 +4,7 @@ aliases: [u-setup-kitchen, kitchen-setup, u-setup-worktop, kitchen-worktop-setup
 tags: [u-setup, kitchen, laundry, worktop]
 status: evergreen
 created: 2026-10-10
-updated: 2026-11-05
+updated: 2026-11-06
 ---
 
 [[index|← Back to Home Overview]]
@@ -91,7 +91,7 @@ Microbial hygiene is the primary non-negotiable selection criterion for drinking
   - **Preferred (Granite Bridge):** Cut two independent rectangular openings ($265 \times 475\text{ mm}$ for Altius FS 230; $260 \times 490\text{ mm}$ for Nero 30) separated by a 50–70 mm continuous granite bridge.
   - **Alternative (Joining Rail):** If using single cutout with Häfele joining strip, execute a stepped cut ($475\text{ mm}$ depth left, $490\text{ mm}$ depth right) and seal seams with Dow Corning 736 high-temp silicone.
   - **Stress Relief:** Ensure all internal cutout corners are diamond-cored with $\ge 5\text{ mm}$ radius.
-- [ ] **Cabinet Thermal Separation:** Install a 12 mm fire-retardant ply baffle between the gas bay and induction bay. Maintain $\ge 50\text{ mm}$ drop clearance and 5 mm front intake air gap for Bella 30 fan.
+- [ ] **Cabinet Thermal Separation:** Install a 12 mm fire-retardant ply baffle between the gas bay and induction bay. Maintain $\ge 50\text{ mm}$ drop clearance and 5 mm front intake air gap for Nero 30 fan.
 - [ ] **Concrete Drainage Curb Skirting Bridge:** Prohibit chiseling the existing raised floor curb encasing the 75 mm sink drain line; instruct Homz carpenter to frame base cabinet skirting to bridge over it.
 - [ ] **BGL Gas Carcass Ventilation:** Cut 50 mm circular ventilated grommets into the rear carcass where the PNG line passes to ensure BGL commissioning approval.
 - [x] **BGL PNG Application & Relocation Initiation:** Submitted dual-track 2026-10-25 via `mypng.gov.in` (App No: `PNG-2026-03527151`) and email to `wecare@bglgas.com`. Awaiting technician on-site marking for inlet lowering (~700 mm FFL).

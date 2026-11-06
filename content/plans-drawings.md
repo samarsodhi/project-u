@@ -4,10 +4,10 @@ aliases: [u-drawings, builder-drawings, mep-drawings, floor-plans, drawings, b42
 tags: [u-setup, architecture, mep, hvac, electrical, plumbing, drawings]
 status: evergreen
 created: 2026-10-18
-updated: 2026-10-23
+updated: 2026-11-06
 ---
 
-[[index|← Back to Home Overview]] · high-rise-engineering-gotchas
+[[index|← Back to Home Overview]] · [[gotchas-and-tips|Gotchas & Field Protips]]
 
 # Plans & Drawings
 
