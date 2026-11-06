@@ -59,7 +59,7 @@ Definitive Good-For-Construction (GFC) engineering records for Unit B-6 (B4206, 
 
 ---
 
-## 3. Daikin VRV HVAC Engineering Schedule
+## 4. Daikin VRV HVAC Engineering Schedule
 
 System driven by a single **10 HP Daikin VRV Outdoor Unit (ODU)** on the Service Balcony ledge. Connected indoor capacity: **10.76 TR** across 7 IDUs.
 
@@ -76,9 +76,7 @@ System driven by a single **10 HP Daikin VRV Outdoor Unit (ODU)** on the Service
 * **Main Refrigerant Headers:** 22.2 mm / 9.5 mm copper runs (7.6 RMT and 4.0 RMT) connected via Daikin Refnets (`286 33T`, `246 33T`, `183 22T`, `103 22T`, `80 22T`, `326 33T`).
 * **Condensate Network:** 40 mm and 32 mm primary headers sloping minimum 1:100 toward plumbing shafts.
 
----
-
-## 4. Plumbing Shafts & Water Distribution
+## 5. Plumbing Shafts & Water Distribution
 
 | Shaft ID | Location | Served Fixtures & Stacks | Pipe Diameters & Types |
 | :--- | :--- | :--- | :--- |
@@ -90,9 +88,7 @@ System driven by a single **10 HP Daikin VRV Outdoor Unit (ODU)** on the Service
 | **P-SHAFT-63** | South-West Wall (Master) | Master Toilet WC, Basin, Shower | 110 mm Soil, 75 mm Waste, 32 mm DWS, 20 mm FWS/HWS |
 | **P-SHAFT-74** | Service Balcony | VRV condensate & utility drain | 50 mm Waste, 32 mm Water Meter feed |
 
----
-
-## 5. Electrical Distribution & Low Voltage
+## 6. Electrical Distribution & Low Voltage
 
 * **Distribution Board (DB):** Surface-recessed in entrance lobby corridor. Fed with 3-phase supply. Feeds 25 mm Ø lighting conduits and 25 mm Ø power conduits.
 * **Communication Junction Box (CJB):** Recessed next to DB. Terminates Cat6 internet drops, TV coax, and building intercom lines.

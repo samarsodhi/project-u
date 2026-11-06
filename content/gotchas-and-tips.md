@@ -51,7 +51,7 @@ A consolidated compilation of non-obvious engineering gotchas, resident communit
   * *Mitigation:* Enforce **Type A or Type F 30mA RCCBs** on all sub-distribution circuits.
 * **Concealed Switch Box Depth & Wire Dressing [Score: 8.7/10]:**
   * *Failure Mode:* In generic construction, 25 mm shallow boxes crush in-wall micro-relays. In Olympus, builder boxes are deep 50 mm GI (Galvanized Iron) metal boxes, but chaotic loop wiring leaves insufficient center pocket clearance behind switch mechanisms.
-  * *Mitigation:* Zero box replacement or wall-chasing is required. Enforce clean perimeter wire dressing: fold loop-in phase and neutral lines along back box corners to preserve a clear $\ge 20\text{ mm}$ center pocket directly behind the switch plate for 16.8 mm relay bodies (standardized on 100% Aqara T1/T2 Zigbee 3.0 modules).
+  * *Mitigation:* Zero box replacement or wall-chasing is required. Enforce clean perimeter wire dressing. Preserves a clear center pocket directly behind the switch plate for 16.8 mm Aqara T1 single relays. Aqara T2 dual relays are 24 mm thick and cannot fit behind switches; place T2 relays beside switches behind blank modular plates or directly on DIN rails inside distribution boards.
 * **Dummy Conduit Route Preservation [Score: 8.4/10]:**
   * *Failure Mode:* Painters skim plaster flush over builder dummy junction boxes, permanently entombing wire-pull routes.
   * *Mitigation:* Cap all unused dummy boxes with matching Panasonic modular blanking plates. Photograph and log box measurements before wall painting.
@@ -85,7 +85,7 @@ A consolidated compilation of non-obvious engineering gotchas, resident communit
   * *Mitigation:* Sequence strictly: (1) Raise relocation ticket via BGL (Bhagyanagar Gas Limited) portal (`bglgas.com`) or email (`wecare@bglgas.com`), (2) BGL technician pre-inspects and marks core cut, (3) Execute specialized core cut, (4) BGL fabricates copper line extension, tests pressure, and commissions.
 * **Kitchen Gas Leak Sensor Retention & Drawer Framing [Score: 9.5/10]:**
   * *Failure Mode:* Discarding or cutting builder-installed gas leak detection sensors to fit modular base drawers voids high-rise fire insurance and central BMS (Building Management System) alarm compliance.
-  * *Mitigation:* Retain 100% of OEM (Original Equipment Manufacturer) gas leak sensors. Relocate sensor upward to the ceiling zone or tucked under the chimney canopy (PNG / Piped Natural Gas is lighter than air and rises), or frame bottom modular drawers with a 75 mm setback clearance notch.
+  * *Mitigation:* Retain 100% of OEM gas leak sensors. Piped Natural Gas (methane) is lighter than air (0.65 SG) and rises to the ceiling; the sensor must mount strictly 30 cm below ceiling level and 2–4 m from the hob. Bottom modular drawer 75 mm setback notches are strictly for manual copper shutoff valve clearance, never for sensor placement.
 * **Undermount Sink Mechanical Support [Score: 9.4/10]:**
   * *Failure Mode:* Gluing heavy 16-gauge (1.2 mm) undermount SS 304 sinks with silicone/epoxy alone leads to sink detachment under a full basin of water and heavy cast-iron cookware.
   * *Mitigation:* Fabricate a welded SS304 (Grade 304 Stainless Steel) under-counter cradle bracket or install heavy-duty mechanical leveling jacks bolted into carcass sidewalls.
@@ -114,10 +114,13 @@ A consolidated compilation of non-obvious engineering gotchas, resident communit
 
 * **Invisible Grille Tensile Metallurgy [Score: 9.9/10]:**
   * *Failure Mode:* Grade 202 cables pit and rust in humid monsoon winds.
-  * *Mitigation:* Mandate **SS316 (Marine-Grade Stainless Steel) cables** with high-density nylon casing, tensioned to $\ge 120\text{ kg}$ pull-force at $\le 75\text{ mm}$ cable spacing.
-* **Wind Tunnel Door Slam [Score: 8.8/10]:**
-  * *Failure Mode:* Floor 42 cross-ventilation creates high-velocity air drafts that violently slam internal swing doors and crack glass sidelights.
-  * *Mitigation:* Install magnetic floor stoppers with hydraulic dampeners on all bedroom doors; fit soft-close friction dampers on heavy balcony sliders.
+  * *Mitigation:* Mandate **SS316 (Marine-Grade Stainless Steel) cables** with high-density nylon casing, tensioned to $\ge 120\text{ kg}$ pull-force at strictly **50 mm (2 inches) vertical pitch**. 75 mm spacing permits toddler limb wedging and head entrapment on Floor 42.
+* **Wind Tunnel Door Slam & Door Stopper Hardware Precedents [Score: 9.0/10]:**
+  * *Failure Mode:* Floor 42 cross-ventilation creates high-velocity air drafts that violently slam internal swing doors and crack glass panels. Builder preinstalled magnetic wall-mounted door stoppers protect standard internal doors, but two physical exceptions exist in the layout.
+  * *Mitigations & Layout Exceptions:*
+    1. **Preinstalled Builder Magnetic Catches:** Retain on all standard bedroom and toilet doors opening against 90° masonry walls.
+    2. **MBR Door (Zero 90° Backing Wall):** Cannot fit magnetic wall catch. Install **Dormakaba TS 68 overhead door closer with hold-open arm** (₹4,800; zero floor drilling, hydraulic backcheck against drafts) or **Ozone SS304 floor-mounted magnetic pillar stopper** (75mm vertical post, ₹1,250).
+    3. **Kitchen Aluminum Door (Opens to Utility Balcony):** Exposed to high exterior drafts. Fit **Dormakaba TS 68 / Häfele DC 140 overhead closer with hold-open arm** (₹4,200) or an **Ozone SS304 heavy rubber floor dome + mechanical kickdown stay** (₹1,400) mounted to bottom aluminum rail.
 
 ---
 
