@@ -57,6 +57,12 @@ The #1 cause of kitchen cabinet rot is adhesive-only undermount failure.
 - **Granite Treatment:** Light Indian granite must be dry-treated with 2 saturating coats of **Akemi Anti-Fleck Nano Sealer** prior to hob/sink installation. Re-seal every 12–18 months.
 - **Hob Cutout:** Cutout for Häfele domino pair (555–557 × 475–477 mm) must have radiused (curved) internal corners. Square 90° cuts initiate stress fractures under thermal cycles.
 
+### Countertop Underside Drip Groove (Water Break)
+- **Physics & Failure Mode:** Spilled water clings to polished stone undersides via surface tension, wicking back to cabinetry. In handle-less kitchens, water pools in G-profile channels, rotting shutter edge banding, swelling BWP ply joints, and rusting runners.
+- **Overhang Dimension:** Stone slab must project 35–50 mm (1.5–2 inches) beyond finished cabinet shutter faces. Overhangs under 30 mm drop water directly onto cabinet doors.
+- **Groove Specification:** Cut a 3–5 mm wide by 3–5 mm deep groove 10–15 mm inward from the slab underside front edge. The 90° undercut breaks surface tension, forcing runoff directly to the floor.
+- **Stone Thickness Safety:** On single-layer 18–20 mm granite, limit groove depth to 3–4 mm to prevent chipping the front lip. Double-molded edges safely accept full 5 mm depth.
+
 ### Drinking Water RO Engineering & Hygiene Protocol
 Microbial hygiene is the primary non-negotiable selection criterion for drinking water.
 - **Biofilm Disqualification:** Hydro-pneumatic under-sink pressure tanks store unchlorinated pure RO permeate against dark butyl rubber at 25–35°C. This develops bacterial biofilm within 6–12 months that cannot be mechanically cleaned. Disqualify all hydro-pneumatic rubber bladder tanks.
@@ -87,6 +93,7 @@ Microbial hygiene is the primary non-negotiable selection criterion for drinking
 
 ### Worktop & Domino Hob Fit-Out
 - [ ] **Slab Nano-Sealing:** Treat owner-sourced light granite with 2 saturating coats of **Akemi Anti-Fleck Nano Sealer** before cutting appliance openings.
+- [ ] **Underside Drip Groove (Water Break):** Instruct stone mason to grind a continuous 3–5 mm wide × 3–5 mm deep groove 10–15 mm from the front outer edge under kitchen and utility slabs. Confirm slab overhang projects $\ge 35\text{–}50\text{ mm}$ past cabinet shutter faces so drips bypass G-profile channels.
 - [ ] **Hob Cutout Strategy (Homz / Stone Mason):**
   - **Preferred (Granite Bridge):** Cut two independent rectangular openings ($265 \times 475\text{ mm}$ for Altius FS 230; $260 \times 490\text{ mm}$ for Nero 30) separated by a 50–70 mm continuous granite bridge.
   - **Alternative (Joining Rail):** If using single cutout with Häfele joining strip, execute a stepped cut ($475\text{ mm}$ depth left, $490\text{ mm}$ depth right) and seal seams with Dow Corning 736 high-temp silicone.
