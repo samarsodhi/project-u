@@ -42,7 +42,9 @@ Master hardware schedule for all bedroom wardrobes and built-in casegoods. Sourc
 | **BR-03 Gurudwara** | GBR-2 Laminate Swing Doors | Spruce & Pop Claro Pull (₹2,275 ea) | Brushed Warm Gold PVD | 256mm CC (295mm L × 35mm P) | 2 |
 | **BR-03 Gurudwara** | GBR-2 Center Glass Door | Slim Anodized Profile Edge (Included) | Warm Gold Anodized | Integrated 20mm Aluminum Extrusion | 1 |
 | **BR-03 Gurudwara** | GBR-2 Top Lofts (550mm) | Touch Latch (Included) | Concealed / Internal | Push-to-Open Mechanical | 3 |
-| **BR-02 Kabir** | Mid Swing Shutters | [Look Mumma Carved Elephant](https://lookmumma.com) (₹1,450 / pair) | Natural Waxed Acacia Wood | 120mm W × 95mm H | 2 pairs |
+| **BR-02 Kabir** | Mid Swing Shutters | [Look Mumma Carved Elephant](https://www.amazon.in/Look-Mumma-Elephant-Premium-Cupboard/dp/B0FJFXNG7K/) (₹1,450 / pair) | Natural Waxed Acacia Wood | 96mm CC (120mm W × 95mm H) | 2 pairs |
+| **BR-02 Kabir** | Bottom Tandem Drawers | **[Recommended]** [Mantara W-0024 Elephant Knob](https://www.mantara.in/products/mantara-w-0024-elephant) (₹649 ea) | Solid Natural Beech Wood | 50mm Ø × 28mm P (Single Point) | 4 |
+| **BR-02 Kabir** | Top Lofts (550mm) | Touch Latch (Included) | Concealed / Internal | Push-to-Open Mechanical | 3 |
 
 ---
 
