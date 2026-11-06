@@ -87,7 +87,7 @@ A consolidated compilation of non-obvious engineering gotchas, resident communit
   * *Failure Mode:* Discarding or cutting builder-installed gas leak detection sensors to fit modular base drawers voids high-rise fire insurance and central BMS (Building Management System) alarm compliance.
   * *Mitigation:* Retain 100% of OEM (Original Equipment Manufacturer) gas leak sensors. Relocate sensor upward to the ceiling zone or tucked under the chimney canopy (PNG / Piped Natural Gas is lighter than air and rises), or frame bottom modular drawers with a 75 mm setback clearance notch.
 * **Undermount Sink Mechanical Support [Score: 9.4/10]:**
-  * *Failure Mode:* Gluing heavy undermount granite or SS sinks with silicone/epoxy alone leads to sink detachment under a full basin of water and heavy cookware.
+  * *Failure Mode:* Gluing heavy 16-gauge (1.2 mm) undermount SS 304 sinks with silicone/epoxy alone leads to sink detachment under a full basin of water and heavy cast-iron cookware.
   * *Mitigation:* Fabricate a welded SS304 (Grade 304 Stainless Steel) under-counter cradle bracket or install heavy-duty mechanical leveling jacks bolted into carcass sidewalls.
 * **BGL Piped Gas Carcass Air Circulation [Score: 9.1/10]:**
   * *Failure Mode:* Enclosing the yellow copper PNG pipe inside an airtight modular carcass causes BGL technicians to reject commissioning and allows gas to accumulate undetected in an unventilated cavity.
