@@ -44,7 +44,7 @@ Configured layout: SE entrance door, NW washroom door, NE wardrobe, North wall d
 
 ![Kabir Wardrobe Locked North Niche](assets/decor/kabir-wardrobe-final-north-niche.png)
 * **Activity Zone & World Map (South-West / West Wall):** Clear floor area in South-West for play and movement; Woodsify 3D Birch World Map mounted on solid West wall via French cleats on 6mm BWP ply backer board.
-* **Circadian & Task Lighting:** Dual 3000K deep-recessed CRI 95+ COB spots in circulation paths (never over pillows). Clamp-mounted IKEA TERTIAL task lamp on desk. 2700K indirect warm amber bedtime LED strip with 20-minute fade-to-off automation via a 24V Zigbee PWM dimmer (`Aqara T1` / `Gledopto`) or `Sonoff MINI-DIM` phase-cut driver (never an ON/OFF relay like `Shelly Plus 1`).
+* **Circadian & Task Lighting:** Dual 3000K deep-recessed CRI 95+ COB spots in circulation paths (never over pillows). Clamp-mounted IKEA TERTIAL task lamp on desk. 2700K indirect warm amber bedtime LED strip with 20-minute fade-to-off automation using the native **[Aqara LED Strip T1](https://www.aqara.com/en/product/led-strip-t1/)** (Zigbee 3.0 + Matter via M3, tunable 2700K + RGBIC) or an `Aqara Dimmer Switch H2` phase-cut driver (reject third-party `Gledopto` Zigbee controllers which cannot pair to Aqara M3).
 * **Clear North & Brahmasthan:** Central room floor remains 100% open and unweighted for free circulation.
 
 ```

@@ -42,8 +42,8 @@ Master technical specification for whole-home low-voltage data infrastructure: 1
   * *WAN 2 (2.5 GbE):* Secondary ISP failover (Airtel fiber line).
   * *LAN 1 (GbE):* Wall Drop — Living TV Console (Direct to Aqara Hub M3 or Apple TV 4K; Sony 65" TV & Sonos Arc Ultra run on 5 GHz Wi-Fi 6 + HDMI eARC).
   * *LAN 2 (GbE):* Wall Drop — Master Bedroom (Owned GL.iNet Beryl AX in 1-click Wired AP mode).
-  * *LAN 3 (GbE):* Wall Drop — Study / Guest Room (WFH workstation dock).
-  * *LAN 4 (GbE):* Wall Drop — Kabir Room (Study desk / printer).
+  * *LAN 3 (GbE):* Wall Drop — Study / Guest Room (WFH workstation dock; Brother `HL-L2440DW` laser printer connects via 5 GHz Wi-Fi).
+  * *LAN 4 (GbE):* Wall Drop — Kabir Room (Study desk / future PC drop).
 
 ### 2. Network Commissioning & Quality Checklist
 * **Central Media DB Patching:** Terminate the 4 builder in-wall Cat6 home-runs into RJ45 male plugs or a compact 6-port patch bracket inside the low-voltage DB, connecting them directly into Flint 2 LAN ports 1–4.
