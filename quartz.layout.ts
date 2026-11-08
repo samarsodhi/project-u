@@ -26,7 +26,7 @@ const explorerConfig = {
       "high-rise-engineering-gotchas": 10,
       "cabinetry-woodwork": 20,
       "kitchen-laundry": 30,
-      "bathrooms-ventilation": 40,
+      "bathrooms": 40,
       "false-ceiling-lighting": 45,
       "lighting-ambience": 50,
       "smart-home-automation": 60,
