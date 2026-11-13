@@ -22,8 +22,8 @@ Pre-ceiling and pre-flooring infrastructure. Failure to sequence these before ar
 * **[[cabinetry-woodwork|Cabinetry & Woodwork]]** — IS 710 BWP plywood, calibrated cores, wardrobe hardware schedule, and ceiling plasterboard.
 * **[[plans-drawings|Plans & Drawings]]** — Unit B4206 architectural floor plan, Daikin VRV 10 HP HVAC, plumbing shafts, and electrical DB.
 * **[[kitchen-laundry|Kitchen & Laundry]]** — Modular cabinetry, light Indian granite, undermount sinks, hybrid domino hob, 32A lines, and stacked laundry.
-* **[[finalized-purchases|Finalized Purchases]]** — Committed major appliances, AV envelope (₹4.64L), dedicated 16A radials, and joinery clearances.
-* **[[bathrooms|Bathrooms]]** — 10L smart geysers, SS304 flanged curtain rods, floor threshold water bars, silent exhaust CFM, and insect mesh.
+* **[[finalized-purchases|Finalized Purchases]]** — Committed major appliances, AV envelope (₹4.59L), dedicated 16A radials, and joinery clearances.
+* **[[bathrooms|Bathrooms]]** — 10L/15L horizontal geysers, SS304 flanged curtain rods, floor threshold water bars, silent exhaust CFM, and insect mesh.
 * **[[lighting-ambience|Lighting & Ambience]]** — Architectural CRI 95+ COB spots, 3000K CCT zoning, remote driver enclosures, and 24V dot-free mirror halos.
 * **[[false-ceiling-lighting|False Ceiling Lighting]]** — Recessed COB downlights, perimeter cove strips, trimless slots, and driver service hatches.
 * **[[smart-home-automation|Smart Home & Automation]]** — In-wall Zigbee 3.0 relays, 50mm deep backboxes, neutral line runs, and BLDC fan regulator bypass.
@@ -38,7 +38,7 @@ Core spatial planning, room ergonomics, bespoke furniture, and functional daily 
 * **[[rooms/living-dining|Living & Dining Spaces]]** — Low platform sofas, solid teak dining, foyer storage, and media joinery.
 * **[[rooms/master-bedroom|Master Bedroom Suite]]** — Solid timber king bed, gas-strut storage, full-height dome dresser, and bedside units.
 * **[[rooms/study-guest-room|Study & Guest Room]]** — Ergonomic standing desk, Steelcase seating, 5-zone pocket-sprung sofa-bed, and library.
-* **[[rooms/kabir-room|Kabir's Room (Study & Play)]]** — BERGLÄRKA manual crank growth desk, posture-lock chair, daybed, and 3D world map.
+* **[[rooms/kabir-room|Kabir's Room (Study & Play)]]** — ErgoYou manual crank growth desk, posture-lock chair, daybed, and 3D world map.
 * **[[rooms/home-gurudwara|Home Gurudwara]]** — Handcrafted teak Palki Sahib, washable cotton sangat durries, and sacred joinery.
 
 ---
