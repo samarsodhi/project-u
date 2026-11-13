@@ -119,8 +119,8 @@ A consolidated compilation of non-obvious engineering gotchas, resident communit
   * *Failure Mode:* Floor 42 cross-ventilation creates high-velocity air drafts that violently slam internal swing doors and crack glass panels. Builder preinstalled magnetic wall-mounted door stoppers protect standard internal doors, but two physical exceptions exist in the layout.
   * *Mitigations & Layout Exceptions:*
     1. **Preinstalled Builder Magnetic Catches:** Retain on all standard bedroom and toilet doors opening against 90° masonry walls.
-    2. **MBR Door (Zero 90° Backing Wall):** Cannot fit magnetic wall catch. Install **Dormakaba TS 68 overhead door closer with hold-open arm** (₹4,800; zero floor drilling, hydraulic backcheck against drafts) or **Ozone SS304 floor-mounted magnetic pillar stopper** (75mm vertical post, ₹1,250).
-    3. **Kitchen Aluminum Door (Opens to Utility Balcony):** Exposed to high exterior drafts. Fit **Dormakaba TS 68 / Häfele DC 140 overhead closer with hold-open arm** (₹4,200) or an **Ozone SS304 heavy rubber floor dome + mechanical kickdown stay** (₹1,400) mounted to bottom aluminum rail.
+    2. **MBR Door (Zero 90° Backing Wall):** Cannot fit a magnetic wall catch and swings into high-draft cross-ventilation. See [[master-bedroom]] for the floor pillar stopper vs. Backcheck closer spec.
+    3. **Kitchen Aluminum Door (Opens to Utility Balcony):** Exposed to Floor 42 exterior drafts; thin hollow aluminum stiles strip bare self-tapping screws and snap closer hold-open detents. See [[kitchen-laundry]] for the Backcheck closer & rivnut mounting spec.
 
 ---
 
