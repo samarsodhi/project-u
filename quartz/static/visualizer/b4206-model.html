@@ -16,7 +16,8 @@
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { width: 100%; height: 100%; overflow: hidden; background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif; }
-  #canvas-wrap { position: fixed; inset: 0; }
+  #canvas-wrap { position: fixed; inset: 0; touch-action: none; }
+  #canvas-wrap canvas { display: block; touch-action: none; }
 
   #hud {
     position: fixed; top: 14px; left: 14px; bottom: 72px; width: 276px;
@@ -107,94 +108,129 @@
   .z-div { width: 1px; height: 20px; background: var(--border); }
 
   /* Best-in-Class Virtual Walkthrough Top Bar, Room Picker, Dock, Portals & Mini-Map */
-  body.walking #palette, body.walking #zoom-bar { display: none; }
+  body.walking #palette,
+  body.walking #zoom-bar,
+  body.walking #hud-toggle { display: none !important; }
+
+  #walk-exit-btn {
+    position: fixed; top: 14px; left: 14px; z-index: 29;
+    background: var(--panel); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(212, 168, 83, 0.55); color: #f8dfa0;
+    border-radius: 12px; height: 40px; padding: 0 14px; font-size: 12px; font-weight: 700;
+    cursor: pointer; display: none; align-items: center; gap: 6px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.48); transition: all 0.16s ease;
+    letter-spacing: 0.01em;
+  }
+  #walk-exit-btn.show { display: inline-flex; }
+  #walk-exit-btn:hover { background: rgba(212, 168, 83, 0.24); border-color: #f8dfa0; color: #fff; transform: translateY(-1px); }
 
   #walk-bar {
     position: fixed; top: 14px; left: 50%; transform: translateX(-50%); z-index: 28;
     background: var(--panel); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(212, 168, 83, 0.7); border-radius: 14px; padding: 6px 8px;
-    display: none; align-items: center; gap: 8px;
-    box-shadow: 0 14px 36px rgba(0,0,0,0.55);
+    border: 1px solid rgba(212, 168, 83, 0.58); border-radius: 14px; padding: 5px 7px;
+    display: none; align-items: center; gap: 6px;
+    box-shadow: 0 14px 36px rgba(0,0,0,0.52);
   }
   #walk-bar.show { display: flex; }
   .w-step {
-    background: rgba(255,255,255,0.08); border: 1px solid var(--border); color: #fff;
-    border-radius: 8px; width: 30px; height: 30px; font-size: 16px; font-weight: 700;
+    background: rgba(255,255,255,0.07); border: 1px solid var(--border); color: #fff;
+    border-radius: 9px; width: 32px; height: 32px; font-size: 17px; font-weight: 700;
     cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s ease;
+    flex-shrink: 0;
   }
   .w-step:hover { background: var(--accent-dim); border-color: var(--accent); color: #f8dfa0; }
   .w-room-btn {
     background: transparent; border: 1px solid transparent; border-radius: 9px;
-    text-align: center; min-width: 196px; padding: 3px 10px; cursor: pointer;
-    transition: all 0.15s ease;
+    text-align: center; min-width: 214px; max-width: 260px; padding: 3px 12px; cursor: pointer;
+    transition: all 0.15s ease; overflow: hidden;
   }
   .w-room-btn:hover { background: rgba(255,255,255,0.07); border-color: var(--border); }
-  #walk-room-name { display: block; font-size: 13px; font-weight: 700; color: #f8dfa0; letter-spacing: 0.01em; }
-  .w-room-btn small { display: block; font-size: 10px; color: var(--muted); margin-top: 1px; }
+  .w-room-row { display: inline-flex; align-items: center; justify-content: center; gap: 5px; max-width: 100%; }
+  #walk-room-name { font-size: 13px; font-weight: 700; color: #f8dfa0; letter-spacing: 0.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+  .w-chev { font-size: 10px; color: var(--accent); transition: transform 0.18s ease; flex-shrink: 0; }
+  .w-room-btn.open .w-chev { transform: rotate(180deg); }
+  .w-room-btn small { display: block; font-size: 10px; color: var(--muted); margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
   #room-picker {
-    position: fixed; top: 68px; left: 50%; transform: translateX(-50%); z-index: 29;
-    background: var(--panel); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(212, 168, 83, 0.55); border-radius: 13px; padding: 8px;
-    display: none; grid-template-columns: repeat(3, minmax(128px, 1fr)); gap: 5px;
-    box-shadow: 0 18px 46px rgba(0,0,0,0.65); max-width: 92vw;
+    position: fixed; top: 66px; left: 50%; transform: translateX(-50%); z-index: 32;
+    background: rgba(15, 18, 24, 0.96); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(212, 168, 83, 0.52); border-radius: 15px; padding: 12px;
+    display: none; grid-template-columns: repeat(3, minmax(156px, 1fr)); gap: 10px;
+    box-shadow: 0 22px 54px rgba(0,0,0,0.72); max-width: min(560px, 94vw); max-height: 70vh; overflow-y: auto;
   }
   #room-picker.open { display: grid; }
-  .rp-item {
-    background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--text);
-    border-radius: 8px; padding: 6px 9px; font-size: 11px; font-weight: 600; text-align: left;
-    cursor: pointer; transition: all 0.13s ease; white-space: nowrap;
+  .rp-col { display: flex; flex-direction: column; gap: 5px; }
+  .rp-head {
+    font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.09em;
+    color: var(--accent); padding: 2px 4px 4px; border-bottom: 1px solid var(--border); margin-bottom: 2px;
   }
-  .rp-item:hover { background: rgba(255,255,255,0.12); border-color: var(--accent); color: #fff; }
+  .rp-item {
+    background: rgba(255,255,255,0.04); border: 1px solid var(--border); color: var(--text);
+    border-radius: 9px; padding: 7px 10px; font-size: 11.5px; font-weight: 600; text-align: left;
+    cursor: pointer; transition: all 0.13s ease; display: flex; flex-direction: column; gap: 1px;
+  }
+  .rp-item small { font-size: 9.5px; font-weight: 400; color: var(--muted); }
+  .rp-item:hover { background: rgba(255,255,255,0.11); border-color: var(--accent); color: #fff; }
   .rp-item.active { background: var(--accent-dim); border-color: var(--accent); color: #f8dfa0; }
+  .rp-item.active small { color: rgba(248, 223, 160, 0.78); }
 
   #walk-dock {
     position: fixed; bottom: 14px; left: 50%; transform: translateX(-50%); z-index: 27;
-    background: var(--panel); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-    border: 1px solid var(--border); border-radius: 14px; padding: 6px 8px;
-    display: none; align-items: center; gap: 6px;
+    background: var(--panel); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+    border: 1px solid var(--border); border-radius: 15px; padding: 6px 8px;
+    display: none; align-items: center; gap: 6px; overflow: hidden;
     box-shadow: 0 14px 36px rgba(0,0,0,0.55); user-select: none;
   }
   #walk-dock.show { display: flex; }
+  #tour-progress {
+    position: absolute; left: 0; bottom: 0; height: 2.5px; width: 0%;
+    background: linear-gradient(90deg, #d4a853, #f8dfa0);
+    transition: opacity 0.25s ease; opacity: 0; pointer-events: none;
+  }
+  #tour-progress.active { opacity: 1; }
   .wd-btn {
-    background: rgba(255,255,255,0.07); border: 1px solid var(--border); color: var(--text);
-    border-radius: 9px; height: 32px; padding: 0 11px; font-size: 11.5px; font-weight: 600;
-    cursor: pointer; display: flex; align-items: center; gap: 5px; white-space: nowrap;
+    background: rgba(255,255,255,0.06); border: 1px solid var(--border); color: var(--text);
+    border-radius: 10px; height: 34px; padding: 0 11px; font-size: 11.5px; font-weight: 600;
+    cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 5px; white-space: nowrap;
     transition: all 0.14s ease;
   }
   .wd-btn:hover { background: rgba(255,255,255,0.14); border-color: var(--accent); color: #fff; }
   .wd-btn.active { background: var(--accent-dim); border-color: var(--accent); color: #f8dfa0; }
+  .wd-div { width: 1px; height: 20px; background: var(--border); flex-shrink: 0; }
 
   #walk-toast {
-    position: fixed; bottom: 62px; left: 50%; transform: translateX(-50%); z-index: 26;
-    background: rgba(15, 17, 21, 0.86); border: 1px solid rgba(212, 168, 83, 0.45);
-    color: #e5e7eb; padding: 5px 13px; border-radius: 999px; font-size: 11px; font-weight: 500;
-    pointer-events: none; opacity: 0; transition: opacity 0.45s ease; white-space: nowrap;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.45);
+    position: fixed; bottom: 64px; left: 50%; transform: translateX(-50%); z-index: 26;
+    background: rgba(14, 17, 23, 0.90); border: 1px solid rgba(212, 168, 83, 0.45);
+    color: #e5e7eb; padding: 6px 14px; border-radius: 999px; font-size: 11px; font-weight: 500;
+    pointer-events: none; opacity: 0; transition: opacity 0.4s ease; white-space: nowrap; max-width: 92vw;
+    overflow: hidden; text-overflow: ellipsis; box-shadow: 0 10px 26px rgba(0,0,0,0.48);
   }
   #walk-toast.show { opacity: 1; }
 
   #portal-layer { position: fixed; inset: 0; pointer-events: none; z-index: 15; overflow: hidden; }
   .portal-pill {
-    position: absolute; transform: translate(-50%, -50%);
-    background: rgba(15, 17, 21, 0.78); border: 1px solid rgba(212, 168, 83, 0.65);
-    color: #f8dfa0; padding: 5px 11px; border-radius: 999px; font-size: 11px; font-weight: 600;
-    white-space: nowrap; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.45);
+    position: absolute; top: 0; left: 0; will-change: transform, opacity;
+    background: rgba(14, 17, 23, 0.80); border: 1px solid rgba(212, 168, 83, 0.65);
+    color: #f8dfa0; padding: 6px 12px; border-radius: 999px; font-size: 11px; font-weight: 600;
+    white-space: nowrap; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.45);
     pointer-events: auto; cursor: pointer; opacity: 0;
-    transition: opacity 0.18s ease, transform 0.14s ease, background 0.14s ease;
+    transition: opacity 0.18s ease, background 0.14s ease, border-color 0.14s ease;
+    display: inline-flex; align-items: center; gap: 5px;
   }
-  .portal-pill:hover { background: rgba(212, 168, 83, 0.28); border-color: #fff; color: #fff; transform: translate(-50%, -50%) scale(1.07); }
+  .portal-pill .p-dist { font-size: 9.5px; color: rgba(226, 232, 240, 0.62); font-weight: 500; }
+  .portal-pill:hover { background: rgba(212, 168, 83, 0.28); border-color: #fff; color: #fff; }
 
   #minimap-wrap {
     position: fixed; bottom: 14px; right: 14px; z-index: 26;
-    background: var(--panel); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-    border: 1px solid rgba(212, 168, 83, 0.55); border-radius: 13px; padding: 8px 9px 7px;
+    background: var(--panel); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(212, 168, 83, 0.50); border-radius: 14px; padding: 8px 9px 7px;
     display: none; flex-direction: column; gap: 5px;
-    box-shadow: 0 14px 38px rgba(0,0,0,0.55); user-select: none;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.58); user-select: none;
   }
   #minimap-wrap.show { display: flex; }
-  .mm-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #f8dfa0; }
+  .mm-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: #f8dfa0; }
+  .mm-actions { display: inline-flex; align-items: center; gap: 4px; }
   .mm-sub { font-size: 9.5px; color: var(--muted); text-align: center; letter-spacing: 0.01em; }
   .mm-zoom-btn {
     background: rgba(255,255,255,0.08); border: 1px solid var(--border); color: var(--text);
@@ -203,41 +239,96 @@
   }
   .mm-zoom-btn:hover { background: rgba(255,255,255,0.16); border-color: var(--accent); color: #f8dfa0; }
   .mm-zoom-btn.active { background: rgba(212, 168, 83, 0.24); border-color: var(--accent); color: #f8dfa0; }
-  #minimap { display: block; width: 268px; height: 224px; border-radius: 8px; background: #10141c; cursor: pointer; touch-action: none; }
+  .mm-canvas-box { position: relative; border-radius: 8px; overflow: hidden; }
+  #minimap { display: block; width: 260px; height: 216px; border-radius: 8px; background: #10141c; cursor: pointer; touch-action: none; }
+  #mm-tip {
+    position: absolute; left: 6px; top: 6px; pointer-events: none;
+    background: rgba(12, 15, 21, 0.88); border: 1px solid rgba(212, 168, 83, 0.45);
+    color: #f8dfa0; font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 6px;
+    opacity: 0; transition: opacity 0.14s ease; white-space: nowrap;
+  }
+  #mm-tip.show { opacity: 1; }
 
   #wp-tooltip {
     position: fixed; z-index: 30; pointer-events: none; display: none;
-    transform: translate(-50%, -145%);
-    background: rgba(15, 17, 21, 0.92); border: 1px solid var(--accent); color: #f8dfa0;
-    padding: 4px 9px; border-radius: 7px; font-size: 11px; font-weight: 600; white-space: nowrap;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.45);
+    transform: translate(-50%, -148%);
+    background: rgba(14, 17, 23, 0.94); border: 1px solid rgba(212, 168, 83, 0.85); color: #f8dfa0;
+    padding: 5px 10px; border-radius: 8px; font-size: 11px; font-weight: 600; white-space: nowrap;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.48); backdrop-filter: blur(8px);
   }
+  #wp-tooltip.inspect { border-color: rgba(147, 197, 253, 0.78); color: #e0f2fe; }
 
   #compass {
-    position: fixed; top: 14px; right: 14px; width: 64px; height: 64px;
-    background: var(--panel); backdrop-filter: blur(12px);
+    position: fixed; top: 14px; right: 14px; width: 52px; height: 52px;
+    background: var(--panel); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--border); border-radius: 50%; z-index: 20;
     display: flex; align-items: center; justify-content: center;
-    font-size: 10px; font-weight: 700; color: var(--muted);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+    font-size: 9px; font-weight: 700; color: var(--muted); cursor: pointer;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.35); transition: border-color 0.15s ease;
   }
-  #compass .n { position: absolute; top: 5px; color: #f87171; }
-  #compass .s { position: absolute; bottom: 5px; }
-  #compass .e { position: absolute; right: 7px; }
-  #compass .w { position: absolute; left: 6px; color: var(--accent); }
-  #compass-needle { width: 2px; height: 22px; background: linear-gradient(to top, #6b7280 50%, #f87171 50%); border-radius: 2px; }
+  #compass:hover { border-color: var(--accent); }
+  #compass .n { position: absolute; top: 4px; color: #f87171; }
+  #compass .s { position: absolute; bottom: 4px; }
+  #compass .e { position: absolute; right: 6px; }
+  #compass .w { position: absolute; left: 5px; color: var(--accent); }
+  #compass-needle { width: 2px; height: 18px; background: linear-gradient(to top, #6b7280 50%, #f87171 50%); border-radius: 2px; }
 
   #inspector {
-    position: fixed; top: 90px; right: 14px; width: 280px;
-    background: var(--panel); backdrop-filter: blur(14px);
-    border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px;
-    z-index: 20; display: none; box-shadow: 0 12px 32px rgba(0,0,0,0.4);
+    position: fixed; top: 80px; right: 14px; width: 286px; max-width: calc(100vw - 28px);
+    background: rgba(16, 19, 25, 0.94); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(212, 168, 83, 0.35); border-radius: 13px; padding: 12px 14px;
+    z-index: 30; display: none; box-shadow: 0 16px 40px rgba(0,0,0,0.52);
   }
   #inspector.show { display: block; }
+  body.walking #inspector { top: auto; right: auto; bottom: 72px; left: 14px; }
+  .insp-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+  #insp-close {
+    background: rgba(255,255,255,0.06); border: 1px solid var(--border); color: var(--muted);
+    border-radius: 7px; width: 24px; height: 24px; cursor: pointer; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  #insp-close:hover { color: #fff; border-color: var(--accent); }
   #insp-tag { font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); font-weight: 700; }
   #insp-title { font-size: 13.5px; font-weight: 700; margin-top: 3px; color: #fff; }
   #insp-desc { font-size: 11.5px; color: #d1d5db; margin-top: 6px; line-height: 1.45; }
   #insp-meta { font-size: 10.5px; color: var(--muted); margin-top: 8px; padding-top: 7px; border-top: 1px solid var(--border); }
+  #insp-actions { display: none; margin-top: 9px; gap: 6px; }
+  #insp-actions.show { display: flex; }
+  #insp-walk-btn {
+    flex: 1; background: var(--accent-dim); border: 1px solid var(--accent); color: #f8dfa0;
+    border-radius: 8px; padding: 6px 10px; font-size: 11px; font-weight: 600; cursor: pointer;
+    transition: all 0.14s ease;
+  }
+  #insp-walk-btn:hover { background: rgba(212, 168, 83, 0.34); color: #fff; }
+
+  @media (max-width: 1180px) {
+    #minimap { width: 212px; height: 176px; }
+    .w-room-btn { min-width: 176px; }
+  }
+  @media (max-width: 1023px) {
+    .w-step { width: 40px; height: 40px; }
+    .wd-btn { height: 40px; padding: 0 11px; font-size: 12px; }
+    #walk-exit-btn { height: 42px; }
+    #minimap-wrap { bottom: 68px; right: 12px; }
+    #minimap { width: 224px; height: 186px; }
+  }
+  @media (max-width: 767px) {
+    body.walking #compass { display: none; }
+    #walk-exit-btn { top: 10px; left: 10px; height: 40px; padding: 0 10px; font-size: 11.5px; }
+    #walk-bar { top: 10px; left: auto; right: 10px; transform: none; max-width: calc(100vw - 122px); padding: 4px 5px; gap: 4px; }
+    .w-step { width: 34px; height: 34px; font-size: 15px; }
+    .w-room-btn { min-width: 0; padding: 2px 6px; }
+    #walk-room-name { font-size: 11.5px; }
+    .w-room-btn small { font-size: 9px; }
+    #room-picker { top: auto; bottom: 70px; left: 50%; transform: translateX(-50%); width: 94vw; grid-template-columns: 1fr; max-height: 56vh; }
+    #walk-dock { bottom: 10px; width: calc(100vw - 20px); justify-content: space-between; padding: 5px 6px; gap: 4px; }
+    .wd-btn { flex: 1; height: 42px; padding: 0 6px; font-size: 11px; }
+    .wd-div { display: none; }
+    #walk-toast { bottom: 64px; font-size: 10.5px; }
+    #minimap-wrap { bottom: 68px; left: 50%; right: auto; transform: translateX(-50%); width: min(332px, 94vw); }
+    #minimap { width: 100%; height: auto; aspect-ratio: 260 / 216; }
+    body.walking #inspector { bottom: 68px; left: 10px; right: 10px; width: auto; }
+  }
 
   #palette {
     position: fixed; bottom: 14px; right: 14px; z-index: 20;
@@ -313,7 +404,7 @@
     </div>
 
     <div class="hint-bar">
-      <strong>Quick Zoom:</strong> Click any <strong>Room Label</strong> on the 3D plan to zoom in · Use <strong>+ / −</strong> bar or keys · Press <strong>Esc</strong> to zoom out to full flat · Click any item for specs.
+      <strong>Quick Walk:</strong> Double-click any floor or click <strong>🚶 Walk House</strong> to step inside · Click any <strong>Room Label</strong> to zoom in · Press <strong>Esc</strong> for full flat.
     </div>
   </div>
 </aside>
@@ -325,49 +416,67 @@
   <button class="z-btn sq" id="btn-zoom-in" title="Zoom In (+)">+</button>
   <span id="zoom-readout">18.0m</span>
   <div class="z-div z-div-zoom"></div>
-  <button class="z-btn" id="btn-walk" title="Enter Virtual First-Person Walkthrough">🚶 Walk House</button>
-  <button class="z-btn accent" id="btn-full-flat" title="Zoom Out to Full Apartment (Esc)">⌂ Full Flat</button>
+  <button class="z-btn accent" id="btn-walk" title="Enter First-Person Walkthrough (W)">🚶 Walk House</button>
+  <button class="z-btn" id="btn-full-flat" title="Zoom Out to Full Apartment (Esc)">⌂ Full Flat</button>
 </div>
 
+<button id="walk-exit-btn" title="Return to 3D Dollhouse (Esc)">← Dollhouse</button>
+
 <div id="walk-bar">
-  <button class="w-step" id="btn-tour-prev" title="Previous Room">‹</button>
+  <button class="w-step" id="btn-tour-prev" title="Previous Room ([)">‹</button>
   <button class="w-room-btn" id="walk-room-trigger" title="Click to jump to any room">
-    <span id="walk-room-name">Drawing & Foyer ▾</span>
-    <small id="walk-room-sub">Stop 1 of 15 · Click to pick room</small>
+    <span class="w-room-row"><span id="walk-room-name">Foyer Entrance</span><span class="w-chev">▾</span></span>
+    <small id="walk-room-sub">Stop 1 of 16 · Click to jump</small>
   </button>
-  <button class="w-step" id="btn-tour-next" title="Next Room">›</button>
-  <button class="z-btn accent" id="btn-walk-exit" title="Exit Walk Mode (Esc)">✕ Exit</button>
+  <button class="w-step" id="btn-tour-next" title="Next Room (])">›</button>
 </div>
 <div id="room-picker"></div>
 
 <div id="walk-dock">
-  <button class="wd-btn" id="btn-auto-tour" title="Cinematic Guided Home Tour (Space)">▶ Auto-Tour</button>
-  <button class="wd-btn" id="btn-eye-height" title="Switch Standing (5'3&quot;) vs Seated Sofa/Desk (3'9&quot;) Eye Height">🧍 Stand</button>
-  <button class="wd-btn active" id="btn-fov-toggle" title="Switch Wide 68° Architectural Lens vs 52° Natural Eye">👁 68° Wide</button>
-  <button class="wd-btn active" id="btn-mm-toggle" title="Show / Hide Live Floorplan Map">🗺 Map</button>
+  <button class="wd-btn" id="btn-auto-tour" title="Cinematic Guided Home Tour through Doorways (Space)">▶ Tour</button>
+  <button class="wd-btn" id="btn-walk-mood" title="Switch Floor 42 Daylight vs 2700K Evening (L)">🌙 2700K</button>
+  <div class="wd-div"></div>
+  <button class="wd-btn" id="btn-eye-height" title="Switch Standing (5'3&quot;) vs Seated Sofa/Desk (3'9&quot;) Eye Height (C)">🧍 5'3"</button>
+  <button class="wd-btn active" id="btn-fov-toggle" title="Switch Wide 68° Architectural Lens vs 52° Natural Eye (F)">👁 68°</button>
+  <button class="wd-btn active" id="btn-mm-toggle" title="Show / Hide Live Floorplan Map (M)">🗺 Map</button>
+  <div id="tour-progress"></div>
 </div>
-<div id="walk-toast">Drag to look · Click floor or room badge to walk · Two-finger scroll to glide &amp; steer · Space for Auto-Tour</div>
+<div id="walk-toast">Drag to look · Click floor or doorway badge to walk · Click any item for specs · Space for Auto-Tour</div>
 
-<div id="minimap-wrap" title="Drag dot/floor to walk · Drag torch knob or scroll to rotate 360°">
+<div id="minimap-wrap" title="Click any room to walk · Drag dot to move · Drag gold knob to aim">
   <div class="mm-head">
     <span>B4206 Live Map</span>
-    <button class="mm-zoom-btn" id="btn-mm-zoom" title="Toggle 2.25× Room Zoom">🔍 Room</button>
+    <span class="mm-actions">
+      <button class="mm-zoom-btn" id="btn-mm-zoom" title="Toggle 2.25× Room Zoom">🔍 Room</button>
+      <button class="mm-zoom-btn" id="btn-mm-close" title="Hide Map (M)">✕</button>
+    </span>
   </div>
-  <canvas id="minimap" width="268" height="224"></canvas>
-  <div class="mm-sub">Drag floor/dot: walk · Knob / Scroll / Right-drag: turn</div>
+  <div class="mm-canvas-box">
+    <canvas id="minimap" width="260" height="216"></canvas>
+    <div id="mm-tip"></div>
+  </div>
+  <div class="mm-sub">Click room to walk · Drag dot to move · Drag gold knob to look</div>
 </div>
 <div id="wp-tooltip"></div>
 
-<div id="compass" title="Main Door faces West (left)">
+<div id="compass" title="Click to orient North · Main Door faces West">
   <span class="n">N</span><span class="s">S</span><span class="e">E</span><span class="w">W</span>
   <div id="compass-needle"></div>
 </div>
 
 <div id="inspector">
-  <div id="insp-tag">SPECIFICATION</div>
-  <div id="insp-title">Click any item</div>
+  <div class="insp-head">
+    <div>
+      <div id="insp-tag">SPECIFICATION</div>
+      <div id="insp-title">Click any item</div>
+    </div>
+    <button id="insp-close" title="Close (Esc)">✕</button>
+  </div>
   <div id="insp-desc"></div>
   <div id="insp-meta"></div>
+  <div id="insp-actions">
+    <button id="insp-walk-btn">🚶 Step Closer</button>
+  </div>
 </div>
 
 <div id="palette">
@@ -393,6 +502,7 @@
 <script type="module">
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
 // ============================================================================
 // 1. SCENE, RENDERER & CAMERA SETUP
@@ -409,6 +519,15 @@ renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1.08;
 wrap.appendChild(renderer.domElement);
+
+// Subtle procedural PMREM reflections (Daylight only; disabled in 2700K Evening for authentic warm mood)
+let dayEnvTexture = null;
+try {
+  const pmrem = new THREE.PMREMGenerator(renderer);
+  dayEnvTexture = pmrem.fromScene(new RoomEnvironment(renderer), 0.04).texture;
+  scene.environment = dayEnvTexture;
+  pmrem.dispose();
+} catch (_) {}
 
 const camera = new THREE.PerspectiveCamera(42, window.innerWidth / window.innerHeight, 0.1, 120);
 camera.position.set(-3.5, 15.8, 19.2);
@@ -712,7 +831,7 @@ const MAT = {
   steel:         new THREE.MeshStandardMaterial({ color: 0xC4C9CE, roughness: 0.28, metalness: 0.82 }),
   darkMetal:     new THREE.MeshStandardMaterial({ color: 0x2A2D32, roughness: 0.45, metalness: 0.65 }),
   upvcWhite:     new THREE.MeshStandardMaterial({ color: 0xF7F7F5, roughness: 0.35 }),
-  glass:         new THREE.MeshPhysicalMaterial({ color: 0xCBE2EC, transparent: true, opacity: 0.32, roughness: 0.08, metalness: 0.1 }),
+  glass:         new THREE.MeshPhysicalMaterial({ color: 0xCBE2EC, transparent: true, opacity: 0.18, roughness: 0.08, metalness: 0.1 }),
   tintedGlass:   new THREE.MeshPhysicalMaterial({ color: 0x6B4E34, transparent: true, opacity: 0.44, roughness: 0.12, metalness: 0.18 }),
   flutedGlass:   new THREE.MeshPhysicalMaterial({ color: 0xD6C8AC, transparent: true, opacity: 0.48, roughness: 0.28, metalness: 0.10 }),
   mirror:        new THREE.MeshStandardMaterial({ color: 0xD7E3EA, roughness: 0.06, metalness: 0.92 }),
@@ -720,7 +839,7 @@ const MAT = {
   fabricOat:     new THREE.MeshStandardMaterial({ color: 0xE6DFD3, roughness: 0.94 }),
   fabricCharcoal:new THREE.MeshStandardMaterial({ color: 0x4E535A, roughness: 0.88 }),
   leatherCognac: new THREE.MeshStandardMaterial({ color: 0x7E4E30, roughness: 0.42, metalness: 0.06 }),
-  sheerCurtain:  new THREE.MeshStandardMaterial({ color: 0xFBF9F4, transparent: true, opacity: 0.42, roughness: 0.95 }),
+  sheerCurtain:  new THREE.MeshStandardMaterial({ color: 0xFBF9F4, transparent: true, opacity: 0.24, roughness: 0.95 }),
   drapeCurtain:  new THREE.MeshStandardMaterial({ color: 0xCFC7B8, roughness: 0.92 }),
   bedLinen:      new THREE.MeshStandardMaterial({ color: 0xF5F3EE, roughness: 0.90 }),
   bedThrow:      new THREE.MeshStandardMaterial({ color: 0x8F9EA8, roughness: 0.92 }),
@@ -826,8 +945,8 @@ loadProcessedImage(
   MAT.cinnHickory
 );
 
-const tile1000 = makeTileTex('#F2F0EC', '#DDDAD3', 4, 4, true); tile1000.repeat.set(4, 4);
-const tile800 = makeTileTex('#EFEDE8', '#D8D5CE', 4, 4, true); tile800.repeat.set(2.5, 2.5);
+const tile1000 = makeTileTex('#E5E0D7', '#CBC5BA', 4, 4, true); tile1000.repeat.set(4, 4);
+const tile800 = makeTileTex('#E2DDD4', '#C6C0B5', 4, 4, true); tile800.repeat.set(2.5, 2.5);
 const woodFloor = makeWoodTex('#96603E', '#6B4026', 8); woodFloor.repeat.set(2, 2);
 const bathTile = makeTileTex('#D8D6D0', '#B6B4AE', 6, 4);
 const balconyTile = makeTileTex('#C8C0B4', '#A39B8F', 5, 8);
@@ -850,18 +969,22 @@ const curtainGroup = new THREE.Group();
 const pathGroup = new THREE.Group();
 const grilleGroup = new THREE.Group();
 const nightLightsGroup = new THREE.Group();
+const ceilingGroup = new THREE.Group();
+ceilingGroup.visible = false;
 const wallMeshes = [];
 const floorMeshes = [];
 const floorRects = [];
 const wallSegments = [];
+const glassSegments = [];
+const proximityDoors = [];
 const inspectables = [];
 const waypointGroup = new THREE.Group();
 waypointGroup.visible = false;
 const waypointMeshes = [];
 
-scene.add(wallGroup, furnGroup, decorGroup, curtainGroup, pathGroup, grilleGroup, nightLightsGroup, waypointGroup);
+scene.add(wallGroup, furnGroup, decorGroup, curtainGroup, pathGroup, grilleGroup, nightLightsGroup, ceilingGroup, waypointGroup);
 
-// Glowing Matterport-style floor cursor ring for Virtual Walkthrough
+// Glowing Matterport-style floor cursor ring + destination ripple for Virtual Walkthrough
 const walkMarker = new THREE.Group();
 const ringOuter = new THREE.Mesh(
   new THREE.RingGeometry(0.18, 0.25, 32),
@@ -882,6 +1005,19 @@ walkMarker.add(ringOuter, ringInner, ringDot);
 walkMarker.position.y = 0.026;
 walkMarker.visible = false;
 scene.add(walkMarker);
+
+const clickRippleMat = new THREE.MeshBasicMaterial({ color: 0xF8DFA0, side: THREE.DoubleSide, transparent: true, opacity: 0 });
+const clickRipple = new THREE.Mesh(new THREE.RingGeometry(0.14, 0.22, 32), clickRippleMat);
+clickRipple.rotation.x = -Math.PI / 2;
+clickRipple.position.y = 0.028;
+clickRipple.visible = false;
+scene.add(clickRipple);
+let clickRippleAge = 1;
+function triggerClickRipple(x, z) {
+  clickRipple.position.set(x, 0.028, z);
+  clickRipple.visible = true;
+  clickRippleAge = 0;
+}
 
 function addBox(parent, w, h, d, x, y, z, mat, meta = null) {
   const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat);
@@ -925,39 +1061,70 @@ function addWall(x1, z1, x2, z2, thick = 0.14, mat = MAT.wallBase, hFull = WALL_
 
 function addWindow(x1, z1, x2, z2, sill = 0.85, top = 2.25) {
   addWall(x1, z1, x2, z2, 0.14, MAT.wallBase, sill, 0);
+  if (WALL_FULL_H - top > 0.05) addWall(x1, z1, x2, z2, 0.14, MAT.wallBase, WALL_FULL_H - top, top);
   const dx = x2 - x1, dz = z2 - z1, len = Math.hypot(dx, dz);
+  const rotY = -Math.atan2(dz, dx);
+  const cx = (x1 + x2) / 2, cz = (z1 + z2) / 2;
   const pane = new THREE.Mesh(new THREE.BoxGeometry(len, top - sill, 0.04), MAT.glass);
-  pane.position.set((x1 + x2) / 2, (sill + top) / 2, (z1 + z2) / 2);
-  pane.rotation.y = -Math.atan2(dz, dx);
+  pane.position.set(cx, (sill + top) / 2, cz);
+  pane.rotation.y = rotY;
   pane.userData = { hFull: top - sill, baseY: sill, isGlass: true };
   wallGroup.add(pane);
   wallMeshes.push(pane);
+  glassSegments.push({ x1, z1, x2, z2, isSlider: false });
+  // Slim dark charcoal aluminum sill & header trim
+  [sill + 0.015, top - 0.015].forEach(fy => {
+    const bar = new THREE.Mesh(new THREE.BoxGeometry(len, 0.03, 0.065), MAT.darkMetal);
+    bar.position.set(cx, fy, cz); bar.rotation.y = rotY;
+    bar.userData = { hFull: 0.03, baseY: fy - 0.015, isGlass: true };
+    wallGroup.add(bar); wallMeshes.push(bar);
+  });
 }
 
-function addSlider(x1, z1, x2, z2, top = 2.40) {
+function addSlider(x1, z1, x2, z2, top = 2.40, slideDir = 1) {
+  if (WALL_FULL_H - top > 0.05) addWall(x1, z1, x2, z2, 0.14, MAT.wallBase, WALL_FULL_H - top, top);
   const dx = x2 - x1, dz = z2 - z1, len = Math.hypot(dx, dz);
-  const pane = new THREE.Mesh(new THREE.BoxGeometry(len, top, 0.05), MAT.glass);
-  pane.position.set((x1 + x2) / 2, top / 2, (z1 + z2) / 2);
-  pane.rotation.y = -Math.atan2(dz, dx);
+  const rotY = -Math.atan2(dz, dx);
+  const cx = (x1 + x2) / 2, cz = (z1 + z2) / 2;
+  const pane = new THREE.Mesh(new THREE.BoxGeometry(len, top, 0.05), MAT.glass.clone());
+  pane.position.set(cx, top / 2, cz);
+  pane.rotation.y = rotY;
   pane.userData = { hFull: top, baseY: 0, isGlass: true };
   wallGroup.add(pane);
   wallMeshes.push(pane);
+  glassSegments.push({ x1, z1, x2, z2, isSlider: true });
+  // Register slider glass to smoothly slide open & fade clear when stepping onto balcony
+  proximityDoors.push({
+    mesh: pane, cx, cz, axisX: (dx / len) * slideDir, axisZ: (dz / len) * slideDir,
+    baseX: cx, baseZ: cz, slideDist: len * 0.42, baseOpacity: 0.18, radius: 1.75, progress: 0, kind: 'slider',
+  });
   addBox(wallGroup, Math.abs(dx) > Math.abs(dz) ? len : 0.06, 0.05, Math.abs(dz) > Math.abs(dx) ? len : 0.06,
-    (x1+x2)/2, 0.025, (z1+z2)/2, MAT.darkMetal);
+    cx, 0.025, cz, MAT.darkMetal);
 }
 
-function addCurtain(x1, z1, x2, z2, offsetInX, offsetInZ) {
+function addCurtain(x1, z1, x2, z2, offsetInX, offsetInZ, sillOnly = false) {
   const dx = x2 - x1, dz = z2 - z1, len = Math.hypot(dx, dz);
   const rotY = -Math.atan2(dz, dx);
+  const cx = (x1 + x2) / 2, cz = (z1 + z2) / 2;
+  const hSheer = sillOnly ? 1.44 : 2.38;
+  const yMid = sillOnly ? 1.56 : 1.22;
   // Sheer center
-  const sheer = new THREE.Mesh(new THREE.BoxGeometry(len * 0.88, 2.38, 0.025), MAT.sheerCurtain);
-  sheer.position.set((x1+x2)/2 + offsetInX, 1.22, (z1+z2)/2 + offsetInZ);
+  const sheer = new THREE.Mesh(new THREE.BoxGeometry(len * 0.88, hSheer, 0.025), MAT.sheerCurtain.clone());
+  sheer.position.set(cx + offsetInX, yMid, cz + offsetInZ);
   sheer.rotation.y = rotY;
   curtainGroup.add(sheer);
+  // If paired with a glass slider, gently part/fade sheer curtain on approach
+  const pairedSlider = glassSegments.find(g => g.isSlider && Math.hypot((g.x1 + g.x2) / 2 - cx, (g.z1 + g.z2) / 2 - cz) < 0.35);
+  if (pairedSlider) {
+    proximityDoors.push({
+      mesh: sheer, cx, cz, axisX: dx / len, axisZ: dz / len,
+      baseX: cx + offsetInX, baseZ: cz + offsetInZ, slideDist: len * 0.36, baseOpacity: 0.24, radius: 1.85, progress: 0, kind: 'sheer',
+    });
+  }
   // Two blackout flank panels
   [-0.42, 0.42].forEach(frac => {
-    const p = new THREE.Mesh(new THREE.BoxGeometry(len * 0.20, 2.40, 0.055), MAT.drapeCurtain);
-    p.position.set((x1+x2)/2 + dx * frac + offsetInX * 1.4, 1.22, (z1+z2)/2 + dz * frac + offsetInZ * 1.4);
+    const p = new THREE.Mesh(new THREE.BoxGeometry(len * 0.20, sillOnly ? 1.46 : 2.40, 0.055), MAT.drapeCurtain);
+    p.position.set(cx + dx * frac + offsetInX * (sillOnly ? 1.05 : 1.4), yMid, cz + dz * frac + offsetInZ * (sillOnly ? 1.05 : 1.4));
     p.rotation.y = rotY;
     p.castShadow = true;
     curtainGroup.add(p);
@@ -1071,26 +1238,33 @@ addWall(11.25, 0.00, 15.78, 0.00);
 
 // WEST PERIMETER (x = 0)
 addWall(0.00, 0.00, 0.00, 0.30);
-addBox(wallGroup, 0.06, 2.25, 1.15, 0.02, 1.125, 0.88, MAT.builderDoor, {
+addWall(0.00, 0.30, 0.00, 1.48, 0.14, MAT.wallBase, WALL_FULL_H - 2.25, 2.25); // Main Door header lintel
+const mainDoorLeaf = addBox(wallGroup, 0.06, 2.25, 1.15, 0.02, 1.125, 0.88, MAT.builderDoor, {
   tag: 'ENTRY · WEST FACING', title: 'Main Entrance Door (40mm Solid Timber)',
   desc: 'Fitted with Aqara A100 Zigbee mortise lock + Aqara G4 hardwired doorbell (12/24V DIN transformer). Immediately North of the West TV Media Wall.',
   meta: 'Orientation: West · Floor 42 Tower B'
 });
-addBox(wallGroup, 0.072, 2.20, 0.14, 0.02, 1.125, 1.12, MAT.darkMetal); // Builder walnut door dark vertical inlay (Docket p.2)
-addBox(wallGroup, 0.08, 0.04, 0.14, 0.04, 1.05, 1.28, MAT.brass); // Brass mortise handle
+mainDoorLeaf.userData.hFull = 2.25; mainDoorLeaf.userData.baseY = 0; mainDoorLeaf.userData.isGlass = true;
+wallMeshes.push(mainDoorLeaf);
+const mainDoorInlay = addBox(wallGroup, 0.072, 2.20, 0.14, 0.02, 1.125, 1.12, MAT.darkMetal); // Builder walnut door dark vertical inlay (Docket p.2)
+mainDoorInlay.userData.hFull = 2.20; mainDoorInlay.userData.baseY = 0.025; mainDoorInlay.userData.isGlass = true;
+wallMeshes.push(mainDoorInlay);
+const mainDoorHandle = addBox(wallGroup, 0.08, 0.04, 0.14, 0.04, 1.05, 1.28, MAT.brass); // Brass mortise handle
+mainDoorHandle.userData.hFull = 0.04; mainDoorHandle.userData.baseY = 1.03; mainDoorHandle.userData.isGlass = true;
+wallMeshes.push(mainDoorHandle);
 addWall(0.00, 1.48, 0.00, 5.48, 0.14, MAT.wallLimewash);
 addWall(0.00, 5.48, 0.00, 6.05);
 addWindow(0.00, 6.05, 0.00, 6.95, 1.4, 2.2);
-addWall(0.00, 6.95, 0.00, 7.80);
-addWindow(0.00, 7.80, 0.00, 8.75); addCurtain(0.00, 7.80, 0.00, 8.75, 0.14, 0);
-addWall(0.00, 8.75, 0.00, 11.60);
+addWall(0.00, 6.95, 0.00, 7.62);
+addWindow(0.00, 7.62, 0.00, 8.32); addCurtain(0.00, 7.62, 0.00, 8.32, 0.10, 0, true);
+addWall(0.00, 8.32, 0.00, 11.60);
 
 // EAST PERIMETER
 addWall(15.78, 0.00, 15.78, 1.05);
 addWindow(15.78, 1.05, 15.78, 2.65); addCurtain(15.78, 1.05, 15.78, 2.65, -0.14, 0);
 addWall(15.78, 2.65, 15.78, 3.78);
 addWall(14.40, 3.78, 15.90, 3.78);
-addSlider(14.40, 3.95, 14.40, 6.18); addCurtain(14.40, 3.95, 14.40, 6.18, -0.14, 0);
+addSlider(14.40, 3.95, 14.40, 6.18, 2.40, -1); addCurtain(14.40, 3.95, 14.40, 6.18, -0.14, 0);
 addWall(14.40, 6.18, 14.40, 7.52);
 addWall(14.40, 6.28, 15.90, 6.28);
 addWall(14.40, 7.52, 14.40, 8.45);
@@ -1098,7 +1272,7 @@ addWall(14.40, 9.30, 14.40, 11.60);
 
 // SOUTH PERIMETER (z = 11.60)
 addWall(0.00, 11.60, 2.15, 11.60);
-addSlider(2.15, 11.60, 3.95, 11.60); addCurtain(2.15, 11.60, 3.95, 11.60, 0, -0.14);
+addSlider(2.15, 11.60, 3.95, 11.60, 2.40, -1); addCurtain(2.15, 11.60, 3.95, 11.60, 0, -0.14);
 addWall(3.95, 11.60, 4.45, 11.60);
 addWindow(4.45, 11.60, 5.35, 11.60, 1.4, 2.2);
 addWall(5.35, 11.60, 7.90, 11.60);
@@ -1109,44 +1283,67 @@ addWall(13.05, 11.60, 15.90, 11.60);
 
 // INTERNAL PARTITIONS
 addWall(4.08, 0.00, 4.08, 3.78, 0.14, MAT.wallBase);
-addBox(furnGroup, 0.18, 2.45, 0.10, 4.08, 1.225, 3.82, MAT.cinnHickory);
-addBox(furnGroup, 0.18, 2.45, 0.10, 4.08, 1.225, 5.44, MAT.cinnHickory);
-addBox(furnGroup, 0.18, 0.14, 1.72, 4.08, 2.48, 4.63, MAT.cinnHickory);
+const archJambN = addBox(furnGroup, 0.18, 2.45, 0.10, 4.08, 1.225, 3.82, MAT.cinnHickory);
+const archJambS = addBox(furnGroup, 0.18, 2.45, 0.10, 4.08, 1.225, 5.44, MAT.cinnHickory);
+const archLintel = addBox(furnGroup, 0.18, 0.14, 1.72, 4.08, 2.48, 4.63, MAT.cinnHickory);
+archJambN.userData.noCollide = archJambS.userData.noCollide = archLintel.userData.noCollide = true;
+addWall(4.08, 3.78, 4.08, 5.48, 0.14, MAT.wallBase, WALL_FULL_H - 2.54, 2.54); // Archway header
 
 addWall(4.08, 2.50, 5.78, 2.50, 0.12);
 addWall(5.78, 0.00, 5.78, 0.45, 0.14, MAT.wallKabir);
 addWall(5.78, 1.25, 5.78, 3.78, 0.14, MAT.wallKabir);
-addBox(furnGroup, 1.66, 2.45, 0.08, 4.93, 1.225, 3.78, MAT.hiddenGrooved, {
+addWall(4.08, 3.78, 5.78, 3.78, 0.14, MAT.wallBase, WALL_FULL_H - 2.45, 2.45);
+const linenDoorMat = MAT.hiddenGrooved.clone(); linenDoorMat.transparent = true;
+const linenHiddenDoor = addBox(furnGroup, 1.66, 2.45, 0.08, 4.93, 1.225, 3.78, linenDoorMat, {
   tag: 'HOMZ HIDDEN DOOR (NW LIVING)', title: 'Linen Store Geometric-Grooved Hidden Door',
   desc: 'Full-height 3163 SI Beige Wool paneling with DP-25mm-BG gold & DP-7.6mm-AB bronze groove inlays on 4× SS304 ball-bearing hinges.',
   meta: 'Linen Store: 1550 × 1300 mm · Docket p. 5'
 });
+linenHiddenDoor.userData.noCollide = true;
+proximityDoors.push({
+  mesh: linenHiddenDoor, cx: 4.93, cz: 3.78, axisX: 0, axisZ: -1,
+  baseX: 4.93, baseZ: 3.78, slideDist: 0.08, baseOpacity: 1.0, radius: 1.55, progress: 0, kind: 'dissolve',
+});
 addWall(5.78, 3.78, 8.75, 3.78, 0.14, MAT.wallKabir);
+addWall(8.75, 3.78, 9.65, 3.78, 0.14, MAT.wallBase, WALL_FULL_H - 2.28, 2.28); // BR-02 Door header
 addWall(9.65, 3.78, 9.92, 3.78, 0.14);
 
 addWall(9.92, 0.00, 9.92, 3.78, 0.14, MAT.wallKabir);
 addWall(9.92, 2.50, 11.62, 2.50, 0.12);
 addWall(11.62, 0.00, 11.62, 1.65, 0.14);
 addWall(11.62, 2.40, 11.62, 3.78, 0.14);
+addWall(11.62, 3.78, 12.70, 3.78, 0.14, MAT.wallBase, WALL_FULL_H - 2.28, 2.28); // BR-03 Door header
 addWall(12.70, 3.78, 15.78, 3.78, 0.14);
 
 addWall(0.00, 5.48, 4.08, 5.48, 0.14);
 addWall(2.85, 5.48, 2.85, 7.52, 0.12);
-addBox(furnGroup, 0.08, 2.45, 2.04, 4.08, 1.225, 6.50, MAT.hiddenGrooved, {
+addWall(4.08, 5.48, 4.08, 7.52, 0.14, MAT.wallBase, WALL_FULL_H - 2.45, 2.45);
+const pujaDoorMat = MAT.hiddenGrooved.clone(); pujaDoorMat.transparent = true;
+const pujaHiddenDoor = addBox(furnGroup, 0.08, 2.45, 2.04, 4.08, 1.225, 6.50, pujaDoorMat, {
   tag: 'HOMZ HIDDEN DOOR (SW LIVING)', title: 'Puja Walk-in Wardrobe Geometric-Grooved Hidden Door',
   desc: 'Full-height 3163 SI Beige Wool paneling with DP-25mm-BG gold & DP-7.6mm-AB bronze grooves matching Linen Store.',
   meta: 'Walk-in Clear: 1220 × 1850 mm · Docket pp. 5–6'
 });
+pujaHiddenDoor.userData.noCollide = true;
+proximityDoors.push({
+  mesh: pujaHiddenDoor, cx: 4.08, cz: 6.50, axisX: -1, axisZ: 0,
+  baseX: 4.08, baseZ: 6.50, slideDist: 0.08, baseOpacity: 1.0, radius: 1.55, progress: 0, kind: 'dissolve',
+});
 addWall(0.00, 7.52, 1.80, 7.52, 0.14);
+addWall(1.80, 7.52, 2.60, 7.52, 0.14, MAT.wallBase, WALL_FULL_H - 2.28, 2.28); // Master Bath header
 addWall(2.60, 7.52, 4.08, 7.52, 0.14);
+addWall(4.08, 7.52, 5.10, 7.52, 0.14, MAT.wallBase, WALL_FULL_H - 2.28, 2.28); // Master Entry header
 
 addWall(5.10, 7.52, 8.85, 7.52, 0.14); // Living South (Persian Carpet) / BR-01 North
+addWall(8.85, 7.52, 9.75, 7.52, 0.14, MAT.wallBase, WALL_FULL_H - 2.28, 2.28); // BR-01 Entry header
 addWall(9.75, 7.52, 10.00, 7.52, 0.14);
 addWall(4.08, 8.95, 5.78, 8.95, 0.12); // MBR NE Dressing Nook South wall
 addWall(4.08, 8.95, 4.08, 11.60, 0.14);
 addWall(5.78, 7.52, 5.78, 10.20, 0.14); // MBR NE Dressing Nook East wall
+addWall(5.78, 10.20, 5.78, 11.00, 0.14, MAT.wallBase, WALL_FULL_H - 2.28, 2.28); // BR-01 Bath header
 addWall(5.78, 11.00, 5.78, 11.60, 0.14);
 addWall(10.00, 7.52, 10.00, 11.60, 0.14);
+addWall(14.40, 8.45, 14.40, 9.30, 0.14, MAT.wallBase, WALL_FULL_H - 2.28, 2.28); // Kitchen-Utility header
 
 // Balcony Parapets, SS316 Grilles & Utility White uPVC 3-Track Enclosure
 function addBalconyParapetAndGrille(x1, z1, x2, z2) {
@@ -1164,6 +1361,7 @@ addBalconyParapetAndGrille(0.00, 13.15, 4.08, 13.15);
 addBalconyParapetAndGrille(0.00, 11.60, 0.00, 13.15);
 addBalconyParapetAndGrille(4.08, 11.60, 4.08, 13.15);
 addBalconyParapetAndGrille(15.90, 3.78, 15.90, 6.28);
+addBalconyParapetAndGrille(15.90, 6.28, 15.90, 7.52); // Service Balcony East safety parapet & grille
 
 // Utility East Parapet + Sumadhura FM Locked White uPVC 3-Track Slider Enclosure
 addWall(15.90, 7.52, 15.90, 11.60, 0.12, MAT.wallBase, 1.10, 0);
@@ -1409,6 +1607,7 @@ addBox(furnGroup, 2.20, 0.04, 1.00, 12.15, 0.73, 5.65, MAT.cpTeak, {
 // 6 Everyday + 2 End/Guest Solid Wood Dining Chairs (Orange Tree Emiko / Spin Sono: 4 wood legs + fabric cushion + teak backrest)
 function addDiningChair(cx, cz, rotY) {
   const g = new THREE.Group(); g.position.set(cx, 0, cz); g.rotation.y = rotY;
+  g.userData.noCollide = true; // Keep dining table solid while leaving perimeter aisles smooth to walk
   [[-0.19,-0.19],[0.19,-0.19],[-0.19,0.19],[0.19,0.19]].forEach(([lx,lz]) => {
     const leg = new THREE.Mesh(new THREE.BoxGeometry(0.038, 0.44, 0.038), MAT.cpTeak);
     leg.position.set(lx, 0.22, lz); leg.castShadow = true; g.add(leg);
@@ -1639,8 +1838,8 @@ addBox(furnGroup, 0.38, 0.18, 0.46, 0.28, 0.48, 10.60, MAT.oakLight);
     meta: 'Budget: ₹9.5k–₹14k pair'
   });
 });
-// 2× EGLO SERAS Brushed-Brass Bedside Reading Sconces (1,300mm AFF)
-[8.10, 10.60].forEach(sz => {
+// 2× EGLO SERAS Brushed-Brass Bedside Reading Sconces (1,300mm AFF, clear of West window)
+[8.46, 10.60].forEach(sz => {
   addBox(decorGroup, 0.14, 0.09, 0.09, 0.14, 1.30, sz, MAT.brass, {
     tag: 'MASTER SUITE · READING SCONCE', title: 'EGLO SERAS Brushed-Brass Wall Spotlight (×2)',
     desc: '2-axis rotatable GU10 head with frosted SOLHETTA 2700K dimmable bulb + anti-glare honeycomb ring on Shelly Dimmer Gen3.',
@@ -1884,10 +2083,10 @@ function addBathSet(cx, cz, isMaster = false) {
 addBathSet(1.15, 6.05, true);
 addBathSet(4.92, 0.65, false);
 addBathSet(10.75, 0.65, false);
-addBathSet(4.92, 10.75, false);
+addBathSet(4.92, 9.75, false);
 
 // ============================================================================
-// 8. CIRCULATION OVERLAY & LIGHTING
+// 8. CIRCULATION OVERLAY, LIGHTING, WALK-MODE CEILING & FLOOR 42 SKY DOME
 // ============================================================================
 function addPath(points) {
   const pts = points.map(([x, z]) => new THREE.Vector3(x, 0.06, z));
@@ -1914,28 +2113,133 @@ sunLight.shadow.bias = -0.0005;
 scene.add(sunLight);
 
 const eveningPoints = [
-  [2.0, 2.4, 2.6, 0xFFCC88, 3.2, 7.5],
-  [7.2, 2.4, 5.6, 0xFFCA80, 3.4, 8.0],
-  [12.15, 1.55, 5.65, 0xFFC570, 3.8, 6.5],
-  [12.2, 2.4, 9.6, 0xFFE2B8, 3.2, 7.0],
-  [2.1, 2.3, 9.5, 0xFFC87C, 2.8, 6.5],
-  [5.1, 2.1, 8.2, 0xFFD292, 2.0, 4.0], // MBR NE Dressing Nook Halo
-  [8.2, 2.3, 9.5, 0xFFE0B2, 2.6, 6.2],
-  [7.8, 2.3, 1.9, 0xFFD496, 2.6, 6.2],
-  [13.85, 2.4, 1.6, 0xFFBD66, 3.5, 6.5],
-  [0.85, 1.95, 0.65, 0xFFB85C, 1.8, 3.8],
+  [2.0, 2.35, 2.6, 0xFFBC6E, 1.55, 6.2],
+  [3.36, 2.02, 5.02, 0xFFB058, 1.15, 4.2], // SE Foyer Pendant over Bench/Credenza
+  [7.2, 2.35, 5.6, 0xFFBC6B, 1.65, 6.8],
+  [12.15, 1.55, 5.65, 0xFFB45C, 1.90, 5.8], // Dining Over-Table Pendant
+  [12.2, 2.35, 9.6, 0xFFD6A0, 1.50, 6.2],
+  [2.1, 2.25, 9.5, 0xFFBA68, 1.45, 5.6],
+  [5.1, 2.1, 8.2, 0xFFC57C, 1.00, 3.6], // MBR NE Dressing Nook Halo
+  [8.2, 2.25, 9.5, 0xFFD098, 1.30, 5.4],
+  [7.8, 2.25, 1.9, 0xFFC882, 1.30, 5.4],
+  [13.85, 2.35, 1.6, 0xFFAE52, 1.85, 5.8], // BR-03 Warm Palki Glow
+  [10.75, 2.30, 3.15, 0xFFC57C, 0.90, 3.6], // Common Vanity Lobby
+  [3.48, 2.30, 6.50, 0xFFC274, 0.85, 3.2],  // Puja Walk-in
+  [15.05, 2.30, 9.55, 0xFFD8A8, 1.10, 4.2], // Kitchen Utility
+  [1.85, 2.30, 6.50, 0xFFD6A2, 0.95, 3.6],  // Master Bath
+  [15.05, 2.20, 5.05, 0xFFB058, 0.95, 4.0], // East Sit-Out Warm Sconce
+  [2.10, 2.20, 12.25, 0xFFB058, 0.95, 4.0], // South Balcony Warm Sconce
 ];
 eveningPoints.forEach(([x, y, z, col, intensity, dist]) => {
-  const pl = new THREE.PointLight(col, intensity, dist, 1.6);
+  const pl = new THREE.PointLight(col, intensity, dist, 2.0);
   pl.position.set(x, y, z);
   nightLightsGroup.add(pl);
 });
 addBox(nightLightsGroup, 3.6, 0.03, 0.05, 13.7, 2.68, 0.16, MAT.coveGlow);
 addBox(nightLightsGroup, 0.05, 0.03, 3.2, 0.16, 2.68, 3.0, MAT.coveGlow);
+addBox(nightLightsGroup, 5.2, 0.03, 0.05, 7.1, 2.68, 7.36, MAT.coveGlow); // Living South perimeter cove
+addBox(nightLightsGroup, 3.4, 0.03, 0.05, 2.1, 2.68, 7.68, MAT.coveGlow); // Master North cove
 nightLightsGroup.visible = false;
 
+// Walk-Mode Architectural Gypsum False Ceiling + Hybec Deep-Recessed COB Downlights
+const ceilingMat = new THREE.MeshStandardMaterial({ color: 0xF5F3EE, roughness: 0.92, metalness: 0.0, side: THREE.DoubleSide });
+const cobBaffleMat = new THREE.MeshStandardMaterial({ color: 0x20232A, roughness: 0.55, metalness: 0.35 });
+const cobCoreMat = new THREE.MeshStandardMaterial({ color: 0xFFF2D6, emissive: 0xFFCE84, emissiveIntensity: 0.25, roughness: 0.3 });
+floorRects.forEach(r => {
+  // Open sky above East Sit-Out, South Balcony & Service Balcony; keep slab over interior + Utility uPVC
+  const isOpenBalcony = r.isBalcony && !(r.x1 >= 14.3 && r.z1 >= 7.5);
+  if (isOpenBalcony) return;
+  const w = r.x2 - r.x1, d = r.z2 - r.z1;
+  const slab = new THREE.Mesh(new THREE.PlaneGeometry(w, d), ceilingMat);
+  slab.rotation.x = Math.PI / 2;
+  slab.position.set((r.x1 + r.x2) * 0.5, WALL_FULL_H, (r.z1 + r.z2) * 0.5);
+  slab.receiveShadow = true;
+  ceilingGroup.add(slab);
+});
+const cobCoords = [
+  [1.2, 1.5], [2.9, 1.5], [1.2, 3.9], [2.9, 3.9],
+  [5.4, 4.7], [7.2, 4.7], [9.1, 4.7], [5.4, 6.4], [9.1, 6.4],
+  [11.2, 4.6], [13.2, 4.6], [11.2, 6.6], [13.2, 6.6],
+  [11.3, 8.6], [13.1, 8.6], [11.3, 10.3], [13.1, 10.3],
+  [1.3, 8.6], [3.1, 8.6], [1.3, 10.4], [3.1, 10.4], [4.9, 8.2],
+  [6.9, 8.6], [8.8, 8.6], [6.9, 10.4], [8.8, 10.4],
+  [6.9, 1.2], [8.6, 1.2], [6.9, 2.8], [8.6, 2.8],
+  [12.8, 1.2], [14.6, 1.2], [12.8, 2.7], [14.6, 2.7],
+  [10.8, 3.1], [3.5, 6.5], [15.1, 8.8], [15.1, 10.4],
+];
+const cobTrimGeo = new THREE.RingGeometry(0.036, 0.056, 16);
+const cobCoreGeo = new THREE.CircleGeometry(0.035, 16);
+cobCoords.forEach(([cx, cz]) => {
+  const trim = new THREE.Mesh(cobTrimGeo, cobBaffleMat);
+  trim.rotation.x = Math.PI / 2;
+  trim.position.set(cx, WALL_FULL_H - 0.004, cz);
+  const core = new THREE.Mesh(cobCoreGeo, cobCoreMat);
+  core.rotation.x = Math.PI / 2;
+  core.position.set(cx, WALL_FULL_H - 0.003, cz);
+  ceilingGroup.add(trim, core);
+});
+
+// Walk-Mode Floor 42 Hyderabad Skyline Sky Dome (Daylight & Twilight 2700K)
+function makeSkyDomeTex(isNight) {
+  const c = document.createElement('canvas'); c.width = 1024; c.height = 512;
+  const g = c.getContext('2d');
+  const grad = g.createLinearGradient(0, 0, 0, 512);
+  if (isNight) {
+    grad.addColorStop(0.00, '#040711');
+    grad.addColorStop(0.38, '#0A1328');
+    grad.addColorStop(0.51, '#16223A');
+    grad.addColorStop(0.56, '#3D2A1F');
+    grad.addColorStop(0.62, '#10141D');
+    grad.addColorStop(1.00, '#07090E');
+  } else {
+    grad.addColorStop(0.00, '#3B78C4');
+    grad.addColorStop(0.34, '#6CA6DC');
+    grad.addColorStop(0.49, '#A7CEE8');
+    grad.addColorStop(0.535,'#E7E5DA');
+    grad.addColorStop(0.59, '#BDB8AE');
+    grad.addColorStop(1.00, '#7D7B78');
+  }
+  g.fillStyle = grad; g.fillRect(0, 0, 1024, 512);
+  // Subtle wispy daytime clouds in upper sky
+  if (!isNight) {
+    for (let i = 0; i < 18; i++) {
+      const cx = (i * 63 + 24) % 1024, cy = 128 + (i * 23) % 92, rw = 44 + (i * 19) % 72;
+      const cg = g.createRadialGradient(cx, cy, 4, cx, cy, rw);
+      cg.addColorStop(0, 'rgba(255,253,248,0.34)');
+      cg.addColorStop(1, 'rgba(255,253,248,0)');
+      g.fillStyle = cg; g.fillRect(cx - rw, cy - rw * 0.45, rw * 2, rw * 0.9);
+    }
+  }
+  // Distant Financial District skyline slightly below eye-level horizon (Floor 42 perspective)
+  const baseLine = 286;
+  g.fillStyle = isNight ? 'rgba(9, 13, 24, 0.92)' : 'rgba(116, 136, 158, 0.42)';
+  for (let i = 0; i < 64; i++) {
+    const bx = i * 16 + ((i * 7) % 5);
+    const bw = 8 + (i * 11) % 14;
+    const bh = 8 + ((i * 29) % 28);
+    g.fillRect(bx, baseLine - bh, bw, bh + 44);
+    if (isNight) {
+      g.fillStyle = 'rgba(255, 208, 128, 0.62)';
+      for (let wy = baseLine - bh + 3; wy < baseLine - 2; wy += 5) {
+        if ((i + wy) % 3 !== 0) g.fillRect(bx + 2, wy, Math.max(2, bw - 4), 1.6);
+      }
+      g.fillStyle = 'rgba(9, 13, 24, 0.92)';
+    }
+  }
+  const tex = new THREE.CanvasTexture(c);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  return tex;
+}
+const skyDayTex = makeSkyDomeTex(false);
+const skyNightTex = makeSkyDomeTex(true);
+const skyDomeMat = new THREE.MeshBasicMaterial({ map: skyDayTex, side: THREE.BackSide, depthWrite: false });
+const skyDome = new THREE.Mesh(new THREE.SphereGeometry(68, 32, 18), skyDomeMat);
+skyDome.position.set(8.0, 0.8, 6.5);
+skyDome.visible = false;
+scene.add(skyDome);
+
 // ============================================================================
-// 9. CAMERA PRESETS, CLICKABLE ROOM LABELS & BEST-IN-CLASS WALK ENGINE
+// 9. FURNITURE COLLIDERS, CONNECTED NAV GRAPH & BEST-IN-CLASS WALK ENGINE
 // ============================================================================
 const PRESETS = [
   { id: 'overview',  name: '3D Dollhouse', dim: 'Full B4206',        cam: [-3.5, 15.8, 19.2], tgt: [8.0, 0.3, 6.2] },
@@ -1965,82 +2269,216 @@ const ROOM_LABELS = [
   { id: 'kitchen',   name: 'Utility (uPVC)',    dim: '4\'11" Wide',     pos: [15.15, 1.5, 9.6] },
 ];
 
-// Curated Matterport-style Walkthrough Nodes (ordered as a natural home tour)
-const WALK_NODES = [
-  { id: 'drawing',   label: 'Foyer Entrance',       pos: [1.10, 1.45], look: [2.60, 3.45] },
-  { id: 'drawing',   label: 'Drawing Room',         pos: [2.25, 3.65], look: [0.65, 3.55] },
-  { id: 'living',    label: 'Living Archway',       pos: [4.45, 4.65], look: [8.20, 5.50] },
-  { id: 'living',    label: 'Living Spine',         pos: [7.10, 5.10], look: [11.20, 5.40] },
-  { id: 'living',    label: 'Central Hall',         pos: [9.20, 4.45], look: [12.10, 5.20] },
-  { id: 'dining',    label: 'Dining Room',          pos: [11.20, 5.20], look: [13.30, 4.35] },
-  { id: 'dining',    label: 'East Sit-Out',         pos: [15.05, 5.05], look: [11.80, 5.25] },
-  { id: 'kitchen',   label: 'Kitchen',              pos: [12.15, 8.85], look: [12.00, 11.20] },
-  { id: 'gurudwara', label: 'BR-03 Home Gurudwara', pos: [12.95, 2.75], look: [14.74, 1.85] },
-  { id: 'kabir',     label: 'BR-02 Kabir Room',     pos: [7.55, 1.50], look: [7.35, 3.68] },
-  { id: 'study',     label: 'BR-01 Study / Guest',  pos: [7.45, 9.35], look: [9.60, 9.85] },
-  { id: 'master',    label: 'Master Suite',         pos: [2.55, 9.70], look: [0.85, 9.25] },
-  { id: 'master',    label: 'Master NE Nook',       pos: [4.55, 8.20], look: [5.65, 8.20] },
-  { id: 'master',    label: 'South Balcony',        pos: [2.25, 12.35], look: [2.25, 9.50] },
-  { id: 'living',    label: 'Puja Walk-in',         pos: [3.48, 6.50], look: [2.95, 6.50] },
+// Auto-collect 2D furniture AABBs (collision + architect mini-map silhouettes)
+const furnColliders = [];
+const mmFurnShapes = [];
+scene.updateMatrixWorld(true);
+(function buildFurnitureColliders() {
+  const box = new THREE.Box3();
+  function isNoCollide(obj) {
+    let cur = obj;
+    while (cur && cur !== furnGroup) {
+      if (cur.userData && cur.userData.noCollide) return true;
+      cur = cur.parent;
+    }
+    return false;
+  }
+  furnGroup.traverse(obj => {
+    if (!obj.isMesh || isNoCollide(obj)) return;
+    box.setFromObject(obj);
+    const sx = box.max.x - box.min.x;
+    const sz = box.max.z - box.min.z;
+    if (box.max.y <= 0.20 || box.min.y >= 1.85) return;
+    if (sx < 0.06 && sz < 0.06) return;
+    const rect = { x1: box.min.x, z1: box.min.z, x2: box.max.x, z2: box.max.z, maxY: box.max.y };
+    furnColliders.push(rect);
+    if (sx >= 0.24 && sz >= 0.24 && sx <= 4.5 && sz <= 4.5) {
+      mmFurnShapes.push(rect);
+    }
+  });
+})();
+
+// Connected 100% Wall- & Furniture-Cleared Navigation Graph (Unit B4206)
+const NAV_NODES = {
+  R_foyer:    { pos: [1.10, 1.45] },
+  T_drw_w:    { pos: [1.15, 3.65] },
+  R_drawing:  { pos: [2.45, 4.35] },
+  D_arch:     { pos: [4.08, 4.63] },
+  R_living_w: { pos: [4.85, 4.65] },
+  D_linen:    { pos: [4.93, 3.78] },
+  R_linen:    { pos: [4.93, 3.15] },
+  T_living_sw:{ pos: [4.85, 6.50] },
+  D_walkin:   { pos: [4.08, 6.50] },
+  R_walkin:   { pos: [3.48, 6.50] },
+  R_living:   { pos: [7.05, 4.65] },
+  R_hall:     { pos: [9.25, 4.65] },
+  D_br2:      { pos: [9.20, 3.78] },
+  T_br2_se:   { pos: [8.90, 3.35] },
+  T_br2_e:    { pos: [8.85, 2.15] },
+  R_br2:      { pos: [7.45, 1.95] },
+  T_br2_w:    { pos: [6.25, 1.55] },
+  D_br2_bath: { pos: [5.78, 0.90] },
+  R_br2_bath: { pos: [5.25, 1.00] },
+  T_din_w:    { pos: [10.35, 4.65] },
+  D_lobby:    { pos: [11.02, 3.78] },
+  R_lobby:    { pos: [11.02, 3.15] },
+  R_dining:   { pos: [11.95, 4.35] },
+  D_br3:      { pos: [12.16, 3.78] },
+  R_br3:      { pos: [13.10, 2.55] },
+  T_din_ne:   { pos: [13.55, 4.45] },
+  T_din_e:    { pos: [13.95, 5.05] },
+  D_sitout:   { pos: [14.40, 5.05] },
+  R_sitout:   { pos: [14.78, 5.05] },
+  T_din_sw:   { pos: [10.35, 6.75] },
+  T_din_se:   { pos: [12.20, 6.85] },
+  D_kitchen:  { pos: [12.20, 7.52] },
+  R_kitchen:  { pos: [12.20, 8.85] },
+  D_utility:  { pos: [14.40, 8.85] },
+  R_utility:  { pos: [15.05, 8.60] },
+  T_br1_n:    { pos: [9.30, 6.85] },
+  D_br1:      { pos: [9.30, 7.52] },
+  T_br1_in:   { pos: [8.95, 8.75] },
+  R_br1:      { pos: [7.50, 9.20] },
+  T_br1_sw:   { pos: [6.30, 9.60] },
+  T_br1_bath: { pos: [6.30, 10.55] },
+  D_br1_bath: { pos: [5.78, 10.55] },
+  R_br1_bath: { pos: [5.35, 10.15] },
+  D_mbr:      { pos: [4.59, 7.52] },
+  R_mbr_nook: { pos: [4.59, 8.23] },
+  D_mbr_arch: { pos: [4.08, 8.23] },
+  T_mbr_ne:   { pos: [3.10, 8.23] },
+  D_mbr_bath: { pos: [2.20, 7.52] },
+  R_mbr_bath: { pos: [2.20, 6.85] },
+  R_master:   { pos: [2.95, 9.55] },
+  T_mbr_se:   { pos: [2.90, 10.85] },
+  D_sbalc:    { pos: [2.60, 11.60] },
+  R_sbalc:    { pos: [2.10, 12.35] },
+};
+
+const NAV_EDGES = [
+  ['R_foyer','T_drw_w'], ['T_drw_w','R_drawing'], ['R_drawing','D_arch'], ['D_arch','R_living_w'],
+  ['R_living_w','D_linen'], ['D_linen','R_linen'],
+  ['R_living_w','T_living_sw'], ['T_living_sw','D_walkin'], ['D_walkin','R_walkin'],
+  ['R_living_w','R_living'], ['R_living','R_hall'],
+  ['R_hall','D_br2'], ['D_br2','T_br2_se'], ['T_br2_se','T_br2_e'], ['T_br2_e','R_br2'],
+  ['R_br2','T_br2_w'], ['T_br2_w','D_br2_bath'], ['D_br2_bath','R_br2_bath'],
+  ['R_hall','T_din_w'], ['T_din_w','D_lobby'], ['D_lobby','R_lobby'],
+  ['T_din_w','R_dining'], ['R_dining','D_br3'], ['D_br3','R_br3'],
+  ['R_dining','T_din_ne'], ['T_din_ne','T_din_e'], ['T_din_e','D_sitout'], ['D_sitout','R_sitout'],
+  ['T_din_w','T_din_sw'], ['T_din_sw','T_din_se'], ['T_din_se','D_kitchen'], ['D_kitchen','R_kitchen'],
+  ['R_kitchen','D_utility'], ['D_utility','R_utility'],
+  ['R_hall','T_br1_n'], ['T_br1_n','T_din_sw'], ['T_br1_n','D_br1'], ['D_br1','T_br1_in'], ['T_br1_in','R_br1'],
+  ['R_br1','T_br1_sw'], ['T_br1_sw','T_br1_bath'], ['T_br1_bath','D_br1_bath'], ['D_br1_bath','R_br1_bath'],
+  ['T_living_sw','D_mbr'], ['D_mbr','R_mbr_nook'], ['R_mbr_nook','D_mbr_arch'], ['D_mbr_arch','T_mbr_ne'],
+  ['T_mbr_ne','D_mbr_bath'], ['D_mbr_bath','R_mbr_bath'],
+  ['T_mbr_ne','R_master'], ['R_master','T_mbr_se'], ['T_mbr_se','D_sbalc'], ['D_sbalc','R_sbalc'],
 ];
 
-// Build 3D Matterport Floor Waypoint Discs
-const wpRingMatBase = new THREE.MeshBasicMaterial({ color: 0xFFFFFF, side: THREE.DoubleSide, transparent: true, opacity: 0.72 });
-const wpFillMatBase = new THREE.MeshBasicMaterial({ color: 0xD4A853, side: THREE.DoubleSide, transparent: true, opacity: 0.20 });
+const NAV_ADJ = {};
+Object.keys(NAV_NODES).forEach(k => NAV_ADJ[k] = []);
+NAV_EDGES.forEach(([a, b]) => {
+  const pa = NAV_NODES[a].pos, pb = NAV_NODES[b].pos;
+  const w = Math.hypot(pa[0] - pb[0], pa[1] - pb[1]);
+  NAV_ADJ[a].push({ to: b, w });
+  NAV_ADJ[b].push({ to: a, w });
+});
+
+// 16 Curated, Collision-Free Hero Stops (ordered as a natural continuous home tour)
+const WALK_NODES = [
+  { id: 'drawing',   navKey: 'R_foyer',    group: 'social',  label: 'Foyer Entrance',       dim: 'West Main Entry',   pos: [1.10, 1.45], look: [2.45, 3.80] },
+  { id: 'drawing',   navKey: 'R_drawing',  group: 'social',  label: 'Drawing Room',         dim: '13\'1" × 17\'9"',   pos: [2.45, 4.35], look: [0.30, 2.82] },
+  { id: 'living',    navKey: 'R_living_w', group: 'social',  label: 'Living Archway',       dim: 'Teak Arch & Spine', pos: [4.85, 4.65], look: [8.50, 5.30] },
+  { id: 'living',    navKey: 'R_living',   group: 'social',  label: 'Living Spine',         dim: '19\'8" × 11\'10"',  pos: [7.05, 4.65], look: [11.20, 5.40] },
+  { id: 'living',    navKey: 'R_hall',     group: 'social',  label: 'Central Hall',         dim: 'Bedroom Hub',       pos: [9.25, 4.65], look: [12.10, 5.20] },
+  { id: 'dining',    navKey: 'R_dining',   group: 'social',  label: 'Dining Room',          dim: '13\'11" × 11\'10"', pos: [11.20, 4.65],look: [13.25, 5.65] },
+  { id: 'dining',    navKey: 'R_sitout',   group: 'outdoor', label: 'East Sit-Out',         dim: '4\'11" Balcony',    pos: [14.78, 5.05],look: [15.95, 4.65] },
+  { id: 'kitchen',   navKey: 'R_kitchen',  group: 'social',  label: 'Kitchen',              dim: '13\'11" × 13\'1"',  pos: [12.20, 8.85],look: [12.20, 11.20] },
+  { id: 'kitchen',   navKey: 'R_utility',  group: 'outdoor', label: 'Kitchen Utility',      dim: 'uPVC Laundry Bay',  pos: [15.05, 8.60],look: [15.05, 10.40] },
+  { id: 'gurudwara', navKey: 'R_br3',      group: 'private', label: 'BR-03 Home Gurudwara', dim: '1/5 East Palki',    pos: [12.65, 2.75],look: [14.55, 1.55] },
+  { id: 'kabir',     navKey: 'R_br2',      group: 'private', label: 'BR-02 Kabir Room',     dim: '13\'1" × 12\'0"',   pos: [7.45, 1.95], look: [7.35, 3.68] },
+  { id: 'study',     navKey: 'R_br1',      group: 'private', label: 'BR-01 Study / Guest',  dim: '13\'1" × 13\'1"',   pos: [7.50, 9.20], look: [9.30, 10.25] },
+  { id: 'master',    navKey: 'R_mbr_nook', group: 'private', label: 'Master NE Nook',       dim: 'Dressing & Mirror', pos: [4.59, 8.23], look: [5.65, 8.20] },
+  { id: 'master',    navKey: 'R_master',   group: 'private', label: 'Master Suite',         dim: '13\'1" × 13\'1"',   pos: [2.95, 9.55], look: [0.85, 9.35] },
+  { id: 'master',    navKey: 'R_sbalc',    group: 'outdoor', label: 'South Balcony',        dim: '13\'1" × 4\'11"',   pos: [2.10, 12.35],look: [2.80, 9.50] },
+  { id: 'living',    navKey: 'R_walkin',   group: 'outdoor', label: 'Puja Walk-in',         dim: '4\'0" × 6\'1"',     pos: [3.68, 6.25], look: [3.08, 7.10] },
+];
+
+// Bi-directional Doorway Threshold Portals (placed cleanly in open doorways, never over furniture)
+const DOOR_PORTALS = [
+  { pos: [4.08, 4.63], axis: 'x', posLabel: 'Drawing Room',         posNode: 1,  negLabel: 'Living Spine',         negNode: 3 },
+  { pos: [4.59, 7.52], axis: 'z', posLabel: 'Living Spine',         posNode: 2,  negLabel: 'Master Suite',         negNode: 13 },
+  { pos: [9.30, 7.52], axis: 'z', posLabel: 'Central Hall',         posNode: 4,  negLabel: 'BR-01 Study / Guest',  negNode: 11 },
+  { pos: [9.20, 3.78], axis: 'z', posLabel: 'BR-02 Kabir Room',     posNode: 10, negLabel: 'Central Hall',         negNode: 4 },
+  { pos: [12.16, 3.78],axis: 'z', posLabel: 'BR-03 Home Gurudwara', posNode: 9,  negLabel: 'Dining Room',          negNode: 5 },
+  { pos: [12.20, 7.52],axis: 'z', posLabel: 'Dining Room',          posNode: 5,  negLabel: 'Kitchen',              negNode: 7 },
+  { pos: [14.40, 5.05],axis: 'x', posLabel: 'Dining Room',          posNode: 5,  negLabel: 'East Sit-Out',         negNode: 6 },
+  { pos: [14.40, 8.85],axis: 'x', posLabel: 'Kitchen',              posNode: 7,  negLabel: 'Kitchen Utility',      negNode: 8 },
+  { pos: [2.75, 11.60],axis: 'z', posLabel: 'Master Suite',         posNode: 13, negLabel: 'South Balcony',        negNode: 14 },
+  { pos: [4.08, 6.50], axis: 'x', posLabel: 'Puja Walk-in',         posNode: 15, negLabel: 'Living Spine',         negNode: 2 },
+];
+
+// Build 3D Matterport Floor Waypoint Discs (with subtle dark contrast rim for ivory floors)
+const wpHaloMatBase = new THREE.MeshBasicMaterial({ color: 0x161920, side: THREE.DoubleSide, transparent: true, opacity: 0.32 });
+const wpRingMatBase = new THREE.MeshBasicMaterial({ color: 0xFFFFFF, side: THREE.DoubleSide, transparent: true, opacity: 0.86 });
+const wpFillMatBase = new THREE.MeshBasicMaterial({ color: 0xD4A853, side: THREE.DoubleSide, transparent: true, opacity: 0.24 });
 WALK_NODES.forEach((node, idx) => {
   const g = new THREE.Group();
   g.position.set(node.pos[0], 0.022, node.pos[1]);
-  const hit = new THREE.Mesh(
-    new THREE.CircleGeometry(0.28, 28),
-    wpFillMatBase.clone()
-  );
+  const halo = new THREE.Mesh(new THREE.RingGeometry(0.26, 0.30, 28), wpHaloMatBase.clone());
+  halo.rotation.x = -Math.PI / 2;
+  const hit = new THREE.Mesh(new THREE.CircleGeometry(0.28, 28), wpFillMatBase.clone());
   hit.rotation.x = -Math.PI / 2;
   hit.userData.walkNodeIdx = idx;
-  const ring = new THREE.Mesh(
-    new THREE.RingGeometry(0.21, 0.27, 28),
-    wpRingMatBase.clone()
-  );
+  const ring = new THREE.Mesh(new THREE.RingGeometry(0.20, 0.265, 28), wpRingMatBase.clone());
   ring.rotation.x = -Math.PI / 2;
   ring.position.y = 0.002;
-  g.add(hit, ring);
-  g.userData = { hit, ring, idx };
+  g.add(halo, hit, ring);
+  g.userData = { halo, hit, ring, idx };
   waypointGroup.add(g);
   waypointMeshes.push(hit);
 });
 
 const ROOM_ZONES = [
-  { name: 'Drawing & Foyer',      x1: 0.00, z1: 0.00, x2: 4.08, z2: 5.48 },
-  { name: 'Puja Walk-in',         x1: 2.85, z1: 5.48, x2: 4.08, z2: 7.52 },
-  { name: 'Master Toilet',        x1: 0.00, z1: 5.48, x2: 2.85, z2: 7.52 },
-  { name: 'Master NE Nook',       x1: 4.08, z1: 7.52, x2: 5.78, z2: 8.95 },
-  { name: 'Master Suite',         x1: 0.00, z1: 7.52, x2: 4.08, z2: 11.60 },
-  { name: 'Master South Balcony', x1: 0.00, z1: 11.60, x2: 4.08, z2: 13.15 },
-  { name: 'Living Spine',         x1: 4.08, z1: 3.78, x2: 10.15, z2: 7.52 },
-  { name: 'Dining Room',          x1: 10.15, z1: 3.78, x2: 14.40, z2: 7.52 },
-  { name: 'East Sit-Out',         x1: 14.40, z1: 3.78, x2: 15.90, z2: 6.28 },
-  { name: 'Kitchen',              x1: 10.00, z1: 7.52, x2: 14.40, z2: 11.60 },
-  { name: 'Kitchen Utility',      x1: 14.40, z1: 7.52, x2: 15.90, z2: 11.60 },
-  { name: 'BR-01 Study / Guest',  x1: 5.78, z1: 7.52, x2: 10.00, z2: 11.60 },
-  { name: 'BR-02 Kabir Room',     x1: 5.78, z1: 0.00, x2: 9.92, z2: 3.78 },
-  { name: 'BR-03 Home Gurudwara', x1: 11.62, z1: 0.00, x2: 15.78, z2: 3.78 },
-  { name: 'Common Vanity Lobby',  x1: 9.92, z1: 2.50, x2: 11.62, z2: 3.78 },
+  { name: 'Drawing & Foyer',      short: 'Drawing',   x1: 0.00, z1: 0.00, x2: 4.08, z2: 5.48 },
+  { name: 'Puja Walk-in',         short: 'Walk-in',   x1: 2.85, z1: 5.48, x2: 4.08, z2: 7.52 },
+  { name: 'Master Toilet',        short: 'M. Bath',   x1: 0.00, z1: 5.48, x2: 2.85, z2: 7.52 },
+  { name: 'Linen Store',          short: 'Linen',     x1: 4.08, z1: 2.50, x2: 5.78, z2: 3.78 },
+  { name: 'Master NE Nook',       short: 'Nook',      x1: 4.08, z1: 7.52, x2: 5.78, z2: 8.95 },
+  { name: 'Master Suite',         short: 'Master',    x1: 0.00, z1: 7.52, x2: 4.08, z2: 11.60 },
+  { name: 'Master South Balcony', short: 'S. Balc',   x1: 0.00, z1: 11.60, x2: 4.08, z2: 13.15 },
+  { name: 'Living Spine',         short: 'Living',    x1: 4.08, z1: 3.78, x2: 10.15, z2: 7.52 },
+  { name: 'Dining Room',          short: 'Dining',    x1: 10.15, z1: 3.78, x2: 14.40, z2: 7.52 },
+  { name: 'East Sit-Out',         short: 'Sit-Out',   x1: 14.40, z1: 3.78, x2: 15.90, z2: 6.28 },
+  { name: 'Kitchen',              short: 'Kitchen',   x1: 10.00, z1: 7.52, x2: 14.40, z2: 11.60 },
+  { name: 'Kitchen Utility',      short: 'Utility',   x1: 14.40, z1: 7.52, x2: 15.90, z2: 11.60 },
+  { name: 'BR-01 Study / Guest',  short: 'Study',     x1: 5.78, z1: 7.52, x2: 10.00, z2: 11.60 },
+  { name: 'BR-01 Bath',           short: 'Bath 1',    x1: 4.08, z1: 8.95, x2: 5.78, z2: 11.60 },
+  { name: 'BR-02 Kabir Room',     short: 'Kabir',     x1: 5.78, z1: 0.00, x2: 9.92, z2: 3.78 },
+  { name: 'BR-02 Bath',           short: 'Bath 2',    x1: 4.08, z1: 0.00, x2: 5.78, z2: 2.50 },
+  { name: 'BR-03 Home Gurudwara', short: 'Gurudwara', x1: 11.62, z1: 0.00, x2: 15.78, z2: 3.78 },
+  { name: 'BR-03 Bath',           short: 'Bath 3',    x1: 9.92, z1: 0.00, x2: 11.62, z2: 2.50 },
+  { name: 'Common Vanity Lobby',  short: 'Lobby',     x1: 9.92, z1: 2.50, x2: 11.62, z2: 3.78 },
 ];
 
-function detectRoomName(x, z) {
+function detectRoomZone(x, z) {
   for (const r of ROOM_ZONES) {
-    if (x >= r.x1 && x <= r.x2 && z >= r.z1 && z <= r.z2) return r.name;
+    if (x >= r.x1 && x <= r.x2 && z >= r.z1 && z <= r.z2) return r;
   }
-  return 'Unit B4206';
+  return null;
 }
-
+function detectRoomName(x, z) {
+  const zObj = detectRoomZone(x, z);
+  return zObj ? zObj.name : 'Unit B4206';
+}
 function shortestYawDelta(from, to) {
   return ((to - from + Math.PI * 3) % (Math.PI * 2)) - Math.PI;
 }
 
-// Doorway-aware 2D wall slide collision
-function resolveWalkCollision(pos, radius = 0.22) {
-  for (let iter = 0; iter < 2; iter++) {
-    for (const s of wallSegments) {
+// Doorway-aware 2D wall + furniture AABB slide collision
+function resolveWalkCollision(pos, wallRadius = 0.19, furnRadius = 0.15) {
+  for (let iter = 0; iter < 3; iter++) {
+    for (let i = 0; i < wallSegments.length; i++) {
+      const s = wallSegments[i];
       const vx = s.x2 - s.x1, vz = s.z2 - s.z1;
       const lenSq = vx * vx + vz * vz;
       if (lenSq < 1e-6) continue;
@@ -2048,9 +2486,29 @@ function resolveWalkCollision(pos, radius = 0.22) {
       const cx = s.x1 + t * vx, cz = s.z1 + t * vz;
       const dx = pos.x - cx, dz = pos.z - cz;
       const dist = Math.hypot(dx, dz);
-      const minD = s.thick * 0.5 + radius;
+      const minD = s.thick * 0.5 + wallRadius;
       if (dist < minD && dist > 1e-5) {
         const push = (minD - dist) / dist;
+        pos.x += dx * push;
+        pos.z += dz * push;
+      }
+    }
+    for (let i = 0; i < furnColliders.length; i++) {
+      const b = furnColliders[i];
+      const cx = Math.max(b.x1, Math.min(b.x2, pos.x));
+      const cz = Math.max(b.z1, Math.min(b.z2, pos.z));
+      const dx = pos.x - cx, dz = pos.z - cz;
+      const dist = Math.hypot(dx, dz);
+      if (dist < 1e-5) {
+        // Strictly inside box: push out along nearest edge
+        const dL = pos.x - b.x1, dR = b.x2 - pos.x, dT = pos.z - b.z1, dB = b.z2 - pos.z;
+        const m = Math.min(dL, dR, dT, dB);
+        if (m === dL) pos.x = b.x1 - furnRadius;
+        else if (m === dR) pos.x = b.x2 + furnRadius;
+        else if (m === dT) pos.z = b.z1 - furnRadius;
+        else pos.z = b.z2 + furnRadius;
+      } else if (dist < furnRadius) {
+        const push = (furnRadius - dist) / dist;
         pos.x += dx * push;
         pos.z += dz * push;
       }
@@ -2060,15 +2518,202 @@ function resolveWalkCollision(pos, radius = 0.22) {
   pos.z = Math.max(0.24, Math.min(12.92, pos.z));
 }
 
-// Interactive 2D Floorplan Mini-Map
+function isInsideFurniture(x, z, pad = 0.10) {
+  for (let i = 0; i < furnColliders.length; i++) {
+    const b = furnColliders[i];
+    if (x >= b.x1 - pad && x <= b.x2 + pad && z >= b.z1 - pad && z <= b.z2 + pad) return true;
+  }
+  return false;
+}
+
+// 2D Segment Intersection & Obstacle-Aware Line-of-Sight
+function segsIntersect2D(ax, az, bx, bz, cx, cz, dx, dz) {
+  const rX = bx - ax, rZ = bz - az;
+  const sX = dx - cx, sZ = dz - cz;
+  const denom = rX * sZ - rZ * sX;
+  if (Math.abs(denom) < 1e-7) return false;
+  const qpx = cx - ax, qpz = cz - az;
+  const t = (qpx * sZ - qpz * sX) / denom;
+  const u = (qpx * rZ - qpz * rX) / denom;
+  return t > 0.02 && t < 0.98 && u >= -0.01 && u <= 1.01;
+}
+function hasWallLOS(x1, z1, x2, z2) {
+  for (let i = 0; i < wallSegments.length; i++) {
+    const s = wallSegments[i];
+    if (segsIntersect2D(x1, z1, x2, z2, s.x1, s.z1, s.x2, s.z2)) return false;
+  }
+  return true;
+}
+function segIntersectsAABB2D(x1, z1, x2, z2, b, pad = 0.13) {
+  const minX = b.x1 - pad, maxX = b.x2 + pad, minZ = b.z1 - pad, maxZ = b.z2 + pad;
+  const dx = x2 - x1, dz = z2 - z1;
+  let t0 = 0.02, t1 = 0.98;
+  if (Math.abs(dx) < 1e-7) {
+    if (x1 < minX || x1 > maxX) return false;
+  } else {
+    let tx1 = (minX - x1) / dx, tx2 = (maxX - x1) / dx;
+    if (tx1 > tx2) { const tmp = tx1; tx1 = tx2; tx2 = tmp; }
+    t0 = Math.max(t0, tx1); t1 = Math.min(t1, tx2);
+    if (t0 > t1) return false;
+  }
+  if (Math.abs(dz) < 1e-7) {
+    if (z1 < minZ || z1 > maxZ) return false;
+  } else {
+    let tz1 = (minZ - z1) / dz, tz2 = (maxZ - z1) / dz;
+    if (tz1 > tz2) { const tmp = tz1; tz1 = tz2; tz2 = tmp; }
+    t0 = Math.max(t0, tz1); t1 = Math.min(t1, tz2);
+    if (t0 > t1) return false;
+  }
+  return true;
+}
+function hasWalkLOS(x1, z1, x2, z2) {
+  if (!hasWallLOS(x1, z1, x2, z2)) return false;
+  for (let i = 0; i < furnColliders.length; i++) {
+    if (segIntersectsAABB2D(x1, z1, x2, z2, furnColliders[i], 0.13)) return false;
+  }
+  return true;
+}
+
+// Doorway-Aware Dijkstra Pathfinding + String-Pulling + Smooth Corner Fillets
+function findWalkPath(x0, z0, x1, z1) {
+  const distDirect = Math.hypot(x1 - x0, z1 - z0);
+  if (distDirect < 0.14) return [[x0, z0], [x1, z1]];
+  if (hasWalkLOS(x0, z0, x1, z1)) return [[x0, z0], [x1, z1]];
+
+  const keys = Object.keys(NAV_NODES);
+  const startLinks = [], goalLinks = [];
+  let bestS = null, bestSD = Infinity, bestG = null, bestGD = Infinity;
+  for (let i = 0; i < keys.length; i++) {
+    const k = keys[i];
+    const [nx, nz] = NAV_NODES[k].pos;
+    const ds = Math.hypot(nx - x0, nz - z0);
+    if (ds < bestSD) { bestSD = ds; bestS = k; }
+    if (hasWalkLOS(x0, z0, nx, nz)) startLinks.push({ to: k, w: ds });
+    const dg = Math.hypot(nx - x1, nz - z1);
+    if (dg < bestGD) { bestGD = dg; bestG = k; }
+    if (hasWalkLOS(nx, nz, x1, z1)) goalLinks.push({ to: k, w: dg });
+  }
+  if (!startLinks.length && bestS) startLinks.push({ to: bestS, w: bestSD });
+  if (!goalLinks.length && bestG) goalLinks.push({ to: bestG, w: bestGD });
+
+  const distMap = { __start: 0 };
+  const prevMap = {};
+  const visited = new Set();
+  const goalLinkMap = new Map(goalLinks.map(g => [g.to, g.w]));
+  const pq = [{ k: '__start', d: 0 }];
+
+  while (pq.length) {
+    let minIdx = 0;
+    for (let i = 1; i < pq.length; i++) if (pq[i].d < pq[minIdx].d) minIdx = i;
+    const { k, d } = pq.splice(minIdx, 1)[0];
+    if (visited.has(k)) continue;
+    visited.add(k);
+    if (k === '__goal') break;
+
+    const edges = k === '__start' ? startLinks : (NAV_ADJ[k] || []);
+    for (let i = 0; i < edges.length; i++) {
+      const e = edges[i];
+      if (visited.has(e.to)) continue;
+      const nd = d + e.w;
+      if (nd < (distMap[e.to] ?? Infinity)) {
+        distMap[e.to] = nd;
+        prevMap[e.to] = k;
+        pq.push({ k: e.to, d: nd });
+      }
+    }
+    if (goalLinkMap.has(k)) {
+      const nd = d + goalLinkMap.get(k);
+      if (nd < (distMap.__goal ?? Infinity)) {
+        distMap.__goal = nd;
+        prevMap.__goal = k;
+        pq.push({ k: '__goal', d: nd });
+      }
+    }
+  }
+
+  if (!prevMap.__goal) return [[x0, z0], [x1, z1]];
+  const raw = [];
+  let cur = '__goal';
+  while (cur) {
+    if (cur === '__goal') raw.push([x1, z1]);
+    else if (cur === '__start') raw.push([x0, z0]);
+    else raw.push(NAV_NODES[cur].pos.slice());
+    cur = prevMap[cur];
+  }
+  raw.reverse();
+
+  // String-pull redundant vertices while preserving wall & furniture clearance
+  const pulled = [raw[0]];
+  let anchor = 0;
+  while (anchor < raw.length - 1) {
+    let furthest = anchor + 1;
+    for (let j = raw.length - 1; j > anchor + 1; j--) {
+      if (hasWalkLOS(raw[anchor][0], raw[anchor][1], raw[j][0], raw[j][1])) {
+        furthest = j;
+        break;
+      }
+    }
+    pulled.push(raw[furthest]);
+    anchor = furthest;
+  }
+
+  // Round sharp turns with compact quadratic Bezier fillets (zero doorway overshoot)
+  if (pulled.length <= 2) return pulled;
+  const smooth = [pulled[0]];
+  for (let i = 1; i < pulled.length - 1; i++) {
+    const A = pulled[i - 1], B = pulled[i], C = pulled[i + 1];
+    const d1 = Math.hypot(B[0] - A[0], B[1] - A[1]);
+    const d2 = Math.hypot(C[0] - B[0], C[1] - B[1]);
+    const r = Math.min(0.28, d1 * 0.34, d2 * 0.34);
+    if (r < 0.05) { smooth.push(B); continue; }
+    const pIn = [B[0] - (B[0] - A[0]) / d1 * r, B[1] - (B[1] - A[1]) / d1 * r];
+    const pOut = [B[0] + (C[0] - B[0]) / d2 * r, B[1] + (C[1] - B[1]) / d2 * r];
+    const steps = 4;
+    for (let s = 0; s <= steps; s++) {
+      const u = s / steps, iu = 1 - u;
+      smooth.push([
+        iu * iu * pIn[0] + 2 * iu * u * B[0] + u * u * pOut[0],
+        iu * iu * pIn[1] + 2 * iu * u * B[1] + u * u * pOut[1],
+      ]);
+    }
+  }
+  smooth.push(pulled[pulled.length - 1]);
+  return smooth;
+}
+
+function buildArcPath(pts) {
+  const cum = [0];
+  for (let i = 1; i < pts.length; i++) {
+    cum.push(cum[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]));
+  }
+  const total = cum[cum.length - 1];
+  function sample(dist) {
+    const d = Math.max(0, Math.min(total, dist));
+    let lo = 0, hi = cum.length - 1;
+    while (lo < hi - 1) {
+      const mid = (lo + hi) >> 1;
+      if (cum[mid] <= d) lo = mid; else hi = mid;
+    }
+    const segLen = cum[hi] - cum[lo];
+    const frac = segLen > 1e-6 ? (d - cum[lo]) / segLen : 0;
+    return [
+      pts[lo][0] + (pts[hi][0] - pts[lo][0]) * frac,
+      pts[lo][1] + (pts[hi][1] - pts[lo][1]) * frac,
+    ];
+  }
+  return { pts, cum, total, sample };
+}
+
+// Architect-Grade Interactive 2D Floorplan Mini-Map
 const mmCanvas = document.getElementById('minimap');
 const mmCtx = mmCanvas.getContext('2d');
-const MM_W = 268, MM_H = 224, MM_CONE_LEN = 34;
+const mmTipEl = document.getElementById('mm-tip');
+const MM_W = 260, MM_H = 216, MM_CONE_LEN = 32;
 const mmDpr = Math.min(2, window.devicePixelRatio || 1);
 mmCanvas.width = Math.round(MM_W * mmDpr);
 mmCanvas.height = Math.round(MM_H * mmDpr);
 mmCtx.setTransform(mmDpr, 0, 0, mmDpr, 0, 0);
-const mmBaseScale = Math.min((MM_W - 22) / 16.0, (MM_H - 22) / 13.25);
+const mmBaseScale = Math.min((MM_W - 20) / 16.0, (MM_H - 20) / 13.25);
 let mmZoomed = false;
 let mmViewZoom = 1.0;
 let mmViewCenter = { x: 7.95, z: 6.575 };
@@ -2088,63 +2733,137 @@ const fromMM = (px, py) => {
   const { scale, ox, oz } = getMMTransform();
   return { x: (px - ox) / scale, z: (py - oz) / scale };
 };
-const MM_TAGS = [
-  ['DRW', 2.0, 2.7], ['LIV', 7.1, 5.6], ['DIN', 12.2, 5.6], ['KIT', 12.2, 9.6],
-  ['MBR', 2.0, 9.6], ['BR1', 7.9, 9.6], ['BR2', 7.9, 1.9], ['BR3', 13.7, 1.9],
-];
 let mmMode = null; // 'walk' | 'aim'
 let mmWalkStart = null;
 let mmWalkTarget = null;
 let mmAimLine = null;
 let mmHoverPart = null; // 'avatar' | 'handle' | null
+let mmHoverZone = null;
+
+function getTorchHandle() {
+  const [ax, ay] = toMM(camera.position.x, camera.position.z);
+  const ang = Math.atan2(-Math.cos(walkYaw), -Math.sin(walkYaw));
+  let len = MM_CONE_LEN;
+  // Clamp handle inside canvas margins so it is ALWAYS grabbable near perimeter walls
+  const dx = Math.cos(ang), dy = Math.sin(ang);
+  const margin = 9;
+  if (dx > 1e-4) len = Math.min(len, (MM_W - margin - ax) / dx);
+  if (dx < -1e-4) len = Math.min(len, (margin - ax) / dx);
+  if (dy > 1e-4) len = Math.min(len, (MM_H - margin - ay) / dy);
+  if (dy < -1e-4) len = Math.min(len, (margin - ay) / dy);
+  len = Math.max(14, Math.min(MM_CONE_LEN, len));
+  return { ax, ay, hx: ax + dx * len, hy: ay + dy * len, len };
+}
 
 function drawMinimap() {
   if (!walkMode) return;
   mmCtx.clearRect(0, 0, MM_W, MM_H);
+
   // Floor slabs
   floorRects.forEach(r => {
     const [x1, y1] = toMM(r.x1, r.z1);
     const [x2, y2] = toMM(r.x2, r.z2);
-    mmCtx.fillStyle = r.isBalcony ? '#1b222e' : (r.isBath ? '#1c2430' : '#252d3b');
+    mmCtx.fillStyle = r.isBalcony ? '#1a2330' : (r.isBath ? '#1c2532' : '#252e3d');
     mmCtx.fillRect(x1, y1, x2 - x1, y2 - y1);
   });
-  // Walls
+
+  // Active room subtle gold wash + hovered room soft highlight
+  const activeZone = detectRoomZone(camera.position.x, camera.position.z);
+  if (activeZone) {
+    const [x1, y1] = toMM(activeZone.x1, activeZone.z1);
+    const [x2, y2] = toMM(activeZone.x2, activeZone.z2);
+    mmCtx.fillStyle = 'rgba(212, 168, 83, 0.14)';
+    mmCtx.fillRect(x1, y1, x2 - x1, y2 - y1);
+  }
+  if (mmHoverZone && mmHoverZone !== activeZone) {
+    const [x1, y1] = toMM(mmHoverZone.x1, mmHoverZone.z1);
+    const [x2, y2] = toMM(mmHoverZone.x2, mmHoverZone.z2);
+    mmCtx.fillStyle = 'rgba(255, 255, 255, 0.08)';
+    mmCtx.fillRect(x1, y1, x2 - x1, y2 - y1);
+  }
+
+  // Architect furniture silhouettes
+  mmCtx.fillStyle = 'rgba(148, 163, 184, 0.24)';
+  for (let i = 0; i < mmFurnShapes.length; i++) {
+    const f = mmFurnShapes[i];
+    const [x1, y1] = toMM(f.x1, f.z1);
+    const [x2, y2] = toMM(f.x2, f.z2);
+    mmCtx.fillRect(x1, y1, Math.max(1.5, x2 - x1), Math.max(1.5, y2 - y1));
+  }
+
+  // Cyan glazing / balcony sliders
+  mmCtx.strokeStyle = 'rgba(125, 211, 252, 0.65)';
+  mmCtx.lineWidth = 2.0;
+  mmCtx.beginPath();
+  glassSegments.forEach(g => {
+    const [x1, y1] = toMM(g.x1, g.z1);
+    const [x2, y2] = toMM(g.x2, g.z2);
+    mmCtx.moveTo(x1, y1); mmCtx.lineTo(x2, y2);
+  });
+  mmCtx.stroke();
+
+  // Solid architectural walls
   mmCtx.strokeStyle = '#94a3b8';
-  mmCtx.lineWidth = 1.6;
+  mmCtx.lineWidth = 1.65;
   mmCtx.beginPath();
   wallSegments.forEach(s => {
     const [x1, y1] = toMM(s.x1, s.z1);
     const [x2, y2] = toMM(s.x2, s.z2);
-    mmCtx.moveTo(x1, y1);
-    mmCtx.lineTo(x2, y2);
+    mmCtx.moveTo(x1, y1); mmCtx.lineTo(x2, y2);
   });
   mmCtx.stroke();
-  // Room tags
-  mmCtx.fillStyle = 'rgba(226, 232, 240, 0.55)';
-  mmCtx.font = '600 8.5px -apple-system, Inter, sans-serif';
+
+  // Adaptive readable room names
   mmCtx.textAlign = 'center';
   mmCtx.textBaseline = 'middle';
-  MM_TAGS.forEach(([txt, rx, rz]) => {
-    const [mx, my] = toMM(rx, rz);
-    mmCtx.fillText(txt, mx, my);
+  mmCtx.font = mmViewZoom > 1.5 ? '600 9.5px -apple-system, Inter, sans-serif' : '600 8px -apple-system, Inter, sans-serif';
+  ROOM_ZONES.forEach(r => {
+    const w = r.x2 - r.x1, d = r.z2 - r.z1;
+    if (mmViewZoom < 1.4 && (w < 2.1 || d < 2.2)) return;
+    const [mx, my] = toMM((r.x1 + r.x2) * 0.5, (r.z1 + r.z2) * 0.5);
+    mmCtx.fillStyle = r === activeZone ? 'rgba(248, 223, 160, 0.92)' : 'rgba(226, 232, 240, 0.56)';
+    mmCtx.fillText(mmViewZoom > 1.6 ? r.name : r.short, mx, my);
   });
+
+  // Live dashed walking path trail when gliding
+  if (walkGlide && walkGlide.arc && walkGlide.arc.pts.length > 1) {
+    mmCtx.save();
+    mmCtx.setLineDash([3, 3]);
+    mmCtx.strokeStyle = 'rgba(248, 223, 160, 0.85)';
+    mmCtx.lineWidth = 1.7;
+    mmCtx.beginPath();
+    walkGlide.arc.pts.forEach(([wx, wz], idx) => {
+      const [mx, my] = toMM(wx, wz);
+      if (idx === 0) mmCtx.moveTo(mx, my); else mmCtx.lineTo(mx, my);
+    });
+    mmCtx.stroke();
+    const last = walkGlide.arc.pts[walkGlide.arc.pts.length - 1];
+    const [gx, gy] = toMM(last[0], last[1]);
+    mmCtx.fillStyle = '#f8dfa0';
+    mmCtx.beginPath(); mmCtx.arc(gx, gy, 3.0, 0, Math.PI * 2); mmCtx.fill();
+    mmCtx.restore();
+  }
+
   // Waypoint dots
-  mmCtx.fillStyle = 'rgba(212, 168, 83, 0.45)';
-  WALK_NODES.forEach(n => {
+  WALK_NODES.forEach((n, idx) => {
     const [wx, wy] = toMM(n.pos[0], n.pos[1]);
-    mmCtx.beginPath(); mmCtx.arc(wx, wy, 2.2, 0, Math.PI * 2); mmCtx.fill();
+    mmCtx.fillStyle = idx === currentTourIdx ? 'rgba(248, 223, 160, 0.85)' : 'rgba(212, 168, 83, 0.35)';
+    mmCtx.beginPath(); mmCtx.arc(wx, wy, idx === currentTourIdx ? 2.6 : 1.9, 0, Math.PI * 2); mmCtx.fill();
   });
-  // Live FOV Vision Cone & Avatar Dot
-  const [px, py] = toMM(camera.position.x, camera.position.z);
+
+  // Live FOV Vision Cone (tracks real horizontal FOV!)
+  const { ax: px, ay: py, hx, hy, len: coneLen } = getTorchHandle();
   const fx = -Math.sin(walkYaw), fz = -Math.cos(walkYaw);
   const ang = Math.atan2(fz, fx);
-  const grad = mmCtx.createRadialGradient(px, py, 2, px, py, MM_CONE_LEN);
-  grad.addColorStop(0, 'rgba(212, 168, 83, 0.62)');
+  const halfFov = Math.atan(Math.tan(THREE.MathUtils.degToRad(camera.fov) * 0.5) * Math.min(1.75, camera.aspect));
+  const clampedHalf = Math.max(0.32, Math.min(0.88, halfFov));
+  const grad = mmCtx.createRadialGradient(px, py, 2, px, py, coneLen + 6);
+  grad.addColorStop(0, 'rgba(212, 168, 83, 0.60)');
   grad.addColorStop(1, 'rgba(212, 168, 83, 0.0)');
   mmCtx.fillStyle = grad;
   mmCtx.beginPath();
   mmCtx.moveTo(px, py);
-  mmCtx.arc(px, py, MM_CONE_LEN, ang - 0.54, ang + 0.54);
+  mmCtx.arc(px, py, coneLen + 6, ang - clampedHalf, ang + clampedHalf);
   mmCtx.closePath();
   mmCtx.fill();
 
@@ -2169,9 +2888,9 @@ function drawMinimap() {
 
   const activeAvatar = mmHoverPart === 'avatar' || mmMode === 'walk';
   if (activeAvatar) {
-    mmCtx.strokeStyle = 'rgba(255, 255, 255, 0.55)';
+    mmCtx.strokeStyle = 'rgba(255, 255, 255, 0.60)';
     mmCtx.lineWidth = 1.5;
-    mmCtx.beginPath(); mmCtx.arc(px, py, 8.2, 0, Math.PI * 2); mmCtx.stroke();
+    mmCtx.beginPath(); mmCtx.arc(px, py, 8.5, 0, Math.PI * 2); mmCtx.stroke();
   }
   mmCtx.fillStyle = activeAvatar ? '#ffffff' : '#f8dfa0';
   mmCtx.beginPath(); mmCtx.arc(px, py, activeAvatar ? 5.6 : 5.0, 0, Math.PI * 2); mmCtx.fill();
@@ -2179,65 +2898,89 @@ function drawMinimap() {
   mmCtx.lineWidth = 1.5;
   mmCtx.stroke();
 
-  // Draggable Torch Aim-Knob at front tip of FOV cone
-  const hx = px + Math.cos(ang) * MM_CONE_LEN, hy = py + Math.sin(ang) * MM_CONE_LEN;
+  // Clamped Draggable Torch Aim-Knob
   const activeHandle = mmHoverPart === 'handle' || mmMode === 'aim';
   mmCtx.fillStyle = activeHandle ? '#ffffff' : '#d4a853';
-  mmCtx.beginPath(); mmCtx.arc(hx, hy, activeHandle ? 5.0 : 3.8, 0, Math.PI * 2); mmCtx.fill();
+  mmCtx.beginPath(); mmCtx.arc(hx, hy, activeHandle ? 5.2 : 4.2, 0, Math.PI * 2); mmCtx.fill();
   mmCtx.strokeStyle = '#0f1115';
   mmCtx.lineWidth = 1.3;
   mmCtx.stroke();
 }
 
+// ============================================================================
+// WALK ENGINE STATE, GROUPED ROOM PICKER & CONTEXTUAL DOORWAY PORTALS
+// ============================================================================
 let currentPreset = PRESETS[0];
 let camAnim = null;
-
-// Virtual Walkthrough State (Smooth Damped Look + Scroll Walk + Glide)
 let walkMode = false;
+let isNightMode = false;
+let preWalkWallMode = 'cut';
 let walkYaw = 0, walkYawTarget = 0;
 let walkPitch = 0, walkPitchTarget = 0;
 let walkScrollVel = 0;
+const walkVel = new THREE.Vector3();
+let walkBobPhase = 0;
 let walkGlide = null;
 let currentTourIdx = 0;
 let hoveredWpIdx = -1;
+let lastRoomLabel = '';
+let lastInspPoint = null;
 const walkKeys = { fwd: false, back: false, left: false, right: false, turnL: false, turnR: false, shift: false };
 let isWalkDragging = false;
+let activeWalkPointerId = null;
 let walkLastPtr = { x: 0, y: 0 };
 const WALK_EYE_STAND = 1.60;
 const WALK_EYE_SIT = 1.15;
 let walkSeated = false;
 let walkEyeY = WALK_EYE_STAND;
 let walkFovWide = true;
+let walkCustomFov = null;
 let walkHudWasOpen = false;
-let mmVisible = true;
+let mmVisible = window.innerWidth >= 1024;
 let autoTour = { active: false, phase: 'glide', timer: 0, baseYaw: 0 };
 let toastTimer = null;
+let walkToastShown = false;
+
+const walkExitBtn = document.getElementById('walk-exit-btn');
+const walkRoomTrigger = document.getElementById('walk-room-trigger');
 const walkRoomNameEl = document.getElementById('walk-room-name');
 const walkRoomSubEl = document.getElementById('walk-room-sub');
 const roomPickerEl = document.getElementById('room-picker');
 const walkDockEl = document.getElementById('walk-dock');
+const tourProgressEl = document.getElementById('tour-progress');
 const walkToastEl = document.getElementById('walk-toast');
 const portalLayerEl = document.getElementById('portal-layer');
 const wpTooltipEl = document.getElementById('wp-tooltip');
 const btnAutoTour = document.getElementById('btn-auto-tour');
+const btnWalkMood = document.getElementById('btn-walk-mood');
 const btnEyeHeight = document.getElementById('btn-eye-height');
 const btnFovToggle = document.getElementById('btn-fov-toggle');
 const btnMmToggle = document.getElementById('btn-mm-toggle');
+btnMmToggle.classList.toggle('active', mmVisible);
+
+const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
 
 function dismissWalkToast() {
   walkToastEl.classList.remove('show');
   if (toastTimer) { clearTimeout(toastTimer); toastTimer = null; }
 }
-function showWalkToast() {
+function showWalkToast(customMsg = null) {
+  if (!customMsg && walkToastShown) return;
+  if (!customMsg) walkToastShown = true;
+  walkToastEl.textContent = customMsg || (isTouchDevice
+    ? 'Swipe to look · Tap floor or doorway pill to walk · Tap items for specs · Pinch to zoom lens'
+    : 'Drag to look · Click floor or doorway pill to walk · Click any item for specs · WASD / Scroll / Space');
   walkToastEl.classList.add('show');
   if (toastTimer) clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => walkToastEl.classList.remove('show'), 5500);
+  toastTimer = setTimeout(() => walkToastEl.classList.remove('show'), 5200);
 }
 function stopAutoTour() {
   if (!autoTour.active) return;
   autoTour.active = false;
   btnAutoTour.classList.remove('active');
-  btnAutoTour.textContent = '▶ Auto-Tour';
+  btnAutoTour.textContent = '▶ Tour';
+  tourProgressEl.classList.remove('active');
+  tourProgressEl.style.width = '0%';
 }
 function startAutoTour() {
   if (!walkMode) return;
@@ -2245,104 +2988,161 @@ function startAutoTour() {
   autoTour.phase = 'glide';
   autoTour.timer = 0;
   btnAutoTour.classList.add('active');
-  btnAutoTour.textContent = '⏸ Pause Tour';
+  btnAutoTour.textContent = '⏸ Pause';
+  tourProgressEl.classList.add('active');
   dismissWalkToast();
   goToTourNode(currentTourIdx, true);
 }
 function updateRoomPickerActive() {
-  roomPickerEl.querySelectorAll('.rp-item').forEach((b, i) => b.classList.toggle('active', i === currentTourIdx));
-  walkRoomSubEl.textContent = `Stop ${currentTourIdx + 1} of ${WALK_NODES.length} · Click to jump`;
+  roomPickerEl.querySelectorAll('.rp-item').forEach(b => {
+    b.classList.toggle('active', Number(b.dataset.idx) === currentTourIdx);
+  });
+  const node = WALK_NODES[currentTourIdx];
+  walkRoomSubEl.textContent = `Stop ${currentTourIdx + 1} of ${WALK_NODES.length} · ${node.dim}`;
+}
+function syncNearestTourNode(x, z) {
+  let bestIdx = currentTourIdx, bestD = Infinity;
+  for (let i = 0; i < WALK_NODES.length; i++) {
+    const n = WALK_NODES[i];
+    const d = Math.hypot(x - n.pos[0], z - n.pos[1]);
+    if (d < bestD && hasWallLOS(x, z, n.pos[0], n.pos[1])) { bestD = d; bestIdx = i; }
+  }
+  if (bestIdx !== currentTourIdx) {
+    currentTourIdx = bestIdx;
+    updateRoomPickerActive();
+  }
 }
 
-// Build 15-stop Quick-Jump Room Picker & Floating In-World Doorway Portals
-WALK_NODES.forEach((node, idx) => {
-  const btn = document.createElement('button');
-  btn.className = 'rp-item';
-  btn.textContent = `${idx + 1}. ${node.label}`;
-  btn.onclick = e => {
-    e.stopPropagation();
-    stopAutoTour();
-    roomPickerEl.classList.remove('open');
-    goToTourNode(idx);
-  };
-  roomPickerEl.appendChild(btn);
+// Build 3-Column Grouped Room Picker
+const PICKER_GROUPS = [
+  { key: 'social',  title: 'Social & Living' },
+  { key: 'private', title: 'Bedrooms & Study' },
+  { key: 'outdoor', title: 'Balconies & Utility' },
+];
+PICKER_GROUPS.forEach(g => {
+  const col = document.createElement('div');
+  col.className = 'rp-col';
+  const head = document.createElement('div');
+  head.className = 'rp-head';
+  head.textContent = g.title;
+  col.appendChild(head);
+  WALK_NODES.forEach((node, idx) => {
+    if (node.group !== g.key) return;
+    const btn = document.createElement('button');
+    btn.className = 'rp-item';
+    btn.dataset.idx = String(idx);
+    btn.innerHTML = `<span>${node.label}</span><small>${node.dim}</small>`;
+    btn.onclick = e => {
+      e.stopPropagation();
+      stopAutoTour();
+      roomPickerEl.classList.remove('open');
+      walkRoomTrigger.classList.remove('open');
+      goToTourNode(idx);
+    };
+    col.appendChild(btn);
+  });
+  roomPickerEl.appendChild(col);
 });
-document.getElementById('walk-room-trigger').onclick = e => {
+
+walkRoomTrigger.onclick = e => {
   e.stopPropagation();
-  roomPickerEl.classList.toggle('open');
+  const open = roomPickerEl.classList.toggle('open');
+  walkRoomTrigger.classList.toggle('open', open);
+  if (open && window.innerWidth < 768) {
+    inspEl.classList.remove('show');
+    setMinimapVisible(false);
+  }
 };
 window.addEventListener('pointerdown', e => {
   if (roomPickerEl.classList.contains('open') && !roomPickerEl.contains(e.target) && !e.target.closest('#walk-room-trigger')) {
     roomPickerEl.classList.remove('open');
+    walkRoomTrigger.classList.remove('open');
   }
 });
 
-const portalEls = WALK_NODES.map((node, idx) => {
+// Build Bi-Directional Contextual Doorway Portals (zero GC per frame)
+const portalEls = DOOR_PORTALS.map(dp => {
   const el = document.createElement('button');
   el.className = 'portal-pill';
-  el.textContent = `→ ${node.label}`;
+  el.innerHTML = `<span class="p-txt"></span><span class="p-dist"></span>`;
   el.onclick = e => {
     e.stopPropagation();
     stopAutoTour();
     dismissWalkToast();
-    goToTourNode(idx);
+    const targetIdx = Number(el.dataset.nodeIdx);
+    if (!Number.isNaN(targetIdx)) goToTourNode(targetIdx);
   };
   portalLayerEl.appendChild(el);
-  return { el, node, idx };
+  return { el, txt: el.querySelector('.p-txt'), distEl: el.querySelector('.p-dist'), dp };
 });
 
-// Exact 2D segment-segment line-of-sight check against solid wallSegments (<0.02ms/frame)
-function segsIntersect2D(ax, az, bx, bz, cx, cz, dx, dz) {
-  const rX = bx - ax, rZ = bz - az;
-  const sX = dx - cx, sZ = dz - cz;
-  const denom = rX * sZ - rZ * sX;
-  if (Math.abs(denom) < 1e-7) return false;
-  const qpx = cx - ax, qpz = cz - az;
-  const t = (qpx * sZ - qpz * sX) / denom;
-  const u = (qpx * rZ - qpz * rX) / denom;
-  return t > 0.03 && t < 0.97 && u >= -0.01 && u <= 1.01;
-}
-function hasLineOfSight2D(x1, z1, x2, z2) {
-  for (let i = 0; i < wallSegments.length; i++) {
-    const s = wallSegments[i];
-    if (segsIntersect2D(x1, z1, x2, z2, s.x1, s.z1, s.x2, s.z2)) return false;
+function hasTallFurnLOS(x1, z1, x2, z2) {
+  for (let i = 0; i < furnColliders.length; i++) {
+    const b = furnColliders[i];
+    if (b.maxY < 1.45) continue;
+    if (segIntersectsAABB2D(x1, z1, x2, z2, b, 0.02)) return false;
   }
   return true;
 }
+
+const _portalProj = new THREE.Vector3();
 function updatePortals() {
-  if (!walkMode) {
+  if (!walkMode || isWalkDragging || autoTour.active) {
     portalLayerEl.style.display = 'none';
     return;
   }
   portalLayerEl.style.display = 'block';
   const candidates = [];
+  const camX = camera.position.x, camZ = camera.position.z;
   for (let i = 0; i < portalEls.length; i++) {
-    const { el, node } = portalEls[i];
-    const dist = Math.hypot(camera.position.x - node.pos[0], camera.position.z - node.pos[1]);
-    if (dist < 1.75 || dist > 9.8 || !hasLineOfSight2D(camera.position.x, camera.position.z, node.pos[0], node.pos[1])) {
-      el.style.opacity = '0';
-      el.style.pointerEvents = 'none';
+    const p = portalEls[i];
+    const dp = p.dp;
+    const dist = Math.hypot(camX - dp.pos[0], camZ - dp.pos[1]);
+    if (dist < 0.26 || dist > 8.6 || !hasWallLOS(camX, camZ, dp.pos[0], dp.pos[1]) || !hasTallFurnLOS(camX, camZ, dp.pos[0], dp.pos[1])) {
+      p.el.style.opacity = '0';
+      p.el.style.pointerEvents = 'none';
       continue;
     }
-    const v = new THREE.Vector3(node.pos[0], 1.24, node.pos[1]).project(camera);
-    if (v.z > 1 || v.x < -0.92 || v.x > 0.92 || v.y < -0.78 || v.y > 0.78) {
-      el.style.opacity = '0';
-      el.style.pointerEvents = 'none';
+    _portalProj.set(dp.pos[0], 1.32, dp.pos[1]).project(camera);
+    if (_portalProj.z > 1 || _portalProj.x < -0.88 || _portalProj.x > 0.88 || _portalProj.y < -0.72 || _portalProj.y > 0.72) {
+      p.el.style.opacity = '0';
+      p.el.style.pointerEvents = 'none';
       continue;
     }
-    candidates.push({ el, dist, sx: (v.x * 0.5 + 0.5) * window.innerWidth, sy: (-v.y * 0.5 + 0.5) * window.innerHeight });
+    const isPosSide = dp.axis === 'x' ? (camX > dp.pos[0]) : (camZ > dp.pos[1]);
+    const label = isPosSide ? dp.posLabel : dp.negLabel;
+    const nodeIdx = isPosSide ? dp.posNode : dp.negNode;
+    const rawSx = (_portalProj.x * 0.5 + 0.5) * window.innerWidth;
+    const edgePad = Math.min(92, window.innerWidth * 0.22);
+    const sx = Math.max(edgePad, Math.min(window.innerWidth - edgePad, rawSx));
+    const sy = (-_portalProj.y * 0.5 + 0.5) * window.innerHeight;
+    candidates.push({ p, dist, label, nodeIdx, sx, sy });
   }
   candidates.sort((a, b) => a.dist - b.dist);
-  candidates.forEach((c, rank) => {
-    if (rank < 4) {
-      c.el.style.left = `${c.sx.toFixed(1)}px`;
-      c.el.style.top = `${c.sy.toFixed(1)}px`;
-      c.el.style.opacity = '0.94';
-      c.el.style.pointerEvents = 'auto';
-    } else {
-      c.el.style.opacity = '0';
-      c.el.style.pointerEvents = 'none';
+
+  const placed = [];
+  candidates.forEach(c => {
+    if (placed.length >= 3) {
+      c.p.el.style.opacity = '0';
+      c.p.el.style.pointerEvents = 'none';
+      return;
     }
+    // Screen-space overlap repulsion so pills never stack
+    let sy = c.sy;
+    for (let k = 0; k < placed.length; k++) {
+      const o = placed[k];
+      if (Math.abs(c.sx - o.sx) < 138 && Math.abs(sy - o.sy) < 42) {
+        sy = o.sy + (sy >= o.sy ? 44 : -44);
+      }
+    }
+    placed.push({ sx: c.sx, sy });
+    c.p.el.dataset.nodeIdx = String(c.nodeIdx);
+    const nextTxt = `→ ${c.label}`;
+    if (c.p.txt.textContent !== nextTxt) c.p.txt.textContent = nextTxt;
+    c.p.distEl.textContent = `${c.dist.toFixed(1)}m`;
+    c.p.el.style.transform = `translate3d(${c.sx.toFixed(1)}px, ${sy.toFixed(1)}px, 0) translate(-50%, -50%)`;
+    c.p.el.style.opacity = '0.94';
+    c.p.el.style.pointerEvents = 'auto';
   });
 }
 
@@ -2351,24 +3151,35 @@ btnAutoTour.onclick = e => {
   if (autoTour.active) stopAutoTour();
   else startAutoTour();
 };
+btnWalkMood.onclick = e => {
+  e.stopPropagation();
+  setLighting(!isNightMode);
+};
 btnEyeHeight.onclick = e => {
   e.stopPropagation();
   walkSeated = !walkSeated;
   btnEyeHeight.classList.toggle('active', walkSeated);
-  btnEyeHeight.textContent = walkSeated ? '🪑 Sit (3\'9")' : '🧍 Stand';
+  btnEyeHeight.textContent = walkSeated ? '🪑 3\'9"' : '🧍 5\'3"';
 };
 btnFovToggle.onclick = e => {
   e.stopPropagation();
+  walkCustomFov = null;
   walkFovWide = !walkFovWide;
   btnFovToggle.classList.toggle('active', walkFovWide);
-  btnFovToggle.textContent = walkFovWide ? '👁 68° Wide' : '👁 52° Eye';
+  btnFovToggle.textContent = walkFovWide ? '👁 68°' : '👁 52°';
 };
-btnMmToggle.onclick = e => {
-  e.stopPropagation();
-  mmVisible = !mmVisible;
+function setMinimapVisible(show) {
+  mmVisible = show;
+  if (show && window.innerWidth < 768) {
+    inspEl.classList.remove('show');
+    roomPickerEl.classList.remove('open');
+    walkRoomTrigger.classList.remove('open');
+  }
   btnMmToggle.classList.toggle('active', mmVisible);
   document.getElementById('minimap-wrap').classList.toggle('show', walkMode && mmVisible);
-};
+}
+btnMmToggle.onclick = e => { e.stopPropagation(); setMinimapVisible(!mmVisible); };
+document.getElementById('btn-mm-close').onclick = e => { e.stopPropagation(); setMinimapVisible(false); };
 
 function syncWalkAnglesFromCamera() {
   const dir = new THREE.Vector3();
@@ -2381,54 +3192,63 @@ function syncWalkAnglesFromCamera() {
   camera.rotation.z = 0;
 }
 
-function glideToWalkSpot(tx, tz, lookAt = null, duration = 0.65, smoothStep = false) {
+function glideToWalkSpot(tx, tz, lookAt = null, duration = null, smoothStep = true, forceDirect = false) {
   const dest = new THREE.Vector3(
     Math.max(0.28, Math.min(15.62, tx)),
     walkEyeY,
     Math.max(0.28, Math.min(12.88, tz))
   );
-  let targetYaw = null;
+  resolveWalkCollision(dest);
+  const pathPts = forceDirect
+    ? [[camera.position.x, camera.position.z], [dest.x, dest.z]]
+    : findWalkPath(camera.position.x, camera.position.z, dest.x, dest.z);
+  const arc = buildArcPath(pathPts);
+  const dur = duration ?? Math.max(0.45, Math.min(3.3, 0.28 + arc.total * 0.32));
+  let finalYaw = null;
   if (lookAt) {
-    const desired = Math.atan2(-(lookAt[0] - dest.x), -(lookAt[1] - dest.z));
-    targetYaw = walkYaw + shortestYawDelta(walkYaw, desired);
+    finalYaw = Math.atan2(-(lookAt[0] - dest.x), -(lookAt[1] - dest.z));
   }
   walkGlide = {
     t: 0,
-    dur: duration,
-    p0: camera.position.clone(),
-    p1: dest,
+    dur,
+    arc,
+    startY: camera.position.y,
     y0: walkYaw,
-    y1: targetYaw,
+    finalYaw,
     pt0: walkPitch,
     pt1: lookAt ? -0.04 : null,
     smoothStep,
+    steerAlongPath: arc.total > 1.25 && arc.pts.length > 2,
   };
 }
 
 function goToTourNode(idx, fromAuto = false) {
-  if (!fromAuto) stopAutoTour();
+  if (!fromAuto) { stopAutoTour(); dismissWalkToast(); }
   currentTourIdx = (idx + WALK_NODES.length) % WALK_NODES.length;
   const node = WALK_NODES[currentTourIdx];
-  const dist = Math.hypot(camera.position.x - node.pos[0], camera.position.z - node.pos[1]);
-  const dur = Math.max(0.58, Math.min(1.35, 0.45 + dist * 0.11));
-  glideToWalkSpot(node.pos[0], node.pos[1], node.look, dur, true);
-  walkRoomNameEl.textContent = `${node.label} ▾`;
+  glideToWalkSpot(node.pos[0], node.pos[1], node.look, null, true, false);
+  lastRoomLabel = node.label;
+  walkRoomNameEl.textContent = node.label;
   updateRoomPickerActive();
   document.querySelectorAll('.room-btn').forEach(b => b.classList.toggle('active', b.dataset.id === node.id));
 }
 
 function enterWalkMode(startPos = null, lookAtPos = null) {
   const wasWalking = walkMode;
+  if (!wasWalking) preWalkWallMode = currentWallMode;
   walkMode = true;
   camAnim = null;
   walkGlide = null;
   walkScrollVel = 0;
+  walkVel.set(0, 0, 0);
   stopAutoTour();
   controls.enabled = false;
   setWallMode('full');
+  ceilingGroup.visible = true;
+  skyDome.visible = true;
+  applyLightingIntensities();
   document.body.classList.add('walking');
-  document.getElementById('btn-walk').classList.add('accent');
-  document.getElementById('btn-walk').textContent = '🚶 Exit Walk';
+  walkExitBtn.classList.add('show');
   document.getElementById('walk-bar').classList.add('show');
   walkDockEl.classList.add('show');
   document.getElementById('minimap-wrap').classList.toggle('show', mmVisible);
@@ -2440,20 +3260,33 @@ function enterWalkMode(startPos = null, lookAtPos = null) {
     showWalkToast();
   }
 
+  let initialLabel = null;
   if (startPos) {
     syncWalkAnglesFromCamera();
-    glideToWalkSpot(startPos.x, startPos.z, lookAtPos ? [lookAtPos.x, lookAtPos.z] : null, 0.65, true);
-  } else if (camera.position.y > 4.2 || currentPreset.id === 'overview' || currentPreset.id === 'plan2d') {
-    currentTourIdx = 0;
-    syncWalkAnglesFromCamera();
-    const node = WALK_NODES[0];
-    glideToWalkSpot(node.pos[0], node.pos[1], node.look, 0.78, true);
+    const safeStart = { x: startPos.x, z: startPos.z };
+    resolveWalkCollision(safeStart);
+    glideToWalkSpot(safeStart.x, safeStart.z, lookAtPos ? [lookAtPos.x, lookAtPos.z] : null, 0.72, true, true);
+    initialLabel = detectRoomName(safeStart.x, safeStart.z);
   } else {
-    syncWalkAnglesFromCamera();
-    glideToWalkSpot(camera.position.x, camera.position.z, [controls.target.x, controls.target.z], 0.48, true);
+    // Smart entry: if currently focused on a specific room preset, drop straight into that room!
+    const matchedIdx = WALK_NODES.findIndex(n => n.id === currentPreset.id);
+    if (camera.position.y > 4.2 || currentPreset.id === 'overview' || currentPreset.id === 'plan2d') {
+      currentTourIdx = matchedIdx >= 0 ? matchedIdx : 0;
+      syncWalkAnglesFromCamera();
+      const node = WALK_NODES[currentTourIdx];
+      glideToWalkSpot(node.pos[0], node.pos[1], node.look, 0.85, true, true);
+      initialLabel = node.label;
+    } else {
+      syncWalkAnglesFromCamera();
+      const targetPt = { x: camera.position.x, z: camera.position.z };
+      resolveWalkCollision(targetPt);
+      glideToWalkSpot(targetPt.x, targetPt.z, [controls.target.x, controls.target.z], 0.55, true, true);
+      initialLabel = detectRoomName(targetPt.x, targetPt.z);
+    }
   }
   updateRoomPickerActive();
-  walkRoomNameEl.textContent = `${detectRoomName(camera.position.x, camera.position.z)} ▾`;
+  lastRoomLabel = initialLabel || detectRoomName(camera.position.x, camera.position.z);
+  walkRoomNameEl.textContent = lastRoomLabel;
 }
 
 function exitWalkMode(returnToOverview = false) {
@@ -2461,29 +3294,56 @@ function exitWalkMode(returnToOverview = false) {
   walkMode = false;
   walkGlide = null;
   walkScrollVel = 0;
+  walkVel.set(0, 0, 0);
+  isWalkDragging = false;
+  activeWalkPointerId = null;
+  mmMode = null; mmWalkStart = null; mmWalkTarget = null; mmAimLine = null; mmHoverZone = null;
   stopAutoTour();
   dismissWalkToast();
   roomPickerEl.classList.remove('open');
+  walkRoomTrigger.classList.remove('open');
   portalLayerEl.style.display = 'none';
   walkMarker.visible = false;
+  clickRipple.visible = false;
   waypointGroup.visible = false;
+  ceilingGroup.visible = false;
+  skyDome.visible = false;
   wpTooltipEl.style.display = 'none';
   Object.keys(walkKeys).forEach(k => walkKeys[k] = false);
+  // Close any proximity-opened doors smoothly back to rest
+  proximityDoors.forEach(d => {
+    d.progress = 0;
+    d.mesh.position.x = d.baseX;
+    d.mesh.position.z = d.baseZ;
+    if (d.mesh.material && d.baseOpacity !== undefined) {
+      d.mesh.material.opacity = d.baseOpacity;
+      d.mesh.material.depthWrite = d.kind === 'dissolve';
+    }
+  });
   document.body.classList.remove('walking');
-  document.getElementById('btn-walk').classList.remove('accent');
-  document.getElementById('btn-walk').textContent = '🚶 Walk House';
+  walkExitBtn.classList.remove('show');
   document.getElementById('walk-bar').classList.remove('show');
   walkDockEl.classList.remove('show');
   document.getElementById('minimap-wrap').classList.remove('show');
+  document.getElementById('insp-actions').classList.remove('show');
   if (walkHudWasOpen) hud.classList.remove('collapsed');
   renderer.domElement.style.cursor = 'default';
   if (document.getElementById('chk-labels').checked) labelsLayer.style.display = 'block';
+
+  // Restore Dollhouse wall height & smooth lift-out camera centered on current room!
+  setWallMode(preWalkWallMode === 'low' ? 'cut' : (preWalkWallMode || 'cut'));
+  applyLightingIntensities();
+  camera.rotation.order = 'XYZ';
   controls.enabled = true;
-  const dir = new THREE.Vector3();
-  camera.getWorldDirection(dir);
-  controls.target.copy(camera.position).add(dir.multiplyScalar(2.4));
-  controls.target.y = Math.max(0.4, Math.min(1.8, controls.target.y));
-  if (returnToOverview) { setWallMode('cut'); flyTo(PRESETS[0]); }
+  if (returnToOverview) {
+    flyTo(PRESETS[0]);
+  } else {
+    const cx = camera.position.x, cz = camera.position.z;
+    const liftTarget = new THREE.Vector3(cx, 0.5, cz);
+    const liftPos = new THREE.Vector3(cx - 4.4, 7.6, cz + 5.8);
+    controls.target.set(cx, 0.9, cz);
+    animateCamera(liftPos, liftTarget);
+  }
 }
 
 function animateCamera(p1, t1) {
@@ -2499,15 +3359,20 @@ function animateCamera(p1, t1) {
 function flyTo(preset) {
   if (walkMode) {
     if (preset.id === 'overview' || preset.id === 'plan2d') {
-      exitWalkMode(false);
-    } else {
-      const nodeIdx = WALK_NODES.findIndex(n => n.id === preset.id);
-      if (nodeIdx >= 0) goToTourNode(nodeIdx);
-      else glideToWalkSpot(preset.cam[0], preset.cam[2], [preset.tgt[0], preset.tgt[2]], 0.65);
-      currentPreset = preset;
-      document.querySelectorAll('.room-btn').forEach(b => b.classList.toggle('active', b.dataset.id === preset.id));
+      exitWalkMode(true);
+      if (preset.id === 'plan2d') {
+        currentPreset = preset;
+        setWallMode('low');
+        animateCamera(new THREE.Vector3(...preset.cam), new THREE.Vector3(...preset.tgt));
+      }
       return;
     }
+    const nodeIdx = WALK_NODES.findIndex(n => n.id === preset.id);
+    if (nodeIdx >= 0) goToTourNode(nodeIdx);
+    else glideToWalkSpot(preset.cam[0], preset.cam[2], [preset.tgt[0], preset.tgt[2]]);
+    currentPreset = preset;
+    document.querySelectorAll('.room-btn').forEach(b => b.classList.toggle('active', b.dataset.id === preset.id));
+    return;
   }
   currentPreset = preset;
   animateCamera(new THREE.Vector3(...preset.cam), new THREE.Vector3(...preset.tgt));
@@ -2530,19 +3395,27 @@ const labelsLayer = document.getElementById('labels-layer');
 const labelEls = ROOM_LABELS.map(r => {
   const el = document.createElement('div');
   el.className = 'room-label';
-  el.title = `Click to zoom into ${r.name}`;
+  el.title = `Click to zoom into ${r.name} · Double-click to walk inside`;
   el.innerHTML = `${r.name}<small>${r.dim}</small>`;
   el.onclick = e => {
     e.stopPropagation();
     const p = PRESETS.find(pr => pr.id === r.id);
     if (p) flyTo(p);
   };
+  el.ondblclick = e => {
+    e.stopPropagation();
+    const nodeIdx = WALK_NODES.findIndex(n => n.id === r.id);
+    enterWalkMode(
+      nodeIdx >= 0 ? { x: WALK_NODES[nodeIdx].pos[0], z: WALK_NODES[nodeIdx].pos[1] } : { x: r.pos[0], z: r.pos[2] },
+      nodeIdx >= 0 ? { x: WALK_NODES[nodeIdx].look[0], z: WALK_NODES[nodeIdx].look[1] } : null
+    );
+  };
   labelsLayer.appendChild(el);
   return { el, pos: new THREE.Vector3(...r.pos) };
 });
 
 // ============================================================================
-// 10. EASY ROOM ZOOM, MINI-MAP CLICK, SCROLL-WALK & KEYBOARD CONTROLS
+// 10. ZOOM BAR, MINI-MAP CONTROLS, TRACKPAD/TOUCH/KEYBOARD INPUTS
 // ============================================================================
 const zoomSlider = document.getElementById('zoom-slider');
 const zoomReadout = document.getElementById('zoom-readout');
@@ -2569,18 +3442,26 @@ document.getElementById('btn-walk').onclick = () => {
   if (walkMode) exitWalkMode(false);
   else enterWalkMode();
 };
-document.getElementById('btn-walk-exit').onclick = () => exitWalkMode(false);
+walkExitBtn.onclick = () => exitWalkMode(false);
 document.getElementById('btn-tour-prev').onclick = () => goToTourNode(currentTourIdx - 1);
 document.getElementById('btn-tour-next').onclick = () => goToTourNode(currentTourIdx + 1);
 document.getElementById('btn-full-flat').onclick = () => {
   if (walkMode) exitWalkMode(true);
   else flyTo(PRESETS[0]);
 };
+document.getElementById('compass').onclick = () => {
+  if (walkMode) {
+    stopAutoTour();
+    walkGlide = null;
+    walkYawTarget = walkYaw + shortestYawDelta(walkYaw, 0);
+    walkPitchTarget = -0.02;
+  } else {
+    const dist = camera.position.distanceTo(controls.target);
+    animateCamera(new THREE.Vector3(controls.target.x, Math.max(4, camera.position.y), controls.target.z + dist * 0.72), controls.target);
+  }
+};
 
-// Mini-Map Smooth Walk + Torch/Eye Orientation Controls:
-// - Drag avatar dot OR drag anywhere on floor: walk continuously in real time
-// - Single click on floor: glide smoothly to that spot
-// - Drag torch aim-knob, right-click/Shift-drag, or scroll over map: rotate 360° in place
+// Mini-Map Interaction: Click room to walk via pathfinding · Drag dot to move safely · Drag gold knob to aim
 const mmZoomBtn = document.getElementById('btn-mm-zoom');
 mmZoomBtn.onclick = e => {
   e.stopPropagation();
@@ -2595,15 +3476,10 @@ function getMMCoords(e) {
     py: (e.clientY - rect.top) * (MM_H / rect.height),
   };
 }
-function getTorchHandle() {
-  const [ax, ay] = toMM(camera.position.x, camera.position.z);
-  const ang = Math.atan2(-Math.cos(walkYaw), -Math.sin(walkYaw));
-  return { ax, ay, hx: ax + Math.cos(ang) * MM_CONE_LEN, hy: ay + Math.sin(ang) * MM_CONE_LEN };
-}
 function toSafeWalkPoint(px, py) {
   const { x, z } = fromMM(px, py);
   const p = { x: Math.max(0.28, Math.min(15.62, x)), z: Math.max(0.28, Math.min(12.88, z)) };
-  resolveWalkCollision(p, 0.22);
+  resolveWalkCollision(p);
   return p;
 }
 function aimCameraAtWorld(tx, tz, ox, oz) {
@@ -2620,16 +3496,19 @@ mmCanvas.addEventListener('wheel', e => {
   e.stopPropagation();
   walkGlide = null;
   const d = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
-  walkYawTarget -= Math.max(-80, Math.min(80, d)) * 0.0048;
+  walkYawTarget -= Math.max(-75, Math.min(75, d)) * 0.0042;
 }, { passive: false });
 mmCanvas.addEventListener('pointerdown', e => {
+  if (!walkMode) return;
   e.stopPropagation();
   stopAutoTour();
   dismissWalkToast();
+  try { mmCanvas.setPointerCapture(e.pointerId); } catch (_) {}
   const { px, py } = getMMCoords(e);
   const { ax, ay, hx, hy } = getTorchHandle();
-  const nearAvatar = Math.hypot(px - ax, py - ay) <= 13;
-  const nearHandle = !nearAvatar && Math.hypot(px - hx, py - hy) <= 13;
+  const hitR = e.pointerType === 'touch' ? 20 : 14;
+  const nearAvatar = Math.hypot(px - ax, py - ay) <= hitR;
+  const nearHandle = !nearAvatar && Math.hypot(px - hx, py - hy) <= hitR;
   if (e.button === 2 || e.shiftKey || nearHandle) {
     mmMode = 'aim';
     const { x, z } = fromMM(px, py);
@@ -2648,18 +3527,39 @@ mmCanvas.addEventListener('pointerdown', e => {
     mmCanvas.style.cursor = 'grabbing';
   }
 });
+mmCanvas.addEventListener('pointerleave', () => {
+  if (!mmMode) {
+    mmHoverZone = null;
+    mmHoverPart = null;
+    mmTipEl.classList.remove('show');
+  }
+});
 window.addEventListener('pointermove', e => {
   if (!walkMode) return;
   if (!mmMode) {
     if (e.target === mmCanvas) {
       const { px, py } = getMMCoords(e);
       const { ax, ay, hx, hy } = getTorchHandle();
-      if (Math.hypot(px - ax, py - ay) <= 13) mmHoverPart = 'avatar';
-      else if (Math.hypot(px - hx, py - hy) <= 13) mmHoverPart = 'handle';
+      if (Math.hypot(px - ax, py - ay) <= 14) mmHoverPart = 'avatar';
+      else if (Math.hypot(px - hx, py - hy) <= 14) mmHoverPart = 'handle';
       else mmHoverPart = null;
+      const world = fromMM(px, py);
+      mmHoverZone = detectRoomZone(world.x, world.z);
+      if (mmHoverPart === 'handle') {
+        mmTipEl.textContent = 'Drag to rotate view 360°';
+        mmTipEl.classList.add('show');
+      } else if (mmHoverPart === 'avatar') {
+        mmTipEl.textContent = 'Drag to walk live';
+        mmTipEl.classList.add('show');
+      } else if (mmHoverZone) {
+        mmTipEl.textContent = `Walk to ${mmHoverZone.name}`;
+        mmTipEl.classList.add('show');
+      } else {
+        mmTipEl.classList.remove('show');
+      }
       mmCanvas.style.cursor = mmHoverPart === 'avatar' ? 'move' : (mmHoverPart === 'handle' ? 'grab' : 'pointer');
-    } else if (mmHoverPart) {
-      mmHoverPart = null;
+    } else if (mmHoverPart || mmHoverZone) {
+      mmHoverPart = null; mmHoverZone = null; mmTipEl.classList.remove('show');
     }
     return;
   }
@@ -2670,7 +3570,7 @@ window.addEventListener('pointermove', e => {
     aimCameraAtWorld(x, z, camera.position.x, camera.position.z);
     mmAimLine = { x0: ax, y0: ay, x1: px, y1: py };
   } else if (mmMode === 'walk' && mmWalkStart) {
-    if (!mmWalkStart.dragged && Math.hypot(px - mmWalkStart.px, py - mmWalkStart.py) > 4) {
+    if (!mmWalkStart.dragged && Math.hypot(px - mmWalkStart.px, py - mmWalkStart.py) > 5) {
       mmWalkStart.dragged = true;
       walkGlide = null;
       mmCanvas.style.cursor = 'grabbing';
@@ -2680,31 +3580,79 @@ window.addEventListener('pointermove', e => {
     }
   }
 });
-window.addEventListener('pointerup', () => {
-  if (mmMode === 'walk' && mmWalkStart && !mmWalkStart.dragged) {
-    glideToWalkSpot(mmWalkStart.pt.x, mmWalkStart.pt.z, null, 0.42);
-    walkRoomNameEl.textContent = detectRoomName(mmWalkStart.pt.x, mmWalkStart.pt.z);
+function endMinimapDrag(commitClick) {
+  if (!mmMode) return;
+  if (commitClick && walkMode && mmMode === 'walk' && mmWalkStart && !mmWalkStart.dragged) {
+    glideToWalkSpot(mmWalkStart.pt.x, mmWalkStart.pt.z, null, null, true, false);
+    triggerClickRipple(mmWalkStart.pt.x, mmWalkStart.pt.z);
+    if (window.innerWidth < 768) setMinimapVisible(false);
   }
   mmMode = null;
   mmWalkStart = null;
   mmWalkTarget = null;
   mmAimLine = null;
   mmCanvas.style.cursor = mmHoverPart === 'avatar' ? 'move' : (mmHoverPart === 'handle' ? 'grab' : 'pointer');
-});
+}
+window.addEventListener('pointerup', () => endMinimapDrag(true));
+window.addEventListener('pointercancel', () => endMinimapDrag(false));
 
-// Smooth Scroll-Wheel / Trackpad Two-Finger Glide + Steer in Walk Mode
+// Calibrated Scroll-Wheel / macOS Precision Trackpad Glide + Pinch-to-FOV
 renderer.domElement.addEventListener('wheel', e => {
   if (!walkMode) return;
   e.preventDefault();
   stopAutoTour();
   dismissWalkToast();
+  if (e.ctrlKey) {
+    // Trackpad pinch gesture smoothly adjusts optical FOV (46°..76°)
+    const cur = walkCustomFov ?? (walkFovWide ? 68 : 52);
+    walkCustomFov = Math.max(46, Math.min(76, cur + e.deltaY * 0.25));
+    btnFovToggle.textContent = `👁 ${Math.round(walkCustomFov)}°`;
+    return;
+  }
   walkGlide = null;
-  const dy = Math.max(-85, Math.min(85, e.deltaY));
-  const dx = Math.max(-85, Math.min(85, e.deltaX));
-  if (Math.abs(dy) > 1) walkScrollVel = Math.max(-4.8, Math.min(4.8, walkScrollVel - dy * 0.038));
-  if (Math.abs(dx) > 1) walkYawTarget -= dx * 0.0042;
+  const isTrackpad = e.deltaMode === 0 && Math.abs(e.deltaY) < 42 && Math.abs(e.deltaX) < 42;
+  const dy = Math.max(-70, Math.min(70, e.deltaY));
+  const dx = Math.max(-70, Math.min(70, e.deltaX));
+  // Dominant-axis lock eliminates accidental yaw twist during vertical two-finger scrolls
+  const absY = Math.abs(dy), absX = Math.abs(dx);
+  if (absY > 0.8 && absY >= absX * 0.7) {
+    const scale = isTrackpad ? 0.022 : 0.030;
+    walkScrollVel = Math.max(-3.6, Math.min(3.6, walkScrollVel - dy * scale));
+  }
+  if (absX > 1.2 && absX > absY * 1.35) {
+    walkYawTarget -= dx * (isTrackpad ? 0.0028 : 0.0038);
+  }
 }, { passive: false });
 
+// Two-Finger Touch Pinch-to-FOV in Walk Mode
+let touchPinchDist = null;
+renderer.domElement.addEventListener('touchstart', e => {
+  if (!walkMode) return;
+  if (e.touches.length === 2) {
+    isWalkDragging = false;
+    touchPinchDist = Math.hypot(
+      e.touches[0].clientX - e.touches[1].clientX,
+      e.touches[0].clientY - e.touches[1].clientY
+    );
+  }
+}, { passive: true });
+renderer.domElement.addEventListener('touchmove', e => {
+  if (!walkMode || e.touches.length !== 2 || touchPinchDist === null) return;
+  const d = Math.hypot(
+    e.touches[0].clientX - e.touches[1].clientX,
+    e.touches[0].clientY - e.touches[1].clientY
+  );
+  const delta = touchPinchDist - d;
+  touchPinchDist = d;
+  const cur = walkCustomFov ?? (walkFovWide ? 68 : 52);
+  walkCustomFov = Math.max(46, Math.min(76, cur + delta * 0.14));
+  btnFovToggle.textContent = `👁 ${Math.round(walkCustomFov)}°`;
+}, { passive: true });
+renderer.domElement.addEventListener('touchend', e => {
+  if (e.touches.length < 2) touchPinchDist = null;
+}, { passive: true });
+
+// Keyboard Navigation (Normalized WASD/Arrows + Shortcuts + Clean Blur Reset)
 window.addEventListener('keydown', e => {
   const k = e.key.toLowerCase();
   if (walkMode) {
@@ -2713,6 +3661,7 @@ window.addEventListener('keydown', e => {
       if (autoTour.active) stopAutoTour(); else startAutoTour();
       return;
     }
+    if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) e.preventDefault();
     if (k === 'w' || e.key === 'ArrowUp') { stopAutoTour(); dismissWalkToast(); walkGlide = null; walkKeys.fwd = true; }
     else if (k === 's' || e.key === 'ArrowDown') { stopAutoTour(); dismissWalkToast(); walkGlide = null; walkKeys.back = true; }
     else if (k === 'a') { stopAutoTour(); dismissWalkToast(); walkGlide = null; walkKeys.left = true; }
@@ -2720,13 +3669,33 @@ window.addEventListener('keydown', e => {
     else if (e.key === 'ArrowLeft' || k === 'q') { stopAutoTour(); dismissWalkToast(); walkGlide = null; walkKeys.turnL = true; }
     else if (e.key === 'ArrowRight' || k === 'e') { stopAutoTour(); dismissWalkToast(); walkGlide = null; walkKeys.turnR = true; }
     else if (e.key === 'Shift') walkKeys.shift = true;
-    else if (e.key === 'Escape') exitWalkMode(false);
+    else if (e.key === '[') goToTourNode(currentTourIdx - 1);
+    else if (e.key === ']') goToTourNode(currentTourIdx + 1);
+    else if (k === 'l') setLighting(!isNightMode);
+    else if (k === 'm') setMinimapVisible(!mmVisible);
+    else if (k === 'c') btnEyeHeight.click();
+    else if (k === 'f') btnFovToggle.click();
+    else if (e.key === 'Escape') {
+      if (roomPickerEl.classList.contains('open')) {
+        roomPickerEl.classList.remove('open');
+        walkRoomTrigger.classList.remove('open');
+      } else if (inspEl.classList.contains('show')) {
+        inspEl.classList.remove('show');
+      } else {
+        exitWalkMode(false);
+      }
+    }
     else if (e.key === '0') exitWalkMode(true);
     return;
   }
+  if (k === 'w') { enterWalkMode(); return; }
   if (e.key === '+' || e.key === '=') zoomToDistance(camera.position.distanceTo(controls.target) * 0.75);
   else if (e.key === '-') zoomToDistance(camera.position.distanceTo(controls.target) * 1.35);
-  else if (e.key === 'Escape' || e.key === '0') flyTo(PRESETS[0]);
+  else if (e.key === 'Escape') {
+    if (inspEl.classList.contains('show')) inspEl.classList.remove('show');
+    else flyTo(PRESETS[0]);
+  }
+  else if (e.key === '0') flyTo(PRESETS[0]);
 });
 window.addEventListener('keyup', e => {
   const k = e.key.toLowerCase();
@@ -2738,9 +3707,15 @@ window.addEventListener('keyup', e => {
   else if (e.key === 'ArrowRight' || k === 'e') walkKeys.turnR = false;
   else if (e.key === 'Shift') walkKeys.shift = false;
 });
+window.addEventListener('blur', () => {
+  Object.keys(walkKeys).forEach(k => walkKeys[k] = false);
+  isWalkDragging = false;
+  activeWalkPointerId = null;
+  endMinimapDrag(false);
+});
 
 // ============================================================================
-// 11. WALL HEIGHT, LIGHTING, LAYER TOGGLES, WALK CURSOR & RAYCAST INSPECTOR
+// 11. WALL HEIGHT, LIGHTING, LAYER TOGGLES, SMART RETICLE & RAYCAST INSPECTOR
 // ============================================================================
 let currentWallMode = 'cut';
 function setWallMode(mode) {
@@ -2759,15 +3734,32 @@ function setWallMode(mode) {
 setWallMode('cut');
 document.querySelectorAll('[data-wall]').forEach(b => b.onclick = () => setWallMode(b.dataset.wall));
 
+function applyLightingIntensities() {
+  if (isNightMode) {
+    scene.environment = null; // Disable bright white studio IBL so 2700K lamps & coves actually glow!
+    hemiLight.intensity = walkMode ? 0.11 : 0.12;
+    sunLight.intensity = 0.04;
+    renderer.toneMappingExposure = walkMode ? 0.96 : 1.02;
+  } else {
+    scene.environment = dayEnvTexture;
+    hemiLight.intensity = walkMode ? 0.76 : 0.88;
+    sunLight.intensity = walkMode ? 1.12 : 1.38;
+    renderer.toneMappingExposure = walkMode ? 0.96 : 1.02;
+  }
+}
 function setLighting(isNight) {
+  isNightMode = isNight;
   document.getElementById('mode-day').classList.toggle('active', !isNight);
   document.getElementById('mode-night').classList.toggle('active', isNight);
+  btnWalkMood.classList.toggle('active', isNight);
+  btnWalkMood.textContent = isNight ? '☀ Day' : '🌙 2700K';
   nightLightsGroup.visible = isNight;
   scene.background.set(isNight ? 0x0B0D12 : 0x1A202C);
-  hemiLight.intensity = isNight ? 0.22 : 0.95;
-  sunLight.intensity = isNight ? 0.14 : 1.55;
-  MAT.lampShade.emissiveIntensity = isNight ? 0.85 : 0.18;
-  renderer.toneMappingExposure = isNight ? 1.18 : 1.08;
+  skyDomeMat.map = isNight ? skyNightTex : skyDayTex;
+  skyDomeMat.needsUpdate = true;
+  cobCoreMat.emissiveIntensity = isNight ? 1.65 : 0.20;
+  MAT.lampShade.emissiveIntensity = isNight ? 1.15 : 0.16;
+  applyLightingIntensities();
 }
 document.getElementById('mode-day').onclick = () => setLighting(false);
 document.getElementById('mode-night').onclick = () => setLighting(true);
@@ -2786,55 +3778,99 @@ document.getElementById('hud-toggle').onclick = () => hud.classList.remove('coll
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
 const inspEl = document.getElementById('inspector');
+const inspActionsEl = document.getElementById('insp-actions');
 let pointerDown = { x: 0, y: 0 };
 
-function showInspector(meta) {
+function showInspector(meta, worldPt = null) {
+  if (walkMode && window.innerWidth < 768) {
+    setMinimapVisible(false);
+    roomPickerEl.classList.remove('open');
+    walkRoomTrigger.classList.remove('open');
+  }
   document.getElementById('insp-tag').textContent = meta.tag;
   document.getElementById('insp-title').textContent = meta.title;
   document.getElementById('insp-desc').textContent = meta.desc;
   document.getElementById('insp-meta').textContent = meta.meta;
+  lastInspPoint = worldPt ? worldPt.clone() : null;
+  const canStepCloser = walkMode && lastInspPoint && Math.hypot(camera.position.x - lastInspPoint.x, camera.position.z - lastInspPoint.z) > 1.75;
+  inspActionsEl.classList.toggle('show', Boolean(canStepCloser));
   inspEl.classList.add('show');
 }
+document.getElementById('insp-close').onclick = e => {
+  e.stopPropagation();
+  inspEl.classList.remove('show');
+};
+document.getElementById('insp-walk-btn').onclick = e => {
+  e.stopPropagation();
+  if (!walkMode || !lastInspPoint) return;
+  const pt = lastInspPoint;
+  const back = camera.position.clone().sub(pt);
+  back.y = 0;
+  if (back.length() < 0.05) back.set(0, 0, 1);
+  back.normalize().multiplyScalar(1.38);
+  const dest = { x: pt.x + back.x, z: pt.z + back.z };
+  resolveWalkCollision(dest);
+  glideToWalkSpot(dest.x, dest.z, [pt.x, pt.z], null, true, false);
+  inspActionsEl.classList.remove('show');
+};
 
+// Canvas Pointer Look, Smart Hover Disambiguation & Click-to-Walk / Inspect
 renderer.domElement.addEventListener('pointerdown', e => {
+  if (e.button !== 0 && e.pointerType === 'mouse') return;
   camAnim = null;
   pointerDown = { x: e.clientX, y: e.clientY };
   if (walkMode) {
     stopAutoTour();
     dismissWalkToast();
     isWalkDragging = true;
+    activeWalkPointerId = e.pointerId;
     walkLastPtr = { x: e.clientX, y: e.clientY };
+    try { renderer.domElement.setPointerCapture(e.pointerId); } catch (_) {}
     renderer.domElement.style.cursor = 'grabbing';
   }
 });
 
+function releaseWalkDrag() {
+  if (!isWalkDragging) return;
+  isWalkDragging = false;
+  if (activeWalkPointerId !== null) {
+    try { renderer.domElement.releasePointerCapture(activeWalkPointerId); } catch (_) {}
+    activeWalkPointerId = null;
+  }
+  if (walkMode) renderer.domElement.style.cursor = 'grab';
+}
+
 renderer.domElement.addEventListener('pointermove', e => {
   if (!walkMode) return;
   if (isWalkDragging) {
+    if (activeWalkPointerId !== null && e.pointerId !== activeWalkPointerId) return;
     const dx = e.clientX - walkLastPtr.x;
     const dy = e.clientY - walkLastPtr.y;
     walkLastPtr = { x: e.clientX, y: e.clientY };
     walkGlide = null;
-    walkYawTarget += dx * 0.0044;
-    walkPitchTarget = Math.max(-1.02, Math.min(1.02, walkPitchTarget + dy * 0.0036));
+    const sens = e.pointerType === 'touch' ? 0.0054 : 0.0042;
+    walkYawTarget += dx * sens;
+    walkPitchTarget = Math.max(-1.05, Math.min(1.05, walkPitchTarget + dy * (sens * 0.82)));
     walkMarker.visible = false;
     wpTooltipEl.style.display = 'none';
     return;
   }
+  if (e.pointerType === 'touch') return;
   mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
   mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
   raycaster.setFromCamera(mouse, camera);
 
-  // Check wall occlusion so we never hover floors/waypoints behind solid walls
+  // Wall occlusion (solid walls always block; non-slider glass blocks)
   const wHits = raycaster.intersectObjects(wallMeshes, false).filter(h => !h.object.userData.isGlass);
   const maxVisibleDist = wHits.length > 0 ? wHits[0].distance : Infinity;
 
-  // 1. Check Matterport Waypoint Discs first
+  // 1. Matterport Waypoint Discs
   const wpHits = raycaster.intersectObjects(waypointMeshes, false).filter(h => h.object.parent.visible && h.distance < maxVisibleDist);
   if (wpHits.length > 0) {
     const idx = wpHits[0].object.userData.walkNodeIdx;
     hoveredWpIdx = idx;
     walkMarker.visible = false;
+    wpTooltipEl.classList.remove('inspect');
     wpTooltipEl.textContent = `${WALK_NODES[idx].label} · Click to walk`;
     wpTooltipEl.style.left = `${e.clientX}px`;
     wpTooltipEl.style.top = `${e.clientY}px`;
@@ -2843,12 +3879,29 @@ renderer.domElement.addEventListener('pointermove', e => {
     return;
   }
   hoveredWpIdx = -1;
+
+  // 2. Compare Inspectable Item vs Walkable Floor (eliminates Walk vs Inspect ambiguity!)
+  const iHits = raycaster.intersectObjects(inspectables, false).filter(h => h.distance < maxVisibleDist + 0.08 && h.object.visible);
+  const fHits = raycaster.intersectObjects(floorMeshes, false).filter(h => h.distance < maxVisibleDist && h.distance < 12.0);
+  const hitItemFirst = iHits.length > 0 && (!fHits.length || iHits[0].distance < fHits[0].distance - 0.04);
+
+  if (hitItemFirst && iHits[0].object.userData.meta) {
+    walkMarker.visible = false;
+    wpTooltipEl.classList.add('inspect');
+    wpTooltipEl.textContent = `ℹ ${iHits[0].object.userData.meta.title}`;
+    wpTooltipEl.style.left = `${e.clientX}px`;
+    wpTooltipEl.style.top = `${e.clientY}px`;
+    wpTooltipEl.style.display = 'block';
+    renderer.domElement.style.cursor = 'pointer';
+    return;
+  }
   wpTooltipEl.style.display = 'none';
 
-  // 2. Check unobstructed floor spot
-  const fHits = raycaster.intersectObjects(floorMeshes, false).filter(h => h.distance < maxVisibleDist && h.distance < 11.5);
+  // 3. Unobstructed Walkable Floor Reticle (snaps safely outside furniture footprints)
   if (fHits.length > 0) {
-    walkMarker.position.set(fHits[0].point.x, 0.026, fHits[0].point.z);
+    const pt = { x: fHits[0].point.x, z: fHits[0].point.z };
+    if (isInsideFurniture(pt.x, pt.z, 0.08)) resolveWalkCollision(pt);
+    walkMarker.position.set(pt.x, 0.026, pt.z);
     walkMarker.visible = true;
     renderer.domElement.style.cursor = 'pointer';
   } else {
@@ -2857,10 +3910,12 @@ renderer.domElement.addEventListener('pointermove', e => {
   }
 });
 
+window.addEventListener('pointerup', releaseWalkDrag);
+window.addEventListener('pointercancel', releaseWalkDrag);
+
 renderer.domElement.addEventListener('pointerup', e => {
-  isWalkDragging = false;
-  if (walkMode) renderer.domElement.style.cursor = 'grab';
-  if (Math.hypot(e.clientX - pointerDown.x, e.clientY - pointerDown.y) > 6) return;
+  releaseWalkDrag();
+  if (Math.hypot(e.clientX - pointerDown.x, e.clientY - pointerDown.y) > 7) return;
   mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
   mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
   raycaster.setFromCamera(mouse, camera);
@@ -2877,16 +3932,21 @@ renderer.domElement.addEventListener('pointerup', e => {
       return;
     }
 
-    // 2. Inspectable vs unobstructed floor spot
-    const iHits = raycaster.intersectObjects(inspectables, false).filter(h => h.distance < maxVisibleDist + 0.12);
-    const fHits = raycaster.intersectObjects(floorMeshes, false).filter(h => h.distance < maxVisibleDist && h.distance < 11.5);
-    if (fHits.length > 0 && (!iHits.length || fHits[0].distance < iHits[0].distance)) {
-      glideToWalkSpot(fHits[0].point.x, fHits[0].point.z, null, 0.52);
-      inspEl.classList.remove('show');
+    // 2. Inspectable item vs walkable floor
+    const iHits = raycaster.intersectObjects(inspectables, false).filter(h => h.distance < maxVisibleDist + 0.08 && h.object.visible);
+    const fHits = raycaster.intersectObjects(floorMeshes, false).filter(h => h.distance < maxVisibleDist && h.distance < 12.0);
+    const hitItemFirst = iHits.length > 0 && (!fHits.length || iHits[0].distance < fHits[0].distance - 0.04);
+
+    if (hitItemFirst && iHits[0].object.userData.meta) {
+      showInspector(iHits[0].object.userData.meta, iHits[0].point);
       return;
     }
-    if (iHits.length > 0 && iHits[0].object.userData.meta) {
-      showInspector(iHits[0].object.userData.meta);
+    if (fHits.length > 0) {
+      const dest = { x: fHits[0].point.x, z: fHits[0].point.z };
+      resolveWalkCollision(dest);
+      glideToWalkSpot(dest.x, dest.z, null, null, true, false);
+      triggerClickRipple(dest.x, dest.z);
+      inspEl.classList.remove('show');
       return;
     }
     inspEl.classList.remove('show');
@@ -2894,76 +3954,131 @@ renderer.domElement.addEventListener('pointerup', e => {
   }
 
   const hits = raycaster.intersectObjects(inspectables, false);
-  if (hits.length > 0 && hits[0].object.userData.meta) showInspector(hits[0].object.userData.meta);
+  if (hits.length > 0 && hits[0].object.userData.meta) showInspector(hits[0].object.userData.meta, hits[0].point);
   else inspEl.classList.remove('show');
 });
 
-// Double-click any item to glide closer & inspect; double-click floor to walk & face room center
+// Double-Click: In Dollhouse -> drop straight into Walk Mode at clicked floor!
+// In Walk Mode -> step closer to inspect item OR walk & face room center!
 renderer.domElement.addEventListener('dblclick', e => {
-  if (!walkMode) return;
-  stopAutoTour();
   mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
   mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
   raycaster.setFromCamera(mouse, camera);
+
+  if (!walkMode) {
+    const fHits = raycaster.intersectObjects(floorMeshes, false);
+    if (fHits.length > 0) {
+      const pt = fHits[0].point;
+      const zMatch = detectRoomZone(pt.x, pt.z);
+      const look = zMatch ? { x: (zMatch.x1 + zMatch.x2) * 0.5, z: (zMatch.z1 + zMatch.z2) * 0.5 } : null;
+      enterWalkMode({ x: pt.x, z: pt.z }, look);
+    }
+    return;
+  }
+
+  stopAutoTour();
   const wHits = raycaster.intersectObjects(wallMeshes, false).filter(h => !h.object.userData.isGlass);
   const maxVisibleDist = wHits.length > 0 ? wHits[0].distance : Infinity;
-  const hits = raycaster.intersectObjects(inspectables, false).filter(h => h.distance < maxVisibleDist + 0.12);
+  const hits = raycaster.intersectObjects(inspectables, false).filter(h => h.distance < maxVisibleDist + 0.08 && h.object.visible);
   if (hits.length > 0 && hits[0].object.userData.meta) {
     const pt = hits[0].point;
     const back = camera.position.clone().sub(pt);
     back.y = 0;
     if (back.length() > 1.55) {
-      back.normalize().multiplyScalar(1.45);
-      glideToWalkSpot(pt.x + back.x, pt.z + back.z, [pt.x, pt.z], 0.55, true);
+      back.normalize().multiplyScalar(1.38);
+      const dest = { x: pt.x + back.x, z: pt.z + back.z };
+      resolveWalkCollision(dest);
+      glideToWalkSpot(dest.x, dest.z, [pt.x, pt.z], null, true, false);
     }
-    showInspector(hits[0].object.userData.meta);
+    showInspector(hits[0].object.userData.meta, pt);
     return;
   }
-  const fHits = raycaster.intersectObjects(floorMeshes, false).filter(h => h.distance < maxVisibleDist && h.distance < 11.5);
+  const fHits = raycaster.intersectObjects(floorMeshes, false).filter(h => h.distance < maxVisibleDist && h.distance < 12.0);
   if (fHits.length > 0) {
-    const pt = fHits[0].point;
-    const zMatch = ROOM_ZONES.find(r => pt.x >= r.x1 && pt.x <= r.x2 && pt.z >= r.z1 && pt.z <= r.z2);
+    const pt = { x: fHits[0].point.x, z: fHits[0].point.z };
+    resolveWalkCollision(pt);
+    const zMatch = detectRoomZone(pt.x, pt.z);
     const look = zMatch ? [(zMatch.x1 + zMatch.x2) * 0.5, (zMatch.z1 + zMatch.z2) * 0.5] : null;
-    glideToWalkSpot(pt.x, pt.z, look, 0.62, true);
+    glideToWalkSpot(pt.x, pt.z, look, null, true, false);
+    triggerClickRipple(pt.x, pt.z);
   }
 });
 
 // ============================================================================
-// 12. RENDER LOOP, WALK ENGINE, MINI-MAP & 2D LABEL PROJECTION
+// 12. RENDER LOOP, DOORWAY-AWARE WALK ENGINE, PROXIMITY DOORS & MINI-MAP
 // ============================================================================
 const needle = document.getElementById('compass-needle');
 const clock = new THREE.Clock();
 let elapsed = 0;
+const _fwd = new THREE.Vector3();
+const _right = new THREE.Vector3();
+const _moveDir = new THREE.Vector3();
+
 function animate() {
   requestAnimationFrame(animate);
   const dt = Math.min(0.05, clock.getDelta());
   elapsed += dt;
 
-  // Smooth Architectural FOV Morph (42° Dollhouse ↔ 68° Wide / 52° Natural Walk Lens)
-  const targetFov = walkMode ? (walkFovWide ? 68 : 52) : 42;
+  // Smooth Architectural FOV Morph (adapts gracefully to portrait mobile so phones aren't a narrow keyhole!)
+  let targetFov = 42;
+  if (walkMode) {
+    const baseFov = walkCustomFov ?? (walkFovWide ? 68 : 52);
+    if (camera.aspect < 1) {
+      const targetHFov = walkCustomFov ?? (walkFovWide ? 70 : 54);
+      targetFov = Math.min(88, Math.max(baseFov, THREE.MathUtils.radToDeg(2 * Math.atan(Math.tan(THREE.MathUtils.degToRad(targetHFov) * 0.5) / Math.max(0.35, camera.aspect)))));
+    } else {
+      targetFov = baseFov;
+    }
+  }
   if (Math.abs(camera.fov - targetFov) > 0.05) {
     camera.fov += (targetFov - camera.fov) * (1 - Math.exp(-8 * dt));
     camera.updateProjectionMatrix();
   }
 
   if (walkMode) {
-    // Smooth Standing (1.60m) ↔ Seated (1.15m) Eye-Height Transition
+    // Smooth Standing (1.60m) ↔ Seated (1.15m) Eye-Height Transition (live even during glides)
     const targetEye = walkSeated ? WALK_EYE_SIT : WALK_EYE_STAND;
     walkEyeY += (targetEye - walkEyeY) * (1 - Math.exp(-10 * dt));
 
-    // Smooth arrow-key turning
     if (walkKeys.turnL) walkYawTarget += 1.85 * dt;
     if (walkKeys.turnR) walkYawTarget -= 1.85 * dt;
 
+    let movingSpeed = 0;
     if (walkGlide) {
       walkGlide.t = Math.min(1, walkGlide.t + dt / walkGlide.dur);
       const t = walkGlide.t;
       const k = walkGlide.smoothStep
         ? (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2)
         : (1 - Math.pow(1 - t, 3));
-      camera.position.lerpVectors(walkGlide.p0, walkGlide.p1, k);
-      if (walkGlide.y1 !== null) walkYawTarget = walkYaw = walkGlide.y0 + (walkGlide.y1 - walkGlide.y0) * k;
-      if (walkGlide.pt1 !== null) walkPitchTarget = walkPitch = walkGlide.pt0 + (walkGlide.pt1 - walkGlide.pt0) * k;
+      const distNow = k * walkGlide.arc.total;
+      const [gx, gz] = walkGlide.arc.sample(distNow);
+      const prevX = camera.position.x, prevZ = camera.position.z;
+      camera.position.x = gx;
+      camera.position.z = gz;
+      // Smoothly bring entry swoop from Dollhouse height down to live walkEyeY
+      camera.position.y = walkGlide.startY + (walkEyeY - walkGlide.startY) * k;
+      movingSpeed = Math.hypot(gx - prevX, gz - prevZ) / Math.max(dt, 0.008);
+
+      // Look-ahead tangent steering along multi-room paths, blending cleanly into hero framing
+      if (walkGlide.steerAlongPath && distNow < walkGlide.arc.total - 0.35) {
+        const [lx, lz] = walkGlide.arc.sample(Math.min(walkGlide.arc.total, distNow + 1.15));
+        const tanYaw = Math.atan2(-(lx - gx), -(lz - gz));
+        let desired = tanYaw;
+        if (walkGlide.finalYaw !== null && t > 0.62) {
+          const blend = (t - 0.62) / 0.38;
+          desired = tanYaw + shortestYawDelta(tanYaw, walkGlide.finalYaw) * (blend * blend * (3 - 2 * blend));
+        }
+        walkYawTarget = walkYaw + shortestYawDelta(walkYaw, desired);
+        walkYaw += (walkYawTarget - walkYaw) * (1 - Math.exp(-7.5 * dt));
+      } else if (walkGlide.finalYaw !== null) {
+        const dYaw = shortestYawDelta(walkYaw, walkGlide.finalYaw);
+        walkYaw += dYaw * (1 - Math.exp(-8.5 * dt));
+        walkYawTarget = walkYaw;
+      }
+      if (walkGlide.pt1 !== null) {
+        walkPitchTarget = walkPitch = walkGlide.pt0 + (walkGlide.pt1 - walkGlide.pt0) * k;
+      }
+
       if (walkGlide.t >= 1) {
         walkGlide = null;
         if (autoTour.active) {
@@ -2973,20 +4088,65 @@ function animate() {
         }
       }
     } else {
-      // Cinematic Guided Auto-Tour gentle room pan
+      // Cinematic Guided Auto-Tour gentle room pan + progress bar
       if (autoTour.active && autoTour.phase === 'pan') {
         autoTour.timer += dt;
-        walkYawTarget = autoTour.baseYaw + Math.sin((autoTour.timer / 3.6) * Math.PI * 2) * 0.34;
+        const frac = Math.min(1, autoTour.timer / 3.4);
+        walkYawTarget = autoTour.baseYaw + Math.sin(frac * Math.PI * 2) * 0.32;
         walkPitchTarget = -0.04;
-        if (autoTour.timer >= 3.6) {
+        const overall = ((currentTourIdx + frac) / WALK_NODES.length) * 100;
+        tourProgressEl.style.width = `${overall.toFixed(1)}%`;
+        if (autoTour.timer >= 3.4) {
           autoTour.phase = 'glide';
           goToTourNode(currentTourIdx + 1, true);
         }
       }
-      // Smooth damped look interpolation
       const damp = 1 - Math.exp(-15 * dt);
       walkYaw += (walkYawTarget - walkYaw) * damp;
       walkPitch += (walkPitchTarget - walkPitch) * damp;
+
+      // Normalized, Velocity-Damped WASD / Arrow / Scroll Movement + Wall/Furniture Slide
+      const maxSpeed = walkKeys.shift ? 4.0 : 2.35;
+      _fwd.set(-Math.sin(walkYaw), 0, -Math.cos(walkYaw));
+      _right.set(Math.cos(walkYaw), 0, -Math.sin(walkYaw));
+      _moveDir.set(0, 0, 0);
+      if (walkKeys.fwd) _moveDir.add(_fwd);
+      if (walkKeys.back) _moveDir.sub(_fwd);
+      if (walkKeys.right) _moveDir.add(_right);
+      if (walkKeys.left) _moveDir.sub(_right);
+      if (_moveDir.lengthSq() > 0) _moveDir.normalize().multiplyScalar(maxSpeed);
+      if (Math.abs(walkScrollVel) > 0.02) {
+        _moveDir.addScaledVector(_fwd, walkScrollVel);
+        walkScrollVel *= Math.exp(-7.5 * dt);
+      } else {
+        walkScrollVel = 0;
+      }
+      const accel = 1 - Math.exp(-13 * dt);
+      walkVel.lerp(_moveDir, accel);
+      if (walkVel.lengthSq() > 0.0004) {
+        camera.position.addScaledVector(walkVel, dt);
+        resolveWalkCollision(camera.position);
+        movingSpeed = walkVel.length();
+      } else {
+        walkVel.set(0, 0, 0);
+      }
+      if (mmWalkTarget && mmMode === 'walk') {
+        const k = 1 - Math.exp(-12 * dt);
+        camera.position.x += (mmWalkTarget.x - camera.position.x) * k;
+        camera.position.z += (mmWalkTarget.z - camera.position.z) * k;
+        resolveWalkCollision(camera.position); // Prevents wall/furniture tunneling on minimap drag!
+      }
+      // Subtle natural footstep micro-bob (<= 1.1cm, zero motion sickness)
+      if (movingSpeed > 0.25 && !mmMode) {
+        walkBobPhase += dt * Math.min(8.5, 4.5 + movingSpeed * 1.4);
+      }
+      const bobOffset = (movingSpeed > 0.25 && !mmMode) ? Math.sin(walkBobPhase) * 0.011 * Math.min(1, movingSpeed * 0.5) : 0;
+      camera.position.y = walkEyeY + bobOffset;
+    }
+
+    if (autoTour.active && autoTour.phase === 'glide') {
+      const overall = ((currentTourIdx + (walkGlide ? walkGlide.t * 0.35 : 0)) / WALK_NODES.length) * 100;
+      tourProgressEl.style.width = `${Math.min(100, overall).toFixed(1)}%`;
     }
 
     camera.rotation.order = 'YXZ';
@@ -2994,31 +4154,27 @@ function animate() {
     camera.rotation.x = walkPitch;
     camera.rotation.z = 0;
 
-    // Keyboard & Scroll-Wheel Movement with doorway-aware wall collision slide
-    const baseSpeed = walkKeys.shift ? 4.2 : 2.5;
-    const fwd = new THREE.Vector3(-Math.sin(walkYaw), 0, -Math.cos(walkYaw));
-    const right = new THREE.Vector3(Math.cos(walkYaw), 0, -Math.sin(walkYaw));
-    let moved = false;
-    if (walkKeys.fwd) { camera.position.addScaledVector(fwd, baseSpeed * dt); moved = true; }
-    if (walkKeys.back) { camera.position.addScaledVector(fwd, -baseSpeed * dt); moved = true; }
-    if (walkKeys.right) { camera.position.addScaledVector(right, baseSpeed * dt); moved = true; }
-    if (walkKeys.left) { camera.position.addScaledVector(right, -baseSpeed * dt); moved = true; }
-    if (Math.abs(walkScrollVel) > 0.02) {
-      camera.position.addScaledVector(fwd, walkScrollVel * dt);
-      walkScrollVel *= Math.exp(-7.5 * dt);
-      moved = true;
-    } else {
-      walkScrollVel = 0;
+    // Proximity Auto-Opening Sliders (slide + fade clear), Sheer Curtains & Hidden Grooved Doors (soft dissolve)
+    for (let i = 0; i < proximityDoors.length; i++) {
+      const d = proximityDoors[i];
+      const dist = Math.hypot(camera.position.x - d.cx, camera.position.z - d.cz);
+      const target = dist < d.radius ? 1 : 0;
+      d.progress += (target - d.progress) * (1 - Math.exp(-8 * dt));
+      if (d.progress > 0.002 || target > 0) {
+        d.mesh.position.x = d.baseX + d.axisX * d.slideDist * d.progress;
+        d.mesh.position.z = d.baseZ + d.axisZ * d.slideDist * d.progress;
+        if (d.kind === 'sheer') {
+          d.mesh.material.opacity = d.baseOpacity * (1 - d.progress * 0.90);
+        } else if (d.kind === 'slider') {
+          d.mesh.material.opacity = d.baseOpacity * (1 - d.progress * 0.88);
+        } else if (d.kind === 'dissolve') {
+          d.mesh.material.opacity = Math.max(0.05, 1 - d.progress * 0.95);
+          d.mesh.material.depthWrite = d.progress < 0.25;
+        }
+      }
     }
-    if (moved) resolveWalkCollision(camera.position);
-    if (mmWalkTarget && mmMode === 'walk') {
-      const k = 1 - Math.exp(-12 * dt);
-      camera.position.x += (mmWalkTarget.x - camera.position.x) * k;
-      camera.position.z += (mmWalkTarget.z - camera.position.z) * k;
-    }
-    camera.position.y = walkGlide ? camera.position.y : walkEyeY;
 
-    // Smooth Mini-Map Room-Zoom pan (frozen while dragging so cursor stays 1:1)
+    // Smooth Mini-Map Room-Zoom Pan (frozen while dragging so cursor stays 1:1)
     const targetMMZoom = mmZoomed ? 2.25 : 1.0;
     mmViewZoom += (targetMMZoom - mmViewZoom) * (1 - Math.exp(-10 * dt));
     if (!mmMode) {
@@ -3032,31 +4188,56 @@ function animate() {
       mmViewCenter.z += (tz - mmViewCenter.z) * panK;
     }
 
-    // Animate Waypoint Discs (hide disc directly underfoot, highlight hovered disc)
-    const pulse = 1 + Math.sin(elapsed * 3.2) * 0.04;
+    // Animate Waypoint Discs with smooth distance fade & crisp dark contrast halo
+    const pulse = 1 + Math.sin(elapsed * 3.0) * 0.035;
     waypointGroup.children.forEach(g => {
       const dist = Math.hypot(camera.position.x - g.position.x, camera.position.z - g.position.z);
-      g.visible = dist > 0.85;
+      const visible = dist > 0.85 && dist < 8.4;
+      g.visible = visible;
+      if (!visible) return;
+      const fade = dist > 5.5 ? Math.max(0, 1 - (dist - 5.5) / 2.9) : 1;
       const isHov = g.userData.idx === hoveredWpIdx;
       const s = isHov ? 1.24 : pulse;
       g.scale.set(s, 1, s);
+      g.userData.halo.material.opacity = (isHov ? 0.50 : 0.34) * fade;
       g.userData.ring.material.color.setHex(isHov ? 0xD4A853 : 0xFFFFFF);
-      g.userData.ring.material.opacity = isHov ? 0.98 : 0.72;
-      g.userData.hit.material.opacity = isHov ? 0.42 : 0.18;
+      g.userData.ring.material.opacity = (isHov ? 0.98 : 0.84) * fade;
+      g.userData.hit.material.opacity = (isHov ? 0.44 : 0.22) * fade;
     });
+
+    // Click destination floor ripple
+    if (clickRipple.visible) {
+      clickRippleAge += dt * 2.1;
+      if (clickRippleAge >= 1) {
+        clickRipple.visible = false;
+      } else {
+        const s = 0.7 + clickRippleAge * 1.9;
+        clickRipple.scale.set(s, s, 1);
+        clickRippleMat.opacity = (1 - clickRippleAge) * 0.85;
+      }
+    }
 
     if (walkMarker.visible) {
       const ms = 1 + Math.sin(elapsed * 5.0) * 0.06;
       ringOuter.scale.set(ms, ms, 1);
     }
 
-    walkRoomNameEl.textContent = `${detectRoomName(camera.position.x, camera.position.z)} ▾`;
+    // Update top room pill only when manually moving into a different room (preserves curated stop names!)
+    if (!walkGlide && (movingSpeed > 0.08 || mmMode === 'walk')) {
+      const roomNow = detectRoomName(camera.position.x, camera.position.z);
+      if (roomNow !== lastRoomLabel) {
+        lastRoomLabel = roomNow;
+        walkRoomNameEl.textContent = roomNow;
+        syncNearestTourNode(camera.position.x, camera.position.z);
+      }
+    }
+
     needle.style.transform = `rotate(${(walkYaw * 180 / Math.PI).toFixed(1)}deg)`;
     updatePortals();
     if (mmVisible) drawMinimap();
   } else {
     if (camAnim) {
-      camAnim.t = Math.min(1, camAnim.t + 0.05);
+      camAnim.t = Math.min(1, camAnim.t + 0.055);
       const k = 1 - Math.pow(1 - camAnim.t, 3);
       camera.position.lerpVectors(camAnim.p0, camAnim.p1, k);
       controls.target.lerpVectors(camAnim.t0, camAnim.t1, k);
