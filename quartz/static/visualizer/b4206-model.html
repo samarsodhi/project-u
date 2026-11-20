@@ -1054,46 +1054,61 @@ addBox(grilleGroup, 0.08, 0.06, 4.08, 15.90, 1.12, 9.56, MAT.upvcWhite);
 
 // ---------- A. DRAWING ROOM & FOYER (x: 0..4.08, z: 0..5.48) ----------
 // Exact 2500×3500 mm IKEA STOCKHOLM Wool Flatweave Rug
-addBox(furnGroup, 2.50, 0.015, 3.50, 2.15, 0.01, 2.85, MAT.rugWool, {
+addBox(furnGroup, 2.50, 0.015, 3.50, 2.18, 0.01, 2.55, MAT.rugWool, {
   tag: 'DRAWING ROOM · RUG', title: 'IKEA STOCKHOLM 100% Pure New Wool Flatweave',
   desc: 'Exact 250×350 cm handwoven wool rug paired with 2× STOPP FILT 4mm anti-slip underlays.',
   meta: 'Budget: ₹36,580 · Tier 1 Recommended'
 });
-// Foyer Louvered CP Teak Shoe Credenza + Sculpted Sparrow Wall Hooks + Pierced Brass Lantern
-addBox(furnGroup, 1.05, 0.78, 0.36, 0.78, 0.39, 0.25, MAT.cpTeak, {
-  tag: 'FOYER · SHOE CREDENZA', title: 'Custom Seasoned CP Teak Louvered Shoe Credenza',
-  desc: 'Kiln-dried solid hardwood with slotted ventilation and flat shelves for UK 10+ sneakers.',
+// South-East Foyer Zone (Drawing South wall, x: 1.58..3.86 — clear of Living archway at x: 4.08)
+// 1. Louvered CP Teak Shoe Credenza (1000×360×780mm, x: 2.86..3.86, 22cm clear of Living archway jamb)
+addBox(furnGroup, 1.00, 0.78, 0.36, 3.36, 0.39, 5.23, MAT.cpTeak, {
+  tag: 'SOUTH FOYER · SHOE CREDENZA', title: 'Custom Seasoned CP Teak Louvered Shoe Credenza (100×36cm)',
+  desc: 'Relocated to Drawing South wall (East side, 22cm clear of Living passage). Slotted ventilation & flat shelves for UK 10+ sneakers.',
   meta: 'Budget: ₹26k–₹32k · Tier 1 Recommended'
 });
-[0.42, 0.64, 0.86, 1.08].forEach(hx => {
-  addBox(decorGroup, 0.03, 0.06, 0.015, hx, 1.48, 0.08, MAT.darkMetal); // Backplate
+// 2. Solid CP Teak Slatted Entry Bench beside Credenza (1150×380×450mm, x: 1.58..2.73)
+const benchMeta = {
+  tag: 'SOUTH FOYER · ENTRY BENCH', title: 'Custom CP Teak Slatted Entry Bench (115×38×45cm)',
+  desc: 'Solid mortise-and-tenon CP teak bench with removable washable seat cushion placed beside shoe credenza beneath the Persian wall carpet.',
+  meta: 'Budget: ₹14k–₹18k · Tier 1 Recommended'
+};
+addBox(furnGroup, 1.15, 0.05, 0.38, 2.155, 0.36, 5.22, MAT.cpTeak, benchMeta);
+addBox(furnGroup, 1.11, 0.07, 0.36, 2.155, 0.42, 5.22, MAT.fabricOat, benchMeta);
+addBox(furnGroup, 1.07, 0.03, 0.30, 2.155, 0.14, 5.22, MAT.cpTeak);
+[[1.63, 5.07], [2.68, 5.07], [1.63, 5.37], [2.68, 5.37]].forEach(([lx, lz]) => {
+  addBox(furnGroup, 0.05, 0.35, 0.05, lx, 0.175, lz, MAT.cpTeak);
+});
+// 3. Cast-Iron Sparrow Wall Hooks mounted above South-East Shoe Credenza
+[3.02, 3.24, 3.46, 3.68].forEach(hx => {
+  addBox(decorGroup, 0.03, 0.06, 0.015, hx, 1.48, 5.40, MAT.darkMetal);
   const bird = new THREE.Mesh(new THREE.BoxGeometry(0.035, 0.045, 0.085), MAT.darkMetal);
-  bird.position.set(hx, 1.49, 0.125); bird.rotation.x = -0.35;
+  bird.position.set(hx, 1.49, 5.355); bird.rotation.x = 0.35;
   bird.userData.meta = {
-    tag: 'FOYER · WALL HOOKS', title: 'Spruce & Pop Skye Cast-Iron Sparrow Hooks (Set of 4)',
-    desc: 'Cast-iron sparrow silhouette pegs anchored via Fischer DuoPower plugs (<5kg load).',
+    tag: 'SOUTH FOYER · WALL HOOKS', title: 'Spruce & Pop Skye Cast-Iron Sparrow Hooks (Set of 4)',
+    desc: 'Cast-iron sparrow silhouette pegs on South wall above shoe credenza via Fischer DuoPower plugs (<5kg load).',
     meta: 'Aesthetic Exception · ₹1,700 set'
   };
   inspectables.push(bird); decorGroup.add(bird);
 });
+// 4. Pierced Brass Pendant Lantern above South-East Foyer Credenza
 const lantern = new THREE.Mesh(new THREE.CylinderGeometry(0.14, 0.18, 0.34, 12), MAT.brass);
-lantern.position.set(0.85, 2.02, 0.58);
+lantern.position.set(3.36, 2.02, 5.02);
 lantern.userData.meta = {
-  tag: 'FOYER · AMBIENT LANTERN', title: 'Fos / Moradabad Hand-Pierced Solid Brass Pendant (16")',
-  desc: 'Suspended at 2,000mm AFF clear of the 1,200mm West Main Door swing; wired to Shelly Dimmer Gen3.',
+  tag: 'SOUTH FOYER · AMBIENT LANTERN', title: 'Fos / Moradabad Hand-Pierced Solid Brass Pendant (16")',
+  desc: 'Suspended at 2,020mm AFF above South-East foyer credenza, clear of Living archway; wired to Shelly Dimmer Gen3.',
   meta: 'Budget: ₹12.5k–₹18.5k'
 };
 inspectables.push(lantern); decorGroup.add(lantern);
 
 // West Media Wall (Homz Docket p. 2 — Burnished Morning Glory 0765 Mineral Limewash)
-// Console: exact 210mm FFL clearance (bottom 0.21m, h 0.36m, top 0.57m)
-addBox(furnGroup, 0.42, 0.36, 2.65, 0.30, 0.39, 3.10, MAT.cinnHickory, {
-  tag: 'DRAWING · WEST MEDIA WALL', title: 'Homz Floating TV Console (424 1D Cinnamon Hickory)',
-  desc: 'West wall left of Main Door MD. 18mm BWP ply on M10 French cleat, exact 210mm robot floor clearance, backed by Morning Glory 0765 burnished mineral limewash.',
+// Console: 2200mm wide (z: 1.65..3.85), exact 210mm FFL clearance, leaving 1.05m limewash wall to SW vase for Nataraja
+addBox(furnGroup, 0.42, 0.36, 2.20, 0.30, 0.39, 2.75, MAT.cinnHickory, {
+  tag: 'DRAWING · WEST MEDIA WALL', title: 'Homz Floating TV Console (220cm · 424 1D Cinnamon Hickory)',
+  desc: 'West wall South of Main Door MD. 18mm BWP ply on M10 French cleat, exact 210mm floor clearance, backed by Morning Glory 0765 burnished limewash.',
   meta: 'Docket p. 2 · Finish: 424 1D Cinnamon Hickory'
 });
-// Owned 65" Sony Bravia XBR-65X90CH: exact 1450 W × 833 H × 70 D mm, center y=1.18m (bottom 763mm -> 193mm above console)
-addBox(furnGroup, 0.07, 0.833, 1.45, 0.115, 1.18, 2.95, MAT.tvScreen, {
+// Owned 65" Sony Bravia XBR-65X90CH: exact 1450 W × 833 H × 70 D mm, centered at z=2.82m
+addBox(furnGroup, 0.07, 0.833, 1.45, 0.115, 1.18, 2.82, MAT.tvScreen, {
   tag: 'DRAWING · WEST AV (EXACT 65")', title: 'Owned 65" Sony Bravia TV (1450×833mm) + Sonos Arc Ultra',
   desc: 'Exact 65" proportions (1450×833×70mm). 50mm in-wall PVC conduit; ≥150mm vertical clearance above console for Sonos Arc Ultra upward Atmos drivers.',
   meta: 'Model: XBR-65X90CH · Direct 230V'
@@ -1103,7 +1118,7 @@ const arcGeo = new THREE.CylinderGeometry(0.0375, 0.0375, 1.178, 16);
 const arcMesh = new THREE.Mesh(arcGeo, MAT.darkMetal);
 arcMesh.rotation.x = Math.PI / 2;
 arcMesh.scale.set(1.48, 1, 1); // 111mm depth × 75mm height exact
-arcMesh.position.set(0.32, 0.608, 2.95);
+arcMesh.position.set(0.32, 0.608, 2.82);
 arcMesh.castShadow = true;
 arcMesh.userData.meta = {
   tag: 'DRAWING · SOUNDBAR (EXACT SPEC)', title: 'Owned Sonos Arc Ultra (1178 × 75 × 111 mm)',
@@ -1113,74 +1128,104 @@ arcMesh.userData.meta = {
 inspectables.push(arcMesh); furnGroup.add(arcMesh);
 
 // Owned Sonos Era 300: exact 260 W × 160 H × 185 D mm
-addBox(decorGroup, 0.185, 0.16, 0.26, 0.30, 0.65, 1.98, MAT.offWhite, {
+addBox(decorGroup, 0.185, 0.16, 0.26, 0.30, 0.65, 1.88, MAT.offWhite, {
   tag: 'DRAWING · STANDALONE MUSIC', title: 'Owned Sonos Era 300 (260 × 160 × 185 mm)',
   desc: 'Standalone spatial music speaker in Drawing Room (not paired as TV surround so Bluetooth/line-in stay enabled).',
   meta: 'Owned · Multi-room sync with Arc Ultra'
 });
-// Devsabha 27" Antique Brass Nataraja (Exact 686mm tall = 120mm lotus pedestal + 566mm real alpha-keyed Natraj.jpeg sculpture!)
-addBox(decorGroup, 0.20, 0.07, 0.24, 0.30, 0.605, 4.10, MAT.bronze, {
-  tag: 'DRAWING · 27" NATARAJA SCULPTURE', title: 'Devsabha 27" Antique Brass Nataraja (686 mm H · 17.5 kg)',
-  desc: 'Solid lost-wax Chola bronze on M10-anchored West console deck with QuakeHold museum gel; lit by 10° 3000K CRI 90+ gimbal spot.',
-  meta: 'Exact 27" (686mm) Height · ₹43,999'
-});
-const lotusBase = new THREE.Mesh(new THREE.CylinderGeometry(0.085, 0.105, 0.055, 18), MAT.brass);
-lotusBase.position.set(0.30, 0.665, 4.10); decorGroup.add(lotusBase);
-const natPlane = new THREE.Mesh(new THREE.PlaneGeometry(0.56, 0.566), MAT.nataraja);
-natPlane.position.set(0.30, 0.973, 4.10); natPlane.rotation.y = Math.PI / 2;
-natPlane.userData.meta = {
-  tag: 'DRAWING · 27" NATARAJA SCULPTURE', title: 'Devsabha 27" Antique Brass Nataraja (686 mm H · 17.5 kg)',
-  desc: 'Solid lost-wax antique brass Nataraja with 22" fire halo on M10-anchored West console deck.',
-  meta: 'Exact 27" (686mm) Height · ₹43,999'
+// Wall-Mounted Nataraja Relief on West Limewash Wall (centered at z=4.38m between TV Console z=3.85 & SW Vase z=4.90)
+const natMeta = {
+  tag: 'DRAWING · WEST WALL NATARAJA', title: 'Tri-Metal / Antique Brass Nataraja Wall Relief (Flush Mount)',
+  desc: 'Mounted flush at 1.36m eye level on burnished Morning Glory 0765 West wall between TV console and SW corner vase via dual 8×50mm Fischer masonry plugs; lit by 10° 3000K gimbal spot.',
+  meta: 'West Wall (z=4.38m) · ₹9.9k–₹16.5k'
 };
+const natBack = new THREE.Mesh(new THREE.CylinderGeometry(0.30, 0.30, 0.024, 32), MAT.bronze);
+natBack.rotation.z = Math.PI / 2;
+natBack.position.set(0.092, 1.36, 4.38);
+natBack.userData.meta = natMeta;
+inspectables.push(natBack); decorGroup.add(natBack);
+const natRim = new THREE.Mesh(new THREE.TorusGeometry(0.30, 0.014, 10, 32), MAT.brass);
+natRim.rotation.y = Math.PI / 2;
+natRim.position.set(0.106, 1.36, 4.38); decorGroup.add(natRim);
+const natPlane = new THREE.Mesh(new THREE.PlaneGeometry(0.52, 0.53), MAT.nataraja);
+natPlane.position.set(0.114, 1.36, 4.38); natPlane.rotation.y = Math.PI / 2;
+natPlane.userData.meta = natMeta;
 inspectables.push(natPlane); decorGroup.add(natPlane);
 
-// Drawing Room Seating (Option B · Recommended): Stanley Classic / Magari Porto 100% Top-Grain Leather 3+2 Suite
-// 3-Seater (2200×940mm) on East wall (z: 1.56..3.76) facing 65" TV + 2-Seater (1600×900mm) on North side (x: 1.42..3.02)
-// Leaves 1.70m Living archway, 1.42m Foyer door swing, North curtain, and South Persian carpet unobstructed.
+// SW Corner Large Sculptural Floor Vase + Preserved Botanicals (x=0.42, z=5.10)
+const vaseMeta = {
+  tag: 'DRAWING · SW CORNER FLOOR VASE', title: 'Large Handcrafted Stoneware Floor Urn (72cm) + Preserved Botanicals',
+  desc: 'Weighted matte terracotta/stoneware floor vessel (4–5kg sand base + museum gel) styled with tall preserved olive, eucalyptus & pampas stems framing the West Nataraja and South Persian carpet.',
+  meta: 'SW Corner · ₹7.5k–₹11k (Tier 1)'
+};
+const vaseMat = new THREE.MeshStandardMaterial({ color: 0xA86E52, roughness: 0.72, metalness: 0.05 });
+const vaseBot = new THREE.Mesh(new THREE.CylinderGeometry(0.19, 0.13, 0.38, 22), vaseMat);
+vaseBot.position.set(0.42, 0.19, 5.10); vaseBot.castShadow = true; vaseBot.userData.meta = vaseMeta;
+inspectables.push(vaseBot); decorGroup.add(vaseBot);
+const vaseTop = new THREE.Mesh(new THREE.CylinderGeometry(0.105, 0.19, 0.24, 22), vaseMat);
+vaseTop.position.set(0.42, 0.50, 5.10); vaseTop.castShadow = true; vaseTop.userData.meta = vaseMeta;
+decorGroup.add(vaseTop);
+const vaseNeck = new THREE.Mesh(new THREE.CylinderGeometry(0.115, 0.10, 0.10, 22), vaseMat);
+vaseNeck.position.set(0.42, 0.67, 5.10); decorGroup.add(vaseNeck);
+[[-0.14, 0.10, 0.62, 0.28, -0.22], [0.16, -0.06, 0.72, -0.24, 0.18], [-0.04, -0.15, 0.68, -0.12, -0.26], [0.10, 0.14, 0.58, 0.22, 0.24], [0.02, 0.02, 0.78, 0.05, -0.06]].forEach(([ox, oz, len, rx, rz], idx) => {
+  const stem = new THREE.Mesh(new THREE.CylinderGeometry(0.008, 0.011, len, 6), MAT.cpTeak);
+  stem.position.set(0.42 + ox * 0.45, 0.70 + len * 0.44, 5.10 + oz * 0.45);
+  stem.rotation.set(rx, 0, rz);
+  decorGroup.add(stem);
+  const plumeMat = idx % 2 === 0 ? MAT.plant : MAT.fabricOat;
+  const plume = new THREE.Mesh(new THREE.SphereGeometry(idx % 2 === 0 ? 0.085 : 0.068, 10, 10), plumeMat);
+  plume.scale.set(0.85, 1.85, 0.85);
+  plume.position.set(0.42 + ox, 0.72 + len * 0.88, 5.10 + oz);
+  plume.userData.meta = vaseMeta;
+  decorGroup.add(plume);
+});
+
+// Drawing Room Seating (Option B · Preferred / Recommended): Stanley Classic / Magari Porto 100% Top-Grain Leather 3+2 Suite
+// 3-Seater (2200×940mm) on East wall (z: 1.46..3.66) + 2-Seater (1600×900mm) tucked along North window (x: 1.66..3.26, z: 0.26..1.16)
+// Leaves 1.70m Living archway, 1.66m Foyer door swing, North curtain, and South Foyer/Persian carpet unobstructed.
 const leather3Meta = {
-  tag: 'DRAWING · 3+2 LEATHER (OPTION B · RECOMMENDED)',
+  tag: 'DRAWING · 3+2 LEATHER (OPTION B · PREFERRED)',
   title: 'Stanley Classic / Magari Porto 100% Top-Grain Leather 3-Seater (2200×940mm)',
   desc: '100% all-over full top-grain bovine leather (zero vinyl backs), kiln-dried hardwood frame with KD bolt-on legs for 2.1m service lift.',
-  meta: 'Option B Recommended · Suite Budget: ₹3.80L–₹4.50L (Tier 2)'
+  meta: 'Option B Preferred · Suite Budget: ₹3.80L–₹4.50L (Tier 2)'
 };
 const leather2Meta = {
-  tag: 'DRAWING · 3+2 LEATHER (OPTION B · RECOMMENDED)',
+  tag: 'DRAWING · 3+2 LEATHER (OPTION B · PREFERRED)',
   title: 'Stanley Classic / Magari Porto 100% Top-Grain Leather 2-Seater (1600×900mm)',
-  desc: 'Matching top-grain leather loveseat facing South Persian carpet; clears West Main Door swing and North curtains.',
-  meta: 'Option B Recommended · 100% Top-Grain Hide'
+  desc: 'Matching top-grain leather loveseat tucked along North window facing South Persian carpet; clears West Main Door swing by 51cm.',
+  meta: 'Option B Preferred · 100% Top-Grain Hide'
 };
-// 3-Seater Leather Sofa (East Wall, z: 1.56..3.76, x: 3.06..4.00)
-addBox(furnGroup, 0.94, 0.14, 2.20, 3.53, 0.19, 2.66, MAT.cpTeak, leather3Meta);
-addBox(furnGroup, 0.80, 0.22, 1.94, 3.46, 0.37, 2.66, MAT.leatherCognac, leather3Meta);
-addBox(furnGroup, 0.22, 0.48, 2.20, 3.89, 0.66, 2.66, MAT.leatherCognac, leather3Meta);
-addBox(furnGroup, 0.92, 0.40, 0.16, 3.53, 0.45, 1.64, MAT.leatherCognac);
-addBox(furnGroup, 0.92, 0.40, 0.16, 3.53, 0.45, 3.68, MAT.leatherCognac);
-// 2-Seater Leather Loveseat (North Window Side, x: 1.42..3.02, z: 0.66..1.56)
-addBox(furnGroup, 1.60, 0.14, 0.90, 2.22, 0.19, 1.11, MAT.cpTeak, leather2Meta);
-addBox(furnGroup, 1.32, 0.22, 0.76, 2.22, 0.37, 1.18, MAT.leatherCognac, leather2Meta);
-addBox(furnGroup, 1.60, 0.48, 0.22, 2.22, 0.66, 0.77, MAT.leatherCognac, leather2Meta);
-addBox(furnGroup, 0.16, 0.40, 0.88, 1.50, 0.45, 1.11, MAT.leatherCognac);
-addBox(furnGroup, 0.16, 0.40, 0.88, 2.94, 0.45, 1.11, MAT.leatherCognac);
+// 3-Seater Leather Sofa (East Wall, z: 1.46..3.66, x: 3.06..4.00)
+addBox(furnGroup, 0.94, 0.14, 2.20, 3.53, 0.19, 2.56, MAT.cpTeak, leather3Meta);
+addBox(furnGroup, 0.80, 0.22, 1.94, 3.46, 0.37, 2.56, MAT.leatherCognac, leather3Meta);
+addBox(furnGroup, 0.22, 0.48, 2.20, 3.89, 0.66, 2.56, MAT.leatherCognac, leather3Meta);
+addBox(furnGroup, 0.92, 0.40, 0.16, 3.53, 0.45, 1.54, MAT.leatherCognac);
+addBox(furnGroup, 0.92, 0.40, 0.16, 3.53, 0.45, 3.58, MAT.leatherCognac);
+// 2-Seater Leather Loveseat (North Window Wall, x: 1.66..3.26, z: 0.26..1.16)
+addBox(furnGroup, 1.60, 0.14, 0.90, 2.46, 0.19, 0.71, MAT.cpTeak, leather2Meta);
+addBox(furnGroup, 1.32, 0.22, 0.76, 2.46, 0.37, 0.78, MAT.leatherCognac, leather2Meta);
+addBox(furnGroup, 1.60, 0.48, 0.22, 2.46, 0.66, 0.37, MAT.leatherCognac, leather2Meta);
+addBox(furnGroup, 0.16, 0.40, 0.88, 1.74, 0.45, 0.71, MAT.leatherCognac);
+addBox(furnGroup, 0.16, 0.40, 0.88, 3.18, 0.45, 0.71, MAT.leatherCognac);
 // NE Corner CP Teak Side Table (520×520mm) bridging 3-Seater & 2-Seater
-addBox(furnGroup, 0.52, 0.04, 0.52, 3.55, 0.52, 1.12, MAT.cpTeak);
-addBox(furnGroup, 0.04, 0.50, 0.04, 3.33, 0.25, 0.90, MAT.darkMetal);
-addBox(furnGroup, 0.04, 0.50, 0.04, 3.77, 0.25, 0.90, MAT.darkMetal);
-addBox(furnGroup, 0.04, 0.50, 0.04, 3.33, 0.25, 1.34, MAT.darkMetal);
-addBox(furnGroup, 0.04, 0.50, 0.04, 3.77, 0.25, 1.34, MAT.darkMetal);
+addBox(furnGroup, 0.52, 0.04, 0.52, 3.66, 0.52, 1.10, MAT.cpTeak);
+addBox(furnGroup, 0.04, 0.50, 0.04, 3.44, 0.25, 0.88, MAT.darkMetal);
+addBox(furnGroup, 0.04, 0.50, 0.04, 3.88, 0.25, 0.88, MAT.darkMetal);
+addBox(furnGroup, 0.04, 0.50, 0.04, 3.44, 0.25, 1.32, MAT.darkMetal);
+addBox(furnGroup, 0.04, 0.50, 0.04, 3.88, 0.25, 1.32, MAT.darkMetal);
 
-addFloorLamp(3.65, 0.48, 'Orange Tree Velar Marble & Brass Arc Floor Lamp', 'Heavy marble base tucked at NE corner arching over 3+2 leather suite with warm 2700K SOLHETTA E27 bulb.', 'Budget: ₹12k–₹13.3k', true);
-addCowayPurifier(0.38, 5.08, 'DRAWING');
+addFloorLamp(3.72, 0.42, 'Orange Tree Velar Marble & Brass Arc Floor Lamp', 'Heavy marble base tucked at NE corner arching over 3+2 leather suite with warm 2700K SOLHETTA E27 bulb.', 'Budget: ₹12k–₹13.3k', true);
+addCowayPurifier(1.36, 0.28, 'DRAWING');
 // Orange Tree Toshi Solid Wood Nesting Coffee Table Pair centered inside 3+2 leather suite
 const ct1 = new THREE.Mesh(new THREE.CylinderGeometry(0.45, 0.45, 0.04, 24), MAT.darkMetal);
-ct1.position.set(2.08, 0.40, 2.72); ct1.castShadow = true; furnGroup.add(ct1);
+ct1.position.set(2.14, 0.40, 2.38); ct1.castShadow = true; furnGroup.add(ct1);
 const ct2 = new THREE.Mesh(new THREE.CylinderGeometry(0.33, 0.33, 0.04, 24), MAT.cpTeak);
-ct2.position.set(1.68, 0.32, 3.16); ct2.castShadow = true; furnGroup.add(ct2);
+ct2.position.set(1.74, 0.32, 2.82); ct2.castShadow = true; furnGroup.add(ct2);
 // Framed Persian Wall Carpet on Drawing Room South Wall: exact 1.52:1 ratio (1840×1210mm inside 1960×1330mm CP Teak frame)
-addBox(decorGroup, 1.96, 1.33, 0.045, 2.04, 1.46, 5.39, MAT.cpTeak);
-addBox(decorGroup, 1.84, 1.21, 0.055, 2.04, 1.46, 5.37, MAT.persianCarpet, {
+addBox(decorGroup, 1.96, 1.33, 0.045, 1.80, 1.52, 5.39, MAT.cpTeak);
+addBox(decorGroup, 1.84, 1.21, 0.055, 1.80, 1.52, 5.37, MAT.persianCarpet, {
   tag: 'DRAWING · SOUTH WALL ART (EXACT 1.52:1)', title: 'Owned Framed Persian Pictorial Wall Carpet',
-  desc: 'Classical courtyard scene in sepia, walnut & antique bronze mounted on the Drawing Room South wall (exact 1.52:1 aspect). 5mm archival breathing spacer + aluminum Z-bar cleat + 3000K CRI 90+ gimbal spot (≤50 lux).',
+  desc: 'Mounted on Drawing South wall above the entry bench, flanked by the SW floor vase and South-East foyer hooks (exact 1.52:1 aspect). 5mm archival spacer + Z-bar cleat + 3000K gimbal spot.',
   meta: 'Drawing Room South Wall · Protected from UV'
 });
 
