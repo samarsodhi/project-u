@@ -531,6 +531,23 @@ const MAT = {
   coveGlow:      new THREE.MeshBasicMaterial({ color: 0xFFCF87 }),
 };
 
+// Upgrade key wall art with real Project U photos when served (procedural canvas remains instant fallback)
+const texLoader = new THREE.TextureLoader();
+function loadRealArt(urls, mat) {
+  let idx = 0;
+  const tryNext = () => {
+    if (idx >= urls.length) return;
+    texLoader.load(urls[idx++], tex => {
+      tex.colorSpace = THREE.SRGBColorSpace;
+      mat.map = tex;
+      mat.needsUpdate = true;
+    }, undefined, tryNext);
+  };
+  tryNext();
+}
+loadRealArt(['../../assets/persian-wall-carpet.jpeg', '../../../assets/persian-wall-carpet.jpeg'], MAT.persianCarpet);
+loadRealArt(['../../assets/decor/woodsify-world-map.jpg', '../../../assets/decor/woodsify-world-map.jpg'], MAT.worldMap);
+
 const tile1000 = makeTileTex('#EAE6DD', '#CFCAC0', 4, 5); tile1000.repeat.set(4, 4);
 const tile800 = makeTileTex('#E5E1D8', '#C8C3B9', 4, 5); tile800.repeat.set(2.5, 2.5);
 const woodFloor = makeWoodTex('#A97D52', '#7E5835', 8); woodFloor.repeat.set(2, 2);
@@ -1290,17 +1307,21 @@ addBox(decorGroup, 0.04, 0.90, 1.50, 5.87, 1.48, 2.55, MAT.worldMap, {
 addCowayPurifier(6.14, 3.40, 'BR-02 KABIR');
 
 // ---------- H. BR-03 HOME GURUDWARA (x: 11.62..15.78, z: 0..3.78) ----------
-addBox(furnGroup, 1.10, 0.62, 0.82, 13.85, 0.31, 0.56, MAT.cpTeak, {
-  tag: 'BR-03 · HOME GURUDWARA', title: 'Handcrafted Solid Teak Palki Sahib (Manji Sahib + Chandoa)',
-  desc: 'Seasoned teak in natural matte beeswax finish, KD bolted corner pillars. Strictly zero speakers or electronic audio in room.',
-  meta: 'North Wall · 2700K Indirect Cove Only'
+// Palki Sahib rotated to FACE EAST (+X), positioned ~1/5 from West wall/wardrobe shutter (x=12.26) & ~4/5 open floor to East (x=15.78)
+const pkX = 13.12, pkZ = 1.85;
+addBox(furnGroup, 0.82, 0.62, 1.10, pkX, 0.31, pkZ, MAT.cpTeak, {
+  tag: 'BR-03 · HOME GURUDWARA (FACING EAST)', title: 'Handcrafted Solid Teak Palki Sahib (Manji Sahib + Chandoa)',
+  desc: 'Positioned 1/5 from West wardrobe shutter and 4/5 from East wall, facing East (+X) toward morning window light. Seasoned teak in natural matte beeswax finish; strictly zero speakers.',
+  meta: 'Faces East · 2700K Indirect Cove Only'
 });
-[[-0.48,-0.34],[0.48,-0.34],[-0.48,0.34],[0.48,0.34]].forEach(([px,pz]) =>
-  addBox(furnGroup, 0.06, 1.35, 0.06, 13.85+px, 1.28, 0.56+pz, MAT.cpTeak));
-addBox(furnGroup, 1.18, 0.12, 0.90, 13.85, 1.98, 0.56, MAT.cpTeak);
-addBox(furnGroup, 1.06, 0.08, 0.78, 13.85, 0.66, 0.56, MAT.brass);
-// 18" Solid Brass Ik Onkar Wall Plaque above North Palki Sahib
-addBox(decorGroup, 0.46, 0.46, 0.03, 13.85, 2.28, 0.10, MAT.ikOnkar, {
+[[-0.34,-0.48],[0.34,-0.48],[-0.34,0.48],[0.34,0.48]].forEach(([px,pz]) =>
+  addBox(furnGroup, 0.06, 1.35, 0.06, pkX+px, 1.28, pkZ+pz, MAT.cpTeak));
+addBox(furnGroup, 0.90, 0.12, 1.18, pkX, 1.98, pkZ, MAT.cpTeak);
+addBox(furnGroup, 0.78, 0.08, 1.06, pkX, 0.66, pkZ, MAT.brass);
+// Subtle carved backrest panel on West side of Palki so East-facing orientation is unmistakable
+addBox(furnGroup, 0.05, 0.65, 1.04, pkX - 0.38, 0.95, pkZ, MAT.cpTeak);
+// 18" Solid Brass Ik Onkar Wall Plaque on North sacred wall
+addBox(decorGroup, 0.46, 0.46, 0.03, 13.85, 2.05, 0.10, MAT.ikOnkar, {
   tag: 'BR-03 · SACRED CALLIGRAPHY', title: '18" Handcrafted Solid Brass Ik Onkar Wall Plaque',
   desc: 'Brushed antique brass passivated with natural beeswax (zero synthetic gloss), washed by 2700K perimeter cove.',
   meta: 'Budget: ₹4,500'
@@ -1312,9 +1333,10 @@ addBox(decorGroup, 0.05, 0.58, 0.80, 15.67, 1.52, 3.16, MAT.goldenTemple, {
   desc: 'Acid-free museum mount in natural matte oiled solid wood frame.',
   meta: 'Budget: ₹6,800'
 });
-addBox(furnGroup, 2.65, 0.015, 1.85, 13.95, 0.01, 2.25, MAT.dhurrie, {
-  tag: 'BR-03 · SANGAT FLOOR', title: 'Heavy Panja 100% Pure Cotton Dhurrie + White Khes',
-  desc: '100% washable, reversible, zero latex backing for sacred purity.',
+// Sangat Floor Dhurrie in open 4/5 East zone facing West toward Palki Sahib
+addBox(furnGroup, 1.75, 0.015, 2.55, 14.62, 0.01, 1.90, MAT.dhurrie, {
+  tag: 'BR-03 · SANGAT FLOOR (EAST ZONE)', title: 'Heavy Panja 100% Pure Cotton Dhurrie + White Khes',
+  desc: '100% washable, reversible, zero latex backing placed in the open 4/5 East floor zone facing Palki Sahib.',
   meta: '6×9 ft · Budget: ₹7,890'
 });
 addCowayPurifier(15.32, 0.36, 'BR-03 GURUDWARA');
@@ -1395,14 +1417,14 @@ nightLightsGroup.visible = false;
 const PRESETS = [
   { id: 'overview', name: '3D Dollhouse', dim: 'Full B4206',      cam: [-3.5, 15.8, 19.2], tgt: [8.0, 0.3, 6.2],   eye: null },
   { id: 'plan2d',   name: '2D Blueprint', dim: 'Top-Down',        cam: [8.0, 26.5, 6.45],  tgt: [8.0, 0.0, 6.4],   eye: null },
-  { id: 'drawing',  name: 'Drawing & TV', dim: 'West Limewash',   cam: [4.9, 3.5, 4.8],    tgt: [0.8, 1.1, 2.6],   eye: { cam: [3.2, 1.55, 4.6], tgt: [0.4, 1.25, 2.5] } },
-  { id: 'living',   name: 'Living Spine', dim: 'Persian Carpet',  cam: [9.5, 3.2, 3.2],    tgt: [6.5, 1.2, 7.1],   eye: { cam: [8.6, 1.55, 4.7], tgt: [6.8, 1.35, 7.3] } },
-  { id: 'dining',   name: 'Dining & Bay', dim: 'NE Bookshelf',    cam: [9.2, 3.4, 7.6],    tgt: [12.6, 1.1, 4.4],  eye: { cam: [10.8, 1.55, 6.8], tgt: [13.2, 1.25, 4.2] } },
-  { id: 'kitchen',  name: 'Kitchen',      dim: '3174 + 158 LU',   cam: [12.4, 3.5, 6.2],   tgt: [11.9, 1.0, 10.4], eye: { cam: [12.2, 1.55, 8.0], tgt: [12.1, 1.15, 11.1] } },
-  { id: 'master',   name: 'Master Suite', dim: 'NE Nook + Bed',   cam: [3.6, 3.6, 12.2],   tgt: [2.4, 1.1, 8.9],   eye: { cam: [1.9, 1.55, 10.4], tgt: [4.8, 1.25, 8.3] } },
-  { id: 'study',    name: 'BR-01 Study',  dim: 'East Desk + Art', cam: [6.2, 3.5, 7.2],    tgt: [8.8, 1.1, 10.1],  eye: { cam: [6.5, 1.55, 8.8], tgt: [9.5, 1.25, 9.6] } },
-  { id: 'kabir',    name: 'BR-02 Kabir',  dim: 'World Map + KBR', cam: [9.2, 3.4, 4.4],    tgt: [7.0, 1.1, 1.8],   eye: { cam: [8.9, 1.55, 2.9], tgt: [6.1, 1.35, 2.2] } },
-  { id: 'gurudwara',name: 'BR-03 Sacred', dim: 'Palki + IkOnkar', cam: [15.4, 3.3, 4.4],   tgt: [13.3, 1.2, 1.1],  eye: { cam: [14.8, 1.55, 3.2], tgt: [13.6, 1.35, 0.5] } },
+  { id: 'drawing',  name: 'Drawing & TV', dim: 'West Limewash',   cam: [3.4, 2.2, 4.9],    tgt: [0.5, 1.15, 2.3],  eye: { cam: [3.1, 1.55, 4.4], tgt: [0.3, 1.25, 2.6] } },
+  { id: 'living',   name: 'Living Spine', dim: 'Persian Carpet',  cam: [9.4, 2.1, 4.5],    tgt: [6.7, 1.35, 7.3],  eye: { cam: [8.2, 1.55, 4.9], tgt: [7.2, 1.42, 7.4] } },
+  { id: 'dining',   name: 'Dining & Bay', dim: 'NE Bookshelf',    cam: [10.4, 2.2, 6.9],   tgt: [13.1, 1.2, 4.2],  eye: { cam: [11.0, 1.55, 6.6], tgt: [13.2, 1.25, 4.0] } },
+  { id: 'kitchen',  name: 'Kitchen',      dim: '3174 + 158 LU',   cam: [12.3, 2.2, 8.1],   tgt: [12.1, 1.1, 11.1], eye: { cam: [12.2, 1.55, 8.4], tgt: [12.1, 1.15, 11.2] } },
+  { id: 'master',   name: 'Master Suite', dim: 'Bed Art + Nook',  cam: [3.5, 2.2, 10.8],   tgt: [0.9, 1.25, 9.2],  eye: { cam: [1.8, 1.55, 9.9], tgt: [5.1, 1.25, 8.2] } },
+  { id: 'study',    name: 'BR-01 Study',  dim: 'East Desk + Art', cam: [6.4, 2.2, 8.4],    tgt: [9.4, 1.25, 9.6],  eye: { cam: [6.8, 1.55, 9.0], tgt: [9.6, 1.35, 9.3] } },
+  { id: 'kabir',    name: 'BR-02 Kabir',  dim: 'World Map + KBR', cam: [8.9, 2.1, 3.1],    tgt: [6.1, 1.3, 2.1],   eye: { cam: [8.6, 1.55, 2.7], tgt: [5.9, 1.42, 2.4] } },
+  { id: 'gurudwara',name: 'BR-03 Sacred', dim: 'East Palki',      cam: [15.2, 2.1, 3.2],   tgt: [13.0, 1.2, 1.7],  eye: { cam: [15.1, 1.55, 2.1], tgt: [12.9, 1.25, 1.8] } },
 ];
 
 const ROOM_LABELS = [

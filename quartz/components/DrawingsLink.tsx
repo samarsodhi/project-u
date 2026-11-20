@@ -30,7 +30,7 @@ const DrawingsLink: QuartzComponent = ({ fileData }: QuartzComponentProps) => {
         <span>Plans & Drawings</span>
       </a>
       <a
-        href="https://samarsodhi.github.io/project-u/static/visualizer/b4206-model.html"
+        href="https://samarsodhi.github.io/project-u/static/visualizer/b4206-model.html?v=3"
         target="_blank"
         rel="noopener noreferrer"
         class="drawings-link-btn"
