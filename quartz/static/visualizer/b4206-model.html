@@ -106,6 +106,28 @@
   }
   .z-div { width: 1px; height: 20px; background: var(--border); }
 
+  /* Virtual Walkthrough On-Screen Cursor Pad */
+  #walk-pad {
+    position: fixed; bottom: 68px; left: 50%; transform: translateX(-50%); z-index: 26;
+    background: var(--panel); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    border: 1px solid var(--accent); border-radius: 14px; padding: 9px 14px;
+    display: none; align-items: center; gap: 14px;
+    box-shadow: 0 14px 36px rgba(0,0,0,0.55);
+  }
+  #walk-pad.show { display: flex; }
+  .dpad { display: grid; grid-template-columns: repeat(3, 30px); grid-template-rows: repeat(2, 28px); gap: 4px; }
+  .dpad button {
+    background: rgba(255,255,255,0.08); border: 1px solid var(--border); color: #fff;
+    border-radius: 6px; font-size: 12px; cursor: pointer; user-select: none;
+  }
+  .dpad button:hover, .dpad button:active { background: var(--accent-dim); border-color: var(--accent); color: #f8dfa0; }
+  .dpad .up { grid-column: 2; grid-row: 1; }
+  .dpad .left { grid-column: 1; grid-row: 2; }
+  .dpad .down { grid-column: 2; grid-row: 2; }
+  .dpad .right { grid-column: 3; grid-row: 2; }
+  .walk-hint { font-size: 11px; color: #d1d5db; line-height: 1.4; }
+  .walk-hint strong { color: #f8dfa0; }
+
   #compass {
     position: fixed; top: 14px; right: 14px; width: 64px; height: 64px;
     background: var(--panel); backdrop-filter: blur(12px);
@@ -211,14 +233,27 @@
 </aside>
 <button id="hud-toggle">☰ B4206 Controls</button>
 
-<div id="zoom-bar" title="Easy Room Zoom Controls (+ / - / Esc)">
+<div id="zoom-bar" title="Easy Room Zoom & Virtual Walkthrough Controls">
   <button class="z-btn sq" id="btn-zoom-out" title="Zoom Out (-)">−</button>
   <input type="range" id="zoom-slider" min="1.4" max="26" step="0.1" value="18" title="Drag to Zoom In / Out" />
   <button class="z-btn sq" id="btn-zoom-in" title="Zoom In (+)">+</button>
   <span id="zoom-readout">18.0m</span>
   <div class="z-div"></div>
+  <button class="z-btn" id="btn-walk" title="Enter Virtual First-Person Walkthrough">🚶 Walk House</button>
   <button class="z-btn" id="btn-eye-level" title="Toggle Eye-Level Inside Room vs Elevated 3/4 View">👁 Eye-Level</button>
   <button class="z-btn accent" id="btn-full-flat" title="Zoom Out to Full Apartment (Esc)">⌂ Full Flat</button>
+</div>
+
+<div id="walk-pad">
+  <div class="dpad">
+    <button class="up" data-move="fwd" title="Walk Forward (W / ↑)">▲</button>
+    <button class="left" data-move="left" title="Strafe Left (A / ←)">◀</button>
+    <button class="down" data-move="back" title="Walk Back (S / ↓)">▼</button>
+    <button class="right" data-move="right" title="Strafe Right (D / →)">▶</button>
+  </div>
+  <div class="walk-hint">
+    <strong>Walk Mode Active:</strong> Click any <strong>floor spot</strong> to glide there · <strong>Drag</strong> to look 360° · <strong>WASD / Arrows</strong> to stroll · <strong>Esc</strong> to exit.
+  </div>
 </div>
 
 <div id="compass" title="Main Door faces West (left)">
@@ -573,9 +608,27 @@ const pathGroup = new THREE.Group();
 const grilleGroup = new THREE.Group();
 const nightLightsGroup = new THREE.Group();
 const wallMeshes = [];
+const floorMeshes = [];
 const inspectables = [];
 
 scene.add(wallGroup, furnGroup, decorGroup, curtainGroup, pathGroup, grilleGroup, nightLightsGroup);
+
+// Glowing floor cursor waypoint ring for Virtual Walkthrough
+const walkMarker = new THREE.Group();
+const ringOuter = new THREE.Mesh(
+  new THREE.RingGeometry(0.15, 0.23, 28),
+  new THREE.MeshBasicMaterial({ color: 0xD4A853, side: THREE.DoubleSide, transparent: true, opacity: 0.92 })
+);
+ringOuter.rotation.x = -Math.PI / 2;
+const ringDot = new THREE.Mesh(
+  new THREE.CircleGeometry(0.055, 16),
+  new THREE.MeshBasicMaterial({ color: 0xFFF3D1, side: THREE.DoubleSide })
+);
+ringDot.rotation.x = -Math.PI / 2;
+walkMarker.add(ringOuter, ringDot);
+walkMarker.position.y = 0.025;
+walkMarker.visible = false;
+scene.add(walkMarker);
 
 function addBox(parent, w, h, d, x, y, z, mat, meta = null) {
   const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat);
@@ -593,6 +646,7 @@ function addFloor(x1, z1, x2, z2, mat, y = 0) {
   m.position.set((x1 + x2) / 2, y - 0.04, (z1 + z2) / 2);
   m.receiveShadow = true;
   scene.add(m);
+  floorMeshes.push(m);
   return m;
 }
 
@@ -940,6 +994,13 @@ const ct1 = new THREE.Mesh(new THREE.CylinderGeometry(0.44, 0.44, 0.05, 24), MAT
 ct1.position.set(2.10, 0.40, 2.60); ct1.castShadow = true; furnGroup.add(ct1);
 const ct2 = new THREE.Mesh(new THREE.CylinderGeometry(0.32, 0.32, 0.05, 24), MAT.cpTeak);
 ct2.position.set(1.70, 0.32, 3.05); ct2.castShadow = true; furnGroup.add(ct2);
+// Framed Persian Wall Carpet on Drawing Room South Wall (z = 5.38, facing North into Drawing Room)
+addBox(decorGroup, 1.98, 1.44, 0.05, 2.04, 1.46, 5.39, MAT.cpTeak);
+addBox(decorGroup, 1.84, 1.32, 0.06, 2.04, 1.46, 5.37, MAT.persianCarpet, {
+  tag: 'DRAWING · SOUTH WALL ART', title: 'Owned Framed Persian Pictorial Wall Carpet',
+  desc: 'Classical courtyard scene in sepia, walnut & antique bronze mounted on the Drawing Room South wall. 5mm archival breathing spacer + aluminum Z-bar cleat + 3000K CRI 90+ gimbal spot (≤50 lux).',
+  meta: 'Drawing Room South Wall · Protected from direct UV'
+});
 
 // ---------- B. LIVING ROOM SPINE & WALK-IN (x: 4.08..10.15, z: 3.78..7.52) ----------
 addBox(furnGroup, 1.05, 2.35, 0.36, 3.46, 1.175, 5.72, MAT.beigeWool, {
@@ -954,25 +1015,19 @@ addDomeMirror(2.94, 1.18, 6.50, 0.70, 1.80, 'x', {
   meta: 'Docket p. 6'
 });
 
-addBox(furnGroup, 3.00, 0.015, 2.20, 7.20, 0.01, 5.55, MAT.rugWool);
-addBox(furnGroup, 2.30, 0.40, 0.94, 7.25, 0.25, 4.35, MAT.fabricOat, {
-  tag: 'LIVING · NORTH WALL FAMILY SOFA', title: 'Gulmohar Lane Slipcovered 3-Seater (North Wall)',
-  desc: 'Backs against North wall between NW Linen Store hidden door and BR-02 entrance door, facing the Persian Wall Carpet on South wall.',
-  meta: 'Docket p. 5 Right · Budget: ₹85k–₹95k'
+addBox(furnGroup, 3.00, 0.015, 2.20, 7.05, 0.01, 5.95, MAT.rugWool);
+// Family Sofa FLIPPED to SOUTH Wall (z = 7.52, facing North into open Living Spine)
+addBox(furnGroup, 2.30, 0.40, 0.94, 7.05, 0.25, 6.94, MAT.fabricOat, {
+  tag: 'LIVING · SOUTH WALL FAMILY SOFA', title: 'Gulmohar Lane Slipcovered 3-Seater (South Wall)',
+  desc: 'Backs against Living South wall (between MBR and BR-01 doorways) facing North toward the NW Linen Store hidden door and open spine.',
+  meta: 'Budget: ₹85k–₹95k · Washable slipcovers'
 });
-addBox(furnGroup, 2.30, 0.42, 0.20, 7.25, 0.62, 3.96, MAT.fabricOat);
-addFloorLamp(5.88, 4.22, 'Orange Tree Ayra Brass & White Dome Floor Lamp', 'Slim soft-brass stem + white dome shade, 2700K CRI 90+ bulb on Aqara T1 switched outlet.', 'Budget: ₹12,399');
-addBox(furnGroup, 1.05, 0.40, 0.68, 7.25, 0.20, 5.55, MAT.fabricSand, {
+addBox(furnGroup, 2.30, 0.42, 0.20, 7.05, 0.62, 7.33, MAT.fabricOat);
+addFloorLamp(5.65, 7.05, 'Orange Tree Ayra Brass & White Dome Floor Lamp', 'Slim soft-brass stem + white dome shade beside South-wall family sofa on Aqara T1 outlet.', 'Budget: ₹12,399');
+addBox(furnGroup, 1.05, 0.40, 0.68, 7.05, 0.20, 5.72, MAT.fabricSand, {
   tag: 'LIVING · OTTOMAN', title: 'Orange Tree Upholstered Storage Ottoman',
-  desc: 'Solid wood frame with hidden toy storage and child-safe padded rim.',
+  desc: 'Solid wood frame with hidden toy storage and child-safe padded rim in front of South-wall family sofa.',
   meta: 'Budget: ₹15k–₹21k'
-});
-// Framed Persian Wall Carpet on Living South Wall (z = 7.42, facing North sofa)
-addBox(decorGroup, 1.98, 1.44, 0.05, 7.25, 1.46, 7.43, MAT.cpTeak);
-addBox(decorGroup, 1.84, 1.32, 0.06, 7.25, 1.46, 7.41, MAT.persianCarpet, {
-  tag: 'LIVING · SOUTH WALL ART', title: 'Owned Framed Persian Pictorial Wall Carpet',
-  desc: 'Classical courtyard scene in sepia, walnut & antique bronze opposite the North-wall family sofa. 5mm archival breathing spacer + aluminum Z-bar cleat + 3000K CRI 90+ gimbal spot (≤50 lux).',
-  meta: 'Protected from direct East slider UV'
 });
 // Patio Corner Accent Chair (Spin Library / Troy Mini)
 addBox(furnGroup, 0.68, 0.42, 0.68, 13.55, 0.21, 6.82, MAT.fabricSand, {
@@ -1415,28 +1470,28 @@ nightLightsGroup.visible = false;
 // 9. CAMERA PRESETS (3/4 + EYE-LEVEL) & CLICKABLE ROOM LABELS
 // ============================================================================
 const PRESETS = [
-  { id: 'overview', name: '3D Dollhouse', dim: 'Full B4206',      cam: [-3.5, 15.8, 19.2], tgt: [8.0, 0.3, 6.2],   eye: null },
-  { id: 'plan2d',   name: '2D Blueprint', dim: 'Top-Down',        cam: [8.0, 26.5, 6.45],  tgt: [8.0, 0.0, 6.4],   eye: null },
-  { id: 'drawing',  name: 'Drawing & TV', dim: 'West Limewash',   cam: [3.4, 2.2, 4.9],    tgt: [0.5, 1.15, 2.3],  eye: { cam: [3.1, 1.55, 4.4], tgt: [0.3, 1.25, 2.6] } },
-  { id: 'living',   name: 'Living Spine', dim: 'Persian Carpet',  cam: [9.4, 2.1, 4.5],    tgt: [6.7, 1.35, 7.3],  eye: { cam: [8.2, 1.55, 4.9], tgt: [7.2, 1.42, 7.4] } },
-  { id: 'dining',   name: 'Dining & Bay', dim: 'NE Bookshelf',    cam: [10.4, 2.2, 6.9],   tgt: [13.1, 1.2, 4.2],  eye: { cam: [11.0, 1.55, 6.6], tgt: [13.2, 1.25, 4.0] } },
-  { id: 'kitchen',  name: 'Kitchen',      dim: '3174 + 158 LU',   cam: [12.3, 2.2, 8.1],   tgt: [12.1, 1.1, 11.1], eye: { cam: [12.2, 1.55, 8.4], tgt: [12.1, 1.15, 11.2] } },
-  { id: 'master',   name: 'Master Suite', dim: 'Bed Art + Nook',  cam: [3.5, 2.2, 10.8],   tgt: [0.9, 1.25, 9.2],  eye: { cam: [1.8, 1.55, 9.9], tgt: [5.1, 1.25, 8.2] } },
-  { id: 'study',    name: 'BR-01 Study',  dim: 'East Desk + Art', cam: [6.4, 2.2, 8.4],    tgt: [9.4, 1.25, 9.6],  eye: { cam: [6.8, 1.55, 9.0], tgt: [9.6, 1.35, 9.3] } },
-  { id: 'kabir',    name: 'BR-02 Kabir',  dim: 'World Map + KBR', cam: [8.9, 2.1, 3.1],    tgt: [6.1, 1.3, 2.1],   eye: { cam: [8.6, 1.55, 2.7], tgt: [5.9, 1.42, 2.4] } },
-  { id: 'gurudwara',name: 'BR-03 Sacred', dim: 'East Palki',      cam: [15.2, 2.1, 3.2],   tgt: [13.0, 1.2, 1.7],  eye: { cam: [15.1, 1.55, 2.1], tgt: [12.9, 1.25, 1.8] } },
+  { id: 'overview', name: '3D Dollhouse', dim: 'Full B4206',       cam: [-3.5, 15.8, 19.2], tgt: [8.0, 0.3, 6.2],   eye: null },
+  { id: 'plan2d',   name: '2D Blueprint', dim: 'Top-Down',         cam: [8.0, 26.5, 6.45],  tgt: [8.0, 0.0, 6.4],   eye: null },
+  { id: 'drawing',  name: 'Drawing & Art',dim: 'Carpet + TV Wall', cam: [2.2, 2.1, 1.3],    tgt: [1.5, 1.25, 4.7],  eye: { cam: [2.2, 1.55, 1.6], tgt: [2.0, 1.38, 5.3] } },
+  { id: 'living',   name: 'Living Spine', dim: 'South Couch',      cam: [9.4, 2.2, 6.4],    tgt: [5.4, 1.15, 5.2],  eye: { cam: [7.2, 1.55, 6.4], tgt: [5.2, 1.25, 4.6] } },
+  { id: 'dining',   name: 'Dining & Bay', dim: 'NE Bookshelf',     cam: [10.4, 2.2, 6.9],   tgt: [13.1, 1.2, 4.2],  eye: { cam: [11.0, 1.55, 6.6], tgt: [13.2, 1.25, 4.0] } },
+  { id: 'kitchen',  name: 'Kitchen',      dim: '3174 + 158 LU',    cam: [12.3, 2.2, 8.1],   tgt: [12.1, 1.1, 11.1], eye: { cam: [12.2, 1.55, 8.4], tgt: [12.1, 1.15, 11.2] } },
+  { id: 'master',   name: 'Master Suite', dim: 'Bed Art + Nook',   cam: [3.5, 2.2, 10.8],   tgt: [0.9, 1.25, 9.2],  eye: { cam: [1.8, 1.55, 9.9], tgt: [5.1, 1.25, 8.2] } },
+  { id: 'study',    name: 'BR-01 Study',  dim: 'East Desk + Art',  cam: [6.4, 2.2, 8.4],    tgt: [9.4, 1.25, 9.6],  eye: { cam: [6.8, 1.55, 9.0], tgt: [9.6, 1.35, 9.3] } },
+  { id: 'kabir',    name: 'BR-02 Kabir',  dim: 'World Map + KBR',  cam: [8.9, 2.1, 3.1],    tgt: [6.1, 1.3, 2.1],   eye: { cam: [8.6, 1.55, 2.7], tgt: [5.9, 1.42, 2.4] } },
+  { id: 'gurudwara',name: 'BR-03 Sacred', dim: 'East Palki',       cam: [15.2, 2.1, 3.2],   tgt: [13.0, 1.2, 1.7],  eye: { cam: [15.1, 1.55, 2.1], tgt: [12.9, 1.25, 1.8] } },
 ];
 
 const ROOM_LABELS = [
-  { id: 'drawing',   name: 'Drawing & Foyer',   dim: '13\'1" × 17\'8"', pos: [2.0, 1.9, 2.6] },
-  { id: 'living',    name: 'Living Spine',      dim: 'Persian Carpet',  pos: [7.2, 1.9, 5.6] },
+  { id: 'drawing',   name: 'Drawing & Foyer',   dim: 'Persian Carpet',  pos: [2.0, 1.9, 2.6] },
+  { id: 'living',    name: 'Living Spine',      dim: 'South Sofa',      pos: [7.2, 1.9, 5.6] },
   { id: 'dining',    name: 'Dining Room',       dim: '13\'11" × 11\'10"', pos: [12.1, 1.9, 5.6] },
   { id: 'kitchen',   name: 'Kitchen',           dim: '13\'11" × 13\'1"', pos: [12.1, 1.9, 9.6] },
   { id: 'master',    name: 'Master Suite',      dim: 'NE Nook Dresser', pos: [2.3, 1.9, 9.4] },
   { id: 'living',    name: 'Puja Walk-in',      dim: '4\'0" × 6\'1"',   pos: [3.45, 1.9, 6.5] },
   { id: 'study',     name: 'BR-01 Study/Guest', dim: '13\'1" × 13\'1"', pos: [7.9, 1.9, 9.5] },
   { id: 'kabir',     name: 'BR-02 Kabir',       dim: '3D World Map',    pos: [7.8, 1.9, 1.9] },
-  { id: 'gurudwara', name: 'BR-03 Gurudwara',   dim: 'Palki + Ik Onkar',pos: [13.8, 1.9, 1.9] },
+  { id: 'gurudwara', name: 'BR-03 Gurudwara',   dim: 'East Palki',      pos: [13.8, 1.9, 1.9] },
   { id: 'dining',    name: 'East Sit-Out',      dim: '4\'11" Wide',     pos: [15.15, 1.5, 5.0] },
   { id: 'master',    name: 'South Balcony',     dim: '4\'11" Wide',     pos: [2.0, 1.5, 12.4] },
   { id: 'kitchen',   name: 'Utility (uPVC)',    dim: '4\'11" Wide',     pos: [15.15, 1.5, 9.6] },
@@ -1445,6 +1500,67 @@ const ROOM_LABELS = [
 let currentPreset = PRESETS[0];
 let isEyeLevel = false;
 let camAnim = null;
+
+// Virtual Walkthrough State
+let walkMode = false;
+let walkYaw = 0;
+let walkPitch = 0;
+let walkGlide = null;
+const walkKeys = { fwd: false, back: false, left: false, right: false };
+let isWalkDragging = false;
+let walkLastPtr = { x: 0, y: 0 };
+const WALK_EYE_Y = 1.60;
+
+function syncWalkAnglesFromCamera() {
+  const dir = new THREE.Vector3();
+  camera.getWorldDirection(dir);
+  walkYaw = Math.atan2(-dir.x, -dir.z);
+  walkPitch = Math.asin(Math.max(-0.85, Math.min(0.85, dir.y)));
+  camera.rotation.order = 'YXZ';
+  camera.rotation.y = walkYaw;
+  camera.rotation.x = walkPitch;
+  camera.rotation.z = 0;
+}
+
+function enterWalkMode(startPos = null, lookAtPos = null) {
+  walkMode = true;
+  camAnim = null;
+  walkGlide = null;
+  controls.enabled = false;
+  setWallMode('full');
+  document.getElementById('btn-walk').classList.add('accent');
+  document.getElementById('btn-walk').textContent = '🚶 Exit Walk';
+  document.getElementById('walk-pad').classList.add('show');
+  if (startPos) {
+    camera.position.set(startPos.x, WALK_EYE_Y, startPos.z);
+    if (lookAtPos) camera.lookAt(lookAtPos.x, 1.40, lookAtPos.z);
+  } else if (camera.position.y > 4.5 || currentPreset.id === 'overview' || currentPreset.id === 'plan2d') {
+    // Default start: West Foyer Entrance looking into Drawing Room (TV + Persian Carpet + Living Archway)
+    camera.position.set(1.5, WALK_EYE_Y, 1.35);
+    camera.lookAt(2.2, 1.40, 4.9);
+  } else {
+    camera.position.y = WALK_EYE_Y;
+    camera.lookAt(controls.target.x, 1.45, controls.target.z);
+  }
+  syncWalkAnglesFromCamera();
+}
+
+function exitWalkMode(returnToOverview = false) {
+  if (!walkMode) return;
+  walkMode = false;
+  walkGlide = null;
+  walkMarker.visible = false;
+  Object.keys(walkKeys).forEach(k => walkKeys[k] = false);
+  document.getElementById('btn-walk').classList.remove('accent');
+  document.getElementById('btn-walk').textContent = '🚶 Walk House';
+  document.getElementById('walk-pad').classList.remove('show');
+  controls.enabled = true;
+  const dir = new THREE.Vector3();
+  camera.getWorldDirection(dir);
+  controls.target.copy(camera.position).add(dir.multiplyScalar(2.4));
+  controls.target.y = Math.max(0.4, Math.min(1.8, controls.target.y));
+  if (returnToOverview) flyTo(PRESETS[0], false);
+}
 
 function animateCamera(p1, t1) {
   camAnim = {
@@ -1457,6 +1573,20 @@ function animateCamera(p1, t1) {
 }
 
 function flyTo(preset, forceEye = false) {
+  if (walkMode) {
+    if (preset.id === 'overview' || preset.id === 'plan2d') {
+      exitWalkMode(false);
+    } else {
+      const targetView = preset.eye || preset;
+      enterWalkMode(
+        new THREE.Vector3(targetView.cam[0], WALK_EYE_Y, targetView.cam[2]),
+        new THREE.Vector3(targetView.tgt[0], 1.40, targetView.tgt[2])
+      );
+      currentPreset = preset;
+      document.querySelectorAll('.room-btn').forEach(b => b.classList.toggle('active', b.dataset.id === preset.id));
+      return;
+    }
+  }
   currentPreset = preset;
   isEyeLevel = forceEye && !!preset.eye;
   const targetView = isEyeLevel ? preset.eye : preset;
@@ -1494,12 +1624,13 @@ const labelEls = ROOM_LABELS.map(r => {
 });
 
 // ============================================================================
-// 10. EASY ROOM ZOOM IN / OUT CONTROLS & KEYBOARD SHORTCUTS
+// 10. EASY ROOM ZOOM, VIRTUAL WALKTHROUGH & KEYBOARD CONTROLS
 // ============================================================================
 const zoomSlider = document.getElementById('zoom-slider');
 const zoomReadout = document.getElementById('zoom-readout');
 
 function zoomToDistance(newDist) {
+  if (walkMode) return;
   const clamped = Math.min(26, Math.max(1.4, newDist));
   const dir = camera.position.clone().sub(controls.target);
   if (dir.lengthSq() < 0.0001) dir.set(0, 1, 1);
@@ -1508,37 +1639,70 @@ function zoomToDistance(newDist) {
 }
 
 document.getElementById('btn-zoom-in').onclick = () => {
-  const d = camera.position.distanceTo(controls.target);
-  zoomToDistance(d * 0.72);
+  if (walkMode) { walkKeys.fwd = true; setTimeout(() => walkKeys.fwd = false, 220); return; }
+  zoomToDistance(camera.position.distanceTo(controls.target) * 0.72);
 };
 document.getElementById('btn-zoom-out').onclick = () => {
-  const d = camera.position.distanceTo(controls.target);
-  zoomToDistance(d * 1.38);
+  if (walkMode) { walkKeys.back = true; setTimeout(() => walkKeys.back = false, 220); return; }
+  zoomToDistance(camera.position.distanceTo(controls.target) * 1.38);
 };
 zoomSlider.addEventListener('input', () => {
+  if (walkMode) exitWalkMode(false);
   camAnim = null;
   const dist = parseFloat(zoomSlider.value);
   const dir = camera.position.clone().sub(controls.target).normalize();
   camera.position.copy(controls.target).add(dir.multiplyScalar(dist));
 });
-document.getElementById('btn-full-flat').onclick = () => flyTo(PRESETS[0], false);
+document.getElementById('btn-walk').onclick = () => {
+  if (walkMode) exitWalkMode(false);
+  else enterWalkMode();
+};
+document.getElementById('btn-full-flat').onclick = () => {
+  if (walkMode) exitWalkMode(true);
+  else flyTo(PRESETS[0], false);
+};
 document.getElementById('btn-eye-level').onclick = () => {
-  if (!currentPreset.eye) {
-    // If on overview, jump into Living Spine eye-level
-    flyTo(PRESETS.find(p => p.id === 'living'), true);
-  } else {
-    flyTo(currentPreset, !isEyeLevel);
-  }
+  if (walkMode) exitWalkMode(false);
+  if (!currentPreset.eye) flyTo(PRESETS.find(p => p.id === 'drawing'), true);
+  else flyTo(currentPreset, !isEyeLevel);
 };
 
+// On-screen D-pad press & hold handlers
+document.querySelectorAll('#walk-pad [data-move]').forEach(btn => {
+  const dir = btn.dataset.move;
+  const start = e => { e.preventDefault(); walkGlide = null; walkKeys[dir] = true; };
+  const stop = () => { walkKeys[dir] = false; };
+  btn.addEventListener('pointerdown', start);
+  btn.addEventListener('pointerup', stop);
+  btn.addEventListener('pointerleave', stop);
+  btn.addEventListener('pointercancel', stop);
+});
+
 window.addEventListener('keydown', e => {
+  const k = e.key.toLowerCase();
+  if (walkMode) {
+    if (k === 'w' || e.key === 'ArrowUp') { walkGlide = null; walkKeys.fwd = true; }
+    else if (k === 's' || e.key === 'ArrowDown') { walkGlide = null; walkKeys.back = true; }
+    else if (k === 'a' || e.key === 'ArrowLeft') { walkGlide = null; walkKeys.left = true; }
+    else if (k === 'd' || e.key === 'ArrowRight') { walkGlide = null; walkKeys.right = true; }
+    else if (e.key === 'Escape') exitWalkMode(false);
+    else if (e.key === '0') exitWalkMode(true);
+    return;
+  }
   if (e.key === '+' || e.key === '=') zoomToDistance(camera.position.distanceTo(controls.target) * 0.75);
   else if (e.key === '-') zoomToDistance(camera.position.distanceTo(controls.target) * 1.35);
   else if (e.key === 'Escape' || e.key === '0') flyTo(PRESETS[0], false);
 });
+window.addEventListener('keyup', e => {
+  const k = e.key.toLowerCase();
+  if (k === 'w' || e.key === 'ArrowUp') walkKeys.fwd = false;
+  else if (k === 's' || e.key === 'ArrowDown') walkKeys.back = false;
+  else if (k === 'a' || e.key === 'ArrowLeft') walkKeys.left = false;
+  else if (k === 'd' || e.key === 'ArrowRight') walkKeys.right = false;
+});
 
 // ============================================================================
-// 11. WALL HEIGHT, LIGHTING, LAYER TOGGLES & RAYCAST INSPECTOR
+// 11. WALL HEIGHT, LIGHTING, LAYER TOGGLES, WALK CURSOR & RAYCAST INSPECTOR
 // ============================================================================
 let currentWallMode = 'cut';
 function setWallMode(mode) {
@@ -1585,12 +1749,67 @@ const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
 const inspEl = document.getElementById('inspector');
 let pointerDown = { x: 0, y: 0 };
-renderer.domElement.addEventListener('pointerdown', e => { camAnim = null; pointerDown = { x: e.clientX, y: e.clientY }; });
+
+renderer.domElement.addEventListener('pointerdown', e => {
+  camAnim = null;
+  pointerDown = { x: e.clientX, y: e.clientY };
+  if (walkMode) {
+    isWalkDragging = true;
+    walkLastPtr = { x: e.clientX, y: e.clientY };
+  }
+});
+
+renderer.domElement.addEventListener('pointermove', e => {
+  if (!walkMode) return;
+  if (isWalkDragging) {
+    const dx = e.clientX - walkLastPtr.x;
+    const dy = e.clientY - walkLastPtr.y;
+    walkLastPtr = { x: e.clientX, y: e.clientY };
+    walkYaw += dx * 0.0042;
+    walkPitch = Math.max(-1.05, Math.min(1.05, walkPitch + dy * 0.0036));
+    camera.rotation.order = 'YXZ';
+    camera.rotation.y = walkYaw;
+    camera.rotation.x = walkPitch;
+    walkMarker.visible = false;
+    return;
+  }
+  mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+  raycaster.setFromCamera(mouse, camera);
+  const fHits = raycaster.intersectObjects(floorMeshes, false);
+  if (fHits.length > 0) {
+    walkMarker.position.set(fHits[0].point.x, 0.025, fHits[0].point.z);
+    walkMarker.visible = true;
+    renderer.domElement.style.cursor = 'pointer';
+  } else {
+    walkMarker.visible = false;
+    renderer.domElement.style.cursor = 'grab';
+  }
+});
+
 renderer.domElement.addEventListener('pointerup', e => {
+  isWalkDragging = false;
   if (Math.hypot(e.clientX - pointerDown.x, e.clientY - pointerDown.y) > 6) return;
   mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
   mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
   raycaster.setFromCamera(mouse, camera);
+
+  // In Walk Mode: clicking a floor spot glides smoothly to that spot (Matterport-style!)
+  if (walkMode) {
+    const fHits = raycaster.intersectObjects(floorMeshes, false);
+    const iHits = raycaster.intersectObjects(inspectables, false);
+    if (fHits.length > 0 && (!iHits.length || fHits[0].distance < iHits[0].distance)) {
+      const pt = fHits[0].point;
+      walkGlide = {
+        t: 0,
+        p0: camera.position.clone(),
+        p1: new THREE.Vector3(Math.max(0.25, Math.min(15.6, pt.x)), WALK_EYE_Y, Math.max(0.25, Math.min(12.9, pt.z))),
+      };
+      inspEl.classList.remove('show');
+      return;
+    }
+  }
+
   const hits = raycaster.intersectObjects(inspectables, false);
   if (hits.length > 0 && hits[0].object.userData.meta) {
     const m = hits[0].object.userData.meta;
@@ -1605,26 +1824,50 @@ renderer.domElement.addEventListener('pointerup', e => {
 });
 
 // ============================================================================
-// 12. RENDER LOOP, ZOOM READOUT & 2D LABEL PROJECTION
+// 12. RENDER LOOP, WALK ENGINE, ZOOM READOUT & 2D LABEL PROJECTION
 // ============================================================================
 const needle = document.getElementById('compass-needle');
+const clock = new THREE.Clock();
 function animate() {
   requestAnimationFrame(animate);
-  if (camAnim) {
-    camAnim.t = Math.min(1, camAnim.t + 0.05);
-    const k = 1 - Math.pow(1 - camAnim.t, 3);
-    camera.position.lerpVectors(camAnim.p0, camAnim.p1, k);
-    controls.target.lerpVectors(camAnim.t0, camAnim.t1, k);
-    if (camAnim.t >= 1) camAnim = null;
+  const dt = Math.min(0.05, clock.getDelta());
+
+  if (walkMode) {
+    if (walkGlide) {
+      walkGlide.t = Math.min(1, walkGlide.t + dt * 2.1);
+      const k = 1 - Math.pow(1 - walkGlide.t, 3);
+      camera.position.lerpVectors(walkGlide.p0, walkGlide.p1, k);
+      if (walkGlide.t >= 1) walkGlide = null;
+    }
+    const speed = 2.6 * dt;
+    const fwd = new THREE.Vector3(-Math.sin(walkYaw), 0, -Math.cos(walkYaw));
+    const right = new THREE.Vector3(Math.cos(walkYaw), 0, -Math.sin(walkYaw));
+    if (walkKeys.fwd) camera.position.addScaledVector(fwd, speed);
+    if (walkKeys.back) camera.position.addScaledVector(fwd, -speed);
+    if (walkKeys.right) camera.position.addScaledVector(right, speed);
+    if (walkKeys.left) camera.position.addScaledVector(right, -speed);
+    camera.position.x = Math.max(0.25, Math.min(15.65, camera.position.x));
+    camera.position.z = Math.max(0.25, Math.min(12.95, camera.position.z));
+    camera.position.y = WALK_EYE_Y;
+    zoomReadout.textContent = 'WALK';
+    needle.style.transform = `rotate(${(-walkYaw * 180 / Math.PI).toFixed(1)}deg)`;
+  } else {
+    if (camAnim) {
+      camAnim.t = Math.min(1, camAnim.t + 0.05);
+      const k = 1 - Math.pow(1 - camAnim.t, 3);
+      camera.position.lerpVectors(camAnim.p0, camAnim.p1, k);
+      controls.target.lerpVectors(camAnim.t0, camAnim.t1, k);
+      if (camAnim.t >= 1) camAnim = null;
+    }
+    controls.update();
+
+    const dist = camera.position.distanceTo(controls.target);
+    if (document.activeElement !== zoomSlider) zoomSlider.value = Math.min(26, Math.max(1.4, dist)).toFixed(1);
+    zoomReadout.textContent = `${dist.toFixed(1)}m`;
+
+    const az = Math.atan2(camera.position.x - controls.target.x, camera.position.z - controls.target.z);
+    needle.style.transform = `rotate(${(az * 180 / Math.PI).toFixed(1)}deg)`;
   }
-  controls.update();
-
-  const dist = camera.position.distanceTo(controls.target);
-  if (document.activeElement !== zoomSlider) zoomSlider.value = Math.min(26, Math.max(1.4, dist)).toFixed(1);
-  zoomReadout.textContent = `${dist.toFixed(1)}m`;
-
-  const az = Math.atan2(camera.position.x - controls.target.x, camera.position.z - controls.target.z);
-  needle.style.transform = `rotate(${(az * 180 / Math.PI).toFixed(1)}deg)`;
 
   if (labelsLayer.style.display !== 'none') {
     labelEls.forEach(({ el, pos }) => {
