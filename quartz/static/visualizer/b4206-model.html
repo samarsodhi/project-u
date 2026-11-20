@@ -136,9 +136,16 @@
     box-shadow: 0 14px 38px rgba(0,0,0,0.55); user-select: none;
   }
   #minimap-wrap.show { display: flex; }
-  .mm-head { display: flex; justify-content: space-between; align-items: center; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #f8dfa0; }
-  .mm-head span:last-child { font-weight: 500; text-transform: none; letter-spacing: 0; color: var(--muted); }
-  #minimap { display: block; width: 230px; height: 192px; border-radius: 8px; background: #10141c; cursor: crosshair; }
+  .mm-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #f8dfa0; }
+  .mm-sub { font-size: 9.5px; color: var(--muted); text-align: center; letter-spacing: 0.01em; }
+  .mm-zoom-btn {
+    background: rgba(255,255,255,0.08); border: 1px solid var(--border); color: var(--text);
+    border-radius: 6px; padding: 2px 7px; font-size: 10px; font-weight: 600; cursor: pointer;
+    text-transform: none; letter-spacing: 0; transition: all 0.14s ease;
+  }
+  .mm-zoom-btn:hover { background: rgba(255,255,255,0.16); border-color: var(--accent); color: #f8dfa0; }
+  .mm-zoom-btn.active { background: rgba(212, 168, 83, 0.24); border-color: var(--accent); color: #f8dfa0; }
+  #minimap { display: block; width: 268px; height: 224px; border-radius: 8px; background: #10141c; cursor: pointer; touch-action: none; }
 
   #wp-tooltip {
     position: fixed; z-index: 30; pointer-events: none; display: none;
@@ -273,9 +280,13 @@
   <button class="z-btn accent" id="btn-walk-exit" title="Exit Walk Mode (Esc)">✕ Exit</button>
 </div>
 
-<div id="minimap-wrap" title="Click to move · Drag or grab torch knob to aim 360°">
-  <div class="mm-head"><span>B4206 Live Map</span><span>Click: move · Drag: aim</span></div>
-  <canvas id="minimap" width="230" height="192"></canvas>
+<div id="minimap-wrap" title="Drag dot/floor to walk · Drag torch knob or scroll to rotate 360°">
+  <div class="mm-head">
+    <span>B4206 Live Map</span>
+    <button class="mm-zoom-btn" id="btn-mm-zoom" title="Toggle 2.25× Room Zoom">🔍 Room</button>
+  </div>
+  <canvas id="minimap" width="268" height="224"></canvas>
+  <div class="mm-sub">Drag floor/dot: walk · Knob / Scroll / Right-drag: turn</div>
 </div>
 <div id="wp-tooltip"></div>
 
@@ -1818,20 +1829,40 @@ function resolveWalkCollision(pos, radius = 0.22) {
 // Interactive 2D Floorplan Mini-Map
 const mmCanvas = document.getElementById('minimap');
 const mmCtx = mmCanvas.getContext('2d');
-const MM_W = 230, MM_H = 192;
-const mmScale = Math.min((MM_W - 22) / 16.0, (MM_H - 22) / 13.25);
-const mmOx = (MM_W - 15.9 * mmScale) / 2;
-const mmOz = (MM_H - 13.15 * mmScale) / 2;
-const toMM = (x, z) => [mmOx + x * mmScale, mmOz + z * mmScale];
-const fromMM = (px, py) => ({ x: (px - mmOx) / mmScale, z: (py - mmOz) / mmScale });
+const MM_W = 268, MM_H = 224, MM_CONE_LEN = 34;
+const mmDpr = Math.min(2, window.devicePixelRatio || 1);
+mmCanvas.width = Math.round(MM_W * mmDpr);
+mmCanvas.height = Math.round(MM_H * mmDpr);
+mmCtx.setTransform(mmDpr, 0, 0, mmDpr, 0, 0);
+const mmBaseScale = Math.min((MM_W - 22) / 16.0, (MM_H - 22) / 13.25);
+let mmZoomed = false;
+let mmViewZoom = 1.0;
+let mmViewCenter = { x: 7.95, z: 6.575 };
+function getMMTransform() {
+  const scale = mmBaseScale * mmViewZoom;
+  return {
+    scale,
+    ox: MM_W * 0.5 - mmViewCenter.x * scale,
+    oz: MM_H * 0.5 - mmViewCenter.z * scale,
+  };
+}
+const toMM = (x, z) => {
+  const { scale, ox, oz } = getMMTransform();
+  return [ox + x * scale, oz + z * scale];
+};
+const fromMM = (px, py) => {
+  const { scale, ox, oz } = getMMTransform();
+  return { x: (px - ox) / scale, z: (py - oz) / scale };
+};
 const MM_TAGS = [
   ['DRW', 2.0, 2.7], ['LIV', 7.1, 5.6], ['DIN', 12.2, 5.6], ['KIT', 12.2, 9.6],
   ['MBR', 2.0, 9.6], ['BR1', 7.9, 9.6], ['BR2', 7.9, 1.9], ['BR3', 13.7, 1.9],
 ];
-let mmMode = null; // 'aim' | 'place-aim'
-let mmAnchor = null;
+let mmMode = null; // 'walk' | 'aim'
+let mmWalkStart = null;
+let mmWalkTarget = null;
 let mmAimLine = null;
-let mmHoverHandle = false;
+let mmHoverPart = null; // 'avatar' | 'handle' | null
 
 function drawMinimap() {
   if (!walkMode) return;
@@ -1873,24 +1904,16 @@ function drawMinimap() {
   const [px, py] = toMM(camera.position.x, camera.position.z);
   const fx = -Math.sin(walkYaw), fz = -Math.cos(walkYaw);
   const ang = Math.atan2(fz, fx);
-  const grad = mmCtx.createRadialGradient(px, py, 2, px, py, 28);
+  const grad = mmCtx.createRadialGradient(px, py, 2, px, py, MM_CONE_LEN);
   grad.addColorStop(0, 'rgba(212, 168, 83, 0.62)');
   grad.addColorStop(1, 'rgba(212, 168, 83, 0.0)');
   mmCtx.fillStyle = grad;
   mmCtx.beginPath();
   mmCtx.moveTo(px, py);
-  mmCtx.arc(px, py, 28, ang - 0.54, ang + 0.54);
+  mmCtx.arc(px, py, MM_CONE_LEN, ang - 0.54, ang + 0.54);
   mmCtx.closePath();
   mmCtx.fill();
 
-  mmCtx.fillStyle = '#f8dfa0';
-  mmCtx.beginPath(); mmCtx.arc(px, py, 4.2, 0, Math.PI * 2); mmCtx.fill();
-  mmCtx.strokeStyle = '#0f1115';
-  mmCtx.lineWidth = 1.4;
-  mmCtx.stroke();
-
-  // Draggable Torch Aim-Knob at front tip of FOV cone (+ dashed aim ray while dragging)
-  const hx = px + Math.cos(ang) * 28, hy = py + Math.sin(ang) * 28;
   if (mmAimLine) {
     mmCtx.save();
     mmCtx.setLineDash([3, 3]);
@@ -1899,9 +1922,34 @@ function drawMinimap() {
     mmCtx.beginPath(); mmCtx.moveTo(mmAimLine.x0, mmAimLine.y0); mmCtx.lineTo(mmAimLine.x1, mmAimLine.y1); mmCtx.stroke();
     mmCtx.restore();
   }
-  const activeHandle = mmHoverHandle || mmMode === 'aim';
+  if (mmWalkTarget && mmMode === 'walk') {
+    const [tx, ty] = toMM(mmWalkTarget.x, mmWalkTarget.z);
+    mmCtx.save();
+    mmCtx.strokeStyle = 'rgba(248, 223, 160, 0.55)';
+    mmCtx.lineWidth = 1.6;
+    mmCtx.beginPath(); mmCtx.moveTo(px, py); mmCtx.lineTo(tx, ty); mmCtx.stroke();
+    mmCtx.fillStyle = 'rgba(248, 223, 160, 0.85)';
+    mmCtx.beginPath(); mmCtx.arc(tx, ty, 2.8, 0, Math.PI * 2); mmCtx.fill();
+    mmCtx.restore();
+  }
+
+  const activeAvatar = mmHoverPart === 'avatar' || mmMode === 'walk';
+  if (activeAvatar) {
+    mmCtx.strokeStyle = 'rgba(255, 255, 255, 0.55)';
+    mmCtx.lineWidth = 1.5;
+    mmCtx.beginPath(); mmCtx.arc(px, py, 8.2, 0, Math.PI * 2); mmCtx.stroke();
+  }
+  mmCtx.fillStyle = activeAvatar ? '#ffffff' : '#f8dfa0';
+  mmCtx.beginPath(); mmCtx.arc(px, py, activeAvatar ? 5.6 : 5.0, 0, Math.PI * 2); mmCtx.fill();
+  mmCtx.strokeStyle = '#0f1115';
+  mmCtx.lineWidth = 1.5;
+  mmCtx.stroke();
+
+  // Draggable Torch Aim-Knob at front tip of FOV cone
+  const hx = px + Math.cos(ang) * MM_CONE_LEN, hy = py + Math.sin(ang) * MM_CONE_LEN;
+  const activeHandle = mmHoverPart === 'handle' || mmMode === 'aim';
   mmCtx.fillStyle = activeHandle ? '#ffffff' : '#d4a853';
-  mmCtx.beginPath(); mmCtx.arc(hx, hy, activeHandle ? 4.5 : 3.5, 0, Math.PI * 2); mmCtx.fill();
+  mmCtx.beginPath(); mmCtx.arc(hx, hy, activeHandle ? 5.0 : 3.8, 0, Math.PI * 2); mmCtx.fill();
   mmCtx.strokeStyle = '#0f1115';
   mmCtx.lineWidth = 1.3;
   mmCtx.stroke();
@@ -2114,10 +2162,17 @@ document.getElementById('btn-full-flat').onclick = () => {
   else flyTo(PRESETS[0]);
 };
 
-// Mini-Map Move + Torch/Eye Orientation Controls:
-// - Grab torch aim-knob (or right-click / Shift+click): rotate 360° in place
-// - Click + hold + drag anywhere: place & aim torch toward cursor
-// - Single click: glide smoothly to that spot
+// Mini-Map Smooth Walk + Torch/Eye Orientation Controls:
+// - Drag avatar dot OR drag anywhere on floor: walk continuously in real time
+// - Single click on floor: glide smoothly to that spot
+// - Drag torch aim-knob, right-click/Shift-drag, or scroll over map: rotate 360° in place
+const mmZoomBtn = document.getElementById('btn-mm-zoom');
+mmZoomBtn.onclick = e => {
+  e.stopPropagation();
+  mmZoomed = !mmZoomed;
+  mmZoomBtn.classList.toggle('active', mmZoomed);
+  mmZoomBtn.textContent = mmZoomed ? '🗺 Full' : '🔍 Room';
+};
 function getMMCoords(e) {
   const rect = mmCanvas.getBoundingClientRect();
   return {
@@ -2128,7 +2183,13 @@ function getMMCoords(e) {
 function getTorchHandle() {
   const [ax, ay] = toMM(camera.position.x, camera.position.z);
   const ang = Math.atan2(-Math.cos(walkYaw), -Math.sin(walkYaw));
-  return { ax, ay, hx: ax + Math.cos(ang) * 28, hy: ay + Math.sin(ang) * 28 };
+  return { ax, ay, hx: ax + Math.cos(ang) * MM_CONE_LEN, hy: ay + Math.sin(ang) * MM_CONE_LEN };
+}
+function toSafeWalkPoint(px, py) {
+  const { x, z } = fromMM(px, py);
+  const p = { x: Math.max(0.28, Math.min(15.62, x)), z: Math.max(0.28, Math.min(12.88, z)) };
+  resolveWalkCollision(p, 0.22);
+  return p;
 }
 function aimCameraAtWorld(tx, tz, ox, oz) {
   if (Math.hypot(tx - ox, tz - oz) < 0.08) return;
@@ -2138,11 +2199,20 @@ function aimCameraAtWorld(tx, tz, ox, oz) {
 }
 
 mmCanvas.addEventListener('contextmenu', e => e.preventDefault());
+mmCanvas.addEventListener('wheel', e => {
+  if (!walkMode) return;
+  e.preventDefault();
+  e.stopPropagation();
+  walkGlide = null;
+  const d = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+  walkYawTarget -= Math.max(-80, Math.min(80, d)) * 0.0048;
+}, { passive: false });
 mmCanvas.addEventListener('pointerdown', e => {
   e.stopPropagation();
   const { px, py } = getMMCoords(e);
   const { ax, ay, hx, hy } = getTorchHandle();
-  const nearHandle = Math.hypot(px - hx, py - hy) <= 14;
+  const nearAvatar = Math.hypot(px - ax, py - ay) <= 13;
+  const nearHandle = !nearAvatar && Math.hypot(px - hx, py - hy) <= 13;
   if (e.button === 2 || e.shiftKey || nearHandle) {
     mmMode = 'aim';
     const { x, z } = fromMM(px, py);
@@ -2151,23 +2221,28 @@ mmCanvas.addEventListener('pointerdown', e => {
     mmCanvas.style.cursor = 'grabbing';
     return;
   }
-  const { x, z } = fromMM(px, py);
-  const cx = Math.max(0.28, Math.min(15.62, x));
-  const cz = Math.max(0.28, Math.min(12.88, z));
-  mmMode = 'place-aim';
-  mmAnchor = { px, py, cx, cz, moved: false };
+  mmMode = 'walk';
   mmAimLine = null;
+  const pt = toSafeWalkPoint(px, py);
+  mmWalkStart = { px, py, pt, dragged: nearAvatar };
+  if (nearAvatar) {
+    walkGlide = null;
+    mmWalkTarget = pt;
+    mmCanvas.style.cursor = 'grabbing';
+  }
 });
 window.addEventListener('pointermove', e => {
   if (!walkMode) return;
   if (!mmMode) {
     if (e.target === mmCanvas) {
       const { px, py } = getMMCoords(e);
-      const { hx, hy } = getTorchHandle();
-      mmHoverHandle = Math.hypot(px - hx, py - hy) <= 14;
-      mmCanvas.style.cursor = mmHoverHandle ? 'grab' : 'crosshair';
-    } else if (mmHoverHandle) {
-      mmHoverHandle = false;
+      const { ax, ay, hx, hy } = getTorchHandle();
+      if (Math.hypot(px - ax, py - ay) <= 13) mmHoverPart = 'avatar';
+      else if (Math.hypot(px - hx, py - hy) <= 13) mmHoverPart = 'handle';
+      else mmHoverPart = null;
+      mmCanvas.style.cursor = mmHoverPart === 'avatar' ? 'move' : (mmHoverPart === 'handle' ? 'grab' : 'pointer');
+    } else if (mmHoverPart) {
+      mmHoverPart = null;
     }
     return;
   }
@@ -2177,30 +2252,27 @@ window.addEventListener('pointermove', e => {
     const { x, z } = fromMM(px, py);
     aimCameraAtWorld(x, z, camera.position.x, camera.position.z);
     mmAimLine = { x0: ax, y0: ay, x1: px, y1: py };
-  } else if (mmMode === 'place-aim' && mmAnchor) {
-    if (Math.hypot(px - mmAnchor.px, py - mmAnchor.py) > 7) {
-      if (!mmAnchor.moved) {
-        walkGlide = null;
-        camera.position.set(mmAnchor.cx, WALK_EYE_Y, mmAnchor.cz);
-        walkRoomNameEl.textContent = detectRoomName(mmAnchor.cx, mmAnchor.cz);
-        mmAnchor.moved = true;
-      }
-      const { x, z } = fromMM(px, py);
-      aimCameraAtWorld(x, z, mmAnchor.cx, mmAnchor.cz);
-      mmAimLine = { x0: mmAnchor.px, y0: mmAnchor.py, x1: px, y1: py };
+  } else if (mmMode === 'walk' && mmWalkStart) {
+    if (!mmWalkStart.dragged && Math.hypot(px - mmWalkStart.px, py - mmWalkStart.py) > 4) {
+      mmWalkStart.dragged = true;
+      walkGlide = null;
       mmCanvas.style.cursor = 'grabbing';
+    }
+    if (mmWalkStart.dragged) {
+      mmWalkTarget = toSafeWalkPoint(px, py);
     }
   }
 });
 window.addEventListener('pointerup', () => {
-  if (mmMode === 'place-aim' && mmAnchor && !mmAnchor.moved) {
-    glideToWalkSpot(mmAnchor.cx, mmAnchor.cz, null, 0.45);
-    walkRoomNameEl.textContent = detectRoomName(mmAnchor.cx, mmAnchor.cz);
+  if (mmMode === 'walk' && mmWalkStart && !mmWalkStart.dragged) {
+    glideToWalkSpot(mmWalkStart.pt.x, mmWalkStart.pt.z, null, 0.42);
+    walkRoomNameEl.textContent = detectRoomName(mmWalkStart.pt.x, mmWalkStart.pt.z);
   }
   mmMode = null;
-  mmAnchor = null;
+  mmWalkStart = null;
+  mmWalkTarget = null;
   mmAimLine = null;
-  mmCanvas.style.cursor = mmHoverHandle ? 'grab' : 'crosshair';
+  mmCanvas.style.cursor = mmHoverPart === 'avatar' ? 'move' : (mmHoverPart === 'handle' ? 'grab' : 'pointer');
 });
 
 // Smooth Scroll-Wheel / Trackpad Two-Finger Walking in Walk Mode
@@ -2469,7 +2541,26 @@ function animate() {
       walkScrollVel = 0;
     }
     if (moved) resolveWalkCollision(camera.position);
+    if (mmWalkTarget && mmMode === 'walk') {
+      const k = 1 - Math.exp(-12 * dt);
+      camera.position.x += (mmWalkTarget.x - camera.position.x) * k;
+      camera.position.z += (mmWalkTarget.z - camera.position.z) * k;
+    }
     camera.position.y = WALK_EYE_Y;
+
+    // Smooth Mini-Map Room-Zoom pan (frozen while dragging so cursor stays 1:1)
+    const targetMMZoom = mmZoomed ? 2.25 : 1.0;
+    mmViewZoom += (targetMMZoom - mmViewZoom) * (1 - Math.exp(-10 * dt));
+    if (!mmMode) {
+      const curScale = mmBaseScale * mmViewZoom;
+      const halfW = (MM_W * 0.5 - 10) / curScale;
+      const halfH = (MM_H * 0.5 - 10) / curScale;
+      const tx = mmZoomed && halfW < 7.95 ? Math.max(halfW, Math.min(15.9 - halfW, camera.position.x)) : 7.95;
+      const tz = mmZoomed && halfH < 6.575 ? Math.max(halfH, Math.min(13.15 - halfH, camera.position.z)) : 6.575;
+      const panK = 1 - Math.exp(-7 * dt);
+      mmViewCenter.x += (tx - mmViewCenter.x) * panK;
+      mmViewCenter.z += (tz - mmViewCenter.z) * panK;
+    }
 
     // Animate Waypoint Discs (hide disc directly underfoot, highlight hovered disc)
     const pulse = 1 + Math.sin(elapsed * 3.2) * 0.04;
