@@ -369,16 +369,39 @@ function makeWoodTex(baseHex, grainHex, planks = 6) {
 function makeLimewashTex() {
   const c = document.createElement('canvas'); c.width = 512; c.height = 512;
   const g = c.getContext('2d');
-  g.fillStyle = '#EAE8DF'; g.fillRect(0, 0, 512, 512);
-  for (let i = 0; i < 420; i++) {
-    const x = Math.random() * 512, y = Math.random() * 512, r = 18 + Math.random() * 65;
+  g.fillStyle = '#EFECE3'; g.fillRect(0, 0, 512, 512);
+  // Subtle Morning Glory (0765) Venetian trowel cross-hatch clouds (burnished Roman clay)
+  for (let i = 0; i < 240; i++) {
+    const x = Math.random() * 512, y = Math.random() * 512, r = 35 + Math.random() * 95;
+    const grd = g.createRadialGradient(x, y, 4, x, y, r);
+    const col = i % 2 === 0 ? 'rgba(255,253,248,0.22)' : 'rgba(192,182,164,0.20)';
+    grd.addColorStop(0, col); grd.addColorStop(1, 'rgba(239,236,227,0)');
+    g.fillStyle = grd; g.fillRect(x - r, y - r, r * 2, r * 2);
+  }
+  g.strokeStyle = 'rgba(182,172,154,0.14)'; g.lineWidth = 6;
+  for (let i = 0; i < 65; i++) {
+    const x = Math.random() * 512, y = Math.random() * 512, a = (Math.random() - 0.5) * 1.4;
+    g.beginPath(); g.moveTo(x, y); g.lineTo(x + Math.cos(a) * 75, y + Math.sin(a) * 75); g.stroke();
+  }
+  const tex = new THREE.CanvasTexture(c);
+  tex.wrapS = tex.wrapT = THREE.RepeatWrapping; tex.repeat.set(2, 1.4);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  return tex;
+}
+
+function makeLimewashBump() {
+  const c = document.createElement('canvas'); c.width = 256; c.height = 256;
+  const g = c.getContext('2d');
+  g.fillStyle = '#808080'; g.fillRect(0, 0, 256, 256);
+  for (let i = 0; i < 180; i++) {
+    const x = Math.random() * 256, y = Math.random() * 256, r = 14 + Math.random() * 44;
     const grd = g.createRadialGradient(x, y, 2, x, y, r);
-    const v = Math.random() > 0.5 ? 'rgba(248,246,240,0.08)' : 'rgba(205,198,184,0.08)';
-    grd.addColorStop(0, v); grd.addColorStop(1, 'rgba(234,232,223,0)');
+    grd.addColorStop(0, i % 2 ? 'rgba(210,210,210,0.25)' : 'rgba(60,60,60,0.25)');
+    grd.addColorStop(1, 'rgba(128,128,128,0)');
     g.fillStyle = grd; g.fillRect(x - r, y - r, r * 2, r * 2);
   }
   const tex = new THREE.CanvasTexture(c);
-  tex.colorSpace = THREE.SRGBColorSpace;
+  tex.wrapS = tex.wrapT = THREE.RepeatWrapping; tex.repeat.set(2, 1.4);
   return tex;
 }
 
@@ -433,18 +456,34 @@ function makePersianCarpetTex() {
 }
 
 function makeWorldMapTex() {
-  const c = document.createElement('canvas'); c.width = 512; c.height = 300;
+  const c = document.createElement('canvas'); c.width = 512; c.height = 307;
   const g = c.getContext('2d');
-  g.fillStyle = '#B2C2CC'; g.fillRect(0, 0, 512, 300);
+  g.clearRect(0, 0, 512, 307);
   const blobs = [
-    ['#C89F72', [60,55,95,70]], ['#A6784B', [120,145,55,95]],
-    ['#D5B793', [225,52,70,50]], ['#8D5F38', [225,112,72,102]],
-    ['#B88B5D', [300,48,130,85]], ['#D5B793', [380,178,70,52]],
+    ['#C89F72', [42,48,108,74]], ['#A6784B', [106,140,56,96]],
+    ['#D5B793', [218,46,74,52]], ['#8D5F38', [218,108,74,104]],
+    ['#B88B5D', [296,42,146,88]], ['#D5B793', [386,176,74,54]],
   ];
   blobs.forEach(([col, [x, y, w, h]]) => {
-    g.fillStyle = 'rgba(0,0,0,0.18)'; g.beginPath(); g.roundRect(x+4, y+4, w, h, 14); g.fill();
+    g.fillStyle = 'rgba(0,0,0,0.22)'; g.beginPath(); g.roundRect(x+4, y+4, w, h, 14); g.fill();
     g.fillStyle = col; g.beginPath(); g.roundRect(x, y, w, h, 14); g.fill();
   });
+  const tex = new THREE.CanvasTexture(c); tex.colorSpace = THREE.SRGBColorSpace;
+  return tex;
+}
+
+function makeNatarajaFallbackTex() {
+  const c = document.createElement('canvas'); c.width = 256; c.height = 256;
+  const g = c.getContext('2d');
+  g.clearRect(0, 0, 256, 256);
+  g.strokeStyle = '#C9A45C'; g.lineWidth = 14;
+  g.beginPath(); g.arc(128, 128, 102, 0, Math.PI * 2); g.stroke();
+  g.fillStyle = '#9C7338';
+  g.beginPath(); g.arc(128, 76, 16, 0, Math.PI * 2); g.fill();
+  g.fillRect(118, 94, 20, 56);
+  g.strokeStyle = '#B88940'; g.lineWidth = 11; g.lineCap = 'round';
+  g.beginPath(); g.moveTo(128, 108); g.lineTo(66, 98); g.moveTo(128, 108); g.lineTo(192, 98);
+  g.moveTo(128, 148); g.lineTo(128, 212); g.moveTo(128, 148); g.lineTo(86, 174); g.stroke();
   const tex = new THREE.CanvasTexture(c); tex.colorSpace = THREE.SRGBColorSpace;
   return tex;
 }
@@ -463,28 +502,14 @@ function makeSerigraphTex(variant = 0) {
   return tex;
 }
 
-function makeMenuBoardTex() {
-  const c = document.createElement('canvas'); c.width = 256; c.height = 320;
-  const g = c.getContext('2d');
-  g.fillStyle = '#F0EFE8'; g.fillRect(0, 0, 256, 320);
-  for (let i = 0; i < 8; i++) {
-    const y = 20 + i * 36;
-    g.fillStyle = '#8B5A32'; g.fillRect(14, y, 228, 11);
-    g.fillStyle = '#E6DFD3';
-    for (let t = 0; t < 7 + (i % 3); t++) g.fillRect(24 + t * 20, y - 10, 14, 15);
-  }
-  const tex = new THREE.CanvasTexture(c); tex.colorSpace = THREE.SRGBColorSpace;
-  return tex;
-}
-
 function makeIkOnkarTex() {
   const c = document.createElement('canvas'); c.width = 256; c.height = 256;
   const g = c.getContext('2d');
-  g.fillStyle = '#F0EFE8'; g.fillRect(0, 0, 256, 256);
-  g.strokeStyle = '#B89146'; g.lineWidth = 10;
-  g.beginPath(); g.arc(128, 128, 108, 0, Math.PI * 2); g.stroke();
-  g.fillStyle = '#B89146';
-  g.font = 'bold 136px serif'; g.textAlign = 'center'; g.textBaseline = 'middle';
+  g.fillStyle = '#C9A45C'; g.fillRect(0, 0, 256, 256);
+  g.strokeStyle = '#6E4F1D'; g.lineWidth = 10;
+  g.beginPath(); g.arc(128, 128, 112, 0, Math.PI * 2); g.stroke();
+  g.fillStyle = '#533A14';
+  g.font = 'bold 132px serif'; g.textAlign = 'center'; g.textBaseline = 'middle';
   g.fillText('ੴ', 128, 136);
   const tex = new THREE.CanvasTexture(c); tex.colorSpace = THREE.SRGBColorSpace;
   return tex;
@@ -520,7 +545,7 @@ function makeDhurrieTex() {
 const MAT = {
   wallBase:      new THREE.MeshStandardMaterial({ color: 0xF0EFE8, roughness: 0.88 }),
   wallKabir:     new THREE.MeshStandardMaterial({ color: 0xB2C2CC, roughness: 0.86 }),
-  wallLimewash:  new THREE.MeshStandardMaterial({ map: makeLimewashTex(), roughness: 0.94 }),
+  wallLimewash:  new THREE.MeshStandardMaterial({ map: makeLimewashTex(), bumpMap: makeLimewashBump(), bumpScale: 0.008, roughness: 0.94 }),
   wallBotanical: new THREE.MeshStandardMaterial({ map: makeBotanicalTex(), roughness: 0.85 }),
   hiddenGrooved: new THREE.MeshStandardMaterial({ map: makeGroovedDoorTex(), roughness: 0.60 }),
 
@@ -553,11 +578,11 @@ const MAT = {
   plant:         new THREE.MeshStandardMaterial({ color: 0x4A6B49, roughness: 0.85 }),
   terracotta:    new THREE.MeshStandardMaterial({ color: 0xB36B4B, roughness: 0.82 }),
   persianCarpet: new THREE.MeshStandardMaterial({ map: makePersianCarpetTex(), roughness: 0.85 }),
-  worldMap:      new THREE.MeshStandardMaterial({ map: makeWorldMapTex(), roughness: 0.78 }),
+  worldMap:      new THREE.MeshStandardMaterial({ map: makeWorldMapTex(), transparent: true, alphaTest: 0.15, roughness: 0.78 }),
+  nataraja:      new THREE.MeshStandardMaterial({ map: makeNatarajaFallbackTex(), transparent: true, alphaTest: 0.18, side: THREE.DoubleSide, roughness: 0.35, metalness: 0.45 }),
   serigraph0:    new THREE.MeshStandardMaterial({ map: makeSerigraphTex(0), roughness: 0.85 }),
   serigraph1:    new THREE.MeshStandardMaterial({ map: makeSerigraphTex(1), roughness: 0.85 }),
-  menuBoard:     new THREE.MeshStandardMaterial({ map: makeMenuBoardTex(), roughness: 0.78 }),
-  ikOnkar:       new THREE.MeshStandardMaterial({ map: makeIkOnkarTex(), roughness: 0.55 }),
+  ikOnkar:       new THREE.MeshStandardMaterial({ map: makeIkOnkarTex(), roughness: 0.32, metalness: 0.72 }),
   goldenTemple:  new THREE.MeshStandardMaterial({ map: makeGoldenTempleTex(), roughness: 0.80 }),
   dhurrie:       new THREE.MeshStandardMaterial({ map: makeDhurrieTex(), roughness: 0.92 }),
   rugWool:       new THREE.MeshStandardMaterial({ color: 0xCFC6B6, roughness: 0.96 }),
@@ -566,22 +591,79 @@ const MAT = {
   coveGlow:      new THREE.MeshBasicMaterial({ color: 0xFFCF87 }),
 };
 
-// Upgrade key wall art with real Project U photos when served (procedural canvas remains instant fallback)
-const texLoader = new THREE.TextureLoader();
-function loadRealArt(urls, mat) {
+// Load & process real Project U photos (alpha-keyed Nataraja & Wood World Map, clean cropped Persian Carpet)
+function loadProcessedImage(urls, processFn, mat) {
   let idx = 0;
   const tryNext = () => {
     if (idx >= urls.length) return;
-    texLoader.load(urls[idx++], tex => {
-      tex.colorSpace = THREE.SRGBColorSpace;
-      mat.map = tex;
-      mat.needsUpdate = true;
-    }, undefined, tryNext);
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => {
+      try {
+        const canvas = processFn(img);
+        const tex = new THREE.CanvasTexture(canvas);
+        tex.colorSpace = THREE.SRGBColorSpace;
+        mat.map = tex;
+        mat.needsUpdate = true;
+      } catch (e) { /* fallback canvas remains */ }
+    };
+    img.onerror = tryNext;
+    img.src = urls[idx++];
   };
   tryNext();
 }
-loadRealArt(['../../assets/persian-wall-carpet.jpeg', '../../../assets/persian-wall-carpet.jpeg'], MAT.persianCarpet);
-loadRealArt(['../../assets/decor/woodsify-world-map.jpg', '../../../assets/decor/woodsify-world-map.jpg'], MAT.worldMap);
+
+// 1. Persian Wall Carpet: 3% inset crop removes photo wall margin (1.52:1 exact)
+loadProcessedImage(
+  ['../../assets/persian-wall-carpet.jpeg', '../../../assets/persian-wall-carpet.jpeg'],
+  img => {
+    const c = document.createElement('canvas'); c.width = 760; c.height = 500;
+    const mx = img.width * 0.032, my = img.height * 0.045;
+    c.getContext('2d').drawImage(img, mx, my, img.width - mx * 2, img.height - my * 2, 0, 0, 760, 500);
+    return c;
+  },
+  MAT.persianCarpet
+);
+
+// 2. Devsabha 27" Nataraja: crop top 82% (removes table surface) & alpha-key pure black studio backdrop
+loadProcessedImage(
+  ['../../assets/media/Natraj.jpeg', '../../../assets/media/Natraj.jpeg'],
+  img => {
+    const c = document.createElement('canvas'); c.width = 512; c.height = 512;
+    const g = c.getContext('2d');
+    g.drawImage(img, 0, 0, img.width, img.height * 0.82, 0, 0, 512, 512);
+    const id = g.getImageData(0, 0, 512, 512), d = id.data;
+    for (let i = 0; i < d.length; i += 4) {
+      const lum = d[i] + d[i+1] + d[i+2];
+      if (lum < 54) d[i+3] = 0;
+      else if (lum < 95) d[i+3] = Math.round(((lum - 54) / 41) * 255);
+    }
+    g.putImageData(id, 0, 0);
+    return c;
+  },
+  MAT.nataraja
+);
+
+// 3. Woodsify 3D World Map: crop strictly top 49% (excludes stock family!) & key out light-grey studio wall
+loadProcessedImage(
+  ['../../assets/decor/woodsify-world-map.jpg', '../../../assets/decor/woodsify-world-map.jpg'],
+  img => {
+    const c = document.createElement('canvas'); c.width = 768; c.height = 460;
+    const g = c.getContext('2d');
+    g.drawImage(img, img.width * 0.06, img.height * 0.02, img.width * 0.88, img.height * 0.48, 0, 0, 768, 460);
+    const id = g.getImageData(0, 0, 768, 460), d = id.data;
+    for (let i = 0; i < d.length; i += 4) {
+      const r = d[i], gr = d[i+1], b = d[i+2];
+      const maxC = Math.max(r, gr, b), minC = Math.min(r, gr, b);
+      const sat = maxC - minC;
+      // Grey/white textured wall has very low saturation & high brightness -> transparent so Misty Breeze wall shows through!
+      if (sat < 16 && minC > 165) d[i+3] = 0;
+    }
+    g.putImageData(id, 0, 0);
+    return c;
+  },
+  MAT.worldMap
+);
 
 const tile1000 = makeTileTex('#EAE6DD', '#CFCAC0', 4, 5); tile1000.repeat.set(4, 4);
 const tile800 = makeTileTex('#E5E1D8', '#C8C3B9', 4, 5); tile800.repeat.set(2.5, 2.5);
@@ -924,23 +1006,28 @@ addBox(grilleGroup, 0.08, 0.06, 4.08, 15.90, 1.12, 9.56, MAT.upvcWhite);
 // ============================================================================
 
 // ---------- A. DRAWING ROOM & FOYER (x: 0..4.08, z: 0..5.48) ----------
-addBox(furnGroup, 2.40, 0.015, 3.20, 2.20, 0.01, 2.80, MAT.rugWool, {
+// Exact 2500×3500 mm IKEA STOCKHOLM Wool Flatweave Rug
+addBox(furnGroup, 2.50, 0.015, 3.50, 2.15, 0.01, 2.85, MAT.rugWool, {
   tag: 'DRAWING ROOM · RUG', title: 'IKEA STOCKHOLM 100% Pure New Wool Flatweave',
-  desc: '250×350 cm handwoven wool rug paired with 2× STOPP FILT 4mm anti-slip underlays.',
+  desc: 'Exact 250×350 cm handwoven wool rug paired with 2× STOPP FILT 4mm anti-slip underlays.',
   meta: 'Budget: ₹36,580 · Tier 1 Recommended'
 });
-// Foyer Louvered CP Teak Shoe Credenza + Sparrow Wall Hooks + Pierced Brass Lantern
+// Foyer Louvered CP Teak Shoe Credenza + Sculpted Sparrow Wall Hooks + Pierced Brass Lantern
 addBox(furnGroup, 1.05, 0.78, 0.36, 0.78, 0.39, 0.25, MAT.cpTeak, {
   tag: 'FOYER · SHOE CREDENZA', title: 'Custom Seasoned CP Teak Louvered Shoe Credenza',
   desc: 'Kiln-dried solid hardwood with slotted ventilation and flat shelves for UK 10+ sneakers.',
   meta: 'Budget: ₹26k–₹32k · Tier 1 Recommended'
 });
 [0.42, 0.64, 0.86, 1.08].forEach(hx => {
-  addBox(decorGroup, 0.06, 0.07, 0.06, hx, 1.48, 0.10, MAT.darkMetal, {
+  addBox(decorGroup, 0.03, 0.06, 0.015, hx, 1.48, 0.08, MAT.darkMetal); // Backplate
+  const bird = new THREE.Mesh(new THREE.BoxGeometry(0.035, 0.045, 0.085), MAT.darkMetal);
+  bird.position.set(hx, 1.49, 0.125); bird.rotation.x = -0.35;
+  bird.userData.meta = {
     tag: 'FOYER · WALL HOOKS', title: 'Spruce & Pop Skye Cast-Iron Sparrow Hooks (Set of 4)',
-    desc: 'Cast iron sparrow motif anchored via Fischer DuoPower plugs for keys, bags, and light coats (<5kg).',
+    desc: 'Cast-iron sparrow silhouette pegs anchored via Fischer DuoPower plugs (<5kg load).',
     meta: 'Aesthetic Exception · ₹1,700 set'
-  });
+  };
+  inspectables.push(bird); decorGroup.add(bird);
 });
 const lantern = new THREE.Mesh(new THREE.CylinderGeometry(0.14, 0.18, 0.34, 12), MAT.brass);
 lantern.position.set(0.85, 2.02, 0.58);
@@ -951,55 +1038,90 @@ lantern.userData.meta = {
 };
 inspectables.push(lantern); decorGroup.add(lantern);
 
-// West Media Wall (Homz Docket p. 2)
-addBox(furnGroup, 0.42, 0.36, 2.65, 0.30, 0.42, 3.10, MAT.cinnHickory, {
+// West Media Wall (Homz Docket p. 2 — Burnished Morning Glory 0765 Mineral Limewash)
+// Console: exact 210mm FFL clearance (bottom 0.21m, h 0.36m, top 0.57m)
+addBox(furnGroup, 0.42, 0.36, 2.65, 0.30, 0.39, 3.10, MAT.cinnHickory, {
   tag: 'DRAWING · WEST MEDIA WALL', title: 'Homz Floating TV Console (424 1D Cinnamon Hickory)',
-  desc: 'West wall left of Main Door MD. 18mm BWP ply on M10 French cleat, 220mm floor clearance, backed by Morning Glory 0765 mineral limewash.',
+  desc: 'West wall left of Main Door MD. 18mm BWP ply on M10 French cleat, exact 210mm robot floor clearance, backed by Morning Glory 0765 burnished mineral limewash.',
   meta: 'Docket p. 2 · Finish: 424 1D Cinnamon Hickory'
 });
-addBox(furnGroup, 0.06, 0.84, 1.46, 0.11, 1.38, 2.95, MAT.tvScreen, {
-  tag: 'DRAWING · WEST AV', title: 'Owned 65" Sony Bravia TV + Sonos Arc Ultra',
-  desc: '50mm in-wall PVC conduit; ≥150mm vertical clearance below TV for Sonos Arc Ultra upward-firing Atmos drivers.',
-  meta: 'Audio: Owned Sonos Arc Ultra'
+// Owned 65" Sony Bravia XBR-65X90CH: exact 1450 W × 833 H × 70 D mm, center y=1.18m (bottom 763mm -> 193mm above console)
+addBox(furnGroup, 0.07, 0.833, 1.45, 0.115, 1.18, 2.95, MAT.tvScreen, {
+  tag: 'DRAWING · WEST AV (EXACT 65")', title: 'Owned 65" Sony Bravia TV (1450×833mm) + Sonos Arc Ultra',
+  desc: 'Exact 65" proportions (1450×833×70mm). 50mm in-wall PVC conduit; ≥150mm vertical clearance above console for Sonos Arc Ultra upward Atmos drivers.',
+  meta: 'Model: XBR-65X90CH · Direct 230V'
 });
-addBox(furnGroup, 0.11, 0.08, 1.16, 0.28, 0.64, 2.95, MAT.darkMetal);
-// Owned Sonos Era 300 on North end of console
-addBox(decorGroup, 0.18, 0.16, 0.26, 0.30, 0.68, 2.00, MAT.offWhite, {
-  tag: 'DRAWING · STANDALONE MUSIC', title: 'Owned Sonos Era 300 Spatial Audio Speaker',
-  desc: 'Standalone music speaker in Drawing Room (not paired as TV surround so Bluetooth/line-in stay enabled).',
+// Owned Sonos Arc Ultra: exact 1178 W × 75 H × 111 D mm with sleek rounded acoustic front
+const arcGeo = new THREE.CylinderGeometry(0.0375, 0.0375, 1.178, 16);
+const arcMesh = new THREE.Mesh(arcGeo, MAT.darkMetal);
+arcMesh.rotation.x = Math.PI / 2;
+arcMesh.scale.set(1.48, 1, 1); // 111mm depth × 75mm height exact
+arcMesh.position.set(0.32, 0.608, 2.95);
+arcMesh.castShadow = true;
+arcMesh.userData.meta = {
+  tag: 'DRAWING · SOUNDBAR (EXACT SPEC)', title: 'Owned Sonos Arc Ultra (1178 × 75 × 111 mm)',
+  desc: '9.1.4 Sound Motion Dolby Atmos soundbar centered under 65" Sony TV via HDMI 2.1 eARC.',
+  meta: 'Exact 1178mm width · Delivered Oct 2026'
+};
+inspectables.push(arcMesh); furnGroup.add(arcMesh);
+
+// Owned Sonos Era 300: exact 260 W × 160 H × 185 D mm
+addBox(decorGroup, 0.185, 0.16, 0.26, 0.30, 0.65, 1.98, MAT.offWhite, {
+  tag: 'DRAWING · STANDALONE MUSIC', title: 'Owned Sonos Era 300 (260 × 160 × 185 mm)',
+  desc: 'Standalone spatial music speaker in Drawing Room (not paired as TV surround so Bluetooth/line-in stay enabled).',
   meta: 'Owned · Multi-room sync with Arc Ultra'
 });
-// 27" Antique Brass Nataraja on South end of console
-addBox(decorGroup, 0.24, 0.08, 0.24, 0.30, 0.64, 4.10, MAT.bronze, {
-  tag: 'DRAWING · SCULPTURE', title: 'Devsabha 27" Antique Brass Nataraja (17.5 kg)',
-  desc: 'Solid lost-wax brass on M10-anchored West console deck with museum gel; lit by 10° 3000K gimbal spot.',
-  meta: 'Height: 27" (68cm) · ₹43,999'
+// Devsabha 27" Antique Brass Nataraja (Exact 686mm tall = 120mm lotus pedestal + 566mm real alpha-keyed Natraj.jpeg sculpture!)
+addBox(decorGroup, 0.20, 0.07, 0.24, 0.30, 0.605, 4.10, MAT.bronze, {
+  tag: 'DRAWING · 27" NATARAJA SCULPTURE', title: 'Devsabha 27" Antique Brass Nataraja (686 mm H · 17.5 kg)',
+  desc: 'Solid lost-wax Chola bronze on M10-anchored West console deck with QuakeHold museum gel; lit by 10° 3000K CRI 90+ gimbal spot.',
+  meta: 'Exact 27" (686mm) Height · ₹43,999'
 });
-const natRing = new THREE.Mesh(new THREE.TorusGeometry(0.24, 0.024, 10, 24), MAT.brass);
-natRing.position.set(0.30, 0.96, 4.10); natRing.rotation.y = Math.PI / 2;
-natRing.castShadow = true; decorGroup.add(natRing);
+const lotusBase = new THREE.Mesh(new THREE.CylinderGeometry(0.085, 0.105, 0.055, 18), MAT.brass);
+lotusBase.position.set(0.30, 0.665, 4.10); decorGroup.add(lotusBase);
+const natPlane = new THREE.Mesh(new THREE.PlaneGeometry(0.56, 0.566), MAT.nataraja);
+natPlane.position.set(0.30, 0.973, 4.10); natPlane.rotation.y = Math.PI / 2;
+natPlane.userData.meta = {
+  tag: 'DRAWING · 27" NATARAJA SCULPTURE', title: 'Devsabha 27" Antique Brass Nataraja (686 mm H · 17.5 kg)',
+  desc: 'Solid lost-wax antique brass Nataraja with 22" fire halo on M10-anchored West console deck.',
+  meta: 'Exact 27" (686mm) Height · ₹43,999'
+};
+inspectables.push(natPlane); decorGroup.add(natPlane);
 
-// East Formal L-Sofa + Arc Lamp + Coway Purifier + Coffee Tables
-addBox(furnGroup, 0.96, 0.16, 2.55, 3.45, 0.22, 2.25, MAT.cpTeak, {
-  tag: 'DRAWING · EAST FORMAL SEATING', title: 'Magari Porto Low Platform L-Sofa (East Wall)',
-  desc: 'Solid walnut/ash frame with KD bolted legs (2.1m lift gate). North window W on left, dark-wood Living archway on right.',
-  meta: 'Docket p. 3 · Budget: ₹3.10L (Suite)'
+// Recommended Drawing Seating: Magari Porto Low Platform 3-Seater Sofa (East Wall) + 2× Fora Horseshoe Armchairs
+addBox(furnGroup, 0.96, 0.16, 2.40, 3.46, 0.22, 2.40, MAT.cpTeak, {
+  tag: 'DRAWING · EAST FORMAL SEATING (RECOMMENDED)', title: 'Magari Porto Low Platform 3-Seater + 2× Fora Armchairs',
+  desc: 'Solid walnut/ash platform frame (2400×960mm) with KD bolted legs (2.1m lift gate) + 2× Fora Horseshoe armchairs.',
+  meta: 'Tier 2 Recommended · Budget: ₹3.10L Suite'
 });
-addBox(furnGroup, 0.88, 0.22, 2.48, 3.42, 0.40, 2.25, MAT.fabricSand);
-addBox(furnGroup, 0.22, 0.45, 2.48, 3.82, 0.68, 2.25, MAT.fabricSand);
-addBox(furnGroup, 1.55, 0.36, 0.88, 2.95, 0.32, 1.05, MAT.fabricSand);
-addFloorLamp(3.62, 3.55, 'Orange Tree Velar Marble & Brass Arc Floor Lamp', 'Heavy marble base tucked by formal sofa with warm 2700K SOLHETTA E27 bulb.', 'Budget: ₹12k–₹13.3k', true);
+addBox(furnGroup, 0.88, 0.22, 2.34, 3.43, 0.40, 2.40, MAT.fabricSand);
+addBox(furnGroup, 0.20, 0.44, 2.34, 3.82, 0.68, 2.40, MAT.fabricSand);
+// 2× Magari Fora Horseshoe Armchairs (760×760mm) — one by North Window, one angled SE
+function addArmchair(ax, az, rotY, tag, title) {
+  const g = new THREE.Group(); g.position.set(ax, 0, az); g.rotation.y = rotY;
+  const seat = new THREE.Mesh(new THREE.BoxGeometry(0.74, 0.22, 0.72), MAT.fabricSand); seat.position.y = 0.34;
+  const base = new THREE.Mesh(new THREE.BoxGeometry(0.76, 0.18, 0.74), MAT.cpTeak); base.position.y = 0.14;
+  const back = new THREE.Mesh(new THREE.BoxGeometry(0.74, 0.40, 0.14), MAT.cpTeak); back.position.set(0, 0.58, -0.30);
+  [seat, base, back].forEach(m => { m.castShadow = true; m.receiveShadow = true; g.add(m); });
+  seat.userData.meta = { tag, title, desc: 'Solid ash/walnut frame with upholstered seat cushion (cane seat pans banned).', meta: '760 × 760 mm · Magari Suite' };
+  inspectables.push(seat); furnGroup.add(g);
+}
+addArmchair(2.65, 0.92, 0.25, 'DRAWING · ARMCHAIR 1', 'Magari Fora Horseshoe Armchair (North Window)');
+addArmchair(3.15, 4.35, -2.55, 'DRAWING · ARMCHAIR 2', 'Magari Fora Horseshoe Armchair (South-East)');
+
+addFloorLamp(3.62, 3.82, 'Orange Tree Velar Marble & Brass Arc Floor Lamp', 'Heavy marble base tucked by formal sofa with warm 2700K SOLHETTA E27 bulb.', 'Budget: ₹12k–₹13.3k', true);
 addCowayPurifier(3.68, 0.32, 'DRAWING');
-const ct1 = new THREE.Mesh(new THREE.CylinderGeometry(0.44, 0.44, 0.05, 24), MAT.darkMetal);
-ct1.position.set(2.10, 0.40, 2.60); ct1.castShadow = true; furnGroup.add(ct1);
-const ct2 = new THREE.Mesh(new THREE.CylinderGeometry(0.32, 0.32, 0.05, 24), MAT.cpTeak);
-ct2.position.set(1.70, 0.32, 3.05); ct2.castShadow = true; furnGroup.add(ct2);
-// Framed Persian Wall Carpet on Drawing Room South Wall (z = 5.38, facing North into Drawing Room)
-addBox(decorGroup, 1.98, 1.44, 0.05, 2.04, 1.46, 5.39, MAT.cpTeak);
-addBox(decorGroup, 1.84, 1.32, 0.06, 2.04, 1.46, 5.37, MAT.persianCarpet, {
-  tag: 'DRAWING · SOUTH WALL ART', title: 'Owned Framed Persian Pictorial Wall Carpet',
-  desc: 'Classical courtyard scene in sepia, walnut & antique bronze mounted on the Drawing Room South wall. 5mm archival breathing spacer + aluminum Z-bar cleat + 3000K CRI 90+ gimbal spot (≤50 lux).',
-  meta: 'Drawing Room South Wall · Protected from direct UV'
+// Orange Tree Toshi Solid Wood Nesting Coffee Table Pair
+const ct1 = new THREE.Mesh(new THREE.CylinderGeometry(0.45, 0.45, 0.04, 24), MAT.darkMetal);
+ct1.position.set(2.05, 0.40, 2.60); ct1.castShadow = true; furnGroup.add(ct1);
+const ct2 = new THREE.Mesh(new THREE.CylinderGeometry(0.33, 0.33, 0.04, 24), MAT.cpTeak);
+ct2.position.set(1.65, 0.32, 3.05); ct2.castShadow = true; furnGroup.add(ct2);
+// Framed Persian Wall Carpet on Drawing Room South Wall: exact 1.52:1 ratio (1840×1210mm inside 1960×1330mm CP Teak frame)
+addBox(decorGroup, 1.96, 1.33, 0.045, 2.04, 1.46, 5.39, MAT.cpTeak);
+addBox(decorGroup, 1.84, 1.21, 0.055, 2.04, 1.46, 5.37, MAT.persianCarpet, {
+  tag: 'DRAWING · SOUTH WALL ART (EXACT 1.52:1)', title: 'Owned Framed Persian Pictorial Wall Carpet',
+  desc: 'Classical courtyard scene in sepia, walnut & antique bronze mounted on the Drawing Room South wall (exact 1.52:1 aspect). 5mm archival breathing spacer + aluminum Z-bar cleat + 3000K CRI 90+ gimbal spot (≤50 lux).',
+  meta: 'Drawing Room South Wall · Protected from UV'
 });
 
 // ---------- B. LIVING ROOM SPINE & WALK-IN (x: 4.08..10.15, z: 3.78..7.52) ----------
@@ -1038,24 +1160,49 @@ addBox(furnGroup, 0.68, 0.42, 0.68, 13.55, 0.21, 6.82, MAT.fabricSand, {
 addBox(furnGroup, 0.68, 0.40, 0.14, 13.55, 0.56, 7.12, MAT.oakLight);
 
 // ---------- C. DINING ROOM, NE BOOKSHELF & LOBBY COMMON VANITY ----------
-addBox(furnGroup, 2.20, 0.06, 1.00, 12.15, 0.75, 5.65, MAT.cpTeak, {
-  tag: 'DINING · HERO TABLE', title: 'Custom Seasoned CP Teak 8-Seat Dining Table',
-  desc: '220×100 cm continuous 40mm solid slab top with KD bolted legs for 2.1m service lift clearance.',
+// Exact 2200×1000×750mm Custom Seasoned CP Teak 8-Seat Table (40mm continuous solid slab, KD bolted legs)
+addBox(furnGroup, 2.20, 0.04, 1.00, 12.15, 0.73, 5.65, MAT.cpTeak, {
+  tag: 'DINING · HERO TABLE (EXACT 220×100×75cm)', title: 'Custom Seasoned CP Teak 8-Seat Dining Table',
+  desc: 'Exact 220×100 cm continuous 40mm solid CP teak slab top (750mm H) with KD bolted legs for 2.1m service lift clearance.',
   meta: 'Budget: ~₹68,000 · Tier 1 Recommended'
 });
-[[-0.95,-0.38],[0.95,-0.38],[-0.95,0.38],[0.95,0.38]].forEach(([lx,lz]) =>
-  addBox(furnGroup, 0.07, 0.72, 0.07, 12.15+lx, 0.36, 5.65+lz, MAT.cpTeak));
+[[-0.96,-0.39],[0.96,-0.39],[-0.96,0.39],[0.96,0.39]].forEach(([lx,lz]) =>
+  addBox(furnGroup, 0.065, 0.71, 0.065, 12.15+lx, 0.355, 5.65+lz, MAT.cpTeak));
+// 6 Everyday + 2 End/Guest Solid Wood Dining Chairs (Orange Tree Emiko / Spin Sono: 4 wood legs + fabric cushion + teak backrest)
+function addDiningChair(cx, cz, rotY) {
+  const g = new THREE.Group(); g.position.set(cx, 0, cz); g.rotation.y = rotY;
+  [[-0.19,-0.19],[0.19,-0.19],[-0.19,0.19],[0.19,0.19]].forEach(([lx,lz]) => {
+    const leg = new THREE.Mesh(new THREE.BoxGeometry(0.038, 0.44, 0.038), MAT.cpTeak);
+    leg.position.set(lx, 0.22, lz); leg.castShadow = true; g.add(leg);
+  });
+  const seat = new THREE.Mesh(new THREE.BoxGeometry(0.45, 0.055, 0.44), MAT.fabricSand);
+  seat.position.set(0, 0.455, 0); seat.castShadow = true; g.add(seat);
+  const back = new THREE.Mesh(new THREE.BoxGeometry(0.45, 0.36, 0.045), MAT.cpTeak);
+  back.position.set(0, 0.66, -0.20); back.castShadow = true; g.add(back);
+  seat.userData.meta = {
+    tag: 'DINING · CHAIRS (6 + 2 GUESTS)', title: 'Orange Tree Emiko / Spin Sono Solid Wood Dining Chairs',
+    desc: 'Kiln-dried solid hardwood frame + performance fabric seat cushion (zero horizontal cane seat pans).',
+    meta: '460 × 460 mm · ₹10k–₹14.3k ea'
+  };
+  inspectables.push(seat); furnGroup.add(g);
+}
 [-0.70, 0, 0.70].forEach(dx => {
-  addBox(furnGroup, 0.46, 0.45, 0.46, 12.15+dx, 0.23, 4.92, MAT.oakLight);
-  addBox(furnGroup, 0.46, 0.44, 0.06, 12.15+dx, 0.66, 4.72, MAT.cpTeak);
-  addBox(furnGroup, 0.46, 0.45, 0.46, 12.15+dx, 0.23, 6.38, MAT.oakLight);
-  addBox(furnGroup, 0.46, 0.44, 0.06, 12.15+dx, 0.66, 6.58, MAT.cpTeak);
+  addDiningChair(12.15 + dx, 4.92, 0);        // 3 North side facing South
+  addDiningChair(12.15 + dx, 6.38, Math.PI);  // 3 South side facing North
 });
-addBox(decorGroup, 1.35, 0.06, 0.14, 12.15, 1.65, 5.65, MAT.brass, {
-  tag: 'DINING · PENDANT', title: 'Orange Tree Kaze / Fos Linear Wood & Brass Chandelier',
-  desc: 'Hung 800mm above tabletop on Shelly Dimmer Gen3 / Wozart Matter trailing-edge dimmer.',
-  meta: 'Budget: ₹13k–₹18k'
+addDiningChair(10.82, 5.65, Math.PI / 2);     // West end chair
+addDiningChair(13.48, 5.65, -Math.PI / 2);    // East end chair
+// Over-Table Linear Wood & Spun Brass Pendant (exact 800mm above 750mm tabletop = 1550mm AFF + twin suspension rods)
+addBox(decorGroup, 1.35, 0.055, 0.12, 12.15, 1.55, 5.65, MAT.cpTeak, {
+  tag: 'DINING · PENDANT (800mm ABOVE TABLE)', title: 'Orange Tree Kaze / Fos Linear Wood & Spun Brass Chandelier',
+  desc: 'Shaded solid wood & spun brass linear luminaire hung exactly 800mm above the 750mm tabletop (1,550mm AFF) on Shelly Dimmer Gen3.',
+  meta: 'Budget: ₹13k–₹18k · 2700K CRI 90+'
 });
+[-0.45, 0, 0.45].forEach(dx => {
+  const shade = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.11, 0.11, 16), MAT.brass);
+  shade.position.set(12.15 + dx, 1.48, 5.65); decorGroup.add(shade);
+});
+[-0.48, 0.48].forEach(dx => addBox(decorGroup, 0.012, 1.22, 0.012, 12.15 + dx, 2.18, 5.65, MAT.brass));
 
 // NE Dining Open Grid Bookshelf + Books (Homz Docket pp. 7–8)
 const bsX = 13.55, bsZ = 3.96;
@@ -1102,11 +1249,13 @@ addBox(furnGroup, 0.64, 2.38, 0.58, 10.40, 1.19, 7.86, MAT.brownSugar, {
   desc: 'Full West appliance wall in 3174 LU Brown Sugar with 158 LU Taupe overhead loft and Gold PVC skirting.',
   meta: 'Docket p. 14 · Kitchen-C'
 });
-addBox(furnGroup, 0.72, 1.84, 0.86, 10.44, 0.92, 8.64, MAT.steel, {
-  tag: 'KITCHEN · REFRIGERATOR (DECIDED)', title: 'Bosch Serie 6 XXL 641L 2-Door (KDN86AID0I)',
-  desc: '493L fresh + 148L top freezer (860mm W fits 980mm niche). Uncrate in B3 for 800mm lift.',
+// Bosch Serie 6 XXL 641L 2-Door Top Freezer (KDN86AID0I): exact 860 W × 1860 H × 810 D mm
+addBox(furnGroup, 0.81, 1.86, 0.86, 10.485, 0.93, 8.64, MAT.steel, {
+  tag: 'KITCHEN · REFRIGERATOR (EXACT 860×1860×810mm)', title: 'Bosch Serie 6 XXL 641L 2-Door (KDN86AID0I)',
+  desc: 'Exact 860 W × 1860 H × 810 D mm (493L fresh + 148L top freezer). Uncrate in B3 for 800mm lift.',
   meta: 'Dedicated 16A drop · ₹94k–₹1.08L'
 });
+addBox(furnGroup, 0.02, 0.018, 0.86, 10.895, 1.38, 8.64, MAT.darkMetal); // Top freezer horizontal door seam
 addBox(furnGroup, 0.66, 0.46, 0.96, 10.42, 2.15, 8.64, MAT.taupeGloss);
 addBox(furnGroup, 0.64, 2.38, 0.64, 10.40, 1.19, 9.44, MAT.brownSugar);
 addBox(furnGroup, 0.06, 0.58, 0.56, 10.71, 0.92, 9.44, MAT.darkMetal, {
@@ -1139,9 +1288,9 @@ addBox(furnGroup, 0.68, 0.05, 0.46, 12.20, 0.865, 11.18, MAT.steel, {
 // Kohler July high-arch tap
 addBox(decorGroup, 0.03, 0.30, 0.03, 12.20, 1.02, 11.42, MAT.steel);
 addBox(decorGroup, 0.03, 0.03, 0.16, 12.20, 1.17, 11.35, MAT.steel);
-// LG PuriCare WW184ETB RO Purifier on South wall beside sink
-addBox(decorGroup, 0.28, 0.48, 0.22, 11.20, 1.42, 11.38, MAT.offWhite, {
-  tag: 'KITCHEN · WATER PURIFIER (DECIDED)', title: 'LG PuriCare WW184ETB (8L Sealed SS304 Tank)',
+// LG PuriCare WW184ETB RO Purifier: exact 290 W × 495 H × 320 D mm
+addBox(decorGroup, 0.29, 0.495, 0.32, 11.20, 1.42, 11.33, MAT.offWhite, {
+  tag: 'KITCHEN · WATER PURIFIER (EXACT 290×495×320mm)', title: 'LG PuriCare WW184ETB (8L Sealed SS304 Tank)',
   desc: 'RO+UV+UF with 6-hr in-tank UV-C LED behind external 10" pre-filter & 2.8 bar PRV.',
   meta: '₹28,990 quote'
 });
@@ -1175,7 +1324,18 @@ addBox(furnGroup, 0.56, 1.72, 0.52, 15.05, 0.86, 9.65, MAT.taupeGloss, {
   desc: 'Tall storage cabinet beside Kitchen door + stacked Bosch Serie 6 10kg washer & Serie 4 10kg heat-pump dryer via WTZ27400 kit + service sink.',
   meta: 'Utility Width: 1500 mm · White uPVC Enclosure'
 });
-addBox(furnGroup, 0.62, 1.72, 0.62, 15.05, 0.86, 10.40, MAT.offWhite);
+// Utility Stacked Bosch Serie 6 Washer (600×850×600) + WTZ27400 Kit + Serie 4 Heat-Pump Dryer (600×850×600)
+addBox(furnGroup, 0.60, 0.84, 0.60, 15.05, 0.42, 10.40, MAT.offWhite, {
+  tag: 'UTILITY · STACKED BOSCH LAUNDRY (EXACT 600×1710mm)', title: 'Bosch Serie 6 10kg Washer + WTZ27400 + Serie 4 10kg Dryer',
+  desc: 'Two stacked 600×850×600mm front-load Bosch machines on structural tile with rubber anti-vibration pads + dedicated 16A radial drops.',
+  meta: 'Decided · ₹44k Washer + ₹64k Dryer + ₹5.5k Stack Kit'
+});
+addBox(furnGroup, 0.61, 0.03, 0.61, 15.05, 0.855, 10.40, MAT.darkMetal); // WTZ27400 stacking kit seam
+addBox(furnGroup, 0.60, 0.84, 0.60, 15.05, 1.29, 10.40, MAT.offWhite);
+[0.44, 1.31].forEach(dy => {
+  const drum = new THREE.Mesh(new THREE.CylinderGeometry(0.19, 0.19, 0.04, 20), MAT.darkMetal);
+  drum.rotation.z = Math.PI / 2; drum.position.set(14.74, dy, 10.40); furnGroup.add(drum);
+});
 addBox(furnGroup, 0.55, 0.05, 0.62, 15.05, 0.84, 11.15, MAT.graniteBlack);
 addBox(furnGroup, 0.50, 1.45, 0.92, 15.25, 0.72, 6.92, MAT.steel, {
   tag: 'SERVICE BALCONY · HVAC', title: 'Daikin 10 HP VRV Outdoor Unit (ODU)',
@@ -1244,29 +1404,36 @@ addBox(furnGroup, 0.38, 0.04, 0.52, 5.52, 0.52, 8.60, MAT.brass);
 [[1.05, 12.40], [2.95, 12.40]].forEach(([bx, bz]) => addBox(furnGroup, 0.58, 0.42, 0.58, bx, 0.21, bz, MAT.cpTeak));
 
 // ---------- F. BR-01 STUDY & GUEST ROOM (x: 5.78..10.00, z: 7.52..11.60) ----------
-addBox(furnGroup, 1.88, 0.42, 0.98, 7.20, 0.21, 8.12, MAT.fabricCharcoal, {
-  tag: 'BR-01 · GUEST SOFA-BED', title: 'Custom CP Teak Pull-Out Sofa-Bed / Gulmohar Lane Berlin',
-  desc: '188×104 cm closed (193 cm open) along North wall. Leaves 203 cm clear walk to South wardrobe.',
+// Exact 1880 W × 1040 D mm Closed Sofa-Bed
+addBox(furnGroup, 1.88, 0.42, 1.04, 7.20, 0.21, 8.15, MAT.fabricCharcoal, {
+  tag: 'BR-01 · GUEST SOFA-BED (188×104cm)', title: 'Custom CP Teak Pull-Out Sofa-Bed / Gulmohar Lane Berlin',
+  desc: 'Exact 188×104 cm closed (193 cm open) along North wall. Leaves 203 cm clear walk to South wardrobe.',
   meta: 'Budget: ₹68k (CP Teak) · BR-01: 4000×4000 mm'
 });
 addBox(furnGroup, 1.88, 0.40, 0.18, 7.20, 0.58, 7.72, MAT.fabricCharcoal);
 
-// East Wall Standing Desk + Amia + Brother Printer + Rustle Menu Board
-addBox(furnGroup, 1.48, 0.05, 0.75, 9.08, 0.75, 9.25, MAT.oakLight, {
-  tag: 'BR-01 · EXECUTIVE DESK', title: 'Owned Dual-Motor Standing Desk + Steelcase Amia',
-  desc: 'Samar sits facing North (command view of NE entry). BenQ ScreenBar Pro + mechanical monitor arm + 3" PU rollerblade castors.',
+// East Wall Standing Desk (Exact 1500×750mm) + Amia + Brother Printer + 3D Rustle 8-Strip Teak Wall Board
+addBox(furnGroup, 1.50, 0.04, 0.75, 9.08, 0.74, 9.25, MAT.oakLight, {
+  tag: 'BR-01 · EXECUTIVE DESK (EXACT 150×75cm)', title: 'Owned Dual-Motor Standing Desk + Steelcase Amia',
+  desc: 'Exact 1500×750mm top. Samar sits facing North (command view of NE entry). BenQ ScreenBar Pro + mechanical monitor arm + 3" PU rollerblade castors.',
   meta: 'Dedicated wall 6A/16A socket'
 });
-addBox(furnGroup, 0.06, 0.73, 0.55, 8.45, 0.36, 9.25, MAT.darkMetal);
-addBox(furnGroup, 0.06, 0.73, 0.55, 9.70, 0.36, 9.25, MAT.darkMetal);
+addBox(furnGroup, 0.06, 0.72, 0.55, 8.44, 0.36, 9.25, MAT.darkMetal);
+addBox(furnGroup, 0.06, 0.72, 0.55, 9.72, 0.36, 9.25, MAT.darkMetal);
 addBox(furnGroup, 0.78, 0.42, 0.04, 9.10, 1.12, 9.00, MAT.tvScreen);
 addBox(furnGroup, 0.56, 0.48, 0.54, 9.10, 0.28, 9.88, MAT.darkMetal);
-// Rustle 8-Strip Teak Wall Menu / Task Board on East wall
-addBox(decorGroup, 0.04, 0.88, 0.68, 9.91, 1.56, 9.25, MAT.menuBoard, {
-  tag: 'BR-01 · EAST WALL BOARD', title: 'Rustle Stylish Wooden Wall Menu / Task Board (Large)',
-  desc: 'Solid teak 8-strip channel rails + birch ply tiles anchored into East wall via Fischer DuoPower plugs.',
-  meta: 'Budget: ₹7.5k–₹8.5k'
-});
+// Rustle 8-Strip Solid Teak Wall Menu / Task Board: 8 real 3D teak channel rails mounted directly on Morning Glory East wall
+for (let r = 0; r < 8; r++) {
+  const ry = 1.20 + r * 0.105;
+  addBox(decorGroup, 0.024, 0.022, 0.68, 9.915, ry, 9.25, MAT.cpTeak, r === 3 ? {
+    tag: 'BR-01 · EAST WALL BOARD (8-STRIP TEAK)', title: 'Rustle Stylish Wooden Wall Menu / Task Board (Large)',
+    desc: '8 solid teak channel rails + removable birch ply letter tiles mounted directly on Morning Glory paint via Fischer DuoPower plugs.',
+    meta: '680 × 880 mm · Budget: ₹7.5k–₹8.5k'
+  } : null);
+  for (let t = 0; t < 6 + (r % 3); t++) {
+    addBox(decorGroup, 0.008, 0.045, 0.036, 9.92, ry + 0.032, 8.98 + t * 0.062, MAT.offWhite);
+  }
+}
 // Brother HL-L2440DW Laser Printer on compact side stand
 addBox(decorGroup, 0.38, 0.48, 0.38, 9.68, 0.24, 8.45, MAT.oakLight);
 addBox(decorGroup, 0.36, 0.20, 0.36, 9.68, 0.58, 8.45, MAT.darkMetal, {
@@ -1316,23 +1483,23 @@ addBox(furnGroup, 0.04, 2.45, 0.76, 9.81, 1.225, 0.51, MAT.cinnHickory);
 addBox(furnGroup, 0.58, 0.52, 2.45, 9.54, 0.26, 2.12, MAT.vintageIndigo);
 addBox(furnGroup, 0.58, 1.93, 2.45, 9.54, 1.485, 2.12, MAT.beigeWool);
 
-// North Study Desk + Orange Tree Semer Task Lamp
-addBox(furnGroup, 1.20, 0.05, 0.70, 8.20, 0.60, 0.46, MAT.oakLight, {
-  tag: 'BR-02 KABIR · STUDY DESK', title: 'Magari Solid Ash Growth Desk + Slotted Chair',
-  desc: 'Kabir faces North; glare-free North window light enters over left shoulder. Zero wheels, zero swivel.',
-  meta: '120×70 cm · Desk ₹45k / Chair ₹24k'
+// North Study Desk (Exact 1200×700mm, age-6 step height 550mm) + Orange Tree Semer Task Lamp (58cm H)
+addBox(furnGroup, 1.20, 0.04, 0.70, 8.20, 0.53, 0.46, MAT.oakLight, {
+  tag: 'BR-02 KABIR · STUDY DESK (EXACT 120×70×55cm)', title: 'Magari Solid Ash Growth Desk + Slotted Chair',
+  desc: 'Exact 1200×700mm set at 550mm age-6 step height. Kabir faces North; glare-free daylight over left shoulder. Zero wheels, zero swivel.',
+  meta: 'Desk ₹45k / Slotted Chair ₹24k'
 });
-addBox(furnGroup, 0.05, 0.58, 0.62, 7.65, 0.29, 0.46, MAT.oakLight);
-addBox(furnGroup, 0.05, 0.58, 0.62, 8.75, 0.29, 0.46, MAT.oakLight);
-addBox(furnGroup, 0.42, 0.38, 0.42, 8.20, 0.19, 1.02, MAT.cpTeak);
+addBox(furnGroup, 0.05, 0.51, 0.62, 7.65, 0.255, 0.46, MAT.oakLight);
+addBox(furnGroup, 0.05, 0.51, 0.62, 8.75, 0.255, 0.46, MAT.oakLight);
+addBox(furnGroup, 0.42, 0.36, 0.42, 8.20, 0.18, 1.02, MAT.cpTeak);
 // Orange Tree Semer Task Lamp on rear-left corner of Kabir's desk
-addBox(decorGroup, 0.14, 0.03, 0.14, 7.72, 0.64, 0.24, MAT.offWhite, {
+addBox(decorGroup, 0.14, 0.03, 0.14, 7.72, 0.565, 0.24, MAT.offWhite, {
   tag: 'BR-02 KABIR · DESK TASK LAMP', title: 'Orange Tree Semer Study Table Lamp',
   desc: 'Matte white + brass swivel head on rear-left corner (avoids right-hand writing shadows), 2700K CRI 90+ bulb.',
   meta: '58 cm H · ₹2,159–₹3,599'
 });
-addBox(decorGroup, 0.02, 0.44, 0.02, 7.72, 0.86, 0.24, MAT.brass);
-addBox(decorGroup, 0.12, 0.10, 0.12, 7.78, 1.06, 0.28, MAT.lampShade);
+addBox(decorGroup, 0.02, 0.44, 0.02, 7.72, 0.79, 0.24, MAT.brass);
+addBox(decorGroup, 0.12, 0.10, 0.12, 7.78, 0.99, 0.28, MAT.lampShade);
 
 // NW Reading Nook: KOMPISHÄNG Pouffe + IKEA RÖDFLIK Reading Floor Lamp
 addBox(furnGroup, 0.80, 0.36, 0.68, 6.55, 0.18, 0.52, MAT.fabricSand, {
@@ -1342,7 +1509,7 @@ addBox(furnGroup, 0.80, 0.36, 0.68, 6.55, 0.18, 0.52, MAT.fabricSand, {
 });
 addFloorLamp(6.04, 0.34, 'IKEA RÖDFLIK Light-Beige Floor Reading Lamp', '25 cm Ø slim base + rotatable light-beige enameled shade with brass accents, 2700K CRI 90+.', 'Leaves 650mm clear on NW path · ₹8,980');
 
-// South Daybed + Henka Wall Sconce + West Wall 3D World Map + Coway Purifier
+// South Daybed + Henka Wall Sconce + West Wall 3D World Map (Alpha-keyed wood continents direct on Misty Breeze paint!) + Coway
 addBox(furnGroup, 1.95, 0.40, 0.96, 7.55, 0.20, 3.18, MAT.oakLight, {
   tag: 'BR-02 KABIR · DAYBED', title: 'Magari / Alankaram Solid Ash Daybed + Trundle',
   desc: '36×75" Indian sizing, rounded child-safe bullnose edges. Vastu alignment: Head East, feet West.',
@@ -1354,33 +1521,40 @@ addBox(decorGroup, 0.16, 0.22, 0.14, 8.38, 1.35, 3.65, MAT.oakLight, {
   desc: 'Mounted at 1,350mm AFF at East head-end of South daybed with 2700K CRI 90+ bulb.',
   meta: 'Budget: ₹4,599'
 });
-addBox(decorGroup, 0.04, 0.90, 1.50, 5.87, 1.48, 2.55, MAT.worldMap, {
-  tag: 'BR-02 KABIR · WEST WALL', title: 'Woodsify 3D Multilayer Birch World Map (150×90 cm)',
-  desc: 'Mounted directly on cured Misty Breeze Royale paint (no BWP backer); grazed by 3000K CRI 90+ ceiling gimbal spot.',
+const mapPlane = new THREE.Mesh(new THREE.PlaneGeometry(1.50, 0.90), MAT.worldMap);
+mapPlane.position.set(5.865, 1.48, 2.55); mapPlane.rotation.y = Math.PI / 2;
+mapPlane.userData.meta = {
+  tag: 'BR-02 KABIR · WEST WALL (EXACT 150×90cm)', title: 'Woodsify 3D Multilayer Birch World Map (Size L)',
+  desc: 'Exact 1500×900mm wood continents mounted directly on cured Misty Breeze 8307 Royale paint (no BWP backer); grazed by 3000K CRI 90+ gimbal spot.',
   meta: 'SW Open Activity Zone · ₹5,689–₹9,540'
-});
+};
+inspectables.push(mapPlane); decorGroup.add(mapPlane);
 addCowayPurifier(6.14, 3.40, 'BR-02 KABIR');
 
 // ---------- H. BR-03 HOME GURUDWARA (x: 11.62..15.78, z: 0..3.78) ----------
-// Palki Sahib rotated to FACE EAST (+X), positioned ~1/5 from West wall/wardrobe shutter (x=12.26) & ~4/5 open floor to East (x=15.78)
-const pkX = 13.12, pkZ = 1.85;
-addBox(furnGroup, 0.82, 0.62, 1.10, pkX, 0.31, pkZ, MAT.cpTeak, {
-  tag: 'BR-03 · HOME GURUDWARA (FACING EAST)', title: 'Handcrafted Solid Teak Palki Sahib (Manji Sahib + Chandoa)',
-  desc: 'Positioned 1/5 from West wardrobe shutter and 4/5 from East wall, facing East (+X) toward morning window light. Seasoned teak in natural matte beeswax finish; strictly zero speakers.',
+// Exact 3 ft (920 W × 760 D × 1950 H mm) Palki Sahib rotated to FACE EAST (+X), ~1/5 from West wardrobe shutter & ~4/5 open floor to East
+const pkX = 13.06, pkZ = 1.85;
+addBox(furnGroup, 0.76, 0.62, 0.92, pkX, 0.31, pkZ, MAT.cpTeak, {
+  tag: 'BR-03 · HOME GURUDWARA (EXACT 3FT · EAST FACING)', title: 'Handcrafted Solid Teak Palki Sahib (920×760×1950mm)',
+  desc: 'Positioned 1/5 from West wardrobe shutter and 4/5 from East wall, facing East (+X) toward morning light. Seasoned teak in natural matte beeswax finish; strictly zero speakers.',
   meta: 'Faces East · 2700K Indirect Cove Only'
 });
-[[-0.34,-0.48],[0.34,-0.48],[-0.34,0.48],[0.34,0.48]].forEach(([px,pz]) =>
-  addBox(furnGroup, 0.06, 1.35, 0.06, pkX+px, 1.28, pkZ+pz, MAT.cpTeak));
-addBox(furnGroup, 0.90, 0.12, 1.18, pkX, 1.98, pkZ, MAT.cpTeak);
-addBox(furnGroup, 0.78, 0.08, 1.06, pkX, 0.66, pkZ, MAT.brass);
-// Subtle carved backrest panel on West side of Palki so East-facing orientation is unmistakable
-addBox(furnGroup, 0.05, 0.65, 1.04, pkX - 0.38, 0.95, pkZ, MAT.cpTeak);
-// 18" Solid Brass Ik Onkar Wall Plaque on North sacred wall
-addBox(decorGroup, 0.46, 0.46, 0.03, 13.85, 2.05, 0.10, MAT.ikOnkar, {
-  tag: 'BR-03 · SACRED CALLIGRAPHY', title: '18" Handcrafted Solid Brass Ik Onkar Wall Plaque',
-  desc: 'Brushed antique brass passivated with natural beeswax (zero synthetic gloss), washed by 2700K perimeter cove.',
+[[-0.32,-0.40],[0.32,-0.40],[-0.32,0.40],[0.32,0.40]].forEach(([px,pz]) =>
+  addBox(furnGroup, 0.055, 1.30, 0.055, pkX+px, 1.27, pkZ+pz, MAT.cpTeak));
+addBox(furnGroup, 0.84, 0.11, 1.00, pkX, 1.92, pkZ, MAT.cpTeak);
+addBox(furnGroup, 0.72, 0.08, 0.88, pkX, 0.66, pkZ, MAT.brass);
+addBox(furnGroup, 0.045, 0.64, 0.88, pkX - 0.35, 0.94, pkZ, MAT.cpTeak); // West backrest panel
+// 18" (457mm Ø) Circular Handcrafted Solid Brass Ik Onkar Medallion on North sacred wall
+const ikDisc = new THREE.Mesh(new THREE.CylinderGeometry(0.228, 0.228, 0.025, 32), [MAT.brass, MAT.ikOnkar, MAT.brass]);
+ikDisc.rotation.x = Math.PI / 2;
+ikDisc.position.set(13.85, 2.02, 0.095);
+ikDisc.castShadow = true;
+ikDisc.userData.meta = {
+  tag: 'BR-03 · SACRED CALLIGRAPHY (EXACT 18" Ø)', title: '18" (457 mm Ø) Handcrafted Solid Brass Ik Onkar Medallion',
+  desc: 'Circular brushed antique brass disc passivated with natural beeswax (zero synthetic gloss), washed by 2700K perimeter cove.',
   meta: 'Budget: ₹4,500'
-});
+};
+inspectables.push(ikDisc); decorGroup.add(ikDisc);
 // Framed Golden Temple Heritage Archival Print on East wall
 addBox(decorGroup, 0.04, 0.66, 0.88, 15.68, 1.52, 3.16, MAT.cpTeak);
 addBox(decorGroup, 0.05, 0.58, 0.80, 15.67, 1.52, 3.16, MAT.goldenTemple, {
@@ -1388,11 +1562,11 @@ addBox(decorGroup, 0.05, 0.58, 0.80, 15.67, 1.52, 3.16, MAT.goldenTemple, {
   desc: 'Acid-free museum mount in natural matte oiled solid wood frame.',
   meta: 'Budget: ₹6,800'
 });
-// Sangat Floor Dhurrie in open 4/5 East zone facing West toward Palki Sahib
-addBox(furnGroup, 1.75, 0.015, 2.55, 14.62, 0.01, 1.90, MAT.dhurrie, {
-  tag: 'BR-03 · SANGAT FLOOR (EAST ZONE)', title: 'Heavy Panja 100% Pure Cotton Dhurrie + White Khes',
-  desc: '100% washable, reversible, zero latex backing placed in the open 4/5 East floor zone facing Palki Sahib.',
-  meta: '6×9 ft · Budget: ₹7,890'
+// Exact 6×9 ft (1830×2740mm) Sangat Cotton Dhurrie in open 4/5 East zone facing West toward Palki Sahib
+addBox(furnGroup, 1.83, 0.015, 2.74, 14.62, 0.01, 1.90, MAT.dhurrie, {
+  tag: 'BR-03 · SANGAT FLOOR (EXACT 6×9 FT)', title: 'Heavy Panja 100% Pure Cotton Dhurrie + White Khes',
+  desc: 'Exact 6×9 ft (1830×2740mm) 100% washable, reversible, zero latex backing in the open East Sangat zone.',
+  meta: 'Budget: ₹7,890'
 });
 addCowayPurifier(15.32, 0.36, 'BR-03 GURUDWARA');
 
