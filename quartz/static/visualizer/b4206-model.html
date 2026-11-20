@@ -374,10 +374,10 @@
   <div class="swatch"><span class="dot" style="background:#F0EFE8"></span>0765 Morning Glory</div>
   <div class="swatch"><span class="dot" style="background:#B2C2CC"></span>8307 Misty Breeze</div>
   <div class="swatch"><span class="dot" style="background:#D8CFBC"></span>3163 SI Beige Wool</div>
-  <div class="swatch"><span class="dot" style="background:#DDD6CB"></span>158 LU Taupe</div>
-  <div class="swatch"><span class="dot" style="background:#9E836B"></span>3174 LU Brown Sugar</div>
-  <div class="swatch"><span class="dot" style="background:#734F35"></span>424 1D Hickory</div>
-  <div class="swatch"><span class="dot" style="background:#263B52"></span>3267 SI Indigo</div>
+  <div class="swatch"><span class="dot" style="background:#F4F2EB"></span>158 LU Wall/Lofts</div>
+  <div class="swatch"><span class="dot" style="background:#7B5238"></span>3174 LU Brown Sugar</div>
+  <div class="swatch"><span class="dot" style="background:#744F36"></span>424 1D Hickory</div>
+  <div class="swatch"><span class="dot" style="background:#1E2C3A"></span>3267 SI Indigo</div>
   <div class="swatch"><span class="dot" style="background:#8B5A32"></span>CP Teak</div>
 </div>
 
@@ -424,7 +424,7 @@ controls.target.set(8.0, 0.3, 6.2);
 // ============================================================================
 // 2. PROCEDURAL ARCHITECTURAL & ART TEXTURES
 // ============================================================================
-function makeTileTex(baseHex, groutHex, tilesPerUnit = 2, subtleNoise = 6) {
+function makeTileTex(baseHex, groutHex, tilesPerUnit = 2, subtleNoise = 6, marbleVeins = false) {
   const c = document.createElement('canvas'); c.width = 512; c.height = 512;
   const g = c.getContext('2d');
   g.fillStyle = baseHex; g.fillRect(0, 0, 512, 512);
@@ -436,6 +436,14 @@ function makeTileTex(baseHex, groutHex, tilesPerUnit = 2, subtleNoise = 6) {
     img.data[i+2] = Math.min(255, Math.max(0, img.data[i+2] + n));
   }
   g.putImageData(img, 0, 0);
+  if (marbleVeins) {
+    g.strokeStyle = 'rgba(182,178,170,0.22)'; g.lineWidth = 2.2;
+    for (let v = 0; v < 14; v++) {
+      const sx = Math.random() * 512, sy = Math.random() * 512;
+      g.beginPath(); g.moveTo(sx, sy);
+      g.bezierCurveTo(sx + 60, sy + 45, sx - 40, sy + 120, sx + 90, sy + 170); g.stroke();
+    }
+  }
   g.strokeStyle = groutHex; g.lineWidth = 3;
   const step = 512 / tilesPerUnit;
   for (let i = 0; i <= tilesPerUnit; i++) {
@@ -448,7 +456,7 @@ function makeTileTex(baseHex, groutHex, tilesPerUnit = 2, subtleNoise = 6) {
   return tex;
 }
 
-function makeWoodTex(baseHex, grainHex, planks = 6) {
+function makeWoodTex(baseHex, grainHex, planks = 6, vertical = false) {
   const c = document.createElement('canvas'); c.width = 512; c.height = 512;
   const g = c.getContext('2d');
   g.fillStyle = baseHex; g.fillRect(0, 0, 512, 512);
@@ -456,14 +464,48 @@ function makeWoodTex(baseHex, grainHex, planks = 6) {
   for (let p = 0; p < planks; p++) {
     g.fillStyle = grainHex;
     g.globalAlpha = 0.08 + (p % 3) * 0.03;
-    g.fillRect(0, p * ph, 512, ph);
-    g.globalAlpha = 0.14;
-    for (let s = 0; s < 14; s++) g.fillRect(0, p * ph + Math.random() * ph, 512, 1 + Math.random() * 2);
-    g.globalAlpha = 0.35; g.strokeStyle = '#3b2413'; g.lineWidth = 1.5;
-    g.beginPath(); g.moveTo(0, p * ph); g.lineTo(512, p * ph); g.stroke();
+    if (vertical) g.fillRect(p * ph, 0, ph, 512); else g.fillRect(0, p * ph, 512, ph);
+    g.globalAlpha = vertical ? 0.22 : 0.14;
+    for (let s = 0; s < (vertical ? 26 : 14); s++) {
+      if (vertical) g.fillRect(p * ph + Math.random() * ph, 0, 1 + Math.random() * 1.8, 512);
+      else g.fillRect(0, p * ph + Math.random() * ph, 512, 1 + Math.random() * 2);
+    }
+    if (!vertical) {
+      g.globalAlpha = 0.35; g.strokeStyle = '#3b2413'; g.lineWidth = 1.5;
+      g.beginPath(); g.moveTo(0, p * ph); g.lineTo(512, p * ph); g.stroke();
+    }
   }
   const tex = new THREE.CanvasTexture(c);
   tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+  tex.colorSpace = THREE.SRGBColorSpace;
+  return tex;
+}
+
+function makeLinenInternalTex() {
+  const c = document.createElement('canvas'); c.width = 256; c.height = 256;
+  const g = c.getContext('2d');
+  g.fillStyle = '#EAE6DE'; g.fillRect(0, 0, 256, 256);
+  g.fillStyle = 'rgba(148,140,130,0.12)';
+  for (let i = 0; i < 256; i += 4) { g.fillRect(i, 0, 1, 256); g.fillRect(0, i, 256, 1); }
+  const tex = new THREE.CanvasTexture(c);
+  tex.wrapS = tex.wrapT = THREE.RepeatWrapping; tex.repeat.set(3, 3);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  return tex;
+}
+
+function makeHerringboneTex() {
+  const c = document.createElement('canvas'); c.width = 256; c.height = 256;
+  const g = c.getContext('2d');
+  g.fillStyle = '#F2F0EB'; g.fillRect(0, 0, 256, 256);
+  g.strokeStyle = '#D2CEC6'; g.lineWidth = 2;
+  const step = 32;
+  for (let y = -64; y < 320; y += step) {
+    for (let x = -64; x < 320; x += step * 2) {
+      g.beginPath(); g.moveTo(x, y); g.lineTo(x + step, y + step); g.lineTo(x + step * 2, y); g.stroke();
+    }
+  }
+  const tex = new THREE.CanvasTexture(c);
+  tex.wrapS = tex.wrapT = THREE.RepeatWrapping; tex.repeat.set(5, 1.8);
   tex.colorSpace = THREE.SRGBColorSpace;
   return tex;
 }
@@ -510,13 +552,13 @@ function makeLimewashBump() {
 function makeGroovedDoorTex() {
   const c = document.createElement('canvas'); c.width = 512; c.height = 512;
   const g = c.getContext('2d');
-  g.fillStyle = '#D8CFBC'; g.fillRect(0, 0, 512, 512);
-  g.strokeStyle = '#3A322C'; g.lineWidth = 4;
+  g.fillStyle = '#D8CFBC'; g.fillRect(0, 0, 512, 512); // Vault locked 3163 SI Beige Wool
+  g.strokeStyle = '#252220'; g.lineWidth = 4;          // Docket p.9 DP-7.6mm-AB antique black/bronze inlay
   [128, 256, 384].forEach(x => { g.beginPath(); g.moveTo(x, 0); g.lineTo(x, 512); g.stroke(); });
   [[0, 170, 128], [128, 120, 256], [256, 230, 384], [384, 340, 512], [0, 380, 128]].forEach(([x1, y, x2]) => {
     g.beginPath(); g.moveTo(x1, y); g.lineTo(x2, y); g.stroke();
   });
-  g.fillStyle = '#C9A45C';
+  g.fillStyle = '#D2B87A';                             // Docket p.9 DP-25mm-BG brushed gold inlay
   g.fillRect(123, 0, 10, 170);
   g.fillRect(379, 0, 10, 230);
   g.fillRect(251, 230, 10, 282);
@@ -651,23 +693,28 @@ const MAT = {
   wallBotanical: new THREE.MeshStandardMaterial({ map: makeBotanicalTex(), roughness: 0.85 }),
   hiddenGrooved: new THREE.MeshStandardMaterial({ map: makeGroovedDoorTex(), roughness: 0.60 }),
 
-  beigeWool:     new THREE.MeshStandardMaterial({ color: 0xD8CFBC, roughness: 0.65 }),
-  taupeGloss:    new THREE.MeshStandardMaterial({ color: 0xDDD6CB, roughness: 0.22, metalness: 0.04 }),
-  brownSugar:    new THREE.MeshStandardMaterial({ color: 0x9E836B, roughness: 0.24, metalness: 0.04 }),
-  cinnHickory:   new THREE.MeshStandardMaterial({ map: makeWoodTex('#734F35', '#4E331F', 8), roughness: 0.58 }),
-  vintageIndigo: new THREE.MeshStandardMaterial({ color: 0x263B52, roughness: 0.68 }),
+  beigeWool:     new THREE.MeshStandardMaterial({ color: 0xD8CFBC, roughness: 0.70 }), // Vault locked 3163 SI Beige Wool
+  taupeGloss:    new THREE.MeshStandardMaterial({ color: 0xF4F2EB, roughness: 0.16, metalness: 0.04 }), // Vault palette Kitchen Wall/Lofts & 158 LU glossy
+  brownSugar:    new THREE.MeshStandardMaterial({ color: 0x7B5238, roughness: 0.18, metalness: 0.06 }), // Vault swatch 3174 LU Brown Sugar (#7B5238)
+  cinnHickory:   new THREE.MeshStandardMaterial({ map: makeWoodTex('#744F36', '#4E331F', 10, true), roughness: 0.58 }), // Vault scan 424 1D vertical grain
+  internalLinen: new THREE.MeshStandardMaterial({ map: makeLinenInternalTex(), roughness: 0.80 }), // Docket p.39 Essential 5133 SD / 0.8mm Off-White liner
+  kitchenBacksplash: new THREE.MeshStandardMaterial({ map: makeHerringboneTex(), roughness: 0.30 }), // Docket pp.12-14 light herringbone tile
+  vintageIndigo: new THREE.MeshStandardMaterial({ color: 0x1E2C3A, roughness: 0.68 }), // Vault swatch 3267 SI Vintage Indigo (#1E2C3A)
   cpTeak:        new THREE.MeshStandardMaterial({ map: makeWoodTex('#8B5A32', '#5C371B', 6), roughness: 0.52 }),
+  builderDoor:   new THREE.MeshStandardMaterial({ map: makeWoodTex('#62402A', '#3E2516', 8, true), roughness: 0.48 }), // Olympus 40mm walnut doors
   oakLight:      new THREE.MeshStandardMaterial({ color: 0xC8A679, roughness: 0.58 }),
   graniteIvory:  new THREE.MeshStandardMaterial({ color: 0xEAE3D5, roughness: 0.25, metalness: 0.05 }),
   graniteBlack:  new THREE.MeshStandardMaterial({ color: 0x22252A, roughness: 0.28, metalness: 0.08 }),
   brass:         new THREE.MeshStandardMaterial({ color: 0xC9A45C, roughness: 0.28, metalness: 0.85 }),
+  goldProfile:   new THREE.MeshStandardMaterial({ color: 0xD2B87A, roughness: 0.24, metalness: 0.84 }), // Docket p.16 Gold Gola & Gold PVC Skirting
+  seamDark:      new THREE.MeshStandardMaterial({ color: 0x6E655D, roughness: 0.85 }),
   bronze:        new THREE.MeshStandardMaterial({ color: 0x7A5C2E, roughness: 0.35, metalness: 0.80 }),
   steel:         new THREE.MeshStandardMaterial({ color: 0xC4C9CE, roughness: 0.28, metalness: 0.82 }),
   darkMetal:     new THREE.MeshStandardMaterial({ color: 0x2A2D32, roughness: 0.45, metalness: 0.65 }),
   upvcWhite:     new THREE.MeshStandardMaterial({ color: 0xF7F7F5, roughness: 0.35 }),
   glass:         new THREE.MeshPhysicalMaterial({ color: 0xCBE2EC, transparent: true, opacity: 0.32, roughness: 0.08, metalness: 0.1 }),
-  tintedGlass:   new THREE.MeshPhysicalMaterial({ color: 0x7A5C3B, transparent: true, opacity: 0.48, roughness: 0.12, metalness: 0.18 }),
-  flutedGlass:   new THREE.MeshPhysicalMaterial({ color: 0xC2B295, transparent: true, opacity: 0.52, roughness: 0.30, metalness: 0.10 }),
+  tintedGlass:   new THREE.MeshPhysicalMaterial({ color: 0x6B4E34, transparent: true, opacity: 0.44, roughness: 0.12, metalness: 0.18 }),
+  flutedGlass:   new THREE.MeshPhysicalMaterial({ color: 0xD6C8AC, transparent: true, opacity: 0.48, roughness: 0.28, metalness: 0.10 }),
   mirror:        new THREE.MeshStandardMaterial({ color: 0xD7E3EA, roughness: 0.06, metalness: 0.92 }),
   fabricSand:    new THREE.MeshStandardMaterial({ color: 0xDDD5C7, roughness: 0.92 }),
   fabricOat:     new THREE.MeshStandardMaterial({ color: 0xE6DFD3, roughness: 0.94 }),
@@ -768,16 +815,27 @@ loadProcessedImage(
   MAT.worldMap
 );
 
-const tile1000 = makeTileTex('#EAE6DD', '#CFCAC0', 4, 5); tile1000.repeat.set(4, 4);
-const tile800 = makeTileTex('#E5E1D8', '#C8C3B9', 4, 5); tile800.repeat.set(2.5, 2.5);
-const woodFloor = makeWoodTex('#A97D52', '#7E5835', 8); woodFloor.repeat.set(2, 2);
+// 4. Authentic Airolam 424 1D Cinnamon Hickory vertical laminate scan
+loadProcessedImage(
+  ['../../assets/swatches/texture-424-cinnamon-hickory.png', '../../../assets/swatches/texture-424-cinnamon-hickory.png'],
+  img => {
+    const c = document.createElement('canvas'); c.width = 512; c.height = 512;
+    c.getContext('2d').drawImage(img, 0, 0, 512, 512);
+    return c;
+  },
+  MAT.cinnHickory
+);
+
+const tile1000 = makeTileTex('#F2F0EC', '#DDDAD3', 4, 4, true); tile1000.repeat.set(4, 4);
+const tile800 = makeTileTex('#EFEDE8', '#D8D5CE', 4, 4, true); tile800.repeat.set(2.5, 2.5);
+const woodFloor = makeWoodTex('#96603E', '#6B4026', 8); woodFloor.repeat.set(2, 2);
 const bathTile = makeTileTex('#D8D6D0', '#B6B4AE', 6, 4);
 const balconyTile = makeTileTex('#C8C0B4', '#A39B8F', 5, 8);
 
 const FLOOR_MAT = {
-  social:  new THREE.MeshStandardMaterial({ map: tile1000, roughness: 0.35 }),
-  bed:     new THREE.MeshStandardMaterial({ map: tile800, roughness: 0.42 }),
-  master:  new THREE.MeshStandardMaterial({ map: woodFloor, roughness: 0.48 }),
+  social:  new THREE.MeshStandardMaterial({ map: tile1000, roughness: 0.22 }),
+  bed:     new THREE.MeshStandardMaterial({ map: tile800, roughness: 0.28 }),
+  master:  new THREE.MeshStandardMaterial({ map: woodFloor, roughness: 0.42 }),
   bath:    new THREE.MeshStandardMaterial({ map: bathTile, roughness: 0.45 }),
   balcony: new THREE.MeshStandardMaterial({ map: balconyTile, roughness: 0.75 }),
 };
@@ -1013,11 +1071,13 @@ addWall(11.25, 0.00, 15.78, 0.00);
 
 // WEST PERIMETER (x = 0)
 addWall(0.00, 0.00, 0.00, 0.30);
-addBox(wallGroup, 0.06, 2.25, 1.15, 0.02, 1.125, 0.88, MAT.cpTeak, {
+addBox(wallGroup, 0.06, 2.25, 1.15, 0.02, 1.125, 0.88, MAT.builderDoor, {
   tag: 'ENTRY · WEST FACING', title: 'Main Entrance Door (40mm Solid Timber)',
   desc: 'Fitted with Aqara A100 Zigbee mortise lock + Aqara G4 hardwired doorbell (12/24V DIN transformer). Immediately North of the West TV Media Wall.',
   meta: 'Orientation: West · Floor 42 Tower B'
 });
+addBox(wallGroup, 0.072, 2.20, 0.14, 0.02, 1.125, 1.12, MAT.darkMetal); // Builder walnut door dark vertical inlay (Docket p.2)
+addBox(wallGroup, 0.08, 0.04, 0.14, 0.04, 1.05, 1.28, MAT.brass); // Brass mortise handle
 addWall(0.00, 1.48, 0.00, 5.48, 0.14, MAT.wallLimewash);
 addWall(0.00, 5.48, 0.00, 6.05);
 addWindow(0.00, 6.05, 0.00, 6.95, 1.4, 2.2);
@@ -1298,12 +1358,17 @@ addBox(decorGroup, 1.84, 1.21, 0.055, 1.80, 1.52, 5.37, MAT.persianCarpet, {
 });
 
 // ---------- B. LIVING ROOM SPINE & WALK-IN (x: 4.08..10.15, z: 3.78..7.52) ----------
-addBox(furnGroup, 1.05, 2.35, 0.36, 3.46, 1.175, 5.72, MAT.beigeWool, {
-  tag: 'PUJA WALK-IN · DOCKET P. 6', title: 'Walk-in Wardrobe (Two-Sided 3163 SI + Backlit Arch Mirror)',
-  desc: 'Two-sided open 3163 SI Beige Wool shelving flanking a full-height backlit arch/dome mirror on the West back wall.',
+// Puja Walk-in Wardrobe (Docket p. 6): two-sided open multi-tier shelving flanking backlit dome mirror
+const walkinMeta = {
+  tag: 'PUJA WALK-IN · DOCKET P. 6', title: 'Walk-in Wardrobe (Two-Sided Open Shelving + Backlit Arch Mirror)',
+  desc: 'Two-sided open multi-tier 3163 SI / 5133 SD shelving flanking a full-height backlit arch/dome mirror on the West back wall.',
   meta: 'Clear Size: 1220 × 1850 mm'
+};
+[5.72, 7.28].forEach((wz, sideIdx) => {
+  addBox(furnGroup, 1.05, 2.35, 0.03, 3.46, 1.175, sideIdx === 0 ? 5.55 : 7.45, MAT.internalLinen, sideIdx === 0 ? walkinMeta : null);
+  [2.96, 3.46, 3.96].forEach(vx => addBox(furnGroup, 0.03, 2.35, 0.36, vx, 1.175, wz, MAT.beigeWool));
+  [0.10, 0.55, 1.00, 1.45, 1.90, 2.33].forEach(sy => addBox(furnGroup, 1.02, 0.03, 0.35, 3.46, sy, wz, MAT.internalLinen));
 });
-addBox(furnGroup, 1.05, 2.35, 0.36, 3.46, 1.175, 7.28, MAT.beigeWool);
 addDomeMirror(2.94, 1.18, 6.50, 0.70, 1.80, 'x', {
   tag: 'PUJA WALK-IN · MIRROR', title: 'Full-Height Backlit Dome Mirror (24V COB Halo)',
   desc: 'Saint-Gobain copper-free mirror on West walk-in wall with 3000K CRI 95+ COB halo.',
@@ -1390,14 +1455,20 @@ addBox(furnGroup, 0.05, 2.45, 0.32, bsX + 0.26, 1.225, bsZ, MAT.cinnHickory);
   if (idx < 4) addBooksRow(bsX, sy, bsZ, 1.15, false);
 });
 
-// Lobby West Common Vanity + Botanical Wallpaper + Backlit Dome Mirror + Robot Bay
+// Lobby West Common Vanity + Botanical Wallpaper + Backlit Dome Mirror + Robot Bay (Docket p. 10)
 addBox(decorGroup, 0.02, 2.25, 1.22, 10.00, 1.125, 3.14, MAT.wallBotanical);
-addBox(furnGroup, 0.50, 0.56, 1.15, 10.24, 0.58, 3.15, MAT.taupeGloss, {
+addBox(furnGroup, 0.50, 0.54, 1.15, 10.24, 0.57, 3.15, MAT.taupeGloss, {
   tag: 'LOBBY · COMMON VANITY (DOCKET P. 10)', title: 'Homz Floating Common Vanity (158 LU Taupe) + Robot Bay',
-  desc: 'West wall of Lobby niche in glossy 158 LU Taupe with botanical wallpaper, vessel basin, backlit dome mirror, and plumbed Roborock Qrevo S Pro bay directly underneath on left.',
+  desc: 'West wall of Lobby niche in glossy 158 LU Taupe (left swing door + 2 right stacked drawers with brass knobs), stone top, vessel basin, botanical wallpaper, backlit dome mirror, and plumbed Roborock Qrevo S Pro bay directly underneath.',
   meta: 'Docket pp. 10–11 · Finish: Century 158 LU Taupe'
 });
-addBox(furnGroup, 0.36, 0.14, 0.52, 10.24, 0.93, 3.15, MAT.offWhite);
+addBox(furnGroup, 0.52, 0.03, 1.17, 10.24, 0.855, 3.15, MAT.graniteIvory); // Stone counter slab
+addBox(furnGroup, 0.015, 0.54, 0.012, 10.495, 0.57, 3.18, MAT.seamDark); // Left door / right drawers vertical seam
+addBox(furnGroup, 0.015, 0.012, 0.58, 10.495, 0.57, 2.88, MAT.seamDark); // 2 stacked drawers horizontal seam
+[0.70, 0.44].forEach(ky => addBox(furnGroup, 0.025, 0.025, 0.025, 10.505, ky, 2.88, MAT.brass)); // Brass drawer knobs
+addBox(furnGroup, 0.36, 0.14, 0.52, 10.24, 0.94, 3.15, MAT.offWhite); // Vessel basin
+addBox(decorGroup, 0.025, 0.24, 0.025, 10.12, 0.99, 2.86, MAT.brass); // Tall brushed brass basin mixer
+addBox(decorGroup, 0.12, 0.025, 0.025, 10.18, 1.10, 2.86, MAT.brass);
 addBox(furnGroup, 0.40, 0.22, 0.40, 10.24, 0.12, 3.45, MAT.offWhite, {
   tag: 'LOBBY · ROBOT VACUUM BAY', title: 'Roborock Qrevo S Pro (Under-Vanity Plumbed Bay)',
   desc: 'Dual 200 RPM spinning mops, detachable washboard tray, parked directly beneath Lobby vanity.',
@@ -1417,11 +1488,14 @@ const foliage = new THREE.Mesh(new THREE.DodecahedronGeometry(0.32), MAT.plant);
 foliage.position.set(15.25, 0.62, 5.05); furnGroup.add(foliage);
 
 // ---------- D. KITCHEN & UTILITY (HOMZ DOCKET PP. 12–16) ----------
-addBox(furnGroup, 0.64, 2.38, 0.58, 10.40, 1.19, 7.86, MAT.brownSugar, {
+// West Wall (Kitchen-C, Docket p. 14): 3174 LU Brown Sugar (#7B5238) bodies + continuous glossy light top loft row + Gold PVC skirting & Gold Gola
+addBox(furnGroup, 0.64, 1.84, 0.58, 10.40, 1.00, 7.86, MAT.brownSugar, {
   tag: 'KITCHEN WEST · DOCKET P. 14', title: 'Tall Pantry + Bosch Fridge + Oven/Microwave Tower',
-  desc: 'Full West appliance wall in 3174 LU Brown Sugar with 158 LU Taupe overhead loft and Gold PVC skirting.',
+  desc: 'Full West appliance wall in 3174 LU Brown Sugar (#7B5238) with continuous glossy light top loft row across Pantry/Fridge/Oven and Gold PVC skirting.',
   meta: 'Docket p. 14 · Kitchen-C'
 });
+addBox(furnGroup, 0.64, 0.46, 0.58, 10.40, 2.15, 7.86, MAT.taupeGloss); // NW Pantry top loft
+addBox(furnGroup, 0.04, 0.08, 0.58, 10.70, 0.04, 7.86, MAT.goldProfile); // NW Pantry Gold PVC skirting
 // Bosch Serie 6 XXL 641L 2-Door Top Freezer (KDN86AID0I): exact 860 W × 1860 H × 810 D mm
 addBox(furnGroup, 0.81, 1.86, 0.86, 10.485, 0.93, 8.64, MAT.steel, {
   tag: 'KITCHEN · REFRIGERATOR (EXACT 860×1860×810mm)', title: 'Bosch Serie 6 XXL 641L 2-Door (KDN86AID0I)',
@@ -1429,8 +1503,10 @@ addBox(furnGroup, 0.81, 1.86, 0.86, 10.485, 0.93, 8.64, MAT.steel, {
   meta: 'Dedicated 16A drop · ₹94k–₹1.08L'
 });
 addBox(furnGroup, 0.02, 0.018, 0.86, 10.895, 1.38, 8.64, MAT.darkMetal); // Top freezer horizontal door seam
-addBox(furnGroup, 0.66, 0.46, 0.96, 10.42, 2.15, 8.64, MAT.taupeGloss);
-addBox(furnGroup, 0.64, 2.38, 0.64, 10.40, 1.19, 9.44, MAT.brownSugar);
+addBox(furnGroup, 0.64, 0.46, 0.96, 10.40, 2.15, 8.64, MAT.taupeGloss); // Fridge top loft
+addBox(furnGroup, 0.64, 1.84, 0.64, 10.40, 1.00, 9.44, MAT.brownSugar); // Oven/MW tall tower body
+addBox(furnGroup, 0.64, 0.46, 0.64, 10.40, 2.15, 9.44, MAT.taupeGloss); // Oven/MW tower top loft
+addBox(furnGroup, 0.04, 0.08, 0.64, 10.70, 0.04, 9.44, MAT.goldProfile); // Oven/MW Gold PVC skirting
 addBox(furnGroup, 0.06, 0.58, 0.56, 10.71, 0.92, 9.44, MAT.darkMetal, {
   tag: 'KITCHEN · BUILT-IN OVEN (DECIDED)', title: 'Bosch Serie 4 66L Built-In Oven (HBF113BR0I)',
   desc: '3D HotAir with mechanical rotary dials (steam-proof). Dedicated unshared 16A radial drop.',
@@ -1441,18 +1517,31 @@ addBox(furnGroup, 0.36, 0.28, 0.49, 10.52, 1.44, 9.44, MAT.darkMetal, {
   desc: 'Freestanding 23L Ceramic Enamel cavity with rotary jog dial sitting on open 450mm shelf above built-in oven.',
   meta: 'Locked Exception · ₹6,940'
 });
-addBox(furnGroup, 0.62, 0.84, 1.12, 10.39, 0.42, 10.34, MAT.brownSugar);
+// West SW Counter Base + Gold Skirting + Gold Gola + Herringbone Backsplash + Split Overheads/Lofts
+addBox(furnGroup, 0.62, 0.76, 1.12, 10.39, 0.46, 10.34, MAT.brownSugar);
+addBox(furnGroup, 0.04, 0.08, 1.12, 10.68, 0.04, 10.34, MAT.goldProfile); // SW Base Gold PVC skirting
+addBox(furnGroup, 0.02, 0.026, 1.12, 10.705, 0.81, 10.34, MAT.goldProfile); // SW Gold Gola top rail
+addBox(furnGroup, 0.02, 0.024, 1.12, 10.705, 0.46, 10.34, MAT.goldProfile); // SW Gold Gola mid rail
 addBox(furnGroup, 0.64, 0.04, 1.14, 10.39, 0.86, 10.34, MAT.graniteIvory);
-addBox(furnGroup, 0.36, 1.10, 1.12, 10.26, 1.84, 10.34, MAT.taupeGloss);
+addBox(decorGroup, 0.02, 0.58, 1.12, 10.09, 1.17, 10.34, MAT.kitchenBacksplash);
+addBox(furnGroup, 0.36, 0.44, 1.12, 10.26, 1.69, 10.34, MAT.taupeGloss); // SW mid overhead
+addBox(furnGroup, 0.36, 0.46, 1.12, 10.26, 2.15, 10.34, MAT.taupeGloss); // SW top loft
+addBox(furnGroup, 0.015, 0.014, 1.12, 10.445, 1.915, 10.34, MAT.seamDark); // Overhead/loft datum seam
 
-// South Wall: Sink + Kohler Tap + LG RO + Pedal Bins + SE Fluted Glass
-addBox(furnGroup, 3.60, 0.84, 0.64, 12.48, 0.42, 11.20, MAT.brownSugar, {
+// South Wall (Kitchen-B, Docket p. 13): Base + Gold Skirting + Gold Gola + Sink + Herringbone + Full Overheads/Lofts + SE Fluted Glass
+addBox(furnGroup, 3.60, 0.76, 0.64, 12.48, 0.46, 11.20, MAT.brownSugar, {
   tag: 'KITCHEN SOUTH · DOCKET P. 13', title: '3174 LU Brown Sugar Base + Ivory Fantasy Granite + Gold Gola',
-  desc: '9× soft-close tandem drawers, Gold PVC skirting, Gold Gola profiles, centered 16G SS304 undermount sink, SE fluted-glass upper display.',
-  meta: 'Overheads: Century 158 LU Taupe (Glossy)'
+  desc: '9× soft-close tandem drawers in 3174 LU Brown Sugar (#7B5238), Gold PVC skirting, Gold Gola profiles, centered 16G SS304 undermount sink, glossy light overheads/lofts & SE gold-framed fluted-glass display.',
+  meta: 'Overheads: Glossy Light Wall/Loft (#F4F2EB)'
 });
-addBox(furnGroup, 3.60, 0.08, 0.04, 12.48, 0.04, 10.87, MAT.brass);
+addBox(furnGroup, 3.60, 0.08, 0.04, 12.48, 0.04, 10.89, MAT.goldProfile); // South Gold PVC skirting
+addBox(furnGroup, 3.60, 0.026, 0.02, 12.48, 0.81, 10.875, MAT.goldProfile); // South Gold Gola top rail
+addBox(furnGroup, 3.60, 0.024, 0.02, 12.48, 0.46, 10.875, MAT.goldProfile); // South Gold Gola mid rail
 addBox(furnGroup, 3.64, 0.04, 0.66, 12.48, 0.86, 11.20, MAT.graniteIvory);
+// South Herringbone Backsplash (clears South window x:11.35..13.05 above sill y=1.0)
+addBox(decorGroup, 0.67, 0.58, 0.02, 11.015, 1.17, 11.51, MAT.kitchenBacksplash);
+addBox(decorGroup, 1.23, 0.58, 0.02, 13.665, 1.17, 11.51, MAT.kitchenBacksplash);
+addBox(decorGroup, 1.70, 0.12, 0.02, 12.20, 0.94, 11.51, MAT.kitchenBacksplash);
 addBox(furnGroup, 0.68, 0.05, 0.46, 12.20, 0.865, 11.18, MAT.steel, {
   tag: 'KITCHEN · SINK & TAP', title: 'Carysil 16G SS304 Undermount Sink + Kohler July Mixer',
   desc: '1.2mm surgical AISI 304 on welded SS304 cradle + Kohler July high-arch forged brass deck mixer.',
@@ -1473,30 +1562,43 @@ addBox(decorGroup, 0.29, 0.495, 0.32, 11.20, 1.42, 11.33, MAT.offWhite, {
   desc: '36L total wet/dry freestanding segregation (no under-sink bin pull-out).',
   meta: '₹4,980 pair'
 }));
-// SE Fluted Glass Upper Display
-addBox(furnGroup, 1.05, 0.68, 0.34, 13.55, 1.65, 11.35, MAT.flutedGlass);
-addBox(furnGroup, 1.08, 0.04, 0.36, 13.55, 1.31, 11.35, MAT.brass);
-addBox(furnGroup, 1.08, 0.04, 0.36, 13.55, 1.99, 11.35, MAT.brass);
-addBox(furnGroup, 1.05, 0.44, 0.36, 13.55, 2.22, 11.35, MAT.taupeGloss);
+// South Wall Overheads & Continuous Top Loft (Docket p. 13)
+addBox(furnGroup, 0.66, 0.46, 0.36, 11.01, 1.69, 11.35, MAT.taupeGloss); // SW upper cabinet (West of window)
+addBox(furnGroup, 0.52, 0.52, 0.36, 12.20, 1.66, 11.35, MAT.taupeGloss); // Center sink upper cabinet (between twin window bays)
+addBox(furnGroup, 3.38, 0.46, 0.36, 12.39, 2.15, 11.35, MAT.taupeGloss); // Full-width South top loft
+addBox(furnGroup, 3.38, 0.014, 0.015, 12.39, 1.92, 11.165, MAT.seamDark); // South loft datum seam
+// SE Gold-Framed Fluted Glass Upper Display (4-sided gold frame + center mullion + internal shelves, Docket pp. 12-13, 16)
+addBox(furnGroup, 1.05, 0.64, 0.32, 13.55, 1.60, 11.35, MAT.flutedGlass);
+[1.28, 1.92].forEach(fy => addBox(furnGroup, 1.08, 0.032, 0.35, 13.55, fy, 11.35, MAT.goldProfile));
+[13.025, 13.55, 14.075].forEach(fx => addBox(furnGroup, 0.03, 0.66, 0.35, fx, 1.60, 11.35, MAT.goldProfile));
+[1.49, 1.71].forEach(sy => addBox(furnGroup, 1.00, 0.022, 0.28, 13.55, sy, 11.36, MAT.internalLinen));
 
-// East Wall: Hob + Chimney
-addBox(furnGroup, 0.64, 0.84, 1.75, 13.98, 0.42, 10.05, MAT.brownSugar);
-addBox(furnGroup, 0.04, 0.08, 1.75, 13.65, 0.04, 10.05, MAT.brass);
+// East Wall (Kitchen-A, Docket p. 12): Hob + Chimney + Gold Skirting + Gold Gola + Herringbone + Split Overheads/Lofts
+addBox(furnGroup, 0.64, 0.76, 1.75, 13.98, 0.46, 10.05, MAT.brownSugar);
+addBox(furnGroup, 0.04, 0.08, 1.75, 13.67, 0.04, 10.05, MAT.goldProfile); // East Gold PVC skirting
+addBox(furnGroup, 0.02, 0.026, 1.75, 13.655, 0.81, 10.05, MAT.goldProfile); // East Gold Gola top rail
+addBox(furnGroup, 0.02, 0.024, 1.75, 13.655, 0.46, 10.05, MAT.goldProfile); // East Gold Gola mid rail
 addBox(furnGroup, 0.66, 0.04, 1.78, 13.98, 0.86, 10.05, MAT.graniteIvory);
+addBox(decorGroup, 0.02, 0.62, 1.75, 14.31, 1.19, 10.05, MAT.kitchenBacksplash);
 addBox(furnGroup, 0.52, 0.03, 0.62, 13.96, 0.89, 10.05, MAT.darkMetal, {
   tag: 'KITCHEN EAST · HOB & CHIMNEY', title: 'Häfele Domino Pair (Gas + Induction) + Faber 90cm BLDC',
-  desc: 'Locked owner exception (₹53k pair) under 90cm Faber Coral BLDC chimney with 158 LU Taupe overheads.',
+  desc: 'Locked owner exception (₹53k pair) under 90cm Faber Coral BLDC chimney with glossy light overheads.',
   meta: 'Docket p. 12 · 2× Tandem Drawers Below'
 });
 addBox(furnGroup, 0.44, 0.22, 0.90, 14.08, 1.56, 10.05, MAT.darkMetal);
-addBox(furnGroup, 0.36, 0.88, 1.75, 14.12, 2.04, 10.05, MAT.taupeGloss);
+addBox(furnGroup, 0.36, 0.44, 1.75, 14.12, 1.70, 10.05, MAT.taupeGloss); // East mid overheads
+addBox(furnGroup, 0.36, 0.46, 1.75, 14.12, 2.15, 10.05, MAT.taupeGloss); // East top loft
+addBox(furnGroup, 0.015, 0.014, 1.75, 13.935, 1.92, 10.05, MAT.seamDark); // East loft datum seam
 
-// Utility + Service Balcony
-addBox(furnGroup, 0.56, 1.72, 0.52, 15.05, 0.86, 9.65, MAT.taupeGloss, {
-  tag: 'UTILITY · DOCKET P. 15', title: 'Utility Tall Storage (158 LU Taupe) + Stacked Bosch Laundry',
-  desc: 'Tall storage cabinet beside Kitchen door + stacked Bosch Serie 6 10kg washer & Serie 4 10kg heat-pump dryer via WTZ27400 kit + service sink.',
+// Utility + Service Balcony (Docket p. 15 + Locked Stacked Bosch Laundry)
+addBox(furnGroup, 0.56, 1.64, 0.52, 15.05, 0.90, 9.65, MAT.taupeGloss, {
+  tag: 'UTILITY · DOCKET P. 15', title: 'Utility Tall Storage & Overhead (158 LU) + Stacked Bosch Laundry',
+  desc: 'Tall storage cabinet with Gold PVC skirting + wall overhead cabinet beside Kitchen door + stacked Bosch Serie 6 10kg washer & Serie 4 10kg heat-pump dryer via WTZ27400 kit + black granite service sink.',
   meta: 'Utility Width: 1500 mm · White uPVC Enclosure'
 });
+addBox(furnGroup, 0.56, 0.08, 0.52, 15.05, 0.04, 9.65, MAT.goldProfile); // Utility Tall Cabinet Gold PVC skirting
+addBox(furnGroup, 0.02, 0.26, 0.02, 14.76, 1.02, 9.84, MAT.goldProfile); // Utility vertical gold pull
+addBox(furnGroup, 0.38, 0.46, 1.18, 15.14, 2.08, 10.75, MAT.taupeGloss); // Utility 2-door wall overhead cabinet (Docket p. 15, clears 1.71m stack)
 // Utility Stacked Bosch Serie 6 Washer (600×850×600) + WTZ27400 Kit + Serie 4 Heat-Pump Dryer (600×850×600)
 addBox(furnGroup, 0.60, 0.84, 0.60, 15.05, 0.42, 10.40, MAT.offWhite, {
   tag: 'UTILITY · STACKED BOSCH LAUNDRY (EXACT 600×1710mm)', title: 'Bosch Serie 6 10kg Washer + WTZ27400 + Serie 4 10kg Dryer',
@@ -1549,13 +1651,16 @@ addBox(furnGroup, 0.38, 0.18, 0.46, 0.28, 0.48, 10.60, MAT.oakLight);
 addFloorLamp(3.68, 11.12, 'Orange Tree Ayra Brass Corner Floor Lamp', 'Soft 2700K evening wind-down light for co-sleeping years on Aqara T1 outlet.', 'Budget: ₹12,399');
 addCowayPurifier(3.68, 9.65, 'MASTER SUITE');
 
-// South Wall 4-Door Wardrobe (beside SD2 slider)
+// South Wall 4-Door Wardrobe (beside SD2 slider — Docket pp. 17–19)
 addBox(furnGroup, 1.96, 2.45, 0.60, 1.12, 1.225, 11.24, MAT.beigeWool, {
   tag: 'MASTER SUITE · SOUTH WARDROBE (DOCKET P. 18)', title: 'Homz 4-Door Wardrobe (3163 SI Beige Wool)',
-  desc: 'South wall beside South Balcony Slider SD2. 4 mid swing doors (Claro Satin Brass pulls), 2 Gold G-profile bottom drawers, 4 Tip-On lofts.',
+  desc: 'South wall beside South Balcony Slider SD2. 4 mid swing doors (Claro Satin Brass pulls), 2 Gold G-profile bottom drawers, 4 Tip-On lofts (zero loft handles).',
   meta: 'Docket pp. 17–19 · Finish: 3163 SI Beige Wool'
 });
-addBox(furnGroup, 1.96, 0.03, 0.03, 1.12, 0.46, 10.93, MAT.brass);
+addBox(furnGroup, 1.96, 0.03, 0.03, 1.12, 0.46, 10.93, MAT.goldProfile); // Gold G-profile bottom drawer rail
+addBox(furnGroup, 1.96, 0.012, 0.012, 1.12, 1.90, 10.935, MAT.seamDark); // Loft horizontal datum seam
+[0.63, 1.12, 1.61].forEach(sx => addBox(furnGroup, 0.012, 2.45, 0.012, sx, 1.225, 10.935, MAT.seamDark));
+[0.57, 0.69, 1.55, 1.67].forEach(px => addBox(furnGroup, 0.016, 0.28, 0.025, px, 1.08, 10.925, MAT.brass)); // 4× Claro Satin Brass pulls
 
 // MOVED PER OWNER: NE DRESSING NOOK BEHIND DOOR (x: 4.08..5.78, z: 7.52..8.95)
 // Dresser console + Backlit Dome Mirror + Brushed-Gold Brown-Tinted Glass Cabinet on East wall of NE Nook!
@@ -1564,14 +1669,17 @@ addBox(furnGroup, 0.44, 0.50, 1.28, 5.48, 0.25, 8.24, MAT.beigeWool, {
   desc: 'Positioned inside the NE Dressing Nook behind the MBR entrance door (facing West): 3163 SI Beige Wool 2-drawer vanity console + full-height backlit dome mirror + brushed-gold brown-tinted glass display cabinet.',
   meta: '24V CRI 95+ Mirror Halo · Claro Satin Brass Knobs'
 });
+addBox(furnGroup, 0.012, 0.48, 0.012, 5.255, 0.25, 8.24, MAT.seamDark); // 2-drawer center seam
+[7.92, 8.56].forEach(kz => addBox(furnGroup, 0.025, 0.025, 0.025, 5.245, 0.34, kz, MAT.brass)); // Claro brass knobs
 addDomeMirror(5.68, 1.38, 7.95, 0.58, 1.56, 'x', {
   tag: 'MASTER SUITE · NE NOOK MIRROR', title: 'Full-Height Backlit Saint-Gobain Dome Mirror',
   desc: 'Mounted on neutral-cure alkoxy silicone inside NE Dressing Nook with 24V CRI 95+ COB halo (Mean Well LPV-60-24).',
   meta: 'Zero facial shadows'
 });
 addBox(furnGroup, 0.36, 1.50, 0.50, 5.52, 1.28, 8.60, MAT.tintedGlass);
-addBox(furnGroup, 0.38, 0.04, 0.52, 5.52, 2.04, 8.60, MAT.brass);
-addBox(furnGroup, 0.38, 0.04, 0.52, 5.52, 0.52, 8.60, MAT.brass);
+[2.04, 0.52].forEach(gy => addBox(furnGroup, 0.38, 0.032, 0.52, 5.52, gy, 8.60, MAT.goldProfile));
+[8.35, 8.85].forEach(gz => addBox(furnGroup, 0.38, 1.54, 0.03, 5.52, 1.28, gz, MAT.goldProfile)); // 4-sided gold frame
+[0.88, 1.28, 1.66].forEach(sy => addBox(furnGroup, 0.32, 0.022, 0.46, 5.54, sy, 8.60, MAT.internalLinen)); // 5133 SD shelves
 
 // Master South Balcony Chairs
 [[1.05, 12.40], [2.95, 12.40]].forEach(([bx, bz]) => addBox(furnGroup, 0.58, 0.42, 0.58, bx, 0.21, bz, MAT.cpTeak));
@@ -1619,9 +1727,12 @@ addCowayPurifier(6.12, 8.05, 'BR-01 STUDY');
 // South Wall 4-Door Wardrobe (West) + Open 424 1D Bookshelf with Books (East beside W2)
 addBox(furnGroup, 1.56, 2.45, 0.58, 6.68, 1.225, 11.24, MAT.beigeWool, {
   tag: 'BR-01 · SOUTH WARDROBE & LIBRARY (DOCKET P. 25)', title: 'Homz 4-Door Wardrobe + East Open Cinnamon Hickory Bookshelf',
-  desc: '4-door 3163 SI Beige Wool wardrobe extends West to SW toilet wall; open 424 1D Cinnamon Hickory bookshelf sits directly beside South Window W2.',
+  desc: '4-door 3163 SI Beige Wool wardrobe extends West to SW toilet wall (Tip-On lofts, zero loft handles); open 424 1D Cinnamon Hickory bookshelf sits directly beside South Window W2.',
   meta: 'Docket pp. 25–27 · Claro Antique Smoked Bronze pulls'
 });
+addBox(furnGroup, 1.56, 0.012, 0.012, 6.68, 1.90, 10.945, MAT.seamDark); // Loft seam
+[6.29, 6.68, 7.07].forEach(sx => addBox(furnGroup, 0.012, 2.45, 0.012, sx, 1.225, 10.945, MAT.seamDark));
+[6.23, 6.35, 7.01, 7.13].forEach(px => addBox(furnGroup, 0.016, 0.28, 0.025, px, 1.08, 10.935, MAT.bronze)); // 4× Claro Smoked Bronze pulls
 // Open Bookshelf Carcass + Shelves + Books
 addBox(furnGroup, 0.04, 2.45, 0.58, 7.47, 1.225, 11.24, MAT.cinnHickory);
 addBox(furnGroup, 0.04, 2.45, 0.58, 7.88, 1.225, 11.24, MAT.cinnHickory);
@@ -1655,6 +1766,10 @@ addBox(furnGroup, 0.04, 2.45, 0.76, 9.81, 1.225, 0.51, MAT.cinnHickory);
 });
 addBox(furnGroup, 0.58, 0.52, 2.45, 9.54, 0.26, 2.12, MAT.vintageIndigo);
 addBox(furnGroup, 0.58, 1.93, 2.45, 9.54, 1.485, 2.12, MAT.beigeWool);
+addBox(furnGroup, 0.012, 0.012, 2.45, 9.245, 1.90, 2.12, MAT.seamDark); // Loft horizontal seam
+[1.51, 2.12, 2.73].forEach(sz => addBox(furnGroup, 0.012, 2.45, 0.012, 9.245, 1.225, sz, MAT.seamDark));
+[1.42, 1.60, 2.64, 2.82].forEach(kz => addBox(furnGroup, 0.028, 0.055, 0.055, 9.235, 1.06, kz, MAT.oakLight)); // Mantara natural beech knobs on 3163 SI doors
+[1.51, 2.73].forEach(kz => [0.16, 0.40].forEach(ky => addBox(furnGroup, 0.028, 0.048, 0.048, 9.235, ky, kz, MAT.oakLight))); // Mantara beech knobs on 3267 SI drawers
 
 // North Study Desk (Exact 1200×700mm, age-6 step height 550mm) + Orange Tree Semer Task Lamp (58cm H)
 addBox(furnGroup, 1.20, 0.04, 0.70, 8.20, 0.53, 0.46, MAT.oakLight, {
@@ -1748,14 +1863,18 @@ addCowayPurifier(15.32, 0.36, 'BR-03 GURUDWARA');
 // West Wall 5-Bay GBR Wardrobe (Docket pp. 29–31)
 addBox(furnGroup, 0.56, 2.45, 0.92, 11.98, 1.225, 0.52, MAT.beigeWool, {
   tag: 'BR-03 · 5-BAY WEST WARDROBE (DOCKET P. 29)', title: 'GBR-2 5-Bay Wardrobe (3163 SI + Center Gold Tinted-Glass Bay)',
-  desc: 'Full 2.35m West run: 2 Beige Wool doors + center brushed-gold brown-tinted glass display bay for Rumala Sahib + 2 Beige Wool doors + 5 Tip-On lofts.',
+  desc: 'Full 2.35m West run: 2 Beige Wool doors + center brushed-gold brown-tinted glass display bay with 5133 SD linen shelves for Rumala Sahib + 2 Beige Wool doors + 5 Tip-On lofts (zero loft handles).',
   meta: 'Docket pp. 29–31 · 4× Claro Warm Gold PVD Pulls'
 });
 addBox(furnGroup, 0.56, 0.55, 0.48, 11.98, 2.175, 1.22, MAT.beigeWool);
 addBox(furnGroup, 0.56, 1.90, 0.48, 11.98, 0.95, 1.22, MAT.tintedGlass);
-addBox(furnGroup, 0.05, 1.90, 0.03, 12.27, 0.95, 0.98, MAT.brass);
-addBox(furnGroup, 0.05, 1.90, 0.03, 12.27, 0.95, 1.46, MAT.brass);
+[0.98, 1.46].forEach(gz => addBox(furnGroup, 0.04, 1.90, 0.03, 12.265, 0.95, gz, MAT.goldProfile));
+[0.02, 1.89].forEach(gy => addBox(furnGroup, 0.04, 0.03, 0.50, 12.265, gy, 1.22, MAT.goldProfile)); // 4-sided brushed gold glass frame
+[0.42, 0.80, 1.18, 1.56].forEach(sy => addBox(furnGroup, 0.48, 0.025, 0.44, 11.96, sy, 1.22, MAT.internalLinen)); // Internal 5133 SD shelves
 addBox(furnGroup, 0.56, 2.45, 0.92, 11.98, 1.225, 1.92, MAT.beigeWool);
+addBox(furnGroup, 0.012, 0.012, 2.32, 12.265, 1.90, 1.22, MAT.seamDark); // Continuous 5-bay loft seam
+[0.52, 1.92].forEach(sz => addBox(furnGroup, 0.012, 2.45, 0.012, 12.265, 1.225, sz, MAT.seamDark));
+[0.46, 0.58, 1.86, 1.98].forEach(pz => addBox(furnGroup, 0.025, 0.28, 0.016, 12.275, 1.08, pz, MAT.brass)); // 4× Claro Warm Gold pulls
 
 // ---------- I. BATHROOMS (4 WASHROOMS) ----------
 function addBathSet(cx, cz, isMaster = false) {
