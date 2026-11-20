@@ -273,8 +273,8 @@
   <button class="z-btn accent" id="btn-walk-exit" title="Exit Walk Mode (Esc)">✕ Exit</button>
 </div>
 
-<div id="minimap-wrap" title="Click anywhere on floorplan to walk there">
-  <div class="mm-head"><span>B4206 Live Map</span><span>Click to move</span></div>
+<div id="minimap-wrap" title="Click to move · Drag or grab torch knob to aim 360°">
+  <div class="mm-head"><span>B4206 Live Map</span><span>Click: move · Drag: aim</span></div>
   <canvas id="minimap" width="230" height="192"></canvas>
 </div>
 <div id="wp-tooltip"></div>
@@ -1828,6 +1828,10 @@ const MM_TAGS = [
   ['DRW', 2.0, 2.7], ['LIV', 7.1, 5.6], ['DIN', 12.2, 5.6], ['KIT', 12.2, 9.6],
   ['MBR', 2.0, 9.6], ['BR1', 7.9, 9.6], ['BR2', 7.9, 1.9], ['BR3', 13.7, 1.9],
 ];
+let mmMode = null; // 'aim' | 'place-aim'
+let mmAnchor = null;
+let mmAimLine = null;
+let mmHoverHandle = false;
 
 function drawMinimap() {
   if (!walkMode) return;
@@ -1883,6 +1887,23 @@ function drawMinimap() {
   mmCtx.beginPath(); mmCtx.arc(px, py, 4.2, 0, Math.PI * 2); mmCtx.fill();
   mmCtx.strokeStyle = '#0f1115';
   mmCtx.lineWidth = 1.4;
+  mmCtx.stroke();
+
+  // Draggable Torch Aim-Knob at front tip of FOV cone (+ dashed aim ray while dragging)
+  const hx = px + Math.cos(ang) * 28, hy = py + Math.sin(ang) * 28;
+  if (mmAimLine) {
+    mmCtx.save();
+    mmCtx.setLineDash([3, 3]);
+    mmCtx.strokeStyle = 'rgba(248, 223, 160, 0.88)';
+    mmCtx.lineWidth = 1.3;
+    mmCtx.beginPath(); mmCtx.moveTo(mmAimLine.x0, mmAimLine.y0); mmCtx.lineTo(mmAimLine.x1, mmAimLine.y1); mmCtx.stroke();
+    mmCtx.restore();
+  }
+  const activeHandle = mmHoverHandle || mmMode === 'aim';
+  mmCtx.fillStyle = activeHandle ? '#ffffff' : '#d4a853';
+  mmCtx.beginPath(); mmCtx.arc(hx, hy, activeHandle ? 4.5 : 3.5, 0, Math.PI * 2); mmCtx.fill();
+  mmCtx.strokeStyle = '#0f1115';
+  mmCtx.lineWidth = 1.3;
   mmCtx.stroke();
 }
 
@@ -2093,26 +2114,94 @@ document.getElementById('btn-full-flat').onclick = () => {
   else flyTo(PRESETS[0]);
 };
 
-// Mini-Map Click / Drag to Teleport Anywhere in B4206
-let mmDragging = false;
-function handleMinimapPointer(e, instant = false) {
+// Mini-Map Move + Torch/Eye Orientation Controls:
+// - Grab torch aim-knob (or right-click / Shift+click): rotate 360° in place
+// - Click + hold + drag anywhere: place & aim torch toward cursor
+// - Single click: glide smoothly to that spot
+function getMMCoords(e) {
   const rect = mmCanvas.getBoundingClientRect();
-  const px = (e.clientX - rect.left) * (MM_W / rect.width);
-  const py = (e.clientY - rect.top) * (MM_H / rect.height);
+  return {
+    px: (e.clientX - rect.left) * (MM_W / rect.width),
+    py: (e.clientY - rect.top) * (MM_H / rect.height),
+  };
+}
+function getTorchHandle() {
+  const [ax, ay] = toMM(camera.position.x, camera.position.z);
+  const ang = Math.atan2(-Math.cos(walkYaw), -Math.sin(walkYaw));
+  return { ax, ay, hx: ax + Math.cos(ang) * 28, hy: ay + Math.sin(ang) * 28 };
+}
+function aimCameraAtWorld(tx, tz, ox, oz) {
+  if (Math.hypot(tx - ox, tz - oz) < 0.08) return;
+  walkGlide = null;
+  const desired = Math.atan2(-(tx - ox), -(tz - oz));
+  walkYawTarget = walkYaw + shortestYawDelta(walkYaw, desired);
+}
+
+mmCanvas.addEventListener('contextmenu', e => e.preventDefault());
+mmCanvas.addEventListener('pointerdown', e => {
+  e.stopPropagation();
+  const { px, py } = getMMCoords(e);
+  const { ax, ay, hx, hy } = getTorchHandle();
+  const nearHandle = Math.hypot(px - hx, py - hy) <= 14;
+  if (e.button === 2 || e.shiftKey || nearHandle) {
+    mmMode = 'aim';
+    const { x, z } = fromMM(px, py);
+    aimCameraAtWorld(x, z, camera.position.x, camera.position.z);
+    mmAimLine = { x0: ax, y0: ay, x1: px, y1: py };
+    mmCanvas.style.cursor = 'grabbing';
+    return;
+  }
   const { x, z } = fromMM(px, py);
   const cx = Math.max(0.28, Math.min(15.62, x));
   const cz = Math.max(0.28, Math.min(12.88, z));
-  if (instant) {
-    walkGlide = null;
-    camera.position.set(cx, WALK_EYE_Y, cz);
-  } else {
-    glideToWalkSpot(cx, cz, null, 0.45);
+  mmMode = 'place-aim';
+  mmAnchor = { px, py, cx, cz, moved: false };
+  mmAimLine = null;
+});
+window.addEventListener('pointermove', e => {
+  if (!walkMode) return;
+  if (!mmMode) {
+    if (e.target === mmCanvas) {
+      const { px, py } = getMMCoords(e);
+      const { hx, hy } = getTorchHandle();
+      mmHoverHandle = Math.hypot(px - hx, py - hy) <= 14;
+      mmCanvas.style.cursor = mmHoverHandle ? 'grab' : 'crosshair';
+    } else if (mmHoverHandle) {
+      mmHoverHandle = false;
+    }
+    return;
   }
-  walkRoomNameEl.textContent = detectRoomName(cx, cz);
-}
-mmCanvas.addEventListener('pointerdown', e => { e.stopPropagation(); mmDragging = true; handleMinimapPointer(e, false); });
-mmCanvas.addEventListener('pointermove', e => { if (mmDragging) { e.stopPropagation(); handleMinimapPointer(e, true); } });
-window.addEventListener('pointerup', () => { mmDragging = false; });
+  const { px, py } = getMMCoords(e);
+  if (mmMode === 'aim') {
+    const [ax, ay] = toMM(camera.position.x, camera.position.z);
+    const { x, z } = fromMM(px, py);
+    aimCameraAtWorld(x, z, camera.position.x, camera.position.z);
+    mmAimLine = { x0: ax, y0: ay, x1: px, y1: py };
+  } else if (mmMode === 'place-aim' && mmAnchor) {
+    if (Math.hypot(px - mmAnchor.px, py - mmAnchor.py) > 7) {
+      if (!mmAnchor.moved) {
+        walkGlide = null;
+        camera.position.set(mmAnchor.cx, WALK_EYE_Y, mmAnchor.cz);
+        walkRoomNameEl.textContent = detectRoomName(mmAnchor.cx, mmAnchor.cz);
+        mmAnchor.moved = true;
+      }
+      const { x, z } = fromMM(px, py);
+      aimCameraAtWorld(x, z, mmAnchor.cx, mmAnchor.cz);
+      mmAimLine = { x0: mmAnchor.px, y0: mmAnchor.py, x1: px, y1: py };
+      mmCanvas.style.cursor = 'grabbing';
+    }
+  }
+});
+window.addEventListener('pointerup', () => {
+  if (mmMode === 'place-aim' && mmAnchor && !mmAnchor.moved) {
+    glideToWalkSpot(mmAnchor.cx, mmAnchor.cz, null, 0.45);
+    walkRoomNameEl.textContent = detectRoomName(mmAnchor.cx, mmAnchor.cz);
+  }
+  mmMode = null;
+  mmAnchor = null;
+  mmAimLine = null;
+  mmCanvas.style.cursor = mmHoverHandle ? 'grab' : 'crosshair';
+});
 
 // Smooth Scroll-Wheel / Trackpad Two-Finger Walking in Walk Mode
 renderer.domElement.addEventListener('wheel', e => {
