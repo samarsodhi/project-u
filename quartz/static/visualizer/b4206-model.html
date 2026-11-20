@@ -106,15 +106,14 @@
   }
   .z-div { width: 1px; height: 20px; background: var(--border); }
 
-  /* Best-in-Class Virtual Walkthrough Top Bar, Mini-Map & Waypoint Tooltip */
-  body.walking #palette { display: none; }
-  body.walking #zoom-slider, body.walking #btn-zoom-in, body.walking #btn-zoom-out, body.walking #zoom-readout, body.walking .z-div-zoom { display: none; }
+  /* Best-in-Class Virtual Walkthrough Top Bar, Room Picker, Dock, Portals & Mini-Map */
+  body.walking #palette, body.walking #zoom-bar { display: none; }
 
   #walk-bar {
-    position: fixed; top: 14px; left: 50%; transform: translateX(-50%); z-index: 26;
-    background: var(--panel); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-    border: 1px solid var(--accent); border-radius: 14px; padding: 7px 10px;
-    display: none; align-items: center; gap: 10px;
+    position: fixed; top: 14px; left: 50%; transform: translateX(-50%); z-index: 28;
+    background: var(--panel); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(212, 168, 83, 0.7); border-radius: 14px; padding: 6px 8px;
+    display: none; align-items: center; gap: 8px;
     box-shadow: 0 14px 36px rgba(0,0,0,0.55);
   }
   #walk-bar.show { display: flex; }
@@ -124,9 +123,68 @@
     cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s ease;
   }
   .w-step:hover { background: var(--accent-dim); border-color: var(--accent); color: #f8dfa0; }
-  .w-room { text-align: center; min-width: 195px; padding: 0 4px; }
+  .w-room-btn {
+    background: transparent; border: 1px solid transparent; border-radius: 9px;
+    text-align: center; min-width: 196px; padding: 3px 10px; cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .w-room-btn:hover { background: rgba(255,255,255,0.07); border-color: var(--border); }
   #walk-room-name { display: block; font-size: 13px; font-weight: 700; color: #f8dfa0; letter-spacing: 0.01em; }
-  .w-room small { display: block; font-size: 10px; color: var(--muted); margin-top: 1px; }
+  .w-room-btn small { display: block; font-size: 10px; color: var(--muted); margin-top: 1px; }
+
+  #room-picker {
+    position: fixed; top: 68px; left: 50%; transform: translateX(-50%); z-index: 29;
+    background: var(--panel); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(212, 168, 83, 0.55); border-radius: 13px; padding: 8px;
+    display: none; grid-template-columns: repeat(3, minmax(128px, 1fr)); gap: 5px;
+    box-shadow: 0 18px 46px rgba(0,0,0,0.65); max-width: 92vw;
+  }
+  #room-picker.open { display: grid; }
+  .rp-item {
+    background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--text);
+    border-radius: 8px; padding: 6px 9px; font-size: 11px; font-weight: 600; text-align: left;
+    cursor: pointer; transition: all 0.13s ease; white-space: nowrap;
+  }
+  .rp-item:hover { background: rgba(255,255,255,0.12); border-color: var(--accent); color: #fff; }
+  .rp-item.active { background: var(--accent-dim); border-color: var(--accent); color: #f8dfa0; }
+
+  #walk-dock {
+    position: fixed; bottom: 14px; left: 50%; transform: translateX(-50%); z-index: 27;
+    background: var(--panel); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border); border-radius: 14px; padding: 6px 8px;
+    display: none; align-items: center; gap: 6px;
+    box-shadow: 0 14px 36px rgba(0,0,0,0.55); user-select: none;
+  }
+  #walk-dock.show { display: flex; }
+  .wd-btn {
+    background: rgba(255,255,255,0.07); border: 1px solid var(--border); color: var(--text);
+    border-radius: 9px; height: 32px; padding: 0 11px; font-size: 11.5px; font-weight: 600;
+    cursor: pointer; display: flex; align-items: center; gap: 5px; white-space: nowrap;
+    transition: all 0.14s ease;
+  }
+  .wd-btn:hover { background: rgba(255,255,255,0.14); border-color: var(--accent); color: #fff; }
+  .wd-btn.active { background: var(--accent-dim); border-color: var(--accent); color: #f8dfa0; }
+
+  #walk-toast {
+    position: fixed; bottom: 62px; left: 50%; transform: translateX(-50%); z-index: 26;
+    background: rgba(15, 17, 21, 0.86); border: 1px solid rgba(212, 168, 83, 0.45);
+    color: #e5e7eb; padding: 5px 13px; border-radius: 999px; font-size: 11px; font-weight: 500;
+    pointer-events: none; opacity: 0; transition: opacity 0.45s ease; white-space: nowrap;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.45);
+  }
+  #walk-toast.show { opacity: 1; }
+
+  #portal-layer { position: fixed; inset: 0; pointer-events: none; z-index: 15; overflow: hidden; }
+  .portal-pill {
+    position: absolute; transform: translate(-50%, -50%);
+    background: rgba(15, 17, 21, 0.78); border: 1px solid rgba(212, 168, 83, 0.65);
+    color: #f8dfa0; padding: 5px 11px; border-radius: 999px; font-size: 11px; font-weight: 600;
+    white-space: nowrap; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.45);
+    pointer-events: auto; cursor: pointer; opacity: 0;
+    transition: opacity 0.18s ease, transform 0.14s ease, background 0.14s ease;
+  }
+  .portal-pill:hover { background: rgba(212, 168, 83, 0.28); border-color: #fff; color: #fff; transform: translate(-50%, -50%) scale(1.07); }
 
   #minimap-wrap {
     position: fixed; bottom: 14px; right: 14px; z-index: 26;
@@ -211,6 +269,7 @@
 <body>
 <div id="canvas-wrap"></div>
 <div id="labels-layer"></div>
+<div id="portal-layer"></div>
 
 <aside id="hud">
   <div class="hud-header">
@@ -272,13 +331,22 @@
 
 <div id="walk-bar">
   <button class="w-step" id="btn-tour-prev" title="Previous Room">‹</button>
-  <div class="w-room">
-    <span id="walk-room-name">Drawing & Foyer</span>
-    <small>Scroll to walk · Drag to look · Click floor or map</small>
-  </div>
+  <button class="w-room-btn" id="walk-room-trigger" title="Click to jump to any room">
+    <span id="walk-room-name">Drawing & Foyer ▾</span>
+    <small id="walk-room-sub">Stop 1 of 15 · Click to pick room</small>
+  </button>
   <button class="w-step" id="btn-tour-next" title="Next Room">›</button>
   <button class="z-btn accent" id="btn-walk-exit" title="Exit Walk Mode (Esc)">✕ Exit</button>
 </div>
+<div id="room-picker"></div>
+
+<div id="walk-dock">
+  <button class="wd-btn" id="btn-auto-tour" title="Cinematic Guided Home Tour (Space)">▶ Auto-Tour</button>
+  <button class="wd-btn" id="btn-eye-height" title="Switch Standing (5'3&quot;) vs Seated Sofa/Desk (3'9&quot;) Eye Height">🧍 Stand</button>
+  <button class="wd-btn active" id="btn-fov-toggle" title="Switch Wide 68° Architectural Lens vs 52° Natural Eye">👁 68° Wide</button>
+  <button class="wd-btn active" id="btn-mm-toggle" title="Show / Hide Live Floorplan Map">🗺 Map</button>
+</div>
+<div id="walk-toast">Drag to look · Click floor or room badge to walk · Two-finger scroll to glide &amp; steer · Space for Auto-Tour</div>
 
 <div id="minimap-wrap" title="Drag dot/floor to walk · Drag torch knob or scroll to rotate 360°">
   <div class="mm-head">
@@ -1614,7 +1682,7 @@ addBox(furnGroup, 0.80, 0.36, 0.68, 6.55, 0.18, 0.52, MAT.fabricSand, {
 });
 addFloorLamp(6.04, 0.34, 'IKEA RÖDFLIK Light-Beige Floor Reading Lamp', '25 cm Ø slim base + rotatable light-beige enameled shade with brass accents, 2700K CRI 90+.', 'Leaves 650mm clear on NW path · ₹8,980');
 
-// South Daybed + Henka Wall Sconce + West Wall 3D World Map (Alpha-keyed wood continents direct on Misty Breeze paint!) + Coway
+// South Daybed + Henka Wall Sconce + South Wall 3D World Map (Alpha-keyed wood continents direct on Misty Breeze paint!) + Coway
 addBox(furnGroup, 1.95, 0.40, 0.96, 7.55, 0.20, 3.18, MAT.oakLight, {
   tag: 'BR-02 KABIR · DAYBED', title: 'Magari / Alankaram Solid Ash Daybed + Trundle',
   desc: '36×75" Indian sizing, rounded child-safe bullnose edges. Vastu alignment: Head East, feet West.',
@@ -1626,12 +1694,13 @@ addBox(decorGroup, 0.16, 0.22, 0.14, 8.38, 1.35, 3.65, MAT.oakLight, {
   desc: 'Mounted at 1,350mm AFF at East head-end of South daybed with 2700K CRI 90+ bulb.',
   meta: 'Budget: ₹4,599'
 });
+// South Wall 3D World Map (1500×900mm) centered above daybed at x=7.35, y=1.52, z=3.695 facing North (-Z), 20cm clear of East Henka sconce
 const mapPlane = new THREE.Mesh(new THREE.PlaneGeometry(1.50, 0.90), MAT.worldMap);
-mapPlane.position.set(5.865, 1.48, 2.55); mapPlane.rotation.y = Math.PI / 2;
+mapPlane.position.set(7.35, 1.52, 3.695); mapPlane.rotation.y = Math.PI;
 mapPlane.userData.meta = {
-  tag: 'BR-02 KABIR · WEST WALL (EXACT 150×90cm)', title: 'Woodsify 3D Multilayer Birch World Map (Size L)',
-  desc: 'Exact 1500×900mm wood continents mounted directly on cured Misty Breeze 8307 Royale paint (no BWP backer); grazed by 3000K CRI 90+ gimbal spot.',
-  meta: 'SW Open Activity Zone · ₹5,689–₹9,540'
+  tag: 'BR-02 KABIR · SOUTH WALL (EXACT 150×90cm)', title: 'Woodsify 3D Multilayer Birch World Map (Size L)',
+  desc: 'Exact 1500×900mm wood continents mounted directly on cured South wall Misty Breeze 8307 Royale paint above daybed (20cm clear of East Henka sconce, no BWP backer); grazed by 3000K CRI 90+ gimbal spot.',
+  meta: 'South Wall Above Daybed · ₹5,689–₹9,540'
 };
 inspectables.push(mapPlane); decorGroup.add(mapPlane);
 addCowayPurifier(6.14, 3.40, 'BR-02 KABIR');
@@ -1758,7 +1827,7 @@ const PRESETS = [
   { id: 'kitchen',   name: 'Kitchen',      dim: '3174 + 158 LU',     cam: [12.3, 2.2, 8.1],   tgt: [12.1, 1.1, 11.1] },
   { id: 'master',    name: 'Master Suite', dim: 'Bed Art + Nook',    cam: [3.5, 2.2, 10.8],   tgt: [0.9, 1.25, 9.2] },
   { id: 'study',     name: 'BR-01 Study',  dim: 'Window Desk',       cam: [6.4, 2.2, 8.4],    tgt: [9.3, 1.15, 10.2] },
-  { id: 'kabir',     name: 'BR-02 Kabir',  dim: 'World Map + KBR',   cam: [8.9, 2.1, 3.1],    tgt: [6.1, 1.3, 2.1] },
+  { id: 'kabir',     name: 'BR-02 Kabir',  dim: 'South World Map',   cam: [7.6, 2.0, 0.85],   tgt: [7.35, 1.32, 3.65] },
   { id: 'gurudwara', name: 'BR-03 Sacred', dim: '1/5 East Palki',    cam: [12.45, 2.1, 3.25], tgt: [14.74, 1.15, 1.85] },
 ];
 
@@ -1779,16 +1848,17 @@ const ROOM_LABELS = [
 
 // Curated Matterport-style Walkthrough Nodes (ordered as a natural home tour)
 const WALK_NODES = [
-  { id: 'drawing',   label: 'Foyer Entrance',       pos: [1.10, 1.25], look: [2.60, 3.10] },
-  { id: 'drawing',   label: 'Drawing Room',         pos: [2.05, 3.95], look: [1.10, 2.75] },
+  { id: 'drawing',   label: 'Foyer Entrance',       pos: [1.10, 1.45], look: [2.60, 3.45] },
+  { id: 'drawing',   label: 'Drawing Room',         pos: [2.25, 3.65], look: [0.65, 3.55] },
   { id: 'living',    label: 'Living Archway',       pos: [4.45, 4.65], look: [8.20, 5.50] },
   { id: 'living',    label: 'Living Spine',         pos: [7.10, 5.10], look: [11.20, 5.40] },
+  { id: 'living',    label: 'Central Hall',         pos: [9.20, 4.45], look: [12.10, 5.20] },
   { id: 'dining',    label: 'Dining Room',          pos: [11.20, 5.20], look: [13.30, 4.35] },
   { id: 'dining',    label: 'East Sit-Out',         pos: [15.05, 5.05], look: [11.80, 5.25] },
   { id: 'kitchen',   label: 'Kitchen',              pos: [12.15, 8.85], look: [12.00, 11.20] },
   { id: 'gurudwara', label: 'BR-03 Home Gurudwara', pos: [12.95, 2.75], look: [14.74, 1.85] },
-  { id: 'kabir',     label: 'BR-02 Kabir Room',     pos: [8.25, 2.25], look: [5.90, 2.25] },
-  { id: 'study',     label: 'BR-01 Study / Guest',  pos: [7.45, 9.35], look: [9.60, 9.35] },
+  { id: 'kabir',     label: 'BR-02 Kabir Room',     pos: [7.55, 1.50], look: [7.35, 3.68] },
+  { id: 'study',     label: 'BR-01 Study / Guest',  pos: [7.45, 9.35], look: [9.60, 9.85] },
   { id: 'master',    label: 'Master Suite',         pos: [2.55, 9.70], look: [0.85, 9.25] },
   { id: 'master',    label: 'Master NE Nook',       pos: [4.55, 8.20], look: [5.65, 8.20] },
   { id: 'master',    label: 'South Balcony',        pos: [2.25, 12.35], look: [2.25, 9.50] },
@@ -2014,9 +2084,172 @@ let hoveredWpIdx = -1;
 const walkKeys = { fwd: false, back: false, left: false, right: false, turnL: false, turnR: false, shift: false };
 let isWalkDragging = false;
 let walkLastPtr = { x: 0, y: 0 };
-const WALK_EYE_Y = 1.60;
+const WALK_EYE_STAND = 1.60;
+const WALK_EYE_SIT = 1.15;
+let walkSeated = false;
+let walkEyeY = WALK_EYE_STAND;
+let walkFovWide = true;
+let walkHudWasOpen = false;
+let mmVisible = true;
+let autoTour = { active: false, phase: 'glide', timer: 0, baseYaw: 0 };
+let toastTimer = null;
 const walkRoomNameEl = document.getElementById('walk-room-name');
+const walkRoomSubEl = document.getElementById('walk-room-sub');
+const roomPickerEl = document.getElementById('room-picker');
+const walkDockEl = document.getElementById('walk-dock');
+const walkToastEl = document.getElementById('walk-toast');
+const portalLayerEl = document.getElementById('portal-layer');
 const wpTooltipEl = document.getElementById('wp-tooltip');
+const btnAutoTour = document.getElementById('btn-auto-tour');
+const btnEyeHeight = document.getElementById('btn-eye-height');
+const btnFovToggle = document.getElementById('btn-fov-toggle');
+const btnMmToggle = document.getElementById('btn-mm-toggle');
+
+function dismissWalkToast() {
+  walkToastEl.classList.remove('show');
+  if (toastTimer) { clearTimeout(toastTimer); toastTimer = null; }
+}
+function showWalkToast() {
+  walkToastEl.classList.add('show');
+  if (toastTimer) clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => walkToastEl.classList.remove('show'), 5500);
+}
+function stopAutoTour() {
+  if (!autoTour.active) return;
+  autoTour.active = false;
+  btnAutoTour.classList.remove('active');
+  btnAutoTour.textContent = '▶ Auto-Tour';
+}
+function startAutoTour() {
+  if (!walkMode) return;
+  autoTour.active = true;
+  autoTour.phase = 'glide';
+  autoTour.timer = 0;
+  btnAutoTour.classList.add('active');
+  btnAutoTour.textContent = '⏸ Pause Tour';
+  dismissWalkToast();
+  goToTourNode(currentTourIdx, true);
+}
+function updateRoomPickerActive() {
+  roomPickerEl.querySelectorAll('.rp-item').forEach((b, i) => b.classList.toggle('active', i === currentTourIdx));
+  walkRoomSubEl.textContent = `Stop ${currentTourIdx + 1} of ${WALK_NODES.length} · Click to jump`;
+}
+
+// Build 15-stop Quick-Jump Room Picker & Floating In-World Doorway Portals
+WALK_NODES.forEach((node, idx) => {
+  const btn = document.createElement('button');
+  btn.className = 'rp-item';
+  btn.textContent = `${idx + 1}. ${node.label}`;
+  btn.onclick = e => {
+    e.stopPropagation();
+    stopAutoTour();
+    roomPickerEl.classList.remove('open');
+    goToTourNode(idx);
+  };
+  roomPickerEl.appendChild(btn);
+});
+document.getElementById('walk-room-trigger').onclick = e => {
+  e.stopPropagation();
+  roomPickerEl.classList.toggle('open');
+};
+window.addEventListener('pointerdown', e => {
+  if (roomPickerEl.classList.contains('open') && !roomPickerEl.contains(e.target) && !e.target.closest('#walk-room-trigger')) {
+    roomPickerEl.classList.remove('open');
+  }
+});
+
+const portalEls = WALK_NODES.map((node, idx) => {
+  const el = document.createElement('button');
+  el.className = 'portal-pill';
+  el.textContent = `→ ${node.label}`;
+  el.onclick = e => {
+    e.stopPropagation();
+    stopAutoTour();
+    dismissWalkToast();
+    goToTourNode(idx);
+  };
+  portalLayerEl.appendChild(el);
+  return { el, node, idx };
+});
+
+// Exact 2D segment-segment line-of-sight check against solid wallSegments (<0.02ms/frame)
+function segsIntersect2D(ax, az, bx, bz, cx, cz, dx, dz) {
+  const rX = bx - ax, rZ = bz - az;
+  const sX = dx - cx, sZ = dz - cz;
+  const denom = rX * sZ - rZ * sX;
+  if (Math.abs(denom) < 1e-7) return false;
+  const qpx = cx - ax, qpz = cz - az;
+  const t = (qpx * sZ - qpz * sX) / denom;
+  const u = (qpx * rZ - qpz * rX) / denom;
+  return t > 0.03 && t < 0.97 && u >= -0.01 && u <= 1.01;
+}
+function hasLineOfSight2D(x1, z1, x2, z2) {
+  for (let i = 0; i < wallSegments.length; i++) {
+    const s = wallSegments[i];
+    if (segsIntersect2D(x1, z1, x2, z2, s.x1, s.z1, s.x2, s.z2)) return false;
+  }
+  return true;
+}
+function updatePortals() {
+  if (!walkMode) {
+    portalLayerEl.style.display = 'none';
+    return;
+  }
+  portalLayerEl.style.display = 'block';
+  const candidates = [];
+  for (let i = 0; i < portalEls.length; i++) {
+    const { el, node } = portalEls[i];
+    const dist = Math.hypot(camera.position.x - node.pos[0], camera.position.z - node.pos[1]);
+    if (dist < 1.75 || dist > 9.8 || !hasLineOfSight2D(camera.position.x, camera.position.z, node.pos[0], node.pos[1])) {
+      el.style.opacity = '0';
+      el.style.pointerEvents = 'none';
+      continue;
+    }
+    const v = new THREE.Vector3(node.pos[0], 1.24, node.pos[1]).project(camera);
+    if (v.z > 1 || v.x < -0.92 || v.x > 0.92 || v.y < -0.78 || v.y > 0.78) {
+      el.style.opacity = '0';
+      el.style.pointerEvents = 'none';
+      continue;
+    }
+    candidates.push({ el, dist, sx: (v.x * 0.5 + 0.5) * window.innerWidth, sy: (-v.y * 0.5 + 0.5) * window.innerHeight });
+  }
+  candidates.sort((a, b) => a.dist - b.dist);
+  candidates.forEach((c, rank) => {
+    if (rank < 4) {
+      c.el.style.left = `${c.sx.toFixed(1)}px`;
+      c.el.style.top = `${c.sy.toFixed(1)}px`;
+      c.el.style.opacity = '0.94';
+      c.el.style.pointerEvents = 'auto';
+    } else {
+      c.el.style.opacity = '0';
+      c.el.style.pointerEvents = 'none';
+    }
+  });
+}
+
+btnAutoTour.onclick = e => {
+  e.stopPropagation();
+  if (autoTour.active) stopAutoTour();
+  else startAutoTour();
+};
+btnEyeHeight.onclick = e => {
+  e.stopPropagation();
+  walkSeated = !walkSeated;
+  btnEyeHeight.classList.toggle('active', walkSeated);
+  btnEyeHeight.textContent = walkSeated ? '🪑 Sit (3\'9")' : '🧍 Stand';
+};
+btnFovToggle.onclick = e => {
+  e.stopPropagation();
+  walkFovWide = !walkFovWide;
+  btnFovToggle.classList.toggle('active', walkFovWide);
+  btnFovToggle.textContent = walkFovWide ? '👁 68° Wide' : '👁 52° Eye';
+};
+btnMmToggle.onclick = e => {
+  e.stopPropagation();
+  mmVisible = !mmVisible;
+  btnMmToggle.classList.toggle('active', mmVisible);
+  document.getElementById('minimap-wrap').classList.toggle('show', walkMode && mmVisible);
+};
 
 function syncWalkAnglesFromCamera() {
   const dir = new THREE.Vector3();
@@ -2029,10 +2262,10 @@ function syncWalkAnglesFromCamera() {
   camera.rotation.z = 0;
 }
 
-function glideToWalkSpot(tx, tz, lookAt = null, duration = 0.62) {
+function glideToWalkSpot(tx, tz, lookAt = null, duration = 0.65, smoothStep = false) {
   const dest = new THREE.Vector3(
     Math.max(0.28, Math.min(15.62, tx)),
-    WALK_EYE_Y,
+    walkEyeY,
     Math.max(0.28, Math.min(12.88, tz))
   );
   let targetYaw = null;
@@ -2048,15 +2281,20 @@ function glideToWalkSpot(tx, tz, lookAt = null, duration = 0.62) {
     y0: walkYaw,
     y1: targetYaw,
     pt0: walkPitch,
-    pt1: lookAt ? -0.05 : null,
+    pt1: lookAt ? -0.04 : null,
+    smoothStep,
   };
 }
 
-function goToTourNode(idx) {
+function goToTourNode(idx, fromAuto = false) {
+  if (!fromAuto) stopAutoTour();
   currentTourIdx = (idx + WALK_NODES.length) % WALK_NODES.length;
   const node = WALK_NODES[currentTourIdx];
-  glideToWalkSpot(node.pos[0], node.pos[1], node.look, 0.65);
-  walkRoomNameEl.textContent = node.label;
+  const dist = Math.hypot(camera.position.x - node.pos[0], camera.position.z - node.pos[1]);
+  const dur = Math.max(0.58, Math.min(1.35, 0.45 + dist * 0.11));
+  glideToWalkSpot(node.pos[0], node.pos[1], node.look, dur, true);
+  walkRoomNameEl.textContent = `${node.label} ▾`;
+  updateRoomPickerActive();
   document.querySelectorAll('.room-btn').forEach(b => b.classList.toggle('active', b.dataset.id === node.id));
 }
 
@@ -2066,30 +2304,37 @@ function enterWalkMode(startPos = null, lookAtPos = null) {
   camAnim = null;
   walkGlide = null;
   walkScrollVel = 0;
+  stopAutoTour();
   controls.enabled = false;
   setWallMode('full');
   document.body.classList.add('walking');
   document.getElementById('btn-walk').classList.add('accent');
   document.getElementById('btn-walk').textContent = '🚶 Exit Walk';
   document.getElementById('walk-bar').classList.add('show');
-  document.getElementById('minimap-wrap').classList.add('show');
+  walkDockEl.classList.add('show');
+  document.getElementById('minimap-wrap').classList.toggle('show', mmVisible);
   waypointGroup.visible = true;
   labelsLayer.style.display = 'none';
-  if (!wasWalking && window.innerWidth < 1150) hud.classList.add('collapsed');
+  if (!wasWalking) {
+    walkHudWasOpen = !hud.classList.contains('collapsed');
+    hud.classList.add('collapsed');
+    showWalkToast();
+  }
 
   if (startPos) {
-    camera.position.set(startPos.x, WALK_EYE_Y, startPos.z);
-    if (lookAtPos) camera.lookAt(lookAtPos.x, 1.42, lookAtPos.z);
+    syncWalkAnglesFromCamera();
+    glideToWalkSpot(startPos.x, startPos.z, lookAtPos ? [lookAtPos.x, lookAtPos.z] : null, 0.65, true);
   } else if (camera.position.y > 4.2 || currentPreset.id === 'overview' || currentPreset.id === 'plan2d') {
     currentTourIdx = 0;
-    camera.position.set(1.10, WALK_EYE_Y, 1.25);
-    camera.lookAt(2.60, 1.40, 3.10);
+    syncWalkAnglesFromCamera();
+    const node = WALK_NODES[0];
+    glideToWalkSpot(node.pos[0], node.pos[1], node.look, 0.78, true);
   } else {
-    camera.position.y = WALK_EYE_Y;
-    camera.lookAt(controls.target.x, 1.42, controls.target.z);
+    syncWalkAnglesFromCamera();
+    glideToWalkSpot(camera.position.x, camera.position.z, [controls.target.x, controls.target.z], 0.48, true);
   }
-  syncWalkAnglesFromCamera();
-  walkRoomNameEl.textContent = detectRoomName(camera.position.x, camera.position.z);
+  updateRoomPickerActive();
+  walkRoomNameEl.textContent = `${detectRoomName(camera.position.x, camera.position.z)} ▾`;
 }
 
 function exitWalkMode(returnToOverview = false) {
@@ -2097,6 +2342,10 @@ function exitWalkMode(returnToOverview = false) {
   walkMode = false;
   walkGlide = null;
   walkScrollVel = 0;
+  stopAutoTour();
+  dismissWalkToast();
+  roomPickerEl.classList.remove('open');
+  portalLayerEl.style.display = 'none';
   walkMarker.visible = false;
   waypointGroup.visible = false;
   wpTooltipEl.style.display = 'none';
@@ -2105,7 +2354,9 @@ function exitWalkMode(returnToOverview = false) {
   document.getElementById('btn-walk').classList.remove('accent');
   document.getElementById('btn-walk').textContent = '🚶 Walk House';
   document.getElementById('walk-bar').classList.remove('show');
+  walkDockEl.classList.remove('show');
   document.getElementById('minimap-wrap').classList.remove('show');
+  if (walkHudWasOpen) hud.classList.remove('collapsed');
   renderer.domElement.style.cursor = 'default';
   if (document.getElementById('chk-labels').checked) labelsLayer.style.display = 'block';
   controls.enabled = true;
@@ -2254,6 +2505,8 @@ mmCanvas.addEventListener('wheel', e => {
 }, { passive: false });
 mmCanvas.addEventListener('pointerdown', e => {
   e.stopPropagation();
+  stopAutoTour();
+  dismissWalkToast();
   const { px, py } = getMMCoords(e);
   const { ax, ay, hx, hy } = getTorchHandle();
   const nearAvatar = Math.hypot(px - ax, py - ay) <= 13;
@@ -2320,24 +2573,33 @@ window.addEventListener('pointerup', () => {
   mmCanvas.style.cursor = mmHoverPart === 'avatar' ? 'move' : (mmHoverPart === 'handle' ? 'grab' : 'pointer');
 });
 
-// Smooth Scroll-Wheel / Trackpad Two-Finger Walking in Walk Mode
+// Smooth Scroll-Wheel / Trackpad Two-Finger Glide + Steer in Walk Mode
 renderer.domElement.addEventListener('wheel', e => {
   if (!walkMode) return;
   e.preventDefault();
+  stopAutoTour();
+  dismissWalkToast();
   walkGlide = null;
-  const delta = Math.max(-85, Math.min(85, e.deltaY));
-  walkScrollVel = Math.max(-4.8, Math.min(4.8, walkScrollVel - delta * 0.038));
+  const dy = Math.max(-85, Math.min(85, e.deltaY));
+  const dx = Math.max(-85, Math.min(85, e.deltaX));
+  if (Math.abs(dy) > 1) walkScrollVel = Math.max(-4.8, Math.min(4.8, walkScrollVel - dy * 0.038));
+  if (Math.abs(dx) > 1) walkYawTarget -= dx * 0.0042;
 }, { passive: false });
 
 window.addEventListener('keydown', e => {
   const k = e.key.toLowerCase();
   if (walkMode) {
-    if (k === 'w' || e.key === 'ArrowUp') { walkGlide = null; walkKeys.fwd = true; }
-    else if (k === 's' || e.key === 'ArrowDown') { walkGlide = null; walkKeys.back = true; }
-    else if (k === 'a') { walkGlide = null; walkKeys.left = true; }
-    else if (k === 'd') { walkGlide = null; walkKeys.right = true; }
-    else if (e.key === 'ArrowLeft' || k === 'q') { walkGlide = null; walkKeys.turnL = true; }
-    else if (e.key === 'ArrowRight' || k === 'e') { walkGlide = null; walkKeys.turnR = true; }
+    if (e.code === 'Space') {
+      e.preventDefault();
+      if (autoTour.active) stopAutoTour(); else startAutoTour();
+      return;
+    }
+    if (k === 'w' || e.key === 'ArrowUp') { stopAutoTour(); dismissWalkToast(); walkGlide = null; walkKeys.fwd = true; }
+    else if (k === 's' || e.key === 'ArrowDown') { stopAutoTour(); dismissWalkToast(); walkGlide = null; walkKeys.back = true; }
+    else if (k === 'a') { stopAutoTour(); dismissWalkToast(); walkGlide = null; walkKeys.left = true; }
+    else if (k === 'd') { stopAutoTour(); dismissWalkToast(); walkGlide = null; walkKeys.right = true; }
+    else if (e.key === 'ArrowLeft' || k === 'q') { stopAutoTour(); dismissWalkToast(); walkGlide = null; walkKeys.turnL = true; }
+    else if (e.key === 'ArrowRight' || k === 'e') { stopAutoTour(); dismissWalkToast(); walkGlide = null; walkKeys.turnR = true; }
     else if (e.key === 'Shift') walkKeys.shift = true;
     else if (e.key === 'Escape') exitWalkMode(false);
     else if (e.key === '0') exitWalkMode(true);
@@ -2419,6 +2681,8 @@ renderer.domElement.addEventListener('pointerdown', e => {
   camAnim = null;
   pointerDown = { x: e.clientX, y: e.clientY };
   if (walkMode) {
+    stopAutoTour();
+    dismissWalkToast();
     isWalkDragging = true;
     walkLastPtr = { x: e.clientX, y: e.clientY };
     renderer.domElement.style.cursor = 'grabbing';
@@ -2515,22 +2779,33 @@ renderer.domElement.addEventListener('pointerup', e => {
   else inspEl.classList.remove('show');
 });
 
-// Double-click any item in Walk Mode to glide closer & inspect it
+// Double-click any item to glide closer & inspect; double-click floor to walk & face room center
 renderer.domElement.addEventListener('dblclick', e => {
   if (!walkMode) return;
+  stopAutoTour();
   mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
   mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
   raycaster.setFromCamera(mouse, camera);
-  const hits = raycaster.intersectObjects(inspectables, false);
+  const wHits = raycaster.intersectObjects(wallMeshes, false).filter(h => !h.object.userData.isGlass);
+  const maxVisibleDist = wHits.length > 0 ? wHits[0].distance : Infinity;
+  const hits = raycaster.intersectObjects(inspectables, false).filter(h => h.distance < maxVisibleDist + 0.12);
   if (hits.length > 0 && hits[0].object.userData.meta) {
     const pt = hits[0].point;
     const back = camera.position.clone().sub(pt);
     back.y = 0;
     if (back.length() > 1.55) {
       back.normalize().multiplyScalar(1.45);
-      glideToWalkSpot(pt.x + back.x, pt.z + back.z, [pt.x, pt.z], 0.55);
+      glideToWalkSpot(pt.x + back.x, pt.z + back.z, [pt.x, pt.z], 0.55, true);
     }
     showInspector(hits[0].object.userData.meta);
+    return;
+  }
+  const fHits = raycaster.intersectObjects(floorMeshes, false).filter(h => h.distance < maxVisibleDist && h.distance < 11.5);
+  if (fHits.length > 0) {
+    const pt = fHits[0].point;
+    const zMatch = ROOM_ZONES.find(r => pt.x >= r.x1 && pt.x <= r.x2 && pt.z >= r.z1 && pt.z <= r.z2);
+    const look = zMatch ? [(zMatch.x1 + zMatch.x2) * 0.5, (zMatch.z1 + zMatch.z2) * 0.5] : null;
+    glideToWalkSpot(pt.x, pt.z, look, 0.62, true);
   }
 });
 
@@ -2545,19 +2820,50 @@ function animate() {
   const dt = Math.min(0.05, clock.getDelta());
   elapsed += dt;
 
+  // Smooth Architectural FOV Morph (42° Dollhouse ↔ 68° Wide / 52° Natural Walk Lens)
+  const targetFov = walkMode ? (walkFovWide ? 68 : 52) : 42;
+  if (Math.abs(camera.fov - targetFov) > 0.05) {
+    camera.fov += (targetFov - camera.fov) * (1 - Math.exp(-8 * dt));
+    camera.updateProjectionMatrix();
+  }
+
   if (walkMode) {
+    // Smooth Standing (1.60m) ↔ Seated (1.15m) Eye-Height Transition
+    const targetEye = walkSeated ? WALK_EYE_SIT : WALK_EYE_STAND;
+    walkEyeY += (targetEye - walkEyeY) * (1 - Math.exp(-10 * dt));
+
     // Smooth arrow-key turning
     if (walkKeys.turnL) walkYawTarget += 1.85 * dt;
     if (walkKeys.turnR) walkYawTarget -= 1.85 * dt;
 
     if (walkGlide) {
       walkGlide.t = Math.min(1, walkGlide.t + dt / walkGlide.dur);
-      const k = 1 - Math.pow(1 - walkGlide.t, 3);
+      const t = walkGlide.t;
+      const k = walkGlide.smoothStep
+        ? (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2)
+        : (1 - Math.pow(1 - t, 3));
       camera.position.lerpVectors(walkGlide.p0, walkGlide.p1, k);
       if (walkGlide.y1 !== null) walkYawTarget = walkYaw = walkGlide.y0 + (walkGlide.y1 - walkGlide.y0) * k;
       if (walkGlide.pt1 !== null) walkPitchTarget = walkPitch = walkGlide.pt0 + (walkGlide.pt1 - walkGlide.pt0) * k;
-      if (walkGlide.t >= 1) walkGlide = null;
+      if (walkGlide.t >= 1) {
+        walkGlide = null;
+        if (autoTour.active) {
+          autoTour.phase = 'pan';
+          autoTour.timer = 0;
+          autoTour.baseYaw = walkYaw;
+        }
+      }
     } else {
+      // Cinematic Guided Auto-Tour gentle room pan
+      if (autoTour.active && autoTour.phase === 'pan') {
+        autoTour.timer += dt;
+        walkYawTarget = autoTour.baseYaw + Math.sin((autoTour.timer / 3.6) * Math.PI * 2) * 0.34;
+        walkPitchTarget = -0.04;
+        if (autoTour.timer >= 3.6) {
+          autoTour.phase = 'glide';
+          goToTourNode(currentTourIdx + 1, true);
+        }
+      }
       // Smooth damped look interpolation
       const damp = 1 - Math.exp(-15 * dt);
       walkYaw += (walkYawTarget - walkYaw) * damp;
@@ -2591,7 +2897,7 @@ function animate() {
       camera.position.x += (mmWalkTarget.x - camera.position.x) * k;
       camera.position.z += (mmWalkTarget.z - camera.position.z) * k;
     }
-    camera.position.y = WALK_EYE_Y;
+    camera.position.y = walkGlide ? camera.position.y : walkEyeY;
 
     // Smooth Mini-Map Room-Zoom pan (frozen while dragging so cursor stays 1:1)
     const targetMMZoom = mmZoomed ? 2.25 : 1.0;
@@ -2625,9 +2931,10 @@ function animate() {
       ringOuter.scale.set(ms, ms, 1);
     }
 
-    walkRoomNameEl.textContent = detectRoomName(camera.position.x, camera.position.z);
+    walkRoomNameEl.textContent = `${detectRoomName(camera.position.x, camera.position.z)} ▾`;
     needle.style.transform = `rotate(${(walkYaw * 180 / Math.PI).toFixed(1)}deg)`;
-    drawMinimap();
+    updatePortals();
+    if (mmVisible) drawMinimap();
   } else {
     if (camAnim) {
       camAnim.t = Math.min(1, camAnim.t + 0.05);
