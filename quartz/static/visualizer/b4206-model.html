@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Project U — Unit B4206 Interactive 2D/3D Architectural Model</title>
+<title>Project U — Unit B4206 Interactive 2D/3D Architectural Model (Docket Verified)</title>
 <style>
   :root {
     --bg: #0f1115;
@@ -18,7 +18,6 @@
   html, body { width: 100%; height: 100%; overflow: hidden; background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif; }
   #canvas-wrap { position: fixed; inset: 0; }
 
-  /* Left Control Panel */
   #hud {
     position: fixed; top: 14px; left: 14px; bottom: 14px; width: 276px;
     background: var(--panel); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
@@ -81,7 +80,6 @@
   }
   .toggle-row input { accent-color: var(--accent); width: 15px; height: 15px; cursor: pointer; }
 
-  /* Compass */
   #compass {
     position: fixed; top: 14px; right: 14px; width: 64px; height: 64px;
     background: var(--panel); backdrop-filter: blur(12px);
@@ -96,9 +94,8 @@
   #compass .w { position: absolute; left: 6px; color: var(--accent); }
   #compass-needle { width: 2px; height: 22px; background: linear-gradient(to top, #6b7280 50%, #f87171 50%); border-radius: 2px; }
 
-  /* Inspector Card */
   #inspector {
-    position: fixed; top: 90px; right: 14px; width: 268px;
+    position: fixed; top: 90px; right: 14px; width: 274px;
     background: var(--panel); backdrop-filter: blur(14px);
     border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px;
     z-index: 20; display: none; box-shadow: 0 12px 32px rgba(0,0,0,0.4);
@@ -109,17 +106,15 @@
   #insp-desc { font-size: 11.5px; color: #d1d5db; margin-top: 6px; line-height: 1.45; }
   #insp-meta { font-size: 10.5px; color: var(--muted); margin-top: 8px; padding-top: 7px; border-top: 1px solid var(--border); }
 
-  /* Palette Strip */
   #palette {
     position: fixed; bottom: 14px; right: 14px; z-index: 20;
     background: var(--panel); backdrop-filter: blur(12px);
     border: 1px solid var(--border); border-radius: 11px; padding: 7px 11px;
-    display: flex; gap: 10px; align-items: center; flex-wrap: wrap; max-width: 680px;
+    display: flex; gap: 10px; align-items: center; flex-wrap: wrap; max-width: 760px;
   }
   .swatch { display: flex; align-items: center; gap: 5px; font-size: 10.5px; color: #d1d5db; }
   .dot { width: 12px; height: 12px; border-radius: 3px; border: 1px solid rgba(255,255,255,0.28); flex-shrink: 0; }
 
-  /* 3D Labels Overlay */
   #labels-layer { position: fixed; inset: 0; pointer-events: none; z-index: 10; overflow: hidden; }
   .room-label {
     position: absolute; transform: translate(-50%, -50%);
@@ -144,7 +139,7 @@
   <div class="hud-header">
     <div>
       <div class="hud-title">Project U · Unit B4206</div>
-      <div class="hud-sub">The Olympus · Fl 42 · 2,880 SFT · West</div>
+      <div class="hud-sub">The Olympus · Fl 42 · Homz Docket Verified</div>
     </div>
     <button class="icon-btn" id="btn-collapse" title="Collapse Panel">✕</button>
   </div>
@@ -202,8 +197,9 @@
   <div class="swatch"><span class="dot" style="background:#F0EFE8"></span>0765 Morning Glory</div>
   <div class="swatch"><span class="dot" style="background:#B2C2CC"></span>8307 Misty Breeze</div>
   <div class="swatch"><span class="dot" style="background:#D8CFBC"></span>3163 SI Beige Wool</div>
+  <div class="swatch"><span class="dot" style="background:#DDD6CB"></span>158 LU Taupe</div>
+  <div class="swatch"><span class="dot" style="background:#9E836B"></span>3174 LU Brown Sugar</div>
   <div class="swatch"><span class="dot" style="background:#734F35"></span>424 1D Cinnamon Hickory</div>
-  <div class="swatch"><span class="dot" style="background:#7B5238"></span>3174 LU Brown Sugar</div>
   <div class="swatch"><span class="dot" style="background:#263B52"></span>3267 SI Vintage Indigo</div>
   <div class="swatch"><span class="dot" style="background:#8B5A32"></span>CP Teak</div>
 </div>
@@ -249,7 +245,7 @@ controls.maxDistance = 38;
 controls.target.set(8.0, 0.4, 6.2);
 
 // ============================================================================
-// 2. PROCEDURAL ARCHITECTURAL TEXTURES (ZERO EXTERNAL ASSETS)
+// 2. PROCEDURAL ARCHITECTURAL TEXTURES (HOMZ DOCKET VERIFIED)
 // ============================================================================
 function makeTileTex(baseHex, groutHex, tilesPerUnit = 2, subtleNoise = 6) {
   const c = document.createElement('canvas'); c.width = 512; c.height = 512;
@@ -313,14 +309,34 @@ function makeLimewashTex() {
   return tex;
 }
 
+// Homz Docket Page 5: Geometric gold (DP-25mm-BG) & dark bronze (DP-7.6mm-AB) grooved 3163 SI hidden door paneling
+function makeGroovedDoorTex() {
+  const c = document.createElement('canvas'); c.width = 512; c.height = 512;
+  const g = c.getContext('2d');
+  g.fillStyle = '#D8CFBC'; g.fillRect(0, 0, 512, 512);
+  // Vertical panel seams
+  g.strokeStyle = '#3A322C'; g.lineWidth = 4;
+  [128, 256, 384].forEach(x => { g.beginPath(); g.moveTo(x, 0); g.lineTo(x, 512); g.stroke(); });
+  // Asymmetric horizontal bronze grooves
+  [[0, 170, 128], [128, 120, 256], [256, 230, 384], [384, 340, 512], [0, 380, 128]].forEach(([x1, y, x2]) => {
+    g.beginPath(); g.moveTo(x1, y); g.lineTo(x2, y); g.stroke();
+  });
+  // Brushed gold vertical accent inlays (DP-25mm-BG)
+  g.fillStyle = '#C9A45C';
+  g.fillRect(123, 0, 10, 170);
+  g.fillRect(379, 0, 10, 230);
+  g.fillRect(251, 230, 10, 282);
+  const tex = new THREE.CanvasTexture(c);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  return tex;
+}
+
 function makePersianCarpetTex() {
   const c = document.createElement('canvas'); c.width = 512; c.height = 384;
   const g = c.getContext('2d');
   g.fillStyle = '#4B3626'; g.fillRect(0, 0, 512, 384);
-  // Ornate border
   g.strokeStyle = '#C9A45C'; g.lineWidth = 16; g.strokeRect(20, 20, 472, 344);
   g.strokeStyle = '#8B5A32'; g.lineWidth = 8; g.strokeRect(38, 38, 436, 308);
-  // Courtyard arch & sepia motifs
   g.fillStyle = '#6A4D35'; g.fillRect(54, 54, 404, 276);
   g.fillStyle = '#D5BC96';
   g.beginPath(); g.arc(256, 175, 84, Math.PI, 0); g.lineTo(340, 310); g.lineTo(172, 310); g.closePath(); g.fill();
@@ -335,11 +351,10 @@ function makeWorldMapTex() {
   const c = document.createElement('canvas'); c.width = 512; c.height = 300;
   const g = c.getContext('2d');
   g.fillStyle = '#B2C2CC'; g.fillRect(0, 0, 512, 300);
-  // Layered birch wood continents
   const blobs = [
-    ['#C89F72', [60,55,95,70]], ['#A6784B', [120,145,55,95]], // Americas
-    ['#D5B793', [225,52,70,50]], ['#8D5F38', [225,112,72,102]], // Europe + Africa
-    ['#B88B5D', [300,48,130,85]], ['#D5B793', [380,178,70,52]], // Asia + Australia
+    ['#C89F72', [60,55,95,70]], ['#A6784B', [120,145,55,95]],
+    ['#D5B793', [225,52,70,50]], ['#8D5F38', [225,112,72,102]],
+    ['#B88B5D', [300,48,130,85]], ['#D5B793', [380,178,70,52]],
   ];
   blobs.forEach(([col, [x, y, w, h]]) => {
     g.fillStyle = 'rgba(0,0,0,0.18)'; g.beginPath(); g.roundRect(x+4, y+4, w, h, 14); g.fill();
@@ -362,28 +377,30 @@ function makeDhurrieTex() {
 }
 
 // ============================================================================
-// 3. PROJECT U LOCKED MATERIAL LIBRARY
+// 3. PROJECT U + HOMZ DOCKET (15-11-2026) LOCKED MATERIAL LIBRARY
 // ============================================================================
 const MAT = {
   wallBase:      new THREE.MeshStandardMaterial({ color: 0xF0EFE8, roughness: 0.88 }), // Morning Glory 0765
   wallKabir:     new THREE.MeshStandardMaterial({ color: 0xB2C2CC, roughness: 0.86 }), // Misty Breeze 8307
   wallLimewash:  new THREE.MeshStandardMaterial({ map: makeLimewashTex(), roughness: 0.94 }),
-  wallBath:      new THREE.MeshStandardMaterial({ color: 0xE7E4DC, roughness: 0.55 }),
-  wallCap:       new THREE.MeshStandardMaterial({ color: 0x3A3D45, roughness: 0.8 }),
+  hiddenGrooved: new THREE.MeshStandardMaterial({ map: makeGroovedDoorTex(), roughness: 0.60 }), // 3163 SI + gold/bronze inlays
 
-  beigeWool:     new THREE.MeshStandardMaterial({ color: 0xD8CFBC, roughness: 0.65 }), // 3163 SI
+  beigeWool:     new THREE.MeshStandardMaterial({ color: 0xD8CFBC, roughness: 0.65 }), // 3163 SI Matt
+  taupeGloss:    new THREE.MeshStandardMaterial({ color: 0xDDD6CB, roughness: 0.22, metalness: 0.04 }), // 158 LU Taupe Glossy
+  brownSugar:    new THREE.MeshStandardMaterial({ color: 0x9E836B, roughness: 0.24, metalness: 0.04 }), // 3174 LU Brown Sugar (Docket calibrated)
   cinnHickory:   new THREE.MeshStandardMaterial({ map: makeWoodTex('#734F35', '#4E331F', 8), roughness: 0.58 }), // 424 1D
-  brownSugar:    new THREE.MeshStandardMaterial({ color: 0x7B5238, roughness: 0.28, metalness: 0.04 }), // 3174 LU
-  offWhiteLoft:  new THREE.MeshStandardMaterial({ color: 0xF4F2EB, roughness: 0.42 }), // #F4F2EB
   vintageIndigo: new THREE.MeshStandardMaterial({ color: 0x263B52, roughness: 0.68 }), // 3267 SI
   cpTeak:        new THREE.MeshStandardMaterial({ map: makeWoodTex('#8B5A32', '#5C371B', 6), roughness: 0.52 }),
   oakLight:      new THREE.MeshStandardMaterial({ color: 0xC8A679, roughness: 0.58 }),
   graniteIvory:  new THREE.MeshStandardMaterial({ color: 0xEAE3D5, roughness: 0.25, metalness: 0.05 }),
-  brass:         new THREE.MeshStandardMaterial({ color: 0xC9A45C, roughness: 0.30, metalness: 0.85 }),
+  graniteBlack:  new THREE.MeshStandardMaterial({ color: 0x22252A, roughness: 0.28, metalness: 0.08 }),
+  brass:         new THREE.MeshStandardMaterial({ color: 0xC9A45C, roughness: 0.28, metalness: 0.85 }),
   bronze:        new THREE.MeshStandardMaterial({ color: 0x7A5C2E, roughness: 0.35, metalness: 0.80 }),
   steel:         new THREE.MeshStandardMaterial({ color: 0xC4C9CE, roughness: 0.28, metalness: 0.82 }),
   darkMetal:     new THREE.MeshStandardMaterial({ color: 0x2A2D32, roughness: 0.45, metalness: 0.65 }),
   glass:         new THREE.MeshPhysicalMaterial({ color: 0xCBE2EC, transparent: true, opacity: 0.32, roughness: 0.08, metalness: 0.1 }),
+  tintedGlass:   new THREE.MeshPhysicalMaterial({ color: 0x7A5C3B, transparent: true, opacity: 0.48, roughness: 0.12, metalness: 0.18 }),
+  flutedGlass:   new THREE.MeshPhysicalMaterial({ color: 0xC2B295, transparent: true, opacity: 0.52, roughness: 0.30, metalness: 0.10 }),
   mirror:        new THREE.MeshStandardMaterial({ color: 0xD7E3EA, roughness: 0.06, metalness: 0.92 }),
   fabricSand:    new THREE.MeshStandardMaterial({ color: 0xDDD5C7, roughness: 0.92 }),
   fabricOat:     new THREE.MeshStandardMaterial({ color: 0xE6DFD3, roughness: 0.94 }),
@@ -397,6 +414,7 @@ const MAT = {
   worldMap:      new THREE.MeshStandardMaterial({ map: makeWorldMapTex(), roughness: 0.78 }),
   dhurrie:       new THREE.MeshStandardMaterial({ map: makeDhurrieTex(), roughness: 0.92 }),
   rugWool:       new THREE.MeshStandardMaterial({ color: 0xCFC6B6, roughness: 0.96 }),
+  offWhite:      new THREE.MeshStandardMaterial({ color: 0xF4F2EB, roughness: 0.42 }),
   coveGlow:      new THREE.MeshBasicMaterial({ color: 0xFFCF87 }),
 };
 
@@ -430,7 +448,6 @@ const inspectables = [];
 
 scene.add(wallGroup, furnGroup, pathGroup, grilleGroup, nightLightsGroup);
 
-// Helpers
 function addBox(parent, w, h, d, x, y, z, mat, meta = null) {
   const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat);
   m.position.set(x, y, z);
@@ -487,7 +504,6 @@ function addSlider(x1, z1, x2, z2, top = 2.40) {
   pane.userData = { hFull: top, baseY: 0, isGlass: true };
   wallGroup.add(pane);
   wallMeshes.push(pane);
-  // Slim dark aluminum frame rails
   addBox(wallGroup, Math.abs(dx) > Math.abs(dz) ? len : 0.06, 0.05, Math.abs(dz) > Math.abs(dx) ? len : 0.06,
     (x1+x2)/2, 0.025, (z1+z2)/2, MAT.darkMetal);
 }
@@ -495,7 +511,6 @@ function addSlider(x1, z1, x2, z2, top = 2.40) {
 // ============================================================================
 // 5. FLOOR SLABS (GFC EXACT MM COORDINATES: X West->East, Z North->South)
 // ============================================================================
-// Ground plinth under entire apartment
 const plinth = new THREE.Mesh(new THREE.BoxGeometry(17.4, 0.18, 14.8), new THREE.MeshStandardMaterial({ color: 0x20242C, roughness: 0.9 }));
 plinth.position.set(8.0, -0.17, 6.6);
 plinth.receiveShadow = true;
@@ -507,12 +522,12 @@ addFloor(4.08, 3.78, 10.15, 7.52, FLOOR_MAT.social);  // Living Room 6000x3600
 addFloor(10.15, 3.78, 14.40, 7.52, FLOOR_MAT.social); // Dining Room 4250x3600
 addFloor(10.00, 7.52, 14.40, 11.60, FLOOR_MAT.social);// Kitchen 4250x3980
 addFloor(4.08, 2.50, 5.78, 3.78, FLOOR_MAT.social);   // Linen Store
-addFloor(9.92, 2.50, 11.62, 3.78, FLOOR_MAT.social);  // Dining Vanity Lobby
+addFloor(9.92, 2.50, 11.62, 3.78, FLOOR_MAT.social);  // Dining Common Vanity Lobby
 
 // Master Suite (Warm laminated wood floor)
 addFloor(0.00, 7.52, 4.08, 11.60, FLOOR_MAT.master);  // Master Bedroom 4000x4000
 addFloor(4.08, 7.52, 5.78, 8.95, FLOOR_MAT.master);   // Master Entry Alcove
-addFloor(2.85, 5.48, 4.08, 7.52, FLOOR_MAT.master);   // Puja -> Walk-in Wardrobe 1220x1850
+addFloor(2.85, 5.48, 4.08, 7.52, FLOOR_MAT.social);   // Puja -> Walk-in Wardrobe 1220x1850
 
 // Secondary Bedrooms (800x800 vitrified tile)
 addFloor(5.78, 0.00, 9.92, 3.78, FLOOR_MAT.bed);      // BR-02 Kabir 4000x3650
@@ -532,7 +547,7 @@ addFloor(14.40, 6.28, 15.90, 7.52, FLOOR_MAT.balcony);  // Service Balcony (VRV 
 addFloor(14.40, 7.52, 15.90, 11.60, FLOOR_MAT.balcony); // Kitchen Utility 1500mm
 
 // ============================================================================
-// 6. ARCHITECTURAL WALLS, WINDOWS & SLIDERS (GFC PLAN)
+// 6. ARCHITECTURAL WALLS, WINDOWS & SLIDERS (GFC + HOMZ DOCKET)
 // ============================================================================
 // --- NORTH PERIMETER (z = 0) ---
 addWall(0.00, 0.00, 1.35, 0.00);
@@ -541,20 +556,21 @@ addWall(3.15, 0.00, 4.45, 0.00);
 addWindow(4.45, 0.00, 5.35, 0.00, 1.4, 2.2); // BR-02 Toilet V
 addWall(5.35, 0.00, 6.05, 0.00);
 addWindow(6.05, 0.00, 7.45, 0.00); // BR-02 Kabir North Window W1
-addWall(7.45, 0.00, 9.92, 0.00, 0.14, MAT.wallKabir); // Kabir solid North desk wall
+addWall(7.45, 0.00, 9.92, 0.00, 0.14, MAT.wallKabir);
 addWall(9.92, 0.00, 10.35, 0.00);
 addWindow(10.35, 0.00, 11.25, 0.00, 1.4, 2.2); // BR-03 Toilet V
 addWall(11.25, 0.00, 15.78, 0.00); // BR-03 Gurudwara North Wall (Palki Sahib)
 
 // --- WEST PERIMETER (x = 0) ---
 addWall(0.00, 0.00, 0.00, 0.30);
-// Main Door MD (West entry, 1.2m wide)
+// Main Door MD (West entry, 1.2m wide — right of TV unit per Docket p. 2)
 addBox(wallGroup, 0.06, 2.25, 1.15, 0.02, 1.125, 0.88, MAT.cpTeak, {
   tag: 'ENTRY · WEST FACING', title: 'Main Entrance Door (40mm Thick)',
-  desc: 'Builder 40mm solid door fitted with Aqara A100 Zigbee smart mortise lock + Aqara G4 hardwired doorbell.',
+  desc: 'Builder 40mm solid door fitted with Aqara A100 Zigbee smart mortise lock + Aqara G4 hardwired doorbell. Sits immediately right (North) of the West TV wall.',
   meta: 'Orientation: West · Floor 42 Tower B'
 });
-addWall(0.00, 1.48, 0.00, 5.48); // Drawing West sofa wall (Royale Soft Matte 0765)
+// Drawing West Wall = Mineral Limewash TV Media Wall (Homz Docket p. 2!)
+addWall(0.00, 1.48, 0.00, 5.48, 0.14, MAT.wallLimewash);
 addWall(0.00, 5.48, 0.00, 6.05);
 addWindow(0.00, 6.05, 0.00, 6.95, 1.4, 2.2); // Master Toilet V
 addWall(0.00, 6.95, 0.00, 7.80);
@@ -573,67 +589,67 @@ addWall(14.40, 7.52, 14.40, 8.45); // Kitchen-Utility wall (door D2 at 8.45-9.30
 addWall(14.40, 9.30, 14.40, 11.60);
 
 // --- SOUTH PERIMETER (z = 11.60) ---
-addWall(0.00, 11.60, 1.45, 11.60);
-addSlider(1.45, 11.60, 3.55, 11.60); // Master South Balcony Slider SD2
-addWall(3.55, 11.60, 4.45, 11.60);
+// Master South Wall: SW Wardrobe (0.0 -> 2.15), SE Balcony Slider SD2 (2.15 -> 3.95) per Docket pp. 17-18!
+addWall(0.00, 11.60, 2.15, 11.60);
+addSlider(2.15, 11.60, 3.95, 11.60); // Master South Balcony Slider SD2
+addWall(3.95, 11.60, 4.45, 11.60);
 addWindow(4.45, 11.60, 5.35, 11.60, 1.4, 2.2); // BR-01 Toilet V
-addWall(5.35, 11.60, 7.85, 11.60); // BR-01 South wardrobe wall
-addWindow(7.85, 11.60, 9.25, 11.60); // BR-01 South Window W2
-addWall(9.25, 11.60, 11.35, 11.60);
+addWall(5.35, 11.60, 7.90, 11.60); // BR-01 South wardrobe + bookshelf wall
+addWindow(7.90, 11.60, 9.35, 11.60); // BR-01 South Window W2
+addWall(9.35, 11.60, 11.35, 11.60);
 addWindow(11.35, 11.60, 13.05, 11.60, 1.0, 2.2); // Kitchen Corner Window CW
 addWall(13.05, 11.60, 15.90, 11.60);
 
 // --- INTERNAL PARTITIONS ---
-// Drawing East Wall (TV Media Wall in Mineral Limewash!)
-addWall(4.08, 0.00, 4.08, 3.78, 0.14, MAT.wallLimewash);
+// Drawing East Wall (Sofa Back Wall, Royale Soft Matte 0765)
+addWall(4.08, 0.00, 4.08, 3.78, 0.14, MAT.wallBase);
+// Dark-wood Portal Archway framing Drawing -> Living passage (Docket pp. 3, 5)
+addBox(furnGroup, 0.18, 2.45, 0.10, 4.08, 1.225, 3.82, MAT.cinnHickory);
+addBox(furnGroup, 0.18, 2.45, 0.10, 4.08, 1.225, 5.44, MAT.cinnHickory);
+addBox(furnGroup, 0.18, 0.14, 1.72, 4.08, 2.48, 4.63, MAT.cinnHickory);
+
 // BR-02 Toilet & Linen Store partitions
 addWall(4.08, 2.50, 5.78, 2.50, 0.12);
-addWall(5.78, 0.00, 5.78, 0.45, 0.14, MAT.wallKabir); // Toilet D2 opening 0.45-1.25
-addWall(5.78, 1.25, 5.78, 3.78, 0.14, MAT.wallKabir); // Kabir West wall (World Map)
-// Hidden door on Linen Store South wall (4.15 -> 5.70)
-addWall(4.08, 3.78, 4.45, 3.78, 0.12);
-addBox(furnGroup, 0.90, 2.15, 0.05, 4.95, 1.075, 3.78, MAT.beigeWool, {
-  tag: 'HOMZ HIDDEN DOOR', title: 'Linen Store Room-Matched Hidden Door',
-  desc: '47mm flush door (6mm BWP + 1mm laminate) on 4× SS304 ball-bearing hinges; overhead Homz loft storage inside.',
-  meta: 'Linen Store: 1550 × 1300 mm'
+addWall(5.78, 0.00, 5.78, 0.45, 0.14, MAT.wallKabir);
+addWall(5.78, 1.25, 5.78, 3.78, 0.14, MAT.wallKabir);
+// NW Linen Store Geometric-Grooved Hidden Door Paneling (Docket p. 5 Right)
+addBox(furnGroup, 1.66, 2.45, 0.08, 4.93, 1.225, 3.78, MAT.hiddenGrooved, {
+  tag: 'HOMZ HIDDEN DOOR (NW LIVING)', title: 'Linen Store Geometric-Grooved Hidden Door',
+  desc: 'Full-height 3163 SI Beige Wool paneling with DP-25mm-BG gold & DP-7.6mm-AB bronze groove inlays. 47mm clad hidden door on 4× SS304 hinges.',
+  meta: 'Linen Store: 1550 × 1300 mm · Docket p. 5'
 });
-addWall(5.45, 3.78, 8.75, 3.78, 0.14, MAT.wallKabir); // Kabir South wall (Daybed) / Living North wall
-// BR-02 SE Entrance Door opening (8.75-9.65)
+addWall(5.78, 3.78, 8.75, 3.78, 0.14, MAT.wallKabir); // Kabir South / Living North Sofa wall
 addWall(9.65, 3.78, 9.92, 3.78, 0.14);
 
 // BR-03 Toilet & Lobby partitions
-addWall(9.92, 0.00, 9.92, 3.78, 0.14, MAT.wallKabir); // Kabir East Wardrobe wall
+addWall(9.92, 0.00, 9.92, 3.78, 0.14, MAT.wallKabir);
 addWall(9.92, 2.50, 11.62, 2.50, 0.12);
-addWall(11.62, 0.00, 11.62, 1.65, 0.14); // BR-03 Toilet D2 at 1.65-2.40
+addWall(11.62, 0.00, 11.62, 1.65, 0.14);
 addWall(11.62, 2.40, 11.62, 3.78, 0.14);
-// BR-03 South wall (SW Entrance D1 at 11.80-12.70)
-addWall(12.70, 3.78, 15.78, 3.78, 0.14);
+addWall(12.70, 3.78, 15.78, 3.78, 0.14); // NE Dining Bookshelf wall (between BR-03 door & Sit-out)
 
 // Master Toilet & Puja Walk-in partitions
-addWall(0.00, 5.48, 4.08, 5.48, 0.14); // Drawing South wall
-addWall(2.85, 5.48, 2.85, 7.52, 0.12); // Master Toilet / Puja divider
-addWall(4.08, 5.48, 4.08, 7.52, 0.14); // Puja East wall
-addWall(0.00, 7.52, 1.80, 7.52, 0.14); // Master Toilet D2 at 1.80-2.60
-addWall(2.60, 7.52, 3.05, 7.52, 0.14);
-// Puja Walk-in Hidden Door
-addBox(furnGroup, 0.85, 2.15, 0.05, 3.50, 1.075, 7.52, MAT.beigeWool, {
-  tag: 'HOMZ WALK-IN ALCOVE', title: 'Puja Room Converted to Walk-in Wardrobe',
-  desc: 'Room-matched hidden door panel into 3163 SI Beige Wool walk-in storage off Master Suite.',
-  meta: 'Clear Size: 1220 × 1850 mm (4\'0" × 6\'1")'
+addWall(0.00, 5.48, 4.08, 5.48, 0.14);
+addWall(2.85, 5.48, 2.85, 7.52, 0.12);
+// SW Puja Walk-in Geometric-Grooved Hidden Door Paneling facing Living (Docket p. 5 Left)
+addBox(furnGroup, 0.08, 2.45, 2.04, 4.08, 1.225, 6.50, MAT.hiddenGrooved, {
+  tag: 'HOMZ HIDDEN DOOR (SW LIVING)', title: 'Puja Walk-in Wardrobe Geometric-Grooved Hidden Door',
+  desc: 'Full-height 3163 SI Beige Wool paneling with DP-25mm-BG gold & DP-7.6mm-AB bronze grooves matching Linen Store.',
+  meta: 'Walk-in Clear: 1220 × 1850 mm · Docket pp. 5–6'
 });
+addWall(0.00, 7.52, 1.80, 7.52, 0.14);
+addWall(2.60, 7.52, 4.08, 7.52, 0.14);
 
 // Master Bedroom / Living / BR-01 partitions
-// Master Entrance D1 (4.20-5.10, z=7.52)
-addWall(5.10, 7.52, 8.85, 7.52, 0.14); // Living South wall (Persian Carpet!) / BR-01 North wall
-// BR-01 NE Entrance D1 (8.85-9.75)
+addWall(5.10, 7.52, 8.85, 7.52, 0.14); // Living South wall (Persian Carpet) / BR-01 North wall
 addWall(9.75, 7.52, 10.00, 7.52, 0.14);
-addWall(4.08, 8.95, 5.78, 8.95, 0.12); // BR-01 Toilet North wall
-addWall(4.08, 8.95, 4.08, 11.60, 0.14); // Master / BR-01 Toilet divider
-addWall(5.78, 7.52, 5.78, 10.20, 0.14); // BR-01 West wall (Toilet D2 at 10.20-11.00)
+addWall(4.08, 8.95, 5.78, 8.95, 0.12);
+addWall(4.08, 8.95, 4.08, 11.60, 0.14);
+addWall(5.78, 7.52, 5.78, 10.20, 0.14);
 addWall(5.78, 11.00, 5.78, 11.60, 0.14);
-addWall(10.00, 7.52, 10.00, 11.60, 0.14); // BR-01 East wall / Kitchen West wall
+addWall(10.00, 7.52, 10.00, 11.60, 0.14);
 
-// Balcony parapets & SS316 Full-Height Grilles (Floor 42 Wind & Safety Mandate)
+// Balcony parapets & SS316 Full-Height Grilles
 function addBalconyParapetAndGrille(x1, z1, x2, z2) {
   addWall(x1, z1, x2, z2, 0.12, MAT.wallBase, 1.10, 0);
   const dx = x2 - x1, dz = z2 - z1, len = Math.hypot(dx, dz);
@@ -645,111 +661,105 @@ function addBalconyParapetAndGrille(x1, z1, x2, z2) {
     grilleGroup.add(bar);
   }
 }
-addBalconyParapetAndGrille(0.00, 13.15, 4.08, 13.15); // Master South balcony
+addBalconyParapetAndGrille(0.00, 13.15, 4.08, 13.15);
 addBalconyParapetAndGrille(0.00, 11.60, 0.00, 13.15);
 addBalconyParapetAndGrille(4.08, 11.60, 4.08, 13.15);
-addBalconyParapetAndGrille(15.90, 3.78, 15.90, 6.28); // East Sit-out
-addBalconyParapetAndGrille(15.90, 7.52, 15.90, 11.60); // Utility
+addBalconyParapetAndGrille(15.90, 3.78, 15.90, 6.28);
+addBalconyParapetAndGrille(15.90, 7.52, 15.90, 11.60);
 
 // ============================================================================
-// 7. ROOM-BY-ROOM FURNITURE, JOINERY & HERO PIECES
+// 7. ROOM-BY-ROOM FURNITURE, JOINERY & HERO PIECES (HOMZ DOCKET VERIFIED)
 // ============================================================================
 
 // ---------- A. DRAWING ROOM & FOYER (x: 0..4.08, z: 0..5.48) ----------
 // Wool Flatweave Rug (250x350cm)
-addBox(furnGroup, 2.50, 0.015, 3.40, 2.10, 0.01, 2.75, MAT.rugWool, {
+addBox(furnGroup, 2.40, 0.015, 3.20, 2.20, 0.01, 2.80, MAT.rugWool, {
   tag: 'DRAWING ROOM · RUG', title: 'IKEA STOCKHOLM 100% Pure New Wool Flatweave',
   desc: '250×350 cm handwoven wool rug paired with 2× STOPP FILT 4mm anti-slip underlays.',
   meta: 'Budget: ₹36,580 · Tier 1 Recommended'
 });
 
-// East Media Wall: Floating Cinnamon Hickory Console + 65" Sony TV + Sonos Arc Ultra + 27" Nataraja
-addBox(furnGroup, 0.42, 0.36, 2.85, 3.78, 0.40, 2.15, MAT.cinnHickory, {
-  tag: 'DRAWING · EAST MEDIA WALL', title: 'Homz Floating TV Console (424 1D Cinnamon Hickory)',
-  desc: '18mm BWP ply on M10 French cleat, slatted acoustic flaps, 220mm floor clearance for robot vacuum, backed by Morning Glory 0765 mineral limewash.',
-  meta: 'Finish: 424 1D Cinnamon Hickory · In Homz ₹18L Scope'
+// WEST MEDIA WALL (Homz Docket p. 2 — Left/South of Main Door MD!)
+addBox(furnGroup, 0.42, 0.36, 2.65, 0.30, 0.42, 3.10, MAT.cinnHickory, {
+  tag: 'DRAWING · WEST MEDIA WALL', title: 'Homz Floating TV Console (424 1D Cinnamon Hickory)',
+  desc: 'On West wall immediately left of Main Door MD. 18mm BWP ply on M10 French cleat, 220mm floor clearance, backed by Morning Glory 0765 mineral limewash.',
+  meta: 'Docket p. 2 · Finish: 424 1D Cinnamon Hickory'
 });
-addBox(furnGroup, 0.06, 0.84, 1.46, 3.97, 1.38, 2.20, MAT.tvScreen, {
-  tag: 'DRAWING · AV', title: 'Owned 65" Sony TV + Sonos Arc Ultra',
+addBox(furnGroup, 0.06, 0.84, 1.46, 0.11, 1.38, 2.95, MAT.tvScreen, {
+  tag: 'DRAWING · WEST AV', title: 'Owned 65" Sony Bravia TV + Sonos Arc Ultra',
   desc: '50mm in-wall PVC conduit; ≥150mm vertical clearance below TV for Sonos Arc Ultra upward-firing drivers.',
   meta: 'Audio: Owned Sonos Arc Ultra (₹85k)'
 });
-addBox(furnGroup, 0.11, 0.08, 1.16, 3.80, 0.62, 2.20, MAT.darkMetal); // Sonos Arc Ultra
-// 27" Antique Brass Nataraja Sculpture on Console North end
-const natBase = addBox(furnGroup, 0.24, 0.08, 0.24, 3.78, 0.62, 1.05, MAT.bronze, {
+addBox(furnGroup, 0.11, 0.08, 1.16, 0.28, 0.64, 2.95, MAT.darkMetal); // Sonos Arc Ultra
+// 27" Antique Brass Nataraja Sculpture on Console South end
+addBox(furnGroup, 0.24, 0.08, 0.24, 0.30, 0.64, 4.10, MAT.bronze, {
   tag: 'DRAWING · SCULPTURE', title: 'Devsabha 27" Antique Brass Nataraja (17.5 kg)',
-  desc: 'Solid lost-wax brass on M10-anchored console deck with museum gel; lit by 10° 3000K gimbal spot.',
+  desc: 'Solid lost-wax brass on M10-anchored West console deck with museum gel; lit by 10° 3000K gimbal spot.',
   meta: 'Height: 27" (68cm) · ₹43,999'
 });
 const natRing = new THREE.Mesh(new THREE.TorusGeometry(0.24, 0.024, 10, 24), MAT.brass);
-natRing.position.set(3.78, 0.94, 1.05); natRing.rotation.y = Math.PI / 2;
+natRing.position.set(0.30, 0.96, 4.10); natRing.rotation.y = Math.PI / 2;
 natRing.castShadow = true; furnGroup.add(natRing);
 
-// Magari Porto Low Platform 3-Seater Sofa (West Wall, facing East)
-addBox(furnGroup, 0.96, 0.14, 2.30, 0.65, 0.22, 2.80, MAT.cpTeak, {
-  tag: 'DRAWING · FORMAL SEATING', title: 'Magari Porto Low Platform Sofa + 2× Armchairs',
-  desc: 'Solid walnut/ash frame with KD bolted legs for 2.1m service lift clearance. Upholstered seat cushions (no horizontal cane).',
-  meta: 'Budget: ₹3.10L (Suite) · Tier 2 Recommended'
+// EAST WALL FORMAL L-SOFA (Homz Docket p. 3 — North Window on left, Wood Archway on right!)
+addBox(furnGroup, 0.96, 0.16, 2.55, 3.45, 0.22, 2.25, MAT.cpTeak, {
+  tag: 'DRAWING · EAST FORMAL SEATING', title: 'Magari Porto Low Platform L-Sofa (East Wall)',
+  desc: 'Solid walnut/ash frame with KD bolted legs (2.1m lift gate). North window W on left, dark-wood Living archway on right.',
+  meta: 'Docket p. 3 · Budget: ₹3.10L (Suite)'
 });
-addBox(furnGroup, 0.88, 0.22, 2.22, 0.68, 0.40, 2.80, MAT.fabricSand); // seat
-addBox(furnGroup, 0.22, 0.45, 2.22, 0.30, 0.68, 2.80, MAT.fabricSand); // back
-// 2× Accent Armchairs (North & South flanking coffee table)
-[[1.85, 0.95], [1.85, 4.45]].forEach(([ax, az]) => {
-  addBox(furnGroup, 0.72, 0.38, 0.72, ax, 0.28, az, MAT.fabricOat, {
-    tag: 'DRAWING · ACCENT CHAIR', title: 'Fora Horseshoe / Spin Library Armchair',
-    desc: 'Solid ash/oak frame with upholstered seat pan; stationary 4-leg frame.',
-    meta: 'Tier 1/2 Selection'
-  });
-  addBox(furnGroup, 0.72, 0.34, 0.14, ax, 0.62, az < 2 ? az - 0.30 : az + 0.30, MAT.cpTeak);
-});
+addBox(furnGroup, 0.88, 0.22, 2.48, 3.42, 0.40, 2.25, MAT.fabricSand);
+addBox(furnGroup, 0.22, 0.45, 2.48, 3.82, 0.68, 2.25, MAT.fabricSand);
+// L-Chaise return along North Window side
+addBox(furnGroup, 1.55, 0.36, 0.88, 2.95, 0.32, 1.05, MAT.fabricSand);
 // Coffee Table Pair (Orange Tree Toshi)
-const ct1 = new THREE.Mesh(new THREE.CylinderGeometry(0.45, 0.45, 0.05, 24), MAT.cpTeak);
-ct1.position.set(2.05, 0.40, 2.55); ct1.castShadow = true; furnGroup.add(ct1);
-const ct2 = new THREE.Mesh(new THREE.CylinderGeometry(0.32, 0.32, 0.05, 24), MAT.oakLight);
-ct2.position.set(2.45, 0.33, 3.05); ct2.castShadow = true; furnGroup.add(ct2);
-
-// Foyer Louvered Shoe Credenza + Brass Lantern (NW corner near Main Door)
-addBox(furnGroup, 1.10, 0.82, 0.38, 0.75, 0.41, 0.32, MAT.cpTeak, {
-  tag: 'FOYER · STORAGE', title: 'Custom CP Teak Louvered Foyer Shoe Credenza',
-  desc: 'Kiln-dried hardwood, slotted ventilation, flat shelves for UK 10+ sneakers. Crowned by hand-pierced brass pendant lantern.',
-  meta: 'Budget: ~₹28k + ₹15k Brass Lantern'
-});
+const ct1 = new THREE.Mesh(new THREE.CylinderGeometry(0.44, 0.44, 0.05, 24), MAT.darkMetal);
+ct1.position.set(2.10, 0.40, 2.60); ct1.castShadow = true; furnGroup.add(ct1);
+const ct2 = new THREE.Mesh(new THREE.CylinderGeometry(0.32, 0.32, 0.05, 24), MAT.cpTeak);
+ct2.position.set(1.70, 0.32, 3.05); ct2.castShadow = true; furnGroup.add(ct2);
+// Foyer Pierced Brass Lantern near NW Entry
 const lantern = new THREE.Mesh(new THREE.CylinderGeometry(0.14, 0.18, 0.36, 12), MAT.brass);
-lantern.position.set(0.75, 2.05, 0.36); furnGroup.add(lantern);
+lantern.position.set(0.85, 2.08, 0.72); furnGroup.add(lantern);
 
-// ---------- B. LIVING ROOM SPINE (x: 4.08..10.15, z: 3.78..7.52) ----------
-addBox(furnGroup, 3.00, 0.015, 2.20, 7.00, 0.01, 5.55, MAT.rugWool);
-// Gulmohar Lane Slipcovered 3-Seater Family Sofa
-addBox(furnGroup, 2.20, 0.40, 0.94, 7.00, 0.25, 4.75, MAT.fabricOat, {
-  tag: 'LIVING · FAMILY SOFA', title: 'Gulmohar Lane Classic Slipcovered 3-Seater',
-  desc: 'Kiln-dried hardwood frame, machine-washable removable slipcovers (child Kabir friendly), KD legs.',
-  meta: 'Budget: ₹85k–₹95k · Tier 1 Recommended'
+// ---------- B. LIVING ROOM SPINE & WALK-IN (x: 4.08..10.15, z: 3.78..7.52) ----------
+// Puja -> Walk-in Wardrobe Interior (Docket p. 6: two-sided 3163 SI open shelving + West backlit arch mirror)
+addBox(furnGroup, 1.05, 2.35, 0.36, 3.46, 1.175, 5.72, MAT.beigeWool, {
+  tag: 'PUJA WALK-IN · DOCKET P. 6', title: 'Walk-in Wardrobe (Two-Sided 3163 SI + Backlit Arch Mirror)',
+  desc: 'Two-sided open 3163 SI Beige Wool shelving flanking a full-height backlit arch/dome mirror on the West back wall.',
+  meta: 'Clear Size: 1220 × 1850 mm'
 });
-addBox(furnGroup, 2.20, 0.42, 0.20, 7.00, 0.62, 4.35, MAT.fabricOat);
-// Upholstered Storage Ottoman (child-safe padded edges)
-addBox(furnGroup, 1.05, 0.40, 0.68, 7.00, 0.20, 5.95, MAT.fabricSand, {
+addBox(furnGroup, 1.05, 2.35, 0.36, 3.46, 1.175, 7.28, MAT.beigeWool);
+addBox(furnGroup, 0.04, 1.85, 0.72, 2.94, 1.08, 6.50, MAT.mirror); // West wall backlit arch mirror
+
+// Living Area Rug + Family Sofa on NORTH Wall (Homz Docket p. 5 Right)
+addBox(furnGroup, 3.00, 0.015, 2.20, 7.20, 0.01, 5.55, MAT.rugWool);
+addBox(furnGroup, 2.30, 0.40, 0.94, 7.25, 0.25, 4.35, MAT.fabricOat, {
+  tag: 'LIVING · NORTH WALL FAMILY SOFA', title: 'Gulmohar Lane Slipcovered 3-Seater (North Wall)',
+  desc: 'Backs against North wall between NW Linen Store hidden-door paneling and BR-02 entrance door, facing the Persian wall carpet on South wall.',
+  meta: 'Docket p. 5 Right · Budget: ₹85k–₹95k'
+});
+addBox(furnGroup, 2.30, 0.42, 0.20, 7.25, 0.62, 3.96, MAT.fabricOat);
+addBox(furnGroup, 1.05, 0.40, 0.68, 7.25, 0.20, 5.55, MAT.fabricSand, {
   tag: 'LIVING · OTTOMAN', title: 'Orange Tree Upholstered Storage Ottoman',
   desc: 'Solid wood frame with hidden toy storage and padded child-safe rim.',
   meta: 'Budget: ₹15k–₹21k'
 });
-// Framed Persian Wall Carpet on Living South Wall (z = 7.42)
-addBox(furnGroup, 1.95, 1.42, 0.04, 7.05, 1.55, 7.42, MAT.cpTeak);
-addBox(furnGroup, 1.82, 1.30, 0.05, 7.05, 1.55, 7.41, MAT.persianCarpet, {
+// Framed Persian Wall Carpet on Living South Wall (z = 7.42, facing North sofa!)
+addBox(furnGroup, 1.95, 1.42, 0.04, 7.25, 1.55, 7.42, MAT.cpTeak);
+addBox(furnGroup, 1.82, 1.30, 0.05, 7.25, 1.55, 7.41, MAT.persianCarpet, {
   tag: 'LIVING · SOUTH WALL ART', title: 'Owned Framed Persian Wall Carpet',
-  desc: 'Classical courtyard scene in sepia, walnut, and antique bronze. Illuminated by 3000K CRI 90+ gimbal spot (≤50 lux textile rule).',
+  desc: 'Classical courtyard scene in sepia, walnut, and antique bronze directly opposite the North-wall family sofa. 3000K CRI 90+ gimbal spot (≤50 lux).',
   meta: 'Protected from direct East slider UV'
 });
 
-// ---------- C. DINING ROOM & LOBBY VANITY (x: 10.15..14.40, z: 3.78..7.52) ----------
+// ---------- C. DINING ROOM, NE BOOKSHELF & LOBBY COMMON VANITY ----------
 // 220x100 cm Custom CP Teak 8-Seat Dining Table
 addBox(furnGroup, 2.20, 0.06, 1.00, 12.15, 0.75, 5.65, MAT.cpTeak, {
   tag: 'DINING · HERO TABLE', title: 'Custom Seasoned CP Teak 8-Seat Dining Table',
   desc: '220×100 cm continuous 40mm solid slab top with KD bolted legs for 2.1m service lift clearance.',
-  meta: 'Budget: ~₹68,000 · Tier 1 Recommended (9.3 BIFL)'
+  meta: 'Budget: ~₹68,000 · Tier 1 Recommended'
 });
 [[-0.95,-0.38],[0.95,-0.38],[-0.95,0.38],[0.95,0.38]].forEach(([lx,lz]) =>
   addBox(furnGroup, 0.07, 0.72, 0.07, 12.15+lx, 0.36, 5.65+lz, MAT.cpTeak));
-// 6 Dining Chairs (3 North, 3 South) + 2 Head Chairs
 [-0.70, 0, 0.70].forEach(dx => {
   addBox(furnGroup, 0.46, 0.45, 0.46, 12.15+dx, 0.23, 4.92, MAT.oakLight);
   addBox(furnGroup, 0.46, 0.44, 0.06, 12.15+dx, 0.66, 4.72, MAT.cpTeak);
@@ -759,147 +769,181 @@ addBox(furnGroup, 2.20, 0.06, 1.00, 12.15, 0.75, 5.65, MAT.cpTeak, {
 // Over-Table Linear Wood & Spun Brass Pendant Chandelier
 addBox(furnGroup, 1.35, 0.06, 0.14, 12.15, 1.65, 5.65, MAT.brass, {
   tag: 'DINING · PENDANT', title: 'Orange Tree Kaze / Fos Linear Wood & Brass Chandelier',
-  desc: 'Hung 800mm above tabletop on Shelly Dimmer Gen3 / Wozart Matter dimmer. Glare-free shaded E27 2700K bulbs.',
+  desc: 'Hung 800mm above tabletop on Shelly Dimmer Gen3 / Wozart Matter dimmer.',
   meta: 'Budget: ₹13k–₹18k'
 });
-// Dining Vanity + Plumbed Robot Vacuum Bay + Dome Mirror (Lobby Niche x: 10.0..11.55, z: 2.55..3.75)
-addBox(furnGroup, 1.35, 0.80, 0.52, 10.78, 0.40, 2.86, MAT.cinnHickory, {
-  tag: 'DINING · VANITY & ROBOT BAY', title: 'Homz Floor-Standing Vanity + Plumbed Robot Dock',
-  desc: '424 1D Cinnamon Hickory bookshelf & vanity housing Roborock Qrevo S Pro (1/2" feed + 32mm drain) + copper-free dome mirror.',
-  meta: 'In Homz ₹18L Scope'
+
+// NE DINING OPEN GRID BOOKSHELF (Homz Docket pp. 7–8: between BR-03 door & East Sit-out!)
+const bsX = 13.55, bsZ = 3.96;
+addBox(furnGroup, 0.05, 2.45, 0.32, bsX - 0.26, 1.225, bsZ, MAT.cinnHickory, {
+  tag: 'DINING · NE OPEN BOOKSHELF', title: 'Homz Floor-to-Ceiling Open Grid Bookshelf (424 1D)',
+  desc: 'Mounted on NE Dining wall directly between BR-03 entrance door and East Sit-out balcony slider. 2 vertical dividers × 5 horizontal shelves.',
+  meta: 'Docket pp. 7–8 · Finish: 424 1D Cinnamon Hickory'
 });
-addBox(furnGroup, 0.42, 0.48, 0.42, 10.35, 0.24, 2.95, MAT.offWhiteLoft); // Robot dock
-addBox(furnGroup, 0.65, 0.95, 0.03, 10.95, 1.48, 2.60, MAT.mirror); // Dome mirror
+addBox(furnGroup, 0.05, 2.45, 0.32, bsX + 0.26, 1.225, bsZ, MAT.cinnHickory);
+[0.45, 0.90, 1.35, 1.80, 2.22].forEach(sy => addBox(furnGroup, 1.32, 0.04, 0.32, bsX, sy, bsZ, MAT.cinnHickory));
+
+// LOBBY COMMON VANITY (Homz Docket pp. 10–11: West wall of Lobby niche in 158 LU Taupe!)
+addBox(furnGroup, 0.50, 0.56, 1.15, 10.22, 0.58, 3.15, MAT.taupeGloss, {
+  tag: 'LOBBY · COMMON VANITY (DOCKET P. 10)', title: 'Homz Floating Common Vanity (158 LU Taupe) + Robot Bay',
+  desc: 'Mounted on West wall of Lobby niche in glossy 158 LU Taupe. Countertop vessel basin, copper-free arch mirror, and Roborock Qrevo S Pro bay directly underneath on left.',
+  meta: 'Docket pp. 10–11 · Finish: Century 158 LU Taupe'
+});
+addBox(furnGroup, 0.36, 0.14, 0.52, 10.22, 0.93, 3.15, MAT.offWhite); // Vessel basin
+addBox(furnGroup, 0.40, 0.22, 0.40, 10.22, 0.12, 3.45, MAT.offWhite); // Robot Vacuum parked under vanity
+addBox(furnGroup, 0.04, 1.05, 0.68, 10.00, 1.62, 3.15, MAT.mirror); // Arch mirror on West wall
 
 // East Sit-Out Balcony Chairs & Wind-Ballasted Planter
-[[15.15, 4.45], [15.15, 5.65]].forEach(([bx, bz]) => {
-  addBox(furnGroup, 0.56, 0.42, 0.56, bx, 0.21, bz, MAT.cpTeak);
-});
+[[15.15, 4.45], [15.15, 5.65]].forEach(([bx, bz]) => addBox(furnGroup, 0.56, 0.42, 0.56, bx, 0.21, bz, MAT.cpTeak));
 const plantPot = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.18, 0.42, 14), MAT.terracotta);
 plantPot.position.set(15.25, 0.21, 5.05); furnGroup.add(plantPot);
 const foliage = new THREE.Mesh(new THREE.DodecahedronGeometry(0.32), MAT.plant);
 foliage.position.set(15.25, 0.62, 5.05); furnGroup.add(foliage);
 
-// ---------- D. KITCHEN & UTILITY (x: 10.00..14.40, z: 7.52..11.60) ----------
-// Bosch Serie 6 Fridge (NW Fridge Niche)
-addBox(furnGroup, 0.72, 1.88, 0.70, 10.45, 0.94, 7.98, MAT.steel, {
-  tag: 'KITCHEN · FRIDGE', title: 'Bosch Serie 6 Refrigerator',
-  desc: 'Dedicated 16A power drop in NW fridge niche.',
-  meta: 'Kitchen Clear: 4250 × 3980 mm'
+// ---------- D. KITCHEN & UTILITY (HOMZ DOCKET PP. 12–16) ----------
+// West Wall (Kitchen-C, p. 14): NW Tall Pantry + Side-by-Side Fridge Alcove + Built-in Oven/Microwave Tall Tower + Counter
+addBox(furnGroup, 0.64, 2.38, 0.58, 10.40, 1.19, 7.86, MAT.brownSugar, {
+  tag: 'KITCHEN WEST · DOCKET P. 14', title: 'Tall Pantry + Side-by-Side Fridge + Oven/Microwave Tower',
+  desc: 'Full West appliance wall in 3174 LU Brown Sugar with 158 LU Taupe overhead loft and Gold PVC skirting.',
+  meta: 'Docket p. 14 · Kitchen-C'
 });
-// Base Cabinets (3174 LU Brown Sugar) + Ivory Fantasy Granite Worktop
-// West run
-addBox(furnGroup, 0.62, 0.84, 2.95, 10.38, 0.42, 9.95, MAT.brownSugar, {
-  tag: 'KITCHEN · BASE & COUNTER', title: '3174 LU Brown Sugar Base + Ivory Fantasy Granite',
-  desc: '9× Hettich/Blum soft-close tandem drawers, Akemi nano-sealed Ivory Fantasy Indian granite (reject Kashmir White), zero dishwasher.',
-  meta: 'Overheads: Warm Off-White (#F4F2EB)'
+addBox(furnGroup, 0.72, 1.82, 0.92, 10.44, 0.91, 8.64, MAT.steel, {
+  tag: 'KITCHEN · FRIDGE', title: 'Side-by-Side / Bosch Serie 6 Refrigerator Alcove',
+  desc: 'Framed between NW tall pantry and built-in oven/microwave tower with 158 LU Taupe loft above.',
+  meta: 'Dedicated 16A power drop'
 });
-addBox(furnGroup, 0.65, 0.04, 2.98, 10.38, 0.86, 9.95, MAT.graniteIvory);
-// South run (under Corner Window with 16G SS304 Undermount Sink)
-addBox(furnGroup, 3.60, 0.84, 0.64, 12.48, 0.42, 11.20, MAT.brownSugar);
+addBox(furnGroup, 0.66, 0.46, 0.96, 10.42, 2.15, 8.64, MAT.taupeGloss); // Fridge loft
+addBox(furnGroup, 0.64, 2.38, 0.64, 10.40, 1.19, 9.44, MAT.brownSugar); // Built-in Oven + Microwave Tower
+addBox(furnGroup, 0.06, 0.58, 0.56, 10.71, 0.92, 9.44, MAT.darkMetal); // Built-in Oven
+addBox(furnGroup, 0.06, 0.38, 0.56, 10.71, 1.44, 9.44, MAT.darkMetal); // Built-in Microwave
+// West counter south of oven tower
+addBox(furnGroup, 0.62, 0.84, 1.12, 10.39, 0.42, 10.34, MAT.brownSugar);
+addBox(furnGroup, 0.64, 0.04, 1.14, 10.39, 0.86, 10.34, MAT.graniteIvory);
+addBox(furnGroup, 0.36, 1.10, 1.12, 10.26, 1.84, 10.34, MAT.taupeGloss); // 158 LU Taupe overheads
+
+// South Wall (Kitchen-B, p. 13): U-base + Ivory Fantasy Granite + Gold Skirting + Centered Sink + SE Fluted Glass
+addBox(furnGroup, 3.60, 0.84, 0.64, 12.48, 0.42, 11.20, MAT.brownSugar, {
+  tag: 'KITCHEN SOUTH · DOCKET P. 13', title: '3174 LU Brown Sugar Base + Ivory Fantasy Granite + Gold Gola',
+  desc: '9× soft-close tandem drawers, Gold PVC skirting, Gold Gola profiles, centered 16G SS304 undermount sink, and SE gold-framed fluted-glass display cabinets.',
+  meta: 'Overheads: Century 158 LU Taupe (Glossy)'
+});
+addBox(furnGroup, 3.60, 0.08, 0.04, 12.48, 0.04, 10.87, MAT.brass); // Gold PVC skirting
 addBox(furnGroup, 3.64, 0.04, 0.66, 12.48, 0.86, 11.20, MAT.graniteIvory);
 addBox(furnGroup, 0.68, 0.05, 0.46, 12.20, 0.865, 11.18, MAT.steel, {
   tag: 'KITCHEN · SINK', title: 'Carysil 16G (1.2mm) Handmade SS304 Undermount Sink',
-  desc: 'R10–R15 corners with sound pads; LG PuriCare SS304 UV-C RO mounted adjacent.',
+  desc: 'Centered between South windows CW + KFG; LG PuriCare SS304 UV-C RO mounted adjacent.',
   meta: 'Strict 16G AISI 304 Mandate'
 });
-// East run (Häfele Domino Gas + Induction Pair + Faber Coral BLDC 90cm Chimney)
-addBox(furnGroup, 0.64, 0.84, 1.85, 13.98, 0.42, 10.10, MAT.brownSugar);
-addBox(furnGroup, 0.66, 0.04, 1.88, 13.98, 0.86, 10.10, MAT.graniteIvory);
-addBox(furnGroup, 0.52, 0.03, 0.62, 13.96, 0.89, 10.10, MAT.darkMetal, {
-  tag: 'KITCHEN · HOB & CHIMNEY', title: 'Häfele Domino Pair (Gas + Induction) + Faber 90cm BLDC',
-  desc: 'Locked owner exception: Altius FS 230 Gas + Bella/Nero 30 Induction (₹53k pair) under 90cm Faber Coral BLDC chimney.',
-  meta: '2× Tandem Drawers Below Hob'
+// SE Gold-Framed Fluted-Glass Upper Display Cabinets (Docket pp. 12-13)
+addBox(furnGroup, 1.05, 0.68, 0.34, 13.55, 1.65, 11.35, MAT.flutedGlass);
+addBox(furnGroup, 1.08, 0.04, 0.36, 13.55, 1.31, 11.35, MAT.brass);
+addBox(furnGroup, 1.08, 0.04, 0.36, 13.55, 1.99, 11.35, MAT.brass);
+addBox(furnGroup, 1.05, 0.44, 0.36, 13.55, 2.22, 11.35, MAT.taupeGloss);
+
+// East Wall (Kitchen-A, p. 12): Hob + Faber 90cm Chimney + 158 LU Taupe Overheads
+addBox(furnGroup, 0.64, 0.84, 1.75, 13.98, 0.42, 10.05, MAT.brownSugar);
+addBox(furnGroup, 0.04, 0.08, 1.75, 13.65, 0.04, 10.05, MAT.brass); // Gold skirting
+addBox(furnGroup, 0.66, 0.04, 1.78, 13.98, 0.86, 10.05, MAT.graniteIvory);
+addBox(furnGroup, 0.52, 0.03, 0.62, 13.96, 0.89, 10.05, MAT.darkMetal, {
+  tag: 'KITCHEN EAST · HOB & CHIMNEY', title: 'Häfele Domino Pair (Gas + Induction) + Faber 90cm BLDC',
+  desc: 'Locked owner exception (₹53k pair) under 90cm Faber Coral BLDC chimney with 158 LU Taupe overheads.',
+  meta: 'Docket p. 12 · 2× Tandem Drawers Below Hob'
 });
-addBox(furnGroup, 0.48, 0.55, 0.90, 14.08, 1.90, 10.10, MAT.darkMetal); // 90cm Chimney hood
-// Warm Off-White (#F4F2EB) Overhead Cabinets & Lofts
-addBox(furnGroup, 0.36, 0.72, 2.75, 10.26, 1.85, 10.00, MAT.offWhiteLoft);
-// Utility: Stacked Bosch Serie 6 Washer + Serie 4 Heat-Pump Dryer
-addBox(furnGroup, 0.62, 1.72, 0.62, 15.05, 0.86, 8.20, MAT.offWhiteLoft, {
-  tag: 'UTILITY · LAUNDRY STACK', title: 'Bosch Serie 6 Washer + Serie 4 Heat-Pump Dryer',
-  desc: 'Stacked directly on structural floor in covered utility alcove (zero hollow plinths).',
+addBox(furnGroup, 0.44, 0.22, 0.90, 14.08, 1.56, 10.05, MAT.darkMetal); // Chimney
+addBox(furnGroup, 0.36, 0.88, 1.75, 14.12, 2.04, 10.05, MAT.taupeGloss); // East 158 LU Taupe overheads
+
+// Utility (Docket p. 15 + Locked Stacked Bosch Washer/Dryer)
+addBox(furnGroup, 0.56, 1.72, 0.52, 15.05, 0.86, 9.65, MAT.taupeGloss, {
+  tag: 'UTILITY · DOCKET P. 15', title: 'Utility Tall Storage (158 LU Taupe) + Stacked Bosch Laundry',
+  desc: 'Tall broom/storage cabinet in 158 LU Taupe beside Kitchen door + stacked Bosch Serie 6 washer & Serie 4 heat-pump dryer on structural floor + service sink.',
   meta: 'Utility Width: 1500 mm (4\'11")'
 });
+addBox(furnGroup, 0.62, 1.72, 0.62, 15.05, 0.86, 10.40, MAT.offWhite); // Stacked Washer + Dryer
+addBox(furnGroup, 0.55, 0.05, 0.62, 15.05, 0.84, 11.15, MAT.graniteBlack); // Utility sink counter
 // Daikin 10 HP VRV ODU on Service Balcony
 addBox(furnGroup, 0.50, 1.45, 0.92, 15.25, 0.72, 6.92, MAT.steel, {
   tag: 'SERVICE BALCONY · HVAC', title: 'Daikin 10 HP VRV Outdoor Unit (ODU)',
-  desc: 'Drives 10.76 TR across 7 indoor units (3 slim-duct concealed + 4 wall-mounted).',
+  desc: 'Drives 10.76 TR across 7 indoor units.',
   meta: 'Service Balcony: 1500 mm wide'
 });
 
-// ---------- E. MASTER BEDROOM SUITE (x: 0..4.08, z: 7.52..11.60) ----------
-// Custom Seasoned CP Teak King Bed (72x78" = 1.83 x 1.98 m, head on West wall)
-addBox(furnGroup, 2.06, 0.34, 1.92, 1.12, 0.17, 9.65, MAT.cpTeak, {
+// ---------- E. MASTER BEDROOM SUITE (HOMZ DOCKET PP. 17–20) ----------
+// Custom Seasoned CP Teak King Bed (West wall facing East)
+addBox(furnGroup, 2.06, 0.34, 1.92, 1.12, 0.17, 9.35, MAT.cpTeak, {
   tag: 'MASTER SUITE · KING BED', title: 'Custom Seasoned CP Teak King Bed (72×78 in)',
   desc: 'Native Indian king mortise-and-tenon frame + Sunday Latex Plus 8" Belgian Dunlop organic latex mattress.',
   meta: 'Bed ₹68k + Mattress ₹58k · Master: 4000×4000 mm'
 });
-addBox(furnGroup, 0.10, 1.05, 1.96, 0.14, 0.58, 9.65, MAT.cpTeak); // Headboard
-addBox(furnGroup, 1.96, 0.22, 1.82, 1.15, 0.45, 9.65, MAT.bedLinen); // Mattress
-addBox(furnGroup, 0.90, 0.24, 1.84, 1.62, 0.46, 9.65, MAT.bedThrow); // Throw
-// 2× Spin Float Solid Ash Wall-Hung Bedside Tables
-addBox(furnGroup, 0.38, 0.18, 0.46, 0.28, 0.48, 8.38, MAT.oakLight);
-addBox(furnGroup, 0.38, 0.18, 0.46, 0.28, 0.48, 10.92, MAT.oakLight);
-// Homz Master Wardrobe (3163 SI Beige Wool + Brushed Satin Brass Pulls)
-addBox(furnGroup, 0.60, 2.40, 2.15, 3.68, 1.20, 10.15, MAT.beigeWool, {
-  tag: 'MASTER SUITE · WARDROBE', title: 'Homz Master Wardrobe (3163 SI Beige Wool)',
-  desc: 'Swing shutters with Spruce & Pop Claro Brushed Satin Brass PVD pulls (256mm CC), internal tension rods, Tip-On lofts.',
-  meta: 'Walk-in Puja Alcove also in 3163 SI Beige Wool'
+addBox(furnGroup, 0.10, 1.05, 1.96, 0.14, 0.58, 9.35, MAT.cpTeak);
+addBox(furnGroup, 1.96, 0.22, 1.82, 1.15, 0.45, 9.35, MAT.bedLinen);
+addBox(furnGroup, 0.90, 0.24, 1.84, 1.62, 0.46, 9.35, MAT.bedThrow);
+addBox(furnGroup, 0.38, 0.18, 0.46, 0.28, 0.48, 8.10, MAT.oakLight);
+addBox(furnGroup, 0.38, 0.18, 0.46, 0.28, 0.48, 10.60, MAT.oakLight);
+
+// SOUTH WALL 4-DOOR WARDROBE (Homz Docket pp. 17–19: SW wall right beside SD2 slider!)
+addBox(furnGroup, 1.96, 2.45, 0.60, 1.12, 1.225, 11.24, MAT.beigeWool, {
+  tag: 'MASTER SUITE · SOUTH WARDROBE (DOCKET P. 18)', title: 'Homz 4-Door Wardrobe (3163 SI Beige Wool)',
+  desc: 'Positioned on South wall immediately beside South Balcony Slider SD2. 4 mid swing doors with Claro Satin Brass pulls, 2 bottom drawers with Gold G-profile, 4 Tip-On lofts.',
+  meta: 'Docket pp. 17–19 · Finish: 3163 SI Beige Wool'
 });
-// Tall Dresser + Full-Height Dome Mirror (South-West corner)
-addBox(furnGroup, 0.95, 0.85, 0.45, 0.72, 0.42, 11.25, MAT.beigeWool);
-addBox(furnGroup, 0.68, 1.65, 0.04, 0.72, 1.68, 11.45, MAT.mirror, {
-  tag: 'MASTER SUITE · DRESSER', title: 'Homz Tall Dresser + Full-Height Dome Mirror',
-  desc: 'Saint-Gobain copper-free mirror with 24V CRI 95+ COB warm halo backlight on Mean Well driver.',
-  meta: 'Hardware: Claro Brass 28mm Knobs'
+addBox(furnGroup, 1.96, 0.03, 0.03, 1.12, 0.46, 10.93, MAT.brass); // Gold G-profile drawer band
+
+// EAST ALCOVE TALL DRESSER + BACKLIT DOME MIRROR + GOLD TINTED-GLASS CABINET (Docket p. 18 Left!)
+addBox(furnGroup, 0.44, 0.48, 1.55, 3.80, 0.24, 9.75, MAT.beigeWool, {
+  tag: 'MASTER SUITE · EAST ALCOVE DRESSER (DOCKET P. 18)', title: 'Homz East Alcove Dresser + Backlit Dome Mirror + Glass Cabinet',
+  desc: 'Faces the bed from the East alcove: low 2-drawer console + full-height backlit Saint-Gobain dome mirror + brushed-gold brown-tinted glass display tower.',
+  meta: 'Docket p. 18 Left · 24V CRI 95+ Mirror Halo'
 });
-// Walk-in Puja Wardrobe Shelving inside 1220x1850 alcove
-addBox(furnGroup, 0.48, 2.35, 1.65, 3.16, 1.17, 6.50, MAT.beigeWool);
+addBox(furnGroup, 0.04, 1.65, 0.66, 3.98, 1.38, 9.38, MAT.mirror); // Full-height backlit dome mirror
+addBox(furnGroup, 0.38, 1.55, 0.56, 3.82, 1.32, 10.16, MAT.tintedGlass); // Brushed-gold brown-tinted glass cabinet
+addBox(furnGroup, 0.40, 0.04, 0.58, 3.82, 2.10, 10.16, MAT.brass);
+addBox(furnGroup, 0.40, 0.04, 0.58, 3.82, 0.54, 10.16, MAT.brass);
+
 // Master South Balcony Chairs
 [[1.05, 12.40], [2.95, 12.40]].forEach(([bx, bz]) => addBox(furnGroup, 0.58, 0.42, 0.58, bx, 0.21, bz, MAT.cpTeak));
 
-// ---------- F. BR-01 STUDY & GUEST ROOM (x: 5.78..10.00, z: 7.52..11.60) ----------
-// North Wall: Custom CP Teak / Gulmohar Lane Berlin Sofa-Bed (188x104cm)
+// ---------- F. BR-01 STUDY & GUEST ROOM (HOMZ DOCKET PP. 25–27 + STUDY SPEC) ----------
+// North Wall: Custom CP Teak / Gulmohar Lane Berlin Sofa-Bed
 addBox(furnGroup, 1.88, 0.42, 0.98, 7.20, 0.21, 8.12, MAT.fabricCharcoal, {
   tag: 'BR-01 · GUEST SOFA-BED', title: 'Custom CP Teak Pull-Out Sofa-Bed / Gulmohar Lane Berlin',
   desc: '188×104 cm closed (193 cm open) along North wall. Leaves 203 cm clear walk to South wardrobe.',
   meta: 'Budget: ₹68k (CP Teak) · BR-01: 4000×4000 mm'
 });
 addBox(furnGroup, 1.88, 0.40, 0.18, 7.20, 0.58, 7.72, MAT.fabricCharcoal);
-// East Wall: Executive Motorized Standing Desk (150x75cm, Samar sits South facing North)
+// East Wall: Executive Standing Desk (Samar faces North) + Steelcase Amia
 addBox(furnGroup, 1.48, 0.05, 0.75, 9.08, 0.75, 9.25, MAT.oakLight, {
   tag: 'BR-01 · EXECUTIVE DESK', title: 'Owned Dual-Motor Standing Desk + Steelcase Amia',
-  desc: 'Samar sits facing North (command view of NE entry). BenQ ScreenBar Pro + mechanical spring monitor arm + Brother HL-L2440DW laser printer.',
+  desc: 'Samar sits facing North (command view of NE entry). BenQ ScreenBar Pro + mechanical monitor arm + Brother HL-L2440DW laser printer.',
   meta: 'Amia upgraded with 3" PU rollerblade castors'
 });
 addBox(furnGroup, 0.06, 0.73, 0.55, 8.45, 0.36, 9.25, MAT.darkMetal);
 addBox(furnGroup, 0.06, 0.73, 0.55, 9.70, 0.36, 9.25, MAT.darkMetal);
-addBox(furnGroup, 0.78, 0.42, 0.04, 9.10, 1.12, 9.00, MAT.tvScreen); // 32" Monitor facing South
-addBox(furnGroup, 0.56, 0.48, 0.54, 9.10, 0.28, 9.88, MAT.darkMetal); // Steelcase Amia chair
-// South Wall: Homz 3-Door Wardrobe (3163 SI) + Left Fluted Cinnamon Hickory Bookshelf Return
-addBox(furnGroup, 1.55, 2.40, 0.58, 6.65, 1.20, 11.22, MAT.beigeWool, {
-  tag: 'BR-01 · WARDROBE & LIBRARY', title: 'Homz 3-Door Wardrobe + Fluted Cinnamon Hickory Library',
-  desc: '3163 SI Beige Wool doors with Claro Antique Smoked Bronze pulls + 35cm fluted 424 1D Cinnamon Hickory open bookshelf beside South window.',
-  meta: 'Concealed 2700K LED shelf wash'
+addBox(furnGroup, 0.78, 0.42, 0.04, 9.10, 1.12, 9.00, MAT.tvScreen);
+addBox(furnGroup, 0.56, 0.48, 0.54, 9.10, 0.28, 9.88, MAT.darkMetal);
+
+// SOUTH WALL: 4-Door Wardrobe (West) + Open Cinnamon Hickory Bookshelf directly beside South Window W2 (East) — Docket pp. 25–27!
+addBox(furnGroup, 1.56, 2.45, 0.58, 6.68, 1.225, 11.24, MAT.beigeWool, {
+  tag: 'BR-01 · SOUTH WARDROBE & LIBRARY (DOCKET P. 25)', title: 'Homz 4-Door Wardrobe + East Open Cinnamon Hickory Bookshelf',
+  desc: '4-door 3163 SI Beige Wool wardrobe extends West to SW toilet wall; open 424 1D Cinnamon Hickory bookshelf sits directly beside South Window W2.',
+  meta: 'Docket pp. 25–27 · Claro Antique Smoked Bronze pulls'
 });
-addBox(furnGroup, 0.42, 2.40, 0.58, 7.64, 1.20, 11.22, MAT.cinnHickory);
-// SE Reading Nook: IKEA POÄNG Armchair + Footstool
+addBox(furnGroup, 0.42, 2.45, 0.58, 7.67, 1.225, 11.24, MAT.cinnHickory);
+// SE Reading Nook: IKEA POÄNG Armchair by South Window
 addBox(furnGroup, 0.68, 0.42, 0.72, 9.15, 0.24, 10.95, MAT.fabricOat, {
   tag: 'BR-01 · READING NOOK', title: 'IKEA POÄNG Armchair & Footstool (Kelinge Beige)',
   desc: 'Birch veneer high-back reading chair by South window with arm-reach access to bookshelf.',
   meta: 'Budget: ₹14.5k–₹18.9k'
 });
 
-// ---------- G. BR-02 KABIR'S ROOM (x: 5.78..9.92, z: 0..3.78) ----------
-// East Wall: Homz Wardrobe (Beige Wool + North Cinnamon Hickory Display Niche + 4 Vintage Indigo Base Drawers)
-addBox(furnGroup, 0.58, 2.40, 0.75, 9.54, 1.20, 0.50, MAT.cinnHickory, {
-  tag: 'BR-02 KABIR · WARDROBE', title: 'Locked KBR Wardrobe (Beige Wool + Hickory Niche + Vintage Indigo)',
-  desc: 'North bay: wall-to-wall 424 1D Cinnamon Hickory open book niche. Main shutters: 3163 SI Beige Wool + Mantara beech elephant knobs. Base: 4× 3267 SI Vintage Indigo tandem drawers.',
+// ---------- G. BR-02 KABIR'S ROOM (HOMZ DOCKET PP. 21–23 + VASTU LAYOUT) ----------
+addBox(furnGroup, 0.58, 2.45, 0.75, 9.54, 1.225, 0.50, MAT.cinnHickory, {
+  tag: 'BR-02 KABIR · EAST WARDROBE (DOCKET P. 22)', title: 'Locked KBR Wardrobe (Beige Wool + Hickory Niche + Vintage Indigo)',
+  desc: 'North bay: wall-to-wall 424 1D Cinnamon Hickory open book niche. Main shutters: 3163 SI Beige Wool + Mantara beech elephant knobs. Base: 3267 SI Vintage Indigo tandem drawers.',
   meta: 'Wall Paint: Misty Breeze (8307) #B2C2CC'
 });
-addBox(furnGroup, 0.58, 0.52, 2.45, 9.54, 0.26, 2.12, MAT.vintageIndigo); // 4 Vintage Indigo Base Drawers
-addBox(furnGroup, 0.58, 1.88, 2.45, 9.54, 1.46, 2.12, MAT.beigeWool); // Beige Wool Upper Shutters & Lofts
-// North Wall (Right of Window): Magari / BERGLÄRKA Growth Desk + Slotted Chair (Kabir faces North)
+addBox(furnGroup, 0.58, 0.52, 2.45, 9.54, 0.26, 2.12, MAT.vintageIndigo);
+addBox(furnGroup, 0.58, 1.93, 2.45, 9.54, 1.485, 2.12, MAT.beigeWool);
+
 addBox(furnGroup, 1.20, 0.05, 0.70, 8.20, 0.60, 0.46, MAT.oakLight, {
   tag: 'BR-02 KABIR · STUDY DESK', title: 'Magari Solid Ash Growth Desk + Slotted Chair',
   desc: 'Kabir faces North; glare-free North window light enters over his left shoulder. Zero wheels, zero swivel.',
@@ -907,29 +951,26 @@ addBox(furnGroup, 1.20, 0.05, 0.70, 8.20, 0.60, 0.46, MAT.oakLight, {
 });
 addBox(furnGroup, 0.05, 0.58, 0.62, 7.65, 0.29, 0.46, MAT.oakLight);
 addBox(furnGroup, 0.05, 0.58, 0.62, 8.75, 0.29, 0.46, MAT.oakLight);
-addBox(furnGroup, 0.42, 0.38, 0.42, 8.20, 0.19, 1.02, MAT.cpTeak); // Slotted growth chair
-// NW Reading Nook: IKEA KOMPISHÄNG Pouffe (left of window, clear 900mm toilet walk)
+addBox(furnGroup, 0.42, 0.38, 0.42, 8.20, 0.19, 1.02, MAT.cpTeak);
 addBox(furnGroup, 0.80, 0.36, 0.68, 6.55, 0.18, 0.52, MAT.fabricSand, {
   tag: 'BR-02 KABIR · READING NOOK', title: 'IKEA KOMPISHÄNG Pocket-Spring Pouffe / Sleeper',
   desc: 'Tri-fold 80×68 cm reading pouffe by North window; leaves 900mm clear walk to NW washroom.',
   meta: 'Budget: ₹12,990'
 });
-// South Wall: Magari Solid Ash Daybed + Pull-Out Trundle (Head East, Feet West)
 addBox(furnGroup, 1.95, 0.40, 0.96, 7.55, 0.20, 3.18, MAT.oakLight, {
   tag: 'BR-02 KABIR · DAYBED', title: 'Magari / Alankaram Solid Ash Daybed + Trundle',
   desc: '36×75" Indian sizing, rounded child-safe bullnose edges. Vastu alignment: Head East, feet West.',
   meta: 'Budget: ~₹95,000 · Lower trundle capped at 5"'
 });
 addBox(furnGroup, 1.88, 0.18, 0.90, 7.55, 0.46, 3.18, MAT.bedLinen);
-// West Wall (SW Activity Zone): Woodsify 3D Wooden World Map (150x90cm)
 addBox(furnGroup, 0.04, 0.90, 1.50, 5.87, 1.48, 2.55, MAT.worldMap, {
   tag: 'BR-02 KABIR · WEST WALL', title: 'Woodsify 3D Multilayer Birch World Map (150×90 cm)',
-  desc: 'Mounted directly on cured Misty Breeze Royale paint (no 6mm ply backer); lit by 3000K CRI 90+ gimbal spot.',
+  desc: 'Mounted directly on cured Misty Breeze Royale paint; lit by 3000K CRI 90+ gimbal spot.',
   meta: 'SW Open Activity Zone'
 });
 
-// ---------- H. BR-03 HOME GURUDWARA (x: 11.62..15.78, z: 0..3.78) ----------
-// North Wall (Centered away from plumbing): Handcrafted Solid Teak Palki Sahib + Chandoa
+// ---------- H. BR-03 HOME GURUDWARA (HOMZ DOCKET PP. 29–31) ----------
+// North Wall: Handcrafted Solid Teak Palki Sahib + Chandoa
 addBox(furnGroup, 1.10, 0.62, 0.82, 13.85, 0.31, 0.56, MAT.cpTeak, {
   tag: 'BR-03 · HOME GURUDWARA', title: 'Handcrafted Solid Teak Palki Sahib (Manji Sahib + Chandoa)',
   desc: 'Seasoned teak in natural matte beeswax finish, KD bolted corner pillars. Strictly zero speakers or electronic audio in room.',
@@ -937,33 +978,35 @@ addBox(furnGroup, 1.10, 0.62, 0.82, 13.85, 0.31, 0.56, MAT.cpTeak, {
 });
 [[-0.48,-0.34],[0.48,-0.34],[-0.48,0.34],[0.48,0.34]].forEach(([px,pz]) =>
   addBox(furnGroup, 0.06, 1.35, 0.06, 13.85+px, 1.28, 0.56+pz, MAT.cpTeak));
-addBox(furnGroup, 1.18, 0.12, 0.90, 13.85, 1.98, 0.56, MAT.cpTeak); // Canopy
-addBox(furnGroup, 1.06, 0.08, 0.78, 13.85, 0.66, 0.56, MAT.brass); // Silk Rumala Sahib accent
-// Sangat Floor Covering: Heavy Panja Cotton Dhurrie (6x9 ft) + White Cotton Khes
-addBox(furnGroup, 2.65, 0.015, 1.85, 13.85, 0.01, 2.25, MAT.dhurrie, {
+addBox(furnGroup, 1.18, 0.12, 0.90, 13.85, 1.98, 0.56, MAT.cpTeak);
+addBox(furnGroup, 1.06, 0.08, 0.78, 13.85, 0.66, 0.56, MAT.brass);
+addBox(furnGroup, 2.65, 0.015, 1.85, 13.95, 0.01, 2.25, MAT.dhurrie, {
   tag: 'BR-03 · SANGAT FLOOR', title: 'Heavy Panja 100% Pure Cotton Dhurrie + White Khes',
   desc: '100% washable, reversible, zero latex backing for sacred purity.',
   meta: '6×9 ft · Budget: ₹7,890'
 });
-// West Wall: GBR-2 Wardrobe (3163 SI Beige Wool + Gold-Framed Clear Glass Middle Shutter)
-addBox(furnGroup, 0.56, 2.38, 1.35, 11.98, 1.19, 0.88, MAT.beigeWool, {
-  tag: 'BR-03 · SACRED STORAGE', title: 'GBR-2 Wardrobe (3163 SI + Gold-Framed Clear Glass Center)',
-  desc: '5mm toughened clear glass middle shutter in warm gold aluminum profile for Rumala Sahib display; Claro Warm Gold PVD pulls.',
-  meta: 'In Homz ₹18L Scope'
+
+// WEST WALL: FULL 5-BAY GBR WARDROBE (Homz Docket pp. 29–30: 2 doors + center brushed-gold tinted glass + 2 doors + 5 lofts!)
+addBox(furnGroup, 0.56, 2.45, 0.92, 11.98, 1.225, 0.52, MAT.beigeWool, {
+  tag: 'BR-03 · 5-BAY WEST WARDROBE (DOCKET P. 29)', title: 'GBR-2 5-Bay Wardrobe (3163 SI + Center Gold Tinted-Glass Bay)',
+  desc: 'Full 2.35m West run: 2 Beige Wool doors + center brushed-gold brown-tinted glass display bay for Rumala Sahib + 2 Beige Wool doors + 5 Tip-On lofts.',
+  meta: 'Docket pp. 29–31 · 4× Claro Warm Gold PVD Pulls'
 });
-addBox(furnGroup, 0.04, 1.85, 0.44, 12.27, 1.08, 0.88, MAT.glass);
-addBox(furnGroup, 0.05, 1.88, 0.03, 12.27, 1.08, 0.66, MAT.brass);
-addBox(furnGroup, 0.05, 1.88, 0.03, 12.27, 1.08, 1.10, MAT.brass);
+addBox(furnGroup, 0.56, 0.55, 0.48, 11.98, 2.175, 1.22, MAT.beigeWool); // Center loft above glass bay
+addBox(furnGroup, 0.56, 1.90, 0.48, 11.98, 0.95, 1.22, MAT.tintedGlass); // Center gold-framed brown-tinted glass display
+addBox(furnGroup, 0.05, 1.90, 0.03, 12.27, 0.95, 0.98, MAT.brass);
+addBox(furnGroup, 0.05, 1.90, 0.03, 12.27, 0.95, 1.46, MAT.brass);
+addBox(furnGroup, 0.56, 2.45, 0.92, 11.98, 1.225, 1.92, MAT.beigeWool); // Right 2 doors + lofts
 
 // ---------- I. BATHROOM FIXTURES (4 WASHROOMS) ----------
 function addBathSet(cx, cz, isMaster = false) {
-  addBox(furnGroup, 0.42, 0.42, 0.62, cx, 0.21, cz, MAT.offWhiteLoft); // WC
-  addBox(furnGroup, 0.55, 0.78, 0.44, cx + (isMaster ? 0.95 : 0), 0.39, cz + (isMaster ? 0 : 0.85), MAT.beigeWool); // Alufurn Vanity
+  addBox(furnGroup, 0.42, 0.42, 0.62, cx, 0.21, cz, MAT.offWhite);
+  addBox(furnGroup, 0.55, 0.78, 0.44, cx + (isMaster ? 0.95 : 0), 0.39, cz + (isMaster ? 0 : 0.85), MAT.beigeWool);
 }
-addBathSet(1.15, 6.05, true);  // Master Toilet
-addBathSet(4.92, 0.65, false); // BR-02 Toilet
-addBathSet(10.75, 0.65, false);// BR-03 Toilet
-addBathSet(4.92, 10.75, false);// BR-01 Toilet
+addBathSet(1.15, 6.05, true);
+addBathSet(4.92, 0.65, false);
+addBathSet(10.75, 0.65, false);
+addBathSet(4.92, 10.75, false);
 
 // ============================================================================
 // 8. CIRCULATION / CLEARANCE OVERLAY (90–120 CM WALKING PATHS)
@@ -974,12 +1017,12 @@ function addPath(points) {
   const line = new THREE.Line(geom, new THREE.LineBasicMaterial({ color: 0x38BDF8, linewidth: 2 }));
   pathGroup.add(line);
 }
-addPath([[0.3, 0.9], [2.2, 1.5], [2.8, 4.9], [5.2, 5.5], [10.4, 5.5], [14.1, 5.5]]); // Entry -> Living -> Dining -> Sit-out
-addPath([[10.8, 5.5], [11.5, 9.2], [14.1, 8.9]]); // Dining -> Kitchen -> Utility
-addPath([[4.6, 5.5], [4.6, 8.2], [2.6, 8.2], [2.6, 11.2]]); // Living -> Master -> South Balcony
-addPath([[9.2, 5.5], [9.2, 3.6], [6.4, 2.2], [5.8, 0.9]]); // Living -> Kabir -> Toilet
-addPath([[9.2, 5.5], [9.2, 7.8], [6.3, 9.2], [6.3, 10.6]]); // Living -> BR-01 West Corridor -> Toilet
-addPath([[12.2, 5.5], [12.2, 3.6], [13.6, 2.2]]); // Dining -> Home Gurudwara
+addPath([[0.3, 0.9], [1.4, 1.8], [2.2, 4.6], [5.2, 5.6], [10.4, 5.6], [14.1, 5.6]]);
+addPath([[10.8, 5.6], [11.7, 9.2], [14.1, 8.9]]);
+addPath([[4.6, 5.6], [4.6, 8.2], [2.9, 8.2], [2.9, 11.2]]);
+addPath([[9.2, 5.6], [9.2, 3.6], [6.4, 2.2], [5.8, 0.9]]);
+addPath([[9.2, 5.6], [9.2, 7.8], [6.3, 9.2], [6.3, 10.6]]);
+addPath([[12.2, 5.6], [12.2, 3.6], [13.6, 2.2]]);
 pathGroup.visible = false;
 
 // ============================================================================
@@ -989,7 +1032,7 @@ const hemiLight = new THREE.HemisphereLight(0xFFFDF8, 0x7A8290, 0.95);
 scene.add(hemiLight);
 
 const sunLight = new THREE.DirectionalLight(0xFFF6E6, 1.55);
-sunLight.position.set(22, 24, 16); // Bright East-South Floor 42 sun
+sunLight.position.set(22, 24, 16);
 sunLight.castShadow = true;
 sunLight.shadow.mapSize.set(2048, 2048);
 sunLight.shadow.camera.left = -16; sunLight.shadow.camera.right = 18;
@@ -997,26 +1040,24 @@ sunLight.shadow.camera.top = 16; sunLight.shadow.camera.bottom = -16;
 sunLight.shadow.bias = -0.0005;
 scene.add(sunLight);
 
-// Evening 2700K/3000K Architectural Warm Lights
 const eveningPoints = [
-  [2.2, 2.4, 2.6, 0xFFCC88, 3.2, 7.5],   // Drawing Room 2700K cove
-  [7.0, 2.4, 5.6, 0xFFCA80, 3.4, 8.0],   // Living Spine + Persian carpet warm wash
-  [12.15, 1.55, 5.65, 0xFFC570, 3.8, 6.5],// Dining Linear Brass Pendant
-  [12.2, 2.4, 9.6, 0xFFE2B8, 3.2, 7.0],  // Kitchen 3000K task light
-  [2.1, 2.3, 9.6, 0xFFC87C, 2.8, 6.5],   // Master Suite warm glow
-  [8.2, 2.3, 9.5, 0xFFE0B2, 2.6, 6.2],   // BR-01 Study 3000K
-  [7.8, 2.3, 1.9, 0xFFD496, 2.6, 6.2],   // BR-02 Kabir circadian glow
-  [13.85, 2.4, 1.6, 0xFFBD66, 3.5, 6.5], // BR-03 Gurudwara 2700K indirect cove
-  [0.75, 1.95, 0.38, 0xFFB85C, 1.8, 3.8],// Foyer pierced brass lantern
+  [2.0, 2.4, 2.6, 0xFFCC88, 3.2, 7.5],
+  [7.2, 2.4, 5.6, 0xFFCA80, 3.4, 8.0],
+  [12.15, 1.55, 5.65, 0xFFC570, 3.8, 6.5],
+  [12.2, 2.4, 9.6, 0xFFE2B8, 3.2, 7.0],
+  [2.1, 2.3, 9.5, 0xFFC87C, 2.8, 6.5],
+  [8.2, 2.3, 9.5, 0xFFE0B2, 2.6, 6.2],
+  [7.8, 2.3, 1.9, 0xFFD496, 2.6, 6.2],
+  [13.85, 2.4, 1.6, 0xFFBD66, 3.5, 6.5],
+  [0.85, 1.95, 0.72, 0xFFB85C, 1.8, 3.8],
 ];
 eveningPoints.forEach(([x, y, z, col, intensity, dist]) => {
   const pl = new THREE.PointLight(col, intensity, dist, 1.6);
   pl.position.set(x, y, z);
   nightLightsGroup.add(pl);
 });
-// Subtle glowing cove strips in Gurudwara & Drawing
 addBox(nightLightsGroup, 3.6, 0.03, 0.05, 13.7, 2.68, 0.16, MAT.coveGlow);
-addBox(nightLightsGroup, 0.05, 0.03, 3.2, 3.94, 2.68, 2.0, MAT.coveGlow);
+addBox(nightLightsGroup, 0.05, 0.03, 3.2, 0.16, 2.68, 3.0, MAT.coveGlow);
 nightLightsGroup.visible = false;
 
 // ============================================================================
@@ -1024,10 +1065,10 @@ nightLightsGroup.visible = false;
 // ============================================================================
 const ROOM_LABELS = [
   { name: 'Drawing & Foyer', dim: '13\'1" × 17\'8"', pos: [2.0, 1.6, 2.6] },
-  { name: 'Living Spine',    dim: '19\'8" × 11\'10"', pos: [7.0, 1.6, 5.6] },
+  { name: 'Living Spine',    dim: '19\'8" × 11\'10"', pos: [7.2, 1.6, 5.6] },
   { name: 'Dining Room',     dim: '13\'11" × 11\'10"', pos: [12.1, 1.6, 5.6] },
   { name: 'Kitchen',         dim: '13\'11" × 13\'1"', pos: [12.1, 1.6, 9.6] },
-  { name: 'Master Suite',    dim: '13\'1" × 13\'1"', pos: [2.0, 1.6, 9.6] },
+  { name: 'Master Suite',    dim: '13\'1" × 13\'1"', pos: [2.0, 1.6, 9.5] },
   { name: 'Puja Walk-in',    dim: '4\'0" × 6\'1"', pos: [3.45, 1.6, 6.5] },
   { name: 'BR-01 Study/Guest', dim: '13\'1" × 13\'1"', pos: [7.9, 1.6, 9.5] },
   { name: 'BR-02 Kabir',     dim: '13\'1" × 12\'0"', pos: [7.8, 1.6, 1.9] },
@@ -1049,17 +1090,16 @@ const labelEls = ROOM_LABELS.map(r => {
 const PRESETS = [
   { id: 'overview', name: '3D Dollhouse', dim: 'Full B4206',     cam: [-3.5, 15.8, 19.2], tgt: [8.0, 0.3, 6.2] },
   { id: 'plan2d',   name: '2D Blueprint', dim: 'Top-Down',       cam: [8.0, 26.5, 6.45],  tgt: [8.0, 0.0, 6.4] },
-  { id: 'drawing',  name: 'Drawing & TV', dim: 'East Limewash',  cam: [-1.2, 3.6, 4.9],   tgt: [3.4, 1.0, 2.2] },
-  { id: 'living',   name: 'Living Spine', dim: 'Persian Carpet', cam: [6.8, 3.8, 2.2],    tgt: [7.0, 1.1, 6.9] },
-  { id: 'dining',   name: 'Dining & Bay', dim: 'CP Teak 8-Seat', cam: [8.6, 3.6, 7.6],    tgt: [12.5, 0.9, 5.2] },
-  { id: 'kitchen',  name: 'Kitchen',      dim: 'Brown Sugar',    cam: [11.6, 3.6, 6.0],   tgt: [12.4, 0.9, 10.3] },
-  { id: 'master',   name: 'Master Suite', dim: 'Teak + Wood',    cam: [4.8, 3.8, 11.8],   tgt: [1.4, 0.9, 9.6] },
-  { id: 'study',    name: 'BR-01 Study',  dim: 'WFH + Guest',    cam: [5.5, 3.8, 7.6],    tgt: [8.6, 0.9, 10.2] },
+  { id: 'drawing',  name: 'Drawing & TV', dim: 'West Limewash',  cam: [5.4, 3.6, 4.9],    tgt: [0.6, 1.0, 2.8] },
+  { id: 'living',   name: 'Living Spine', dim: 'Hidden Doors',   cam: [9.2, 3.5, 6.8],    tgt: [4.6, 1.1, 5.2] },
+  { id: 'dining',   name: 'Dining & Bay', dim: 'NE Bookshelf',   cam: [9.0, 3.5, 7.6],    tgt: [12.8, 1.0, 4.4] },
+  { id: 'kitchen',  name: 'Kitchen',      dim: '3174 + 158 LU',  cam: [12.4, 3.6, 6.0],   tgt: [11.8, 1.0, 10.2] },
+  { id: 'master',   name: 'Master Suite', dim: 'South Wardrobe', cam: [4.6, 3.8, 7.6],    tgt: [1.6, 1.0, 10.6] },
+  { id: 'study',    name: 'BR-01 Study',  dim: 'South Library',  cam: [8.8, 3.6, 7.2],    tgt: [7.4, 1.0, 10.8] },
   { id: 'kabir',    name: 'BR-02 Kabir',  dim: 'Misty Breeze',   cam: [5.6, 3.8, 4.5],    tgt: [8.4, 0.9, 1.6] },
-  { id: 'gurudwara',name: 'BR-03 Sacred', dim: 'Palki Sahib',    cam: [11.8, 3.4, 4.4],   tgt: [13.8, 1.0, 1.0] },
+  { id: 'gurudwara',name: 'BR-03 Sacred', dim: 'Palki + 5-Bay',  cam: [15.4, 3.4, 4.4],   tgt: [12.8, 1.0, 1.2] },
 ];
 
-// Smooth Camera Tweening
 let camAnim = null;
 function flyTo(preset) {
   camAnim = {
@@ -1127,7 +1167,6 @@ const hud = document.getElementById('hud');
 document.getElementById('btn-collapse').onclick = () => hud.classList.add('collapsed');
 document.getElementById('hud-toggle').onclick = () => hud.classList.remove('collapsed');
 
-// Click-to-Inspect Raycaster
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
 const inspEl = document.getElementById('inspector');
@@ -1166,11 +1205,9 @@ function animate() {
   }
   controls.update();
 
-  // Rotate compass needle to match camera azimuth
   const az = Math.atan2(camera.position.x - controls.target.x, camera.position.z - controls.target.z);
   needle.style.transform = `rotate(${(az * 180 / Math.PI).toFixed(1)}deg)`;
 
-  // Project 3D room labels
   if (labelsLayer.style.display !== 'none') {
     labelEls.forEach(({ el, pos }) => {
       const v = pos.clone().project(camera);

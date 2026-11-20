@@ -41,9 +41,9 @@ Master hardware schedule for all bedroom wardrobes and built-in casegoods. Sourc
 | **BR-01 Study** | Mid Swing Shutters (1.8m) | Spruce & Pop Claro Pull (₹2,275 ea) | Antique Smoked Bronze | 256mm CC (295mm L × 35mm P) | 3 |
 | **BR-01 Study** | Bottom External Drawers | Spruce & Pop Claro Pull (₹1,275 ea) | Antique Smoked Bronze | 128mm CC (165mm L × 35mm P) | 2 |
 | **BR-01 Study** | Top Lofts (550mm) | Touch Latch (Included) | Concealed / Internal | Push-to-Open Mechanical | 3 |
-| **BR-03 Gurudwara** | GBR-2 Laminate Swing Doors | Spruce & Pop Claro Pull (₹2,275 ea) | Brushed Warm Gold PVD | 256mm CC (295mm L × 35mm P) | 2 |
+| **BR-03 Gurudwara** | GBR-2 Laminate Swing Doors (5-Bay West Run) | Spruce & Pop Claro Pull (₹2,275 ea) | Brushed Warm Gold PVD | 256mm CC (295mm L × 35mm P) | 4 |
 | **BR-03 Gurudwara** | GBR-2 Center Glass Door | Slim Anodized Profile Edge (Included) | Warm Gold Anodized | Integrated 20mm Aluminum Extrusion | 1 |
-| **BR-03 Gurudwara** | GBR-2 Top Lofts (550mm) | Touch Latch (Included) | Concealed / Internal | Push-to-Open Mechanical | 3 |
+| **BR-03 Gurudwara** | GBR-2 Top Lofts (550mm) | Touch Latch (Included) | Concealed / Internal | Push-to-Open Mechanical | 5 |
 | **BR-02 Kabir** | Mid Swing Shutters | **[Recommended]** [Mantara W-0024 Elephant Knob](https://www.mantara.in/products/mantara-w-0024-elephant) (₹649 ea) | Solid Natural Beech Wood | 50mm Ø × 28mm P (Single M4 Center Hole; avoids 96mm CC lockout) | 2 |
 | **BR-02 Kabir** | Mid Swing Shutters (Alternative) | **[Aesthetic Exception]** [Look Mumma Elephant Wooden Handles](https://www.google.com/search?q=Look+Mumma+Elephant+Wooden+Handles) (₹399 ea) | Carved Acacia Wood | 96mm CC dual-bolt (locks out adult 256mm CC without patching) | 2 |
 | **BR-02 Kabir** | Bottom Tandem Drawers | **[Recommended]** [Mantara W-0024 Elephant Knob](https://www.mantara.in/products/mantara-w-0024-elephant) (₹649 ea) | Solid Natural Beech Wood | 50mm Ø × 28mm P (Single Point) | 4 |
