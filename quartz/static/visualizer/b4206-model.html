@@ -593,6 +593,7 @@ const MAT = {
   fabricSand:    new THREE.MeshStandardMaterial({ color: 0xDDD5C7, roughness: 0.92 }),
   fabricOat:     new THREE.MeshStandardMaterial({ color: 0xE6DFD3, roughness: 0.94 }),
   fabricCharcoal:new THREE.MeshStandardMaterial({ color: 0x4E535A, roughness: 0.88 }),
+  leatherCognac: new THREE.MeshStandardMaterial({ color: 0x7E4E30, roughness: 0.42, metalness: 0.06 }),
   sheerCurtain:  new THREE.MeshStandardMaterial({ color: 0xFBF9F4, transparent: true, opacity: 0.42, roughness: 0.95 }),
   drapeCurtain:  new THREE.MeshStandardMaterial({ color: 0xCFC7B8, roughness: 0.92 }),
   bedLinen:      new THREE.MeshStandardMaterial({ color: 0xF5F3EE, roughness: 0.90 }),
@@ -1123,33 +1124,43 @@ natPlane.userData.meta = {
 };
 inspectables.push(natPlane); decorGroup.add(natPlane);
 
-// Drawing Room Seating: Single Modular 2-Piece KD L-Shaped Sofa Only (2750 × 2350 mm)
-// East main run (z: 0.90..3.65, facing West 65" TV at 3.33m) + North return (x: 1.65..4.00, z: 0.90..1.82)
-// Keeps the 1.70m Living archway, 1.65m Foyer door zone, North curtain, and South Persian carpet 100% open.
-const lSofaMeta = {
-  tag: 'DRAWING · L-SHAPED SOFA ONLY',
-  title: 'Modular 2-Piece KD L-Shaped Sofa (2750 × 2350 mm)',
-  desc: 'Solid kiln-dried walnut/ash platform base in 2 knock-down sections (clears 2.1m service lift). East run faces 65" Sony TV at 3.33m; North return keeps Living archway, foyer swing, and South Persian carpet completely unobstructed.',
-  meta: '2750 × 2350 × 960 mm · Single L-Sectional Only'
+// Drawing Room Seating (Option B · Recommended): Stanley Classic / Magari Porto 100% Top-Grain Leather 3+2 Suite
+// 3-Seater (2200×940mm) on East wall (z: 1.56..3.76) facing 65" TV + 2-Seater (1600×900mm) on North side (x: 1.42..3.02)
+// Leaves 1.70m Living archway, 1.42m Foyer door swing, North curtain, and South Persian carpet unobstructed.
+const leather3Meta = {
+  tag: 'DRAWING · 3+2 LEATHER (OPTION B · RECOMMENDED)',
+  title: 'Stanley Classic / Magari Porto 100% Top-Grain Leather 3-Seater (2200×940mm)',
+  desc: '100% all-over full top-grain bovine leather (zero vinyl backs), kiln-dried hardwood frame with KD bolt-on legs for 2.1m service lift.',
+  meta: 'Option B Recommended · Suite Budget: ₹3.80L–₹4.50L (Tier 2)'
 };
-// East run platform, seat, backrest & South armrest
-addBox(furnGroup, 0.96, 0.14, 2.75, 3.52, 0.20, 2.275, MAT.cpTeak, lSofaMeta);
-addBox(furnGroup, 0.84, 0.22, 2.66, 3.46, 0.38, 2.275, MAT.fabricSand, lSofaMeta);
-addBox(furnGroup, 0.20, 0.44, 2.75, 3.90, 0.66, 2.275, MAT.fabricSand, lSofaMeta);
-addBox(furnGroup, 0.94, 0.34, 0.14, 3.52, 0.44, 3.58, MAT.fabricSand);
-// North return platform, seat, backrest & West armrest
-addBox(furnGroup, 1.39, 0.14, 0.92, 2.345, 0.20, 1.36, MAT.cpTeak, lSofaMeta);
-addBox(furnGroup, 1.39, 0.22, 0.80, 2.345, 0.38, 1.42, MAT.fabricSand, lSofaMeta);
-addBox(furnGroup, 1.39, 0.44, 0.20, 2.345, 0.66, 1.00, MAT.fabricSand, lSofaMeta);
-addBox(furnGroup, 0.14, 0.34, 0.92, 1.72, 0.44, 1.36, MAT.fabricSand);
-// Subtle accent cushions along the L-sofa back
-[[3.74, 0.62, 1.48], [3.74, 0.62, 2.40], [3.74, 0.62, 3.18], [2.42, 0.62, 1.18]].forEach(([cx, cy, cz]) => {
-  addBox(furnGroup, cx > 3.0 ? 0.14 : 0.42, 0.34, cx > 3.0 ? 0.42 : 0.14, cx, cy, cz, MAT.fabricOat);
-});
+const leather2Meta = {
+  tag: 'DRAWING · 3+2 LEATHER (OPTION B · RECOMMENDED)',
+  title: 'Stanley Classic / Magari Porto 100% Top-Grain Leather 2-Seater (1600×900mm)',
+  desc: 'Matching top-grain leather loveseat facing South Persian carpet; clears West Main Door swing and North curtains.',
+  meta: 'Option B Recommended · 100% Top-Grain Hide'
+};
+// 3-Seater Leather Sofa (East Wall, z: 1.56..3.76, x: 3.06..4.00)
+addBox(furnGroup, 0.94, 0.14, 2.20, 3.53, 0.19, 2.66, MAT.cpTeak, leather3Meta);
+addBox(furnGroup, 0.80, 0.22, 1.94, 3.46, 0.37, 2.66, MAT.leatherCognac, leather3Meta);
+addBox(furnGroup, 0.22, 0.48, 2.20, 3.89, 0.66, 2.66, MAT.leatherCognac, leather3Meta);
+addBox(furnGroup, 0.92, 0.40, 0.16, 3.53, 0.45, 1.64, MAT.leatherCognac);
+addBox(furnGroup, 0.92, 0.40, 0.16, 3.53, 0.45, 3.68, MAT.leatherCognac);
+// 2-Seater Leather Loveseat (North Window Side, x: 1.42..3.02, z: 0.66..1.56)
+addBox(furnGroup, 1.60, 0.14, 0.90, 2.22, 0.19, 1.11, MAT.cpTeak, leather2Meta);
+addBox(furnGroup, 1.32, 0.22, 0.76, 2.22, 0.37, 1.18, MAT.leatherCognac, leather2Meta);
+addBox(furnGroup, 1.60, 0.48, 0.22, 2.22, 0.66, 0.77, MAT.leatherCognac, leather2Meta);
+addBox(furnGroup, 0.16, 0.40, 0.88, 1.50, 0.45, 1.11, MAT.leatherCognac);
+addBox(furnGroup, 0.16, 0.40, 0.88, 2.94, 0.45, 1.11, MAT.leatherCognac);
+// NE Corner CP Teak Side Table (520×520mm) bridging 3-Seater & 2-Seater
+addBox(furnGroup, 0.52, 0.04, 0.52, 3.55, 0.52, 1.12, MAT.cpTeak);
+addBox(furnGroup, 0.04, 0.50, 0.04, 3.33, 0.25, 0.90, MAT.darkMetal);
+addBox(furnGroup, 0.04, 0.50, 0.04, 3.77, 0.25, 0.90, MAT.darkMetal);
+addBox(furnGroup, 0.04, 0.50, 0.04, 3.33, 0.25, 1.34, MAT.darkMetal);
+addBox(furnGroup, 0.04, 0.50, 0.04, 3.77, 0.25, 1.34, MAT.darkMetal);
 
-addFloorLamp(3.62, 0.52, 'Orange Tree Velar Marble & Brass Arc Floor Lamp', 'Heavy marble base tucked at NE corner arching over L-sofa corner with warm 2700K SOLHETTA E27 bulb.', 'Budget: ₹12k–₹13.3k', true);
+addFloorLamp(3.65, 0.48, 'Orange Tree Velar Marble & Brass Arc Floor Lamp', 'Heavy marble base tucked at NE corner arching over 3+2 leather suite with warm 2700K SOLHETTA E27 bulb.', 'Budget: ₹12k–₹13.3k', true);
 addCowayPurifier(0.38, 5.08, 'DRAWING');
-// Orange Tree Toshi Solid Wood Nesting Coffee Table Pair centered in L-nook
+// Orange Tree Toshi Solid Wood Nesting Coffee Table Pair centered inside 3+2 leather suite
 const ct1 = new THREE.Mesh(new THREE.CylinderGeometry(0.45, 0.45, 0.04, 24), MAT.darkMetal);
 ct1.position.set(2.08, 0.40, 2.72); ct1.castShadow = true; furnGroup.add(ct1);
 const ct2 = new THREE.Mesh(new THREE.CylinderGeometry(0.33, 0.33, 0.04, 24), MAT.cpTeak);
@@ -1450,31 +1461,31 @@ addBox(furnGroup, 1.88, 0.42, 1.04, 7.20, 0.21, 8.15, MAT.fabricCharcoal, {
 });
 addBox(furnGroup, 1.88, 0.40, 0.18, 7.20, 0.58, 7.72, MAT.fabricCharcoal);
 
-// East Wall Standing Desk (Exact 1500×750mm) + Amia + Brother Printer + 3D Rustle 8-Strip Teak Wall Board
-addBox(furnGroup, 1.50, 0.04, 0.75, 9.08, 0.74, 9.25, MAT.oakLight, {
-  tag: 'BR-01 · EXECUTIVE DESK (EXACT 150×75cm)', title: 'Owned Dual-Motor Standing Desk + Steelcase Amia',
-  desc: 'Exact 1500×750mm top. Samar sits facing North (command view of NE entry). BenQ ScreenBar Pro + mechanical monitor arm + 3" PU rollerblade castors.',
+// East Wall Standing Desk (Exact 1500×750mm): 1/4 (84cm) from South Window, 3/4 (236cm) from NE Entrance
+addBox(furnGroup, 1.50, 0.04, 0.75, 9.08, 0.74, 10.25, MAT.oakLight, {
+  tag: 'BR-01 · EXECUTIVE DESK (1/4 FROM WINDOW)', title: 'Owned Dual-Motor Standing Desk + Steelcase Amia',
+  desc: 'Exact 1500×750mm top positioned 1/4 (84cm) from South window curtain and 3/4 (236cm) from NE entrance. Samar sits facing North with BenQ ScreenBar Pro + mechanical monitor arm + 3" PU rollerblade castors.',
   meta: 'Dedicated wall 6A/16A socket'
 });
-addBox(furnGroup, 0.06, 0.72, 0.55, 8.44, 0.36, 9.25, MAT.darkMetal);
-addBox(furnGroup, 0.06, 0.72, 0.55, 9.72, 0.36, 9.25, MAT.darkMetal);
-addBox(furnGroup, 0.78, 0.42, 0.04, 9.10, 1.12, 9.00, MAT.tvScreen);
-addBox(furnGroup, 0.56, 0.48, 0.54, 9.10, 0.28, 9.88, MAT.darkMetal);
-// Rustle 8-Strip Solid Teak Wall Menu / Task Board: 8 real 3D teak channel rails mounted directly on Morning Glory East wall
+addBox(furnGroup, 0.06, 0.72, 0.55, 8.44, 0.36, 10.25, MAT.darkMetal);
+addBox(furnGroup, 0.06, 0.72, 0.55, 9.72, 0.36, 10.25, MAT.darkMetal);
+addBox(furnGroup, 0.78, 0.42, 0.04, 9.10, 1.12, 10.00, MAT.tvScreen);
+addBox(furnGroup, 0.56, 0.48, 0.54, 9.10, 0.28, 10.88, MAT.darkMetal);
+// Rustle 8-Strip Solid Teak Wall Menu / Task Board aligned beside desk at z = 10.25
 for (let r = 0; r < 8; r++) {
   const ry = 1.20 + r * 0.105;
-  addBox(decorGroup, 0.024, 0.022, 0.68, 9.915, ry, 9.25, MAT.cpTeak, r === 3 ? {
+  addBox(decorGroup, 0.024, 0.022, 0.68, 9.915, ry, 10.25, MAT.cpTeak, r === 3 ? {
     tag: 'BR-01 · EAST WALL BOARD (8-STRIP TEAK)', title: 'Rustle Stylish Wooden Wall Menu / Task Board (Large)',
     desc: '8 solid teak channel rails + removable birch ply letter tiles mounted directly on Morning Glory paint via Fischer DuoPower plugs.',
     meta: '680 × 880 mm · Budget: ₹7.5k–₹8.5k'
   } : null);
   for (let t = 0; t < 6 + (r % 3); t++) {
-    addBox(decorGroup, 0.008, 0.045, 0.036, 9.92, ry + 0.032, 8.98 + t * 0.062, MAT.offWhite);
+    addBox(decorGroup, 0.008, 0.045, 0.036, 9.92, ry + 0.032, 9.98 + t * 0.062, MAT.offWhite);
   }
 }
-// Brother HL-L2440DW Laser Printer on compact side stand
-addBox(decorGroup, 0.38, 0.48, 0.38, 9.68, 0.24, 8.45, MAT.oakLight);
-addBox(decorGroup, 0.36, 0.20, 0.36, 9.68, 0.58, 8.45, MAT.darkMetal, {
+// Brother HL-L2440DW Laser Printer on compact side stand within reach of desk & clear of NE door
+addBox(decorGroup, 0.38, 0.48, 0.38, 9.68, 0.24, 9.45, MAT.oakLight);
+addBox(decorGroup, 0.36, 0.20, 0.36, 9.68, 0.58, 9.45, MAT.darkMetal, {
   tag: 'BR-01 · LASER PRINTER (DECIDED)', title: 'Brother HL-L2440DW Dual-Band Wi-Fi Auto-Duplex Laser',
   desc: 'Dry toner never clogs when idle. Plugged directly into wall socket (920W fuser spike, never UPS).',
   meta: '₹14,990 · Centralized home printing'
@@ -1496,14 +1507,14 @@ addBox(furnGroup, 0.42, 2.45, 0.04, 7.67, 1.225, 11.51, MAT.cinnHickory);
   if (idx < 4) addBooksRow(7.67, sy, 11.24, 0.34, false);
 });
 
-// SE Reading Nook: IKEA POÄNG Armchair + Footstool + Ayra Floor Lamp
-addBox(furnGroup, 0.68, 0.42, 0.72, 9.15, 0.24, 10.95, MAT.fabricOat, {
+// Reading Nook beside Open Bookshelf & South Window W2 (clear of desk & Amia chair)
+addBox(furnGroup, 0.68, 0.42, 0.72, 7.15, 0.24, 10.05, MAT.fabricOat, {
   tag: 'BR-01 · READING NOOK', title: 'IKEA POÄNG Armchair & Footstool (Kelinge Beige)',
-  desc: 'Birch veneer high-back reading chair + detached footstool by South window W2.',
+  desc: 'Birch veneer high-back reading chair + detached footstool angled beside open bookshelf & South window W2, keeping 103cm West bath corridor and 84cm desk clearance.',
   meta: 'Budget: ₹14.5k–₹18.9k'
 });
-addBox(furnGroup, 0.52, 0.34, 0.44, 8.62, 0.17, 10.75, MAT.fabricOat);
-addFloorLamp(9.64, 11.12, 'Orange Tree Ayra Reading Floor Lamp', '2700K CRI 90+ warm reading lamp tucked behind POÄNG reading nook.', 'Budget: ₹12,399');
+addBox(furnGroup, 0.52, 0.34, 0.44, 7.52, 0.17, 10.48, MAT.fabricOat);
+addFloorLamp(7.98, 11.12, 'Orange Tree Ayra Reading Floor Lamp', '2700K CRI 90+ warm reading lamp beside open bookshelf and South window W2.', 'Budget: ₹12,399');
 
 // ---------- G. BR-02 KABIR'S ROOM (x: 5.78..9.92, z: 0..3.78) ----------
 // East Wall Wardrobe: North Open 424 1D Book Niche (with real shelves + books!) + 3163 SI + 3267 SI Indigo Drawers
@@ -1685,18 +1696,18 @@ nightLightsGroup.visible = false;
 const PRESETS = [
   { id: 'overview',  name: '3D Dollhouse', dim: 'Full B4206',        cam: [-3.5, 15.8, 19.2], tgt: [8.0, 0.3, 6.2] },
   { id: 'plan2d',    name: '2D Blueprint', dim: 'Top-Down',          cam: [8.0, 26.5, 6.45],  tgt: [8.0, 0.0, 6.4] },
-  { id: 'drawing',   name: 'Drawing & Art',dim: 'L-Sofa + Carpet',   cam: [1.35, 2.15, 1.05], tgt: [2.45, 1.05, 3.85] },
+  { id: 'drawing',   name: 'Drawing & Art',dim: '3+2 Leather',       cam: [1.35, 2.15, 1.05], tgt: [2.45, 1.05, 3.85] },
   { id: 'living',    name: 'Living Spine', dim: 'South Couch',       cam: [9.4, 2.2, 6.4],    tgt: [5.4, 1.15, 5.2] },
   { id: 'dining',    name: 'Dining & Bay', dim: 'NE Bookshelf',      cam: [10.4, 2.2, 6.9],   tgt: [13.1, 1.2, 4.2] },
   { id: 'kitchen',   name: 'Kitchen',      dim: '3174 + 158 LU',     cam: [12.3, 2.2, 8.1],   tgt: [12.1, 1.1, 11.1] },
   { id: 'master',    name: 'Master Suite', dim: 'Bed Art + Nook',    cam: [3.5, 2.2, 10.8],   tgt: [0.9, 1.25, 9.2] },
-  { id: 'study',     name: 'BR-01 Study',  dim: 'East Desk + Art',   cam: [6.4, 2.2, 8.4],    tgt: [9.4, 1.25, 9.6] },
+  { id: 'study',     name: 'BR-01 Study',  dim: 'Window Desk',       cam: [6.4, 2.2, 8.4],    tgt: [9.3, 1.15, 10.2] },
   { id: 'kabir',     name: 'BR-02 Kabir',  dim: 'World Map + KBR',   cam: [8.9, 2.1, 3.1],    tgt: [6.1, 1.3, 2.1] },
   { id: 'gurudwara', name: 'BR-03 Sacred', dim: '1/5 East Palki',    cam: [12.45, 2.1, 3.25], tgt: [14.74, 1.15, 1.85] },
 ];
 
 const ROOM_LABELS = [
-  { id: 'drawing',   name: 'Drawing & Foyer',   dim: 'L-Sofa + Carpet', pos: [2.0, 1.9, 2.6] },
+  { id: 'drawing',   name: 'Drawing & Foyer',   dim: '3+2 Leather',     pos: [2.0, 1.9, 2.6] },
   { id: 'living',    name: 'Living Spine',      dim: 'South Sofa',      pos: [7.2, 1.9, 5.6] },
   { id: 'dining',    name: 'Dining Room',       dim: '13\'11" × 11\'10"', pos: [12.1, 1.9, 5.6] },
   { id: 'kitchen',   name: 'Kitchen',           dim: '13\'11" × 13\'1"', pos: [12.1, 1.9, 9.6] },

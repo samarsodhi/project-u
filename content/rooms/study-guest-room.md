@@ -4,7 +4,7 @@ aliases: [rooms-br01, br-01, study-guest, wfh-study, u-br01]
 tags: [u-setup, rooms, study, guest-room]
 status: evergreen
 created: 2026-10-10
-updated: 2026-11-15
+updated: 2026-11-21
 ---
 
 [[index|← Back to Home Overview]]
@@ -13,7 +13,7 @@ updated: 2026-11-15
 
 Primary workspace for Samar (SDM at Amazon) and flexible guest suite. Houses the owned standing desk, Steelcase Amia ergonomic chair, integrated wardrobe end-shelf library, monitor task lighting, and a solid-wood guest sofa-bed (Custom CP Teak pull-out or Gulmohar Lane Berlin).
 
-> **Clearance Rule:** Position the standing desk along the East wall facing North. Maintain 100 cm buffer behind the desk chair and verify South window blackout drapery eliminates screen backlight glare.
+> **Clearance Rule:** Position the standing desk along the East wall facing North, **1/4 (~84 cm) from the South window curtain and 3/4 (~236 cm) from the NE room entrance**, with South window blackout drapery eliminating screen backlight glare.
 > **Finishes Reference:** Wall finish references [[curtains-paint-finishes#definitive-room-by-room-color-palette]].
 
 ---
