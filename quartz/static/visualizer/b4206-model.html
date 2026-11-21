@@ -861,16 +861,17 @@ const MAT = {
 };
 
 // Load & process real Project U photos (alpha-keyed Nataraja & Wood World Map, clean cropped Persian Carpet)
-function loadProcessedImage(urls, processFn, mat) {
+function loadProcessedImage(urls, processFn, mat, wrapRepeat = false) {
   let idx = 0;
   const tryNext = () => {
     if (idx >= urls.length) return;
     const img = new Image();
-    img.crossOrigin = 'anonymous';
+    if (window.location.protocol !== 'file:') img.crossOrigin = 'anonymous';
     img.onload = () => {
       try {
         const canvas = processFn(img);
         const tex = new THREE.CanvasTexture(canvas);
+        if (wrapRepeat) tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
         tex.colorSpace = THREE.SRGBColorSpace;
         mat.map = tex;
         mat.needsUpdate = true;
@@ -882,30 +883,37 @@ function loadProcessedImage(urls, processFn, mat) {
   tryNext();
 }
 
-// 1. Persian Wall Carpet: 3% inset crop removes photo wall margin (1.52:1 exact)
+// 1. Persian Wall Carpet: 1.5% X / 2.2% Y inset crop removes photo wall margin while keeping full tapestry weave (1.52:1 exact)
 loadProcessedImage(
-  ['../../assets/persian-wall-carpet.jpeg', '../../../assets/persian-wall-carpet.jpeg'],
+  ['../../assets/decor/persian-wall-carpet-thumb.jpg', '../../../assets/decor/persian-wall-carpet-thumb.jpg', '../assets/decor/persian-wall-carpet-thumb.jpg', '../../assets/persian-wall-carpet.jpeg', '../../../assets/persian-wall-carpet.jpeg', '../assets/persian-wall-carpet.jpeg'],
   img => {
     const c = document.createElement('canvas'); c.width = 760; c.height = 500;
-    const mx = img.width * 0.032, my = img.height * 0.045;
+    const mx = img.width * 0.015, my = img.height * 0.022;
     c.getContext('2d').drawImage(img, mx, my, img.width - mx * 2, img.height - my * 2, 0, 0, 760, 500);
     return c;
   },
   MAT.persianCarpet
 );
 
-// 2. Devsabha 27" Nataraja: crop top 82% (removes table surface) & alpha-key pure black studio backdrop
+// 2. GiTAGGED 16"–20" Tri-Metal Thanjavur / Brass Nataraja Wall Relief: true 1:1 square crop (zero aspect stretch) & alpha-key backdrop + tabletop corners
 loadProcessedImage(
-  ['../../assets/media/Natraj.jpeg', '../../../assets/media/Natraj.jpeg'],
+  ['../../assets/media/Natraj.jpeg', '../../../assets/media/Natraj.jpeg', '../assets/media/Natraj.jpeg'],
   img => {
     const c = document.createElement('canvas'); c.width = 512; c.height = 512;
     const g = c.getContext('2d');
-    g.drawImage(img, 0, 0, img.width, img.height * 0.82, 0, 0, 512, 512);
+    const sq = img.width * 0.94;
+    g.drawImage(img, img.width * 0.03, img.height * 0.018, sq, sq, 0, 0, 512, 512);
     const id = g.getImageData(0, 0, 512, 512), d = id.data;
-    for (let i = 0; i < d.length; i += 4) {
-      const lum = d[i] + d[i+1] + d[i+2];
-      if (lum < 54) d[i+3] = 0;
-      else if (lum < 95) d[i+3] = Math.round(((lum - 54) / 41) * 255);
+    for (let y = 0; y < 512; y++) {
+      for (let x = 0; x < 512; x++) {
+        const i = (y * 512 + x) * 4;
+        // Mask out bottom-left / bottom-right tabletop surface outside the lotus pedestal
+        if (y > 410 && Math.abs(x - 256) > 108) { d[i+3] = 0; continue; }
+        if (Math.hypot(x - 256, y - 246) > 250 && y < 415) { d[i+3] = 0; continue; }
+        const lum = d[i] + d[i+1] + d[i+2];
+        if (lum < 58) d[i+3] = 0;
+        else if (lum < 102) d[i+3] = Math.round(((lum - 58) / 44) * 255);
+      }
     }
     g.putImageData(id, 0, 0);
     return c;
@@ -913,20 +921,26 @@ loadProcessedImage(
   MAT.nataraja
 );
 
-// 3. Woodsify 3D World Map: crop strictly top 49% (excludes stock family!) & key out light-grey studio wall
+// 3. Woodsify 3D World Map: crop top 43.8% (strictly above child's hair at y=45.5%!) & key out grey stucco studio wall
 loadProcessedImage(
-  ['../../assets/decor/woodsify-world-map.jpg', '../../../assets/decor/woodsify-world-map.jpg'],
+  ['../../assets/decor/woodsify-world-map.jpg', '../../../assets/decor/woodsify-world-map.jpg', '../assets/decor/woodsify-world-map.jpg'],
   img => {
     const c = document.createElement('canvas'); c.width = 768; c.height = 460;
     const g = c.getContext('2d');
-    g.drawImage(img, img.width * 0.06, img.height * 0.02, img.width * 0.88, img.height * 0.48, 0, 0, 768, 460);
+    g.drawImage(img, img.width * 0.07, img.height * 0.025, img.width * 0.86, img.height * 0.43, 0, 0, 768, 460);
     const id = g.getImageData(0, 0, 768, 460), d = id.data;
-    for (let i = 0; i < d.length; i += 4) {
-      const r = d[i], gr = d[i+1], b = d[i+2];
-      const maxC = Math.max(r, gr, b), minC = Math.min(r, gr, b);
-      const sat = maxC - minC;
-      // Grey/white textured wall has very low saturation & high brightness -> transparent so Misty Breeze wall shows through!
-      if (sat < 16 && minC > 165) d[i+3] = 0;
+    for (let y = 0; y < 460; y++) {
+      for (let x = 0; x < 768; x++) {
+        const i = (y * 768 + x) * 4;
+        // Extra safety mask over lower-center-left zone where stock child's hair reaches in source photo
+        if (y > 405 && x > 150 && x < 395) { d[i+3] = 0; continue; }
+        const r = d[i], gr = d[i+1], b = d[i+2];
+        const maxC = Math.max(r, gr, b), minC = Math.min(r, gr, b);
+        const sat = maxC - minC;
+        // Grey/white textured stucco wall & drop shadow have low saturation -> transparent so Misty Breeze wall shows through!
+        if (sat < 22 && minC > 125) d[i+3] = 0;
+        else if (sat < 28 && minC > 110) d[i+3] = Math.round(((sat - 16) / 12) * 180);
+      }
     }
     g.putImageData(id, 0, 0);
     return c;
@@ -936,13 +950,14 @@ loadProcessedImage(
 
 // 4. Authentic Airolam 424 1D Cinnamon Hickory vertical laminate scan
 loadProcessedImage(
-  ['../../assets/swatches/texture-424-cinnamon-hickory.png', '../../../assets/swatches/texture-424-cinnamon-hickory.png'],
+  ['../../assets/swatches/texture-424-cinnamon-hickory.png', '../../../assets/swatches/texture-424-cinnamon-hickory.png', '../assets/swatches/texture-424-cinnamon-hickory.png'],
   img => {
     const c = document.createElement('canvas'); c.width = 512; c.height = 512;
     c.getContext('2d').drawImage(img, 0, 0, 512, 512);
     return c;
   },
-  MAT.cinnHickory
+  MAT.cinnHickory,
+  true
 );
 
 const tile1000 = makeTileTex('#E5E0D7', '#CBC5BA', 4, 4, true); tile1000.repeat.set(4, 4);
@@ -1239,19 +1254,25 @@ addWall(11.25, 0.00, 15.78, 0.00);
 // WEST PERIMETER (x = 0)
 addWall(0.00, 0.00, 0.00, 0.30);
 addWall(0.00, 0.30, 0.00, 1.48, 0.14, MAT.wallBase, WALL_FULL_H - 2.25, 2.25); // Main Door header lintel
-const mainDoorLeaf = addBox(wallGroup, 0.06, 2.25, 1.15, 0.02, 1.125, 0.88, MAT.builderDoor, {
-  tag: 'ENTRY · WEST FACING', title: 'Main Entrance Door (40mm Solid Timber)',
-  desc: 'Fitted with Aqara A100 Zigbee mortise lock + Aqara G4 hardwired doorbell (12/24V DIN transformer). Immediately North of the West TV Media Wall.',
-  meta: 'Orientation: West · Floor 42 Tower B'
+const mainDoorLeaf = addBox(wallGroup, 0.04, 2.25, 1.15, 0.02, 1.125, 0.88, MAT.builderDoor, {
+  tag: 'ENTRY · WEST FACING (EXACT 40mm)', title: 'Main Entrance Door (40mm Solid Timber) + Aqara A100 & G4',
+  desc: 'Strictly 40mm builder door fitted with Aqara A100 Zigbee mortise lock (40–50mm thin-door spindle kit, Apple Home Key) + Aqara Video Doorbell G4 on Mean Well HDR-15-12/24 DIN transformer (isolated from 230V mains) + Panasonic 230V Ding-Dong offline fail-safe.',
+  meta: 'Lock ₹18.5k + G4 Doorbell ₹11.5k · West Floor 42'
 });
 mainDoorLeaf.userData.hFull = 2.25; mainDoorLeaf.userData.baseY = 0; mainDoorLeaf.userData.isGlass = true;
 wallMeshes.push(mainDoorLeaf);
-const mainDoorInlay = addBox(wallGroup, 0.072, 2.20, 0.14, 0.02, 1.125, 1.12, MAT.darkMetal); // Builder walnut door dark vertical inlay (Docket p.2)
+const mainDoorInlay = addBox(wallGroup, 0.052, 2.20, 0.14, 0.02, 1.125, 1.12, MAT.darkMetal); // Builder walnut door dark vertical inlay (Docket p.2)
 mainDoorInlay.userData.hFull = 2.20; mainDoorInlay.userData.baseY = 0.025; mainDoorInlay.userData.isGlass = true;
 wallMeshes.push(mainDoorInlay);
 const mainDoorHandle = addBox(wallGroup, 0.08, 0.04, 0.14, 0.04, 1.05, 1.28, MAT.brass); // Brass mortise handle
 mainDoorHandle.userData.hFull = 0.04; mainDoorHandle.userData.baseY = 1.03; mainDoorHandle.userData.isGlass = true;
 wallMeshes.push(mainDoorHandle);
+// Outer Entrance Niche: Godrej Interio Slimline 3-Tier CRCA Powder-Coated Steel Shoe Rack
+addBox(furnGroup, 0.18, 1.05, 0.72, -0.18, 0.525, 0.25, MAT.steel, {
+  tag: 'OUTER FOYER NICHE · DAILY FOOTWEAR', title: 'Godrej Interio Slimline 3-Tier CRCA Powder-Coated Steel Shoe Rack',
+  desc: 'Wall-mounted 170mm slim profile steel shoe cabinet in outer corridor entrance niche (zero corridor egress obstruction per Sumadhura FM bylaws).',
+  meta: 'Budget: ₹6,500 · Daily family footwear'
+});
 addWall(0.00, 1.48, 0.00, 5.48, 0.14, MAT.wallLimewash);
 addWall(0.00, 5.48, 0.00, 6.05);
 addWindow(0.00, 6.05, 0.00, 6.95, 1.4, 2.2);
@@ -1295,8 +1316,8 @@ addWall(5.78, 1.25, 5.78, 3.78, 0.14, MAT.wallKabir);
 addWall(4.08, 3.78, 5.78, 3.78, 0.14, MAT.wallBase, WALL_FULL_H - 2.45, 2.45);
 const linenDoorMat = MAT.hiddenGrooved.clone(); linenDoorMat.transparent = true;
 const linenHiddenDoor = addBox(furnGroup, 1.66, 2.45, 0.08, 4.93, 1.225, 3.78, linenDoorMat, {
-  tag: 'HOMZ HIDDEN DOOR (NW LIVING)', title: 'Linen Store Geometric-Grooved Hidden Door',
-  desc: 'Full-height 3163 SI Beige Wool paneling with DP-25mm-BG gold & DP-7.6mm-AB bronze groove inlays on 4× SS304 ball-bearing hinges.',
+  tag: 'HOMZ HIDDEN DOOR (NW LIVING)', title: 'Linen Store Geometric-Grooved Hidden Door (47mm Total)',
+  desc: '40mm builder door clad strictly with 6mm calibrated BWP ply + 1mm 3163 SI Beige Wool laminate (47mm total slab; 18mm ply banned) with DP-25mm-BG gold & DP-7.6mm-AB bronze groove inlays on 4× SS304 ball-bearing hinges.',
   meta: 'Linen Store: 1550 × 1300 mm · Docket p. 5'
 });
 linenHiddenDoor.userData.noCollide = true;
@@ -1320,8 +1341,8 @@ addWall(2.85, 5.48, 2.85, 7.52, 0.12);
 addWall(4.08, 5.48, 4.08, 7.52, 0.14, MAT.wallBase, WALL_FULL_H - 2.45, 2.45);
 const pujaDoorMat = MAT.hiddenGrooved.clone(); pujaDoorMat.transparent = true;
 const pujaHiddenDoor = addBox(furnGroup, 0.08, 2.45, 2.04, 4.08, 1.225, 6.50, pujaDoorMat, {
-  tag: 'HOMZ HIDDEN DOOR (SW LIVING)', title: 'Puja Walk-in Wardrobe Geometric-Grooved Hidden Door',
-  desc: 'Full-height 3163 SI Beige Wool paneling with DP-25mm-BG gold & DP-7.6mm-AB bronze grooves matching Linen Store.',
+  tag: 'HOMZ HIDDEN DOOR (SW LIVING)', title: 'Puja Walk-in Wardrobe Geometric-Grooved Hidden Door (47mm Total)',
+  desc: '40mm builder door clad with 6mm calibrated BWP ply + 1mm 3163 SI Beige Wool laminate (47mm total slab) with DP-25mm-BG gold & DP-7.6mm-AB bronze grooves on 4× SS304 ball-bearing hinges.',
   meta: 'Walk-in Clear: 1220 × 1850 mm · Docket pp. 5–6'
 });
 pujaHiddenDoor.userData.noCollide = true;
@@ -1346,6 +1367,11 @@ addWall(10.00, 7.52, 10.00, 11.60, 0.14);
 addWall(14.40, 8.45, 14.40, 9.30, 0.14, MAT.wallBase, WALL_FULL_H - 2.28, 2.28); // Kitchen-Utility header
 
 // Balcony Parapets, SS316 Grilles & Utility White uPVC 3-Track Enclosure
+const grilleMeta = {
+  tag: 'BALCONY SAFETY · FLOOR 42', title: 'Full-Height SS316 Marine Invisible Grille (2.5–3.0mm Cable, 50mm Pitch)',
+  desc: 'AISI 316 marine-grade nylon-coated cable at 50mm pitch anchored into structural RCC slab/parapet with M8×75mm SS316 anchors ≤250mm OC + horizontal stiffener every 1.0m + Ozone OZ-SD-01 / Dorset keyed patio sliding deadbolts.',
+  meta: 'Acid-tested SS316 · ~₹45k–₹60k flat · 8" fire-egress cutter in Utility'
+};
 function addBalconyParapetAndGrille(x1, z1, x2, z2) {
   addWall(x1, z1, x2, z2, 0.12, MAT.wallBase, 1.10, 0);
   const dx = x2 - x1, dz = z2 - z1, len = Math.hypot(dx, dz);
@@ -1354,8 +1380,16 @@ function addBalconyParapetAndGrille(x1, z1, x2, z2) {
     const t = i / count;
     const bar = new THREE.Mesh(new THREE.CylinderGeometry(0.007, 0.007, 1.65, 6), MAT.steel);
     bar.position.set(x1 + dx * t, 1.92, z1 + dz * t);
+    bar.userData.meta = grilleMeta;
+    inspectables.push(bar);
     grilleGroup.add(bar);
   }
+  // Horizontal mid-span anti-deflection stiffener wire at y = 1.92m
+  const stiff = new THREE.Mesh(new THREE.BoxGeometry(Math.abs(dx) > 0.1 ? len : 0.016, 0.016, Math.abs(dz) > 0.1 ? len : 0.016), MAT.steel);
+  stiff.position.set((x1 + x2) * 0.5, 1.92, (z1 + z2) * 0.5);
+  stiff.userData.meta = grilleMeta;
+  inspectables.push(stiff);
+  grilleGroup.add(stiff);
 }
 addBalconyParapetAndGrille(0.00, 13.15, 4.08, 13.15);
 addBalconyParapetAndGrille(0.00, 11.60, 0.00, 13.15);
@@ -1389,8 +1423,8 @@ addBox(furnGroup, 2.50, 0.015, 3.50, 2.18, 0.01, 2.55, MAT.rugWool, {
 // 1. Louvered CP Teak Shoe Credenza (1000×360×780mm, x: 2.86..3.86, 22cm clear of Living archway jamb)
 addBox(furnGroup, 1.00, 0.78, 0.36, 3.36, 0.39, 5.23, MAT.cpTeak, {
   tag: 'SOUTH FOYER · SHOE CREDENZA', title: 'Custom Seasoned CP Teak Louvered Shoe Credenza (100×36cm)',
-  desc: 'Relocated to Drawing South wall (East side, 22cm clear of Living passage). Slotted ventilation & flat shelves for UK 10+ sneakers.',
-  meta: 'Budget: ₹26k–₹32k · Tier 1 Recommended'
+  desc: 'Relocated to Drawing South wall (East side, 22cm clear of Living passage). Slotted ventilation & flat shelves for UK 10+ sneakers + Outer Entrance Niche Godrej Interio CRCA Steel Rack (₹6,500).',
+  meta: 'Budget: ₹26k–₹32k (+ ₹6.5k Outer Steel Rack) · Tier 1 Recommended'
 });
 // 2. Solid CP Teak Slatted Entry Bench beside Credenza (1150×380×450mm, x: 1.58..2.73)
 const benchMeta = {
@@ -1404,16 +1438,19 @@ addBox(furnGroup, 1.07, 0.03, 0.30, 2.155, 0.14, 5.22, MAT.cpTeak);
 [[1.63, 5.07], [2.68, 5.07], [1.63, 5.37], [2.68, 5.37]].forEach(([lx, lz]) => {
   addBox(furnGroup, 0.05, 0.35, 0.05, lx, 0.175, lz, MAT.cpTeak);
 });
-// 3. Cast-Iron Sparrow Wall Hooks mounted above South-East Shoe Credenza
+// 3. Antique Brass/Bronze Cast-Iron Sparrow Wall Hooks mounted above South-East Shoe Credenza (exact match to sparrow-wall-hook.jpg)
+const hookMeta = {
+  tag: 'SOUTH FOYER · WALL HOOKS', title: 'Spruce & Pop Skye Cast-Iron Sparrow Hooks (Set of 4 · Antique Brass)',
+  desc: 'Antique brass/bronze finish cast-iron sparrow silhouette hooks on vertical stem with lower J-hook above shoe credenza via Fischer DuoPower plugs (<5kg load).',
+  meta: 'Aesthetic Exception · ₹1,700 set'
+};
 [3.02, 3.24, 3.46, 3.68].forEach(hx => {
-  addBox(decorGroup, 0.03, 0.06, 0.015, hx, 1.48, 5.40, MAT.darkMetal);
-  const bird = new THREE.Mesh(new THREE.BoxGeometry(0.035, 0.045, 0.085), MAT.darkMetal);
-  bird.position.set(hx, 1.49, 5.355); bird.rotation.x = 0.35;
-  bird.userData.meta = {
-    tag: 'SOUTH FOYER · WALL HOOKS', title: 'Spruce & Pop Skye Cast-Iron Sparrow Hooks (Set of 4)',
-    desc: 'Cast-iron sparrow silhouette pegs on South wall above shoe credenza via Fischer DuoPower plugs (<5kg load).',
-    meta: 'Aesthetic Exception · ₹1,700 set'
-  };
+  addBox(decorGroup, 0.012, 0.11, 0.010, hx, 1.47, 5.402, MAT.bronze, hookMeta); // Vertical stem
+  addBox(decorGroup, 0.038, 0.022, 0.012, hx, 1.465, 5.40, MAT.bronze); // 2-screw middle mounting plate
+  addBox(decorGroup, 0.012, 0.022, 0.038, hx, 1.425, 5.382, MAT.brass); // Lower J-hook projection
+  const bird = new THREE.Mesh(new THREE.BoxGeometry(0.052, 0.032, 0.024), MAT.brass);
+  bird.position.set(hx - 0.006, 1.535, 5.392); bird.rotation.z = 0.25;
+  bird.userData.meta = hookMeta;
   inspectables.push(bird); decorGroup.add(bird);
 });
 // 4. Pierced Brass Pendant Lantern above South-East Foyer Credenza
@@ -1435,9 +1472,9 @@ addBox(furnGroup, 0.42, 0.36, 2.20, 0.30, 0.39, 2.75, MAT.cinnHickory, {
 });
 // Owned 65" Sony Bravia XBR-65X90CH: exact 1450 W × 833 H × 70 D mm, centered at z=2.82m
 addBox(furnGroup, 0.07, 0.833, 1.45, 0.115, 1.18, 2.82, MAT.tvScreen, {
-  tag: 'DRAWING · WEST AV (EXACT 65")', title: 'Owned 65" Sony Bravia TV (1450×833mm) + Sonos Arc Ultra',
-  desc: 'Exact 65" proportions (1450×833×70mm). 50mm in-wall PVC conduit; ≥150mm vertical clearance above console for Sonos Arc Ultra upward Atmos drivers.',
-  meta: 'Model: XBR-65X90CH · Direct 230V'
+  tag: 'DRAWING · WEST AV (EXACT 65")', title: 'Owned 65" Sony Bravia TV (1450×833mm) + Brateck VESA 400×400 Mount',
+  desc: 'Exact 65" proportions (1450×833×70mm) on Brateck / Rife VESA 400×400 75kg Tilt Mount (₹2,499) + Honeywell HDMI 2.1 eARC Cable (₹1,299) via 50mm in-wall PVC conduit; ≥150mm vertical clearance above console for Sonos Arc Ultra upward Atmos drivers.',
+  meta: 'Model: XBR-65X90CH (Owned) · Mount + HDMI 2.1: ₹3,798'
 });
 // Owned Sonos Arc Ultra: exact 1178 W × 75 H × 111 D mm with sleek rounded acoustic front
 const arcGeo = new THREE.CylinderGeometry(0.0375, 0.0375, 1.178, 16);
@@ -1447,9 +1484,9 @@ arcMesh.scale.set(1.48, 1, 1); // 111mm depth × 75mm height exact
 arcMesh.position.set(0.32, 0.608, 2.82);
 arcMesh.castShadow = true;
 arcMesh.userData.meta = {
-  tag: 'DRAWING · SOUNDBAR (EXACT SPEC)', title: 'Owned Sonos Arc Ultra (1178 × 75 × 111 mm)',
-  desc: '9.1.4 Sound Motion Dolby Atmos soundbar centered under 65" Sony TV via HDMI 2.1 eARC.',
-  meta: 'Exact 1178mm width · Delivered Oct 2026'
+  tag: 'DRAWING · SOUNDBAR (FINALIZED PURCHASE)', title: 'Owned Sonos Arc Ultra (1178 × 75 × 111 mm)',
+  desc: '9.1.4 Sound Motion Dolby Atmos soundbar centered under 65" Sony TV via Honeywell Certified Ultra High Speed HDMI 2.1 eARC cable.',
+  meta: '₹85,004 (Owned & Delivered Oct 21, 2026 · ₹99,999 MRP)'
 };
 inspectables.push(arcMesh); furnGroup.add(arcMesh);
 
@@ -1459,21 +1496,28 @@ addBox(decorGroup, 0.185, 0.16, 0.26, 0.30, 0.65, 1.88, MAT.offWhite, {
   desc: 'Standalone spatial music speaker in Drawing Room (not paired as TV surround so Bluetooth/line-in stay enabled).',
   meta: 'Owned · Multi-room sync with Arc Ultra'
 });
+// Aqara Hub M3 (Ethernet RJ-45 LAN 1 PoE/USB-C Zigbee 3.0 + Matter + Thread Border Router) on TV Console
+addBox(decorGroup, 0.105, 0.032, 0.105, 0.30, 0.586, 2.18, MAT.darkMetal, {
+  tag: 'SMART HOME · PRIMARY ZIGBEE 3.0 & MATTER BRIDGE', title: 'Aqara Hub M3 (Wired Ethernet LAN 1 + Zigbee 3.0 / Thread / IR)',
+  desc: 'Hardwired to TV wall RJ-45 Cat6 port (LAN 1 from Flint 2) to eliminate Wi-Fi jitter. Bridges 100% of in-wall Aqara T1/T2 relays, A100 door lock, smoke/gas/water sensors, and curtain motor locally over Matter.',
+  meta: 'Budget: ₹14,500 · Tier 1 Recommended'
+});
 // Wall-Mounted Nataraja Relief on West Limewash Wall (centered at z=4.38m between TV Console z=3.85 & SW Vase z=4.90)
+// Exact 20" (508mm Ø = 0.254m radius) Thanjavur relief plate proportions per art-wall-decor.md
 const natMeta = {
-  tag: 'DRAWING · WEST WALL NATARAJA', title: 'Tri-Metal / Antique Brass Nataraja Wall Relief (Flush Mount)',
-  desc: 'Mounted flush at 1.36m eye level on burnished Morning Glory 0765 West wall between TV console and SW corner vase via dual 8×50mm Fischer masonry plugs; lit by 10° 3000K gimbal spot.',
-  meta: 'West Wall (z=4.38m) · ₹9.9k–₹16.5k'
+  tag: 'DRAWING · WEST WALL NATARAJA (EXACT 20" Ø)', title: 'GiTAGGED 16"–20" Tri-Metal Thanjavur / Brass Nataraja Wall Relief',
+  desc: 'Mounted flush at 1.36m eye level on burnished Morning Glory 0765 West wall between TV console and SW corner vase via dual 8×50mm Fischer masonry plugs; lit by 10° 3000K gimbal spot (3D plinth option: Devsabha 27" ₹43,999).',
+  meta: 'West Wall (z=4.38m) · ₹9,925–₹16,500 (Tier 1 Recommended)'
 };
-const natBack = new THREE.Mesh(new THREE.CylinderGeometry(0.30, 0.30, 0.024, 32), MAT.bronze);
+const natBack = new THREE.Mesh(new THREE.CylinderGeometry(0.254, 0.254, 0.024, 32), MAT.bronze);
 natBack.rotation.z = Math.PI / 2;
 natBack.position.set(0.092, 1.36, 4.38);
 natBack.userData.meta = natMeta;
 inspectables.push(natBack); decorGroup.add(natBack);
-const natRim = new THREE.Mesh(new THREE.TorusGeometry(0.30, 0.014, 10, 32), MAT.brass);
+const natRim = new THREE.Mesh(new THREE.TorusGeometry(0.254, 0.013, 10, 32), MAT.brass);
 natRim.rotation.y = Math.PI / 2;
 natRim.position.set(0.106, 1.36, 4.38); decorGroup.add(natRim);
-const natPlane = new THREE.Mesh(new THREE.PlaneGeometry(0.52, 0.53), MAT.nataraja);
+const natPlane = new THREE.Mesh(new THREE.PlaneGeometry(0.47, 0.47), MAT.nataraja);
 natPlane.position.set(0.114, 1.36, 4.38); natPlane.rotation.y = Math.PI / 2;
 natPlane.userData.meta = natMeta;
 inspectables.push(natPlane); decorGroup.add(natPlane);
@@ -1543,19 +1587,50 @@ addBox(furnGroup, 0.04, 0.50, 0.04, 3.88, 0.25, 1.32, MAT.darkMetal);
 addFloorLamp(3.72, 0.42, 'Orange Tree Velar Marble & Brass Arc Floor Lamp', 'Heavy marble base tucked at NE corner arching over 3+2 leather suite with warm 2700K SOLHETTA E27 bulb.', 'Budget: ₹12k–₹13.3k', true);
 addCowayPurifier(1.36, 0.28, 'DRAWING');
 // Orange Tree Toshi Solid Wood Nesting Coffee Table Pair centered inside 3+2 leather suite
-const ct1 = new THREE.Mesh(new THREE.CylinderGeometry(0.45, 0.45, 0.04, 24), MAT.darkMetal);
-ct1.position.set(2.14, 0.40, 2.38); ct1.castShadow = true; furnGroup.add(ct1);
-const ct2 = new THREE.Mesh(new THREE.CylinderGeometry(0.33, 0.33, 0.04, 24), MAT.cpTeak);
-ct2.position.set(1.74, 0.32, 2.82); ct2.castShadow = true; furnGroup.add(ct2);
+const toshiMeta = {
+  tag: 'DRAWING · COFFEE TABLE PAIR', title: 'Orange Tree Toshi Solid Wood Nesting Coffee Table (Set of 2)',
+  desc: 'Kiln-dried solid hardwood nesting tables with rounded child-safe rims (zero glass tops) centered inside the 3+2 top-grain leather suite.',
+  meta: 'Budget: ₹21,699 · Tier 1 Recommended'
+};
+const ct1 = new THREE.Mesh(new THREE.CylinderGeometry(0.45, 0.45, 0.04, 24), MAT.cpTeak);
+ct1.position.set(2.14, 0.40, 2.38); ct1.castShadow = true; ct1.userData.meta = toshiMeta;
+inspectables.push(ct1); furnGroup.add(ct1);
+const ct1Base = new THREE.Mesh(new THREE.CylinderGeometry(0.36, 0.38, 0.36, 16, 1, true), MAT.cpTeak);
+ct1Base.position.set(2.14, 0.19, 2.38); furnGroup.add(ct1Base);
+const ct2 = new THREE.Mesh(new THREE.CylinderGeometry(0.33, 0.33, 0.04, 24), MAT.oakLight);
+ct2.position.set(1.74, 0.32, 2.82); ct2.castShadow = true; ct2.userData.meta = toshiMeta;
+inspectables.push(ct2); furnGroup.add(ct2);
+const ct2Base = new THREE.Mesh(new THREE.CylinderGeometry(0.25, 0.27, 0.28, 16, 1, true), MAT.oakLight);
+ct2Base.position.set(1.74, 0.15, 2.82); furnGroup.add(ct2Base);
 // Framed Persian Wall Carpet on Drawing Room South Wall: exact 1.52:1 ratio (1840×1210mm inside 1960×1330mm CP Teak frame)
-addBox(decorGroup, 1.96, 1.33, 0.045, 1.80, 1.52, 5.39, MAT.cpTeak);
-addBox(decorGroup, 1.84, 1.21, 0.055, 1.80, 1.52, 5.37, MAT.persianCarpet, {
-  tag: 'DRAWING · SOUTH WALL ART (EXACT 1.52:1)', title: 'Owned Framed Persian Pictorial Wall Carpet',
-  desc: 'Mounted on Drawing South wall above the entry bench, flanked by the SW floor vase and South-East foyer hooks (exact 1.52:1 aspect). 5mm archival spacer + Z-bar cleat + 3000K gimbal spot.',
+// Recessed cleanly inside CP Teak frame (zero side-edge texture smearing!)
+const carpetMeta = {
+  tag: 'DRAWING · SOUTH WALL ART (EXACT 1.52:1)', title: 'Owned Framed Persian Pictorial Wall Carpet (184×121cm)',
+  desc: 'Mounted on Drawing South wall above the entry bench, flanked by the SW floor vase and South-East foyer hooks (exact 1.52:1 aspect). 5mm archival breathing spacer + Z-bar aluminum French cleat + 3000K gimbal spot.',
   meta: 'Drawing Room South Wall · Protected from UV'
-});
+};
+addBox(decorGroup, 1.96, 1.33, 0.048, 1.80, 1.52, 5.385, MAT.cpTeak, carpetMeta);
+const carpetPlane = new THREE.Mesh(new THREE.PlaneGeometry(1.84, 1.21), MAT.persianCarpet);
+carpetPlane.position.set(1.80, 1.52, 5.358); carpetPlane.rotation.y = Math.PI;
+carpetPlane.userData.meta = carpetMeta;
+inspectables.push(carpetPlane); decorGroup.add(carpetPlane);
 
-// ---------- B. LIVING ROOM SPINE & WALK-IN (x: 4.08..10.15, z: 3.78..7.52) ----------
+// ---------- B. LIVING ROOM SPINE, LINEN STORE & WALK-IN (x: 4.08..10.15, z: 3.78..7.52) ----------
+// NW Linen Store Interior (x: 4.08..5.78, z: 2.50..3.78): Homz Overhead Loft + Ventilated Network Shelf (Flint 2 + DRC-100A DC-UPS)
+addBox(furnGroup, 1.54, 0.56, 0.45, 4.93, 2.16, 2.78, MAT.beigeWool, {
+  tag: 'LINEN STORE · HOMZ OVERHEAD LOFT (DOCKET P. 5)', title: 'Homz Linen Store Overhead Storage Loft (3163 SI Beige Wool)',
+  desc: 'Full-width overhead storage loft in 3163 SI Beige Wool with Essential 5133 SD linen interior behind the geometric-grooved hidden door.',
+  meta: 'Linen Store: 1550 × 1300 mm · Homz ₹18L Scope'
+});
+const netShelfMeta = {
+  tag: 'LINEN STORE · WHOLE-HOME WI-FI & DC-UPS', title: 'Owned GL.iNet Flint 2 (GL-MT6000) + Mean Well DRC-100A DC-UPS',
+  desc: 'Homz ventilated wooden media shelf (450×350×350mm) housing ISP GPON ONT, owned GL.iNet Flint 2 primary router (patches all 5 room Cat6 drops directly, zero external switch), and Mean Well DRC-100A DIN-rail DC-UPS + Exide 12V 7Ah SLA battery + inline 12V 5A buck regulator (0ms transfer).',
+  meta: 'Router: Owned · DC-UPS Enclosure: ₹5,150–₹5,550'
+};
+addBox(furnGroup, 0.45, 0.03, 0.35, 4.55, 1.42, 2.74, MAT.cinnHickory, netShelfMeta);
+addBox(decorGroup, 0.22, 0.05, 0.16, 4.46, 1.46, 2.74, MAT.darkMetal, netShelfMeta); // GL.iNet Flint 2 router
+addBox(decorGroup, 0.14, 0.16, 0.12, 4.66, 1.52, 2.72, MAT.steel, netShelfMeta);     // Mean Well DRC-100A DIN DC-UPS + 7Ah SLA box
+
 // Puja Walk-in Wardrobe (Docket p. 6): two-sided open multi-tier shelving flanking backlit dome mirror
 const walkinMeta = {
   tag: 'PUJA WALK-IN · DOCKET P. 6', title: 'Walk-in Wardrobe (Two-Sided Open Shelving + Backlit Arch Mirror)',
@@ -1573,7 +1648,11 @@ addDomeMirror(2.94, 1.18, 6.50, 0.70, 1.80, 'x', {
   meta: 'Docket p. 6'
 });
 
-addBox(furnGroup, 3.00, 0.015, 2.20, 7.05, 0.01, 5.95, MAT.rugWool);
+addBox(furnGroup, 3.00, 0.015, 2.20, 7.05, 0.01, 5.95, MAT.rugWool, {
+  tag: 'LIVING SPINE · RUG', title: 'Hand-Tufted / Flatweave 100% Pure New Wool Rug (300×220cm)',
+  desc: 'Anchors the South-wall family lounge zone; mapped as an app "No-Mop Zone" for Roborock Qrevo S Pro and vacuumed weekly with owned Dyson V15.',
+  meta: 'Obeetee / Jaipur Rugs / IKEA STOCKHOLM'
+});
 // Family Sofa FLIPPED to SOUTH Wall (z = 7.52, facing North into open Living Spine)
 addBox(furnGroup, 2.30, 0.40, 0.94, 7.05, 0.25, 6.94, MAT.fabricOat, {
   tag: 'LIVING · SOUTH WALL FAMILY SOFA', title: 'Gulmohar Lane Slipcovered 3-Seater (South Wall)',
@@ -1590,8 +1669,8 @@ addBox(furnGroup, 1.05, 0.40, 0.68, 7.05, 0.20, 5.72, MAT.fabricSand, {
 // Patio Corner Accent Chair (Spin Library / Troy Mini)
 addBox(furnGroup, 0.68, 0.42, 0.68, 13.55, 0.21, 6.82, MAT.fabricSand, {
   tag: 'LIVING/PATIO · ACCENT CHAIR', title: 'Spin Library / Troy Mini Solid Wood Armchair',
-  desc: 'Stationary 4-leg solid oak/ash + steel frame positioned ≥400mm clear of East Sit-out slider.',
-  meta: 'Budget: ₹23.5k–₹25k'
+  desc: 'Stationary 4-leg solid oak/ash + powder-coated steel frame positioned ≥400mm clear of East Sit-out slider (no swivel base).',
+  meta: 'Budget: ₹23,499–₹24,999 · Tier 1 Locked'
 });
 addBox(furnGroup, 0.68, 0.40, 0.14, 13.55, 0.56, 7.12, MAT.oakLight);
 
@@ -1669,28 +1748,44 @@ addBox(furnGroup, 0.36, 0.14, 0.52, 10.24, 0.94, 3.15, MAT.offWhite); // Vessel 
 addBox(decorGroup, 0.025, 0.24, 0.025, 10.12, 0.99, 2.86, MAT.brass); // Tall brushed brass basin mixer
 addBox(decorGroup, 0.12, 0.025, 0.025, 10.18, 1.10, 2.86, MAT.brass);
 addBox(furnGroup, 0.40, 0.22, 0.40, 10.24, 0.12, 3.45, MAT.offWhite, {
-  tag: 'LOBBY · ROBOT VACUUM BAY', title: 'Roborock Qrevo S Pro (Under-Vanity Plumbed Bay)',
-  desc: 'Dual 200 RPM spinning mops, detachable washboard tray, parked directly beneath Lobby vanity.',
-  meta: '1/2" cold valve + 32mm drain'
+  tag: 'LOBBY · ROBOT VACUUM BAY (TIER 2 RECOMMENDED)', title: 'Roborock Qrevo S Pro (Under-Vanity Plumbed Bay)',
+  desc: 'Dual 200 RPM spinning mops, 55°C hot wash + 45°C warm-air dry, detachable 1-piece sink-rinse washboard tray on waterproof silicone mat (≥100mm lateral IR clearance). Tier 1 alt: Dreame L50 Ultra CE Plumbed (₹64k).',
+  meta: 'Budget: ₹74,999–₹89,990 · 1/2" cold valve + 32mm drain'
 });
 addDomeMirror(10.03, 1.62, 3.15, 0.66, 1.08, 'x', {
-  tag: 'LOBBY · DOME MIRROR', title: 'Copper-Free Arch Mirror + 24V CRI 95+ COB Halo',
-  desc: '3000K dot-free COB halo powered by potted Mean Well LPV-60-24 Class-II driver.',
-  meta: 'Zero transformer hum'
+  tag: 'LOBBY · DOME MIRROR', title: 'Saint-Gobain SGG Mirasafe 5mm Copper-Free Arch Mirror + 24V COB Halo',
+  desc: '3000K dot-free CRI 95+ COB halo in aluminum channel powered by potted Mean Well LPV-60-24 Class-II driver on neutral-cure alkoxy silicone.',
+  meta: 'Mirror in Homz ₹18L scope + ₹3,600 24V COB Halo'
 });
 
-// East Sit-Out Balcony
-[[15.15, 4.45], [15.15, 5.65]].forEach(([bx, bz]) => addBox(furnGroup, 0.56, 0.42, 0.56, bx, 0.21, bz, MAT.cpTeak));
+// East Sit-Out Balcony (Seating + Wind-Ballasted Planter + Sonos Move 2 Portable Stereo Speaker)
+const sitoutChairMeta = {
+  tag: 'EAST SIT-OUT · BALCONY SEATING', title: 'Seasoned CP Teak Balcony Lounge Chairs (Pair)',
+  desc: 'Outdoor oiled solid teak balcony seating protected by full-height SS316 marine invisible grilles (50mm pitch) and 3M Prestige 70 solar glazing.',
+  meta: 'East Sit-Out: 4\'11" Wide · Floor 42 Horizon View'
+};
+[[15.15, 4.45], [15.15, 5.65]].forEach(([bx, bz]) => addBox(furnGroup, 0.56, 0.42, 0.56, bx, 0.21, bz, MAT.cpTeak, sitoutChairMeta));
+const planterMeta = {
+  tag: 'EAST SIT-OUT · WIND-BALLASTED PLANTER', title: 'Heavy Terracotta Floor Planter (Floor 42 Wind-Ballasted)',
+  desc: 'Low-center-of-gravity terracotta vessel ballasted with washed river stone base for Floor 42 wind gusts.',
+  meta: 'East Sit-Out Balcony'
+};
 const plantPot = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.18, 0.42, 14), MAT.terracotta);
-plantPot.position.set(15.25, 0.21, 5.05); furnGroup.add(plantPot);
+plantPot.position.set(15.25, 0.21, 5.05); plantPot.userData.meta = planterMeta; inspectables.push(plantPot); furnGroup.add(plantPot);
 const foliage = new THREE.Mesh(new THREE.DodecahedronGeometry(0.32), MAT.plant);
-foliage.position.set(15.25, 0.62, 5.05); furnGroup.add(foliage);
+foliage.position.set(15.25, 0.62, 5.05); foliage.userData.meta = planterMeta; inspectables.push(foliage); furnGroup.add(foliage);
+// Sonos Move 2 Portable Balcony & Dining Speaker (exact 160 W × 241 H × 127 D mm)
+addBox(decorGroup, 0.127, 0.241, 0.160, 14.72, 0.12, 4.18, MAT.darkMetal, {
+  tag: 'EAST SIT-OUT · PORTABLE AUDIO (TIER 2 RECOMMENDED)', title: 'Sonos Move 2 Weatherproof Portable Stereo Speaker',
+  desc: 'Dual-tweeter stereo + automatic Trueplay, IP56 weatherproof rating, 24-hr user-replaceable battery for East Sit-Out Balcony, Dining, and Kitchen.',
+  meta: 'Budget: ₹38,249 · Exact 160×241×127mm'
+});
 
 // ---------- D. KITCHEN & UTILITY (HOMZ DOCKET PP. 12–16) ----------
 // West Wall (Kitchen-C, Docket p. 14): 3174 LU Brown Sugar (#7B5238) bodies + continuous glossy light top loft row + Gold PVC skirting & Gold Gola
 addBox(furnGroup, 0.64, 1.84, 0.58, 10.40, 1.00, 7.86, MAT.brownSugar, {
   tag: 'KITCHEN WEST · DOCKET P. 14', title: 'Tall Pantry + Bosch Fridge + Oven/Microwave Tower',
-  desc: 'Full West appliance wall in 3174 LU Brown Sugar (#7B5238) with continuous glossy light top loft row across Pantry/Fridge/Oven and Gold PVC skirting.',
+  desc: 'Full West appliance wall in 3174 LU Brown Sugar (#7B5238) on Century Club Prime BWP ply with continuous 158 LU Taupe glossy top loft row across Pantry/Fridge/Oven and Gold PVC skirting.',
   meta: 'Docket p. 14 · Kitchen-C'
 });
 addBox(furnGroup, 0.64, 0.46, 0.58, 10.40, 2.15, 7.86, MAT.taupeGloss); // NW Pantry top loft
@@ -1711,10 +1806,10 @@ addBox(furnGroup, 0.06, 0.58, 0.56, 10.71, 0.92, 9.44, MAT.darkMetal, {
   desc: '3D HotAir with mechanical rotary dials (steam-proof). Dedicated unshared 16A radial drop.',
   meta: '₹54k Elitehaus quote'
 });
-addBox(furnGroup, 0.36, 0.28, 0.49, 10.52, 1.44, 9.44, MAT.darkMetal, {
-  tag: 'KITCHEN · MICROWAVE (DECIDED)', title: 'Samsung MS23A301TAK/TL 23L Solo (Open Shelf)',
-  desc: 'Freestanding 23L Ceramic Enamel cavity with rotary jog dial sitting on open 450mm shelf above built-in oven.',
-  meta: 'Locked Exception · ₹6,940'
+addBox(furnGroup, 0.374, 0.275, 0.489, 10.52, 1.44, 9.44, MAT.darkMetal, {
+  tag: 'KITCHEN · MICROWAVE (EXACT 489×275×374mm)', title: 'Samsung MS23A301TAK/TL 23L Solo (Open 450mm Shelf)',
+  desc: 'Exact 489 W × 275 H × 374 D mm freestanding 23L Ceramic Enamel cavity with rotary jog dial on open 450mm shelf above built-in oven (in-stock fallback: MS23A3513AK/TL).',
+  meta: 'Locked Exception · ₹6,940 (fallback ₹7,990)'
 });
 // West SW Counter Base + Gold Skirting + Gold Gola + Herringbone Backsplash + Split Overheads/Lofts
 addBox(furnGroup, 0.62, 0.76, 1.12, 10.39, 0.46, 10.34, MAT.brownSugar);
@@ -1729,9 +1824,9 @@ addBox(furnGroup, 0.015, 0.014, 1.12, 10.445, 1.915, 10.34, MAT.seamDark); // Ov
 
 // South Wall (Kitchen-B, Docket p. 13): Base + Gold Skirting + Gold Gola + Sink + Herringbone + Full Overheads/Lofts + SE Fluted Glass
 addBox(furnGroup, 3.60, 0.76, 0.64, 12.48, 0.46, 11.20, MAT.brownSugar, {
-  tag: 'KITCHEN SOUTH · DOCKET P. 13', title: '3174 LU Brown Sugar Base + Ivory Fantasy Granite + Gold Gola',
-  desc: '9× soft-close tandem drawers in 3174 LU Brown Sugar (#7B5238), Gold PVC skirting, Gold Gola profiles, centered 16G SS304 undermount sink, glossy light overheads/lofts & SE gold-framed fluted-glass display.',
-  meta: 'Overheads: Glossy Light Wall/Loft (#F4F2EB)'
+  tag: 'KITCHEN SOUTH · DOCKET P. 13', title: '3174 LU Brown Sugar Base + Ivory Fantasy Granite (~₹30k) + Gold Gola',
+  desc: '9× soft-close tandem drawers (Hettich InnoTech Atira / Blum LEGRABOX) on Century Club Prime BWP ply, 20mm Ivory Fantasy Indian granite (Akemi Nano-Sealed, 3–5mm underside drip groove), 158 LU Taupe glossy overheads/lofts & SE gold-framed fluted-glass display.',
+  meta: 'Base: 3174 LU Brown Sugar · Overheads: 158 LU Taupe Glossy'
 });
 addBox(furnGroup, 3.60, 0.08, 0.04, 12.48, 0.04, 10.89, MAT.goldProfile); // South Gold PVC skirting
 addBox(furnGroup, 3.60, 0.026, 0.02, 12.48, 0.81, 10.875, MAT.goldProfile); // South Gold Gola top rail
@@ -1741,10 +1836,10 @@ addBox(furnGroup, 3.64, 0.04, 0.66, 12.48, 0.86, 11.20, MAT.graniteIvory);
 addBox(decorGroup, 0.67, 0.58, 0.02, 11.015, 1.17, 11.51, MAT.kitchenBacksplash);
 addBox(decorGroup, 1.23, 0.58, 0.02, 13.665, 1.17, 11.51, MAT.kitchenBacksplash);
 addBox(decorGroup, 1.70, 0.12, 0.02, 12.20, 0.94, 11.51, MAT.kitchenBacksplash);
-addBox(furnGroup, 0.68, 0.05, 0.46, 12.20, 0.865, 11.18, MAT.steel, {
-  tag: 'KITCHEN · SINK & TAP', title: 'Carysil 16G SS304 Undermount Sink + Kohler July Mixer',
-  desc: '1.2mm surgical AISI 304 on welded SS304 cradle + Kohler July high-arch forged brass deck mixer.',
-  meta: 'No under-sink bin · Rigid PVC P-trap'
+addBox(furnGroup, 0.72, 0.05, 0.46, 12.20, 0.865, 11.18, MAT.steel, {
+  tag: 'KITCHEN · SINK & TAP (TIER 1 RECOMMENDED)', title: 'Carysil Quadro / Nirali NG Quadrato 16G SS304 Sink + Kohler July Mixer',
+  desc: '1.2mm (16-gauge) surgical AISI 304 undermount sink (R10 corners, sound pads) on welded SS304 cradle + Kohler July (K-5243IN-4-CP) high-arch forged brass deck mixer + Jaquar/Viega smooth-bore rigid PVC P-trap.',
+  meta: 'Sink ₹10.5k–₹13.5k + Kohler July ₹6.3k–₹6.9k + Rigid P-Trap ₹2.6k'
 });
 // Kohler July high-arch tap
 addBox(decorGroup, 0.03, 0.30, 0.03, 12.20, 1.02, 11.42, MAT.steel);
@@ -1772,22 +1867,34 @@ addBox(furnGroup, 1.05, 0.64, 0.32, 13.55, 1.60, 11.35, MAT.flutedGlass);
 [13.025, 13.55, 14.075].forEach(fx => addBox(furnGroup, 0.03, 0.66, 0.35, fx, 1.60, 11.35, MAT.goldProfile));
 [1.49, 1.71].forEach(sy => addBox(furnGroup, 1.00, 0.022, 0.28, 13.55, sy, 11.36, MAT.internalLinen));
 
-// East Wall (Kitchen-A, Docket p. 12): Hob + Chimney + Gold Skirting + Gold Gola + Herringbone + Split Overheads/Lofts
+// East Wall (Kitchen-A, Docket p. 12): 2× 300mm Domino Hobs + 60mm Granite Bridge (660mm total) + Faber 90cm BLDC Chimney
 addBox(furnGroup, 0.64, 0.76, 1.75, 13.98, 0.46, 10.05, MAT.brownSugar);
 addBox(furnGroup, 0.04, 0.08, 1.75, 13.67, 0.04, 10.05, MAT.goldProfile); // East Gold PVC skirting
 addBox(furnGroup, 0.02, 0.026, 1.75, 13.655, 0.81, 10.05, MAT.goldProfile); // East Gold Gola top rail
 addBox(furnGroup, 0.02, 0.024, 1.75, 13.655, 0.46, 10.05, MAT.goldProfile); // East Gold Gola mid rail
 addBox(furnGroup, 0.66, 0.04, 1.78, 13.98, 0.86, 10.05, MAT.graniteIvory);
 addBox(decorGroup, 0.02, 0.62, 1.75, 14.31, 1.19, 10.05, MAT.kitchenBacksplash);
-addBox(furnGroup, 0.52, 0.03, 0.62, 13.96, 0.89, 10.05, MAT.darkMetal, {
-  tag: 'KITCHEN EAST · HOB & CHIMNEY', title: 'Häfele Domino Pair (Gas + Induction) + Faber 90cm BLDC',
-  desc: 'Locked owner exception (₹53k pair) under 90cm Faber Coral BLDC chimney with glossy light overheads.',
-  meta: 'Docket p. 12 · 2× Tandem Drawers Below'
+const dominoMeta = {
+  tag: 'KITCHEN EAST · LOCKED HOB EXCEPTION (660–670mm SPAN)', title: 'Häfele Domino Pair: Altius FS 230 (30cm Gas) + Bella/Nero 30 (30cm Induction)',
+  desc: 'Two 300×520mm domino hobs separated by a 60mm solid granite structural bridge (660mm total span; 115mm overhang per side under 900mm chimney). Dedicated 16A induction line + 50mm BGL PNG ventilation grommets.',
+  meta: 'Locked Owner Exception · ₹53,000 Pair · 2× Tandem Drawers Below'
+};
+addBox(furnGroup, 0.52, 0.03, 0.30, 13.96, 0.89, 9.87, MAT.darkMetal, dominoMeta);  // 30cm Gas Domino
+addBox(furnGroup, 0.52, 0.03, 0.30, 13.96, 0.89, 10.23, MAT.darkMetal, dominoMeta); // 30cm Induction Domino
+addBox(furnGroup, 0.40, 0.22, 0.90, 14.10, 1.56, 10.05, MAT.darkMetal, {
+  tag: 'KITCHEN EAST · 90CM BLDC CHIMNEY (TIER 1 RECOMMENDED)', title: 'Faber Coral HC SC FL BK BLDC 90 (900×400mm Flat T-Box)',
+  desc: '1,500 m³/h gross suction, 9-speed inverter BLDC motor, 400mm flat T-box canopy, filterless + heat auto-clean, vented via 150mm smooth-bore rigid UPVC duct + gravity louver.',
+  meta: 'Budget: ₹19,490–₹20,500 · 650–700mm above hob'
 });
-addBox(furnGroup, 0.44, 0.22, 0.90, 14.08, 1.56, 10.05, MAT.darkMetal);
 addBox(furnGroup, 0.36, 0.44, 1.75, 14.12, 1.70, 10.05, MAT.taupeGloss); // East mid overheads
 addBox(furnGroup, 0.36, 0.46, 1.75, 14.12, 2.15, 10.05, MAT.taupeGloss); // East top loft
 addBox(furnGroup, 0.015, 0.014, 1.75, 13.935, 1.92, 10.05, MAT.seamDark); // East loft datum seam
+// Kitchen-to-Utility Doorway (x=14.40, z:8.45..9.30): Dormakaba TS 73 V Overhead Hydraulic Backcheck Closer on dry Kitchen side
+addBox(decorGroup, 0.06, 0.065, 0.24, 14.35, 2.24, 8.64, MAT.steel, {
+  tag: 'KITCHEN-UTILITY DOOR · WIND SLAM ARRESTOR', title: 'Dormakaba TS 73 V Overhead Hydraulic Closer (Thinking Backcheck)',
+  desc: 'Mounted on dry interior Kitchen side with aluminum drop plate + M5/M6 SS304 threaded rivnuts + floor rubber dome stop (₹650) to arrest Floor 42 wind-tunnel slams.',
+  meta: 'Tier 2 Recommended · ₹7,500–₹9,500 (Tier 1: Häfele DCL 110 ₹4.5k)'
+});
 
 // Utility + Service Balcony (Docket p. 15 + Locked Stacked Bosch Laundry)
 addBox(furnGroup, 0.56, 1.64, 0.52, 15.05, 0.90, 9.65, MAT.taupeGloss, {
@@ -1798,19 +1905,24 @@ addBox(furnGroup, 0.56, 1.64, 0.52, 15.05, 0.90, 9.65, MAT.taupeGloss, {
 addBox(furnGroup, 0.56, 0.08, 0.52, 15.05, 0.04, 9.65, MAT.goldProfile); // Utility Tall Cabinet Gold PVC skirting
 addBox(furnGroup, 0.02, 0.26, 0.02, 14.76, 1.02, 9.84, MAT.goldProfile); // Utility vertical gold pull
 addBox(furnGroup, 0.38, 0.46, 1.18, 15.14, 2.08, 10.75, MAT.taupeGloss); // Utility 2-door wall overhead cabinet (Docket p. 15, clears 1.71m stack)
-// Utility Stacked Bosch Serie 6 Washer (600×850×600) + WTZ27400 Kit + Serie 4 Heat-Pump Dryer (600×850×600)
-addBox(furnGroup, 0.60, 0.84, 0.60, 15.05, 0.42, 10.40, MAT.offWhite, {
-  tag: 'UTILITY · STACKED BOSCH LAUNDRY (EXACT 600×1710mm)', title: 'Bosch Serie 6 10kg Washer + WTZ27400 + Serie 4 10kg Dryer',
-  desc: 'Two stacked 600×850×600mm front-load Bosch machines on structural tile with rubber anti-vibration pads + dedicated 16A radial drops.',
+// Utility Stacked Bosch Serie 6 Washer (WGA254ZSIN, 600×850×600) + WTZ27400 Kit + Serie 4 Heat-Pump Dryer (WQG2520XIN, 600×850×600)
+const laundryMeta = {
+  tag: 'UTILITY · STACKED BOSCH LAUNDRY (EXACT 600×1710mm)', title: 'Bosch WGA254ZSIN (10kg Washer) + WTZ27400 + WQG2520XIN (10kg Heat-Pump Dryer)',
+  desc: 'Two stacked 600×850×600mm Bosch machines on structural tile with rubber anti-vibration pads, 20-bar SS304 braided inlet hose, inline polyphosphate scale filter on cold inlet, and 2× dedicated 16A radial drops.',
   meta: 'Decided · ₹44k Washer + ₹64k Dryer + ₹5.5k Stack Kit'
-});
-addBox(furnGroup, 0.61, 0.03, 0.61, 15.05, 0.855, 10.40, MAT.darkMetal); // WTZ27400 stacking kit seam
-addBox(furnGroup, 0.60, 0.84, 0.60, 15.05, 1.29, 10.40, MAT.offWhite);
+};
+addBox(furnGroup, 0.60, 0.84, 0.60, 15.05, 0.42, 10.40, MAT.offWhite, laundryMeta);
+addBox(furnGroup, 0.61, 0.03, 0.61, 15.05, 0.855, 10.40, MAT.darkMetal, laundryMeta); // WTZ27400 stacking kit seam
+addBox(furnGroup, 0.60, 0.84, 0.60, 15.05, 1.29, 10.40, MAT.offWhite, laundryMeta);
 [0.44, 1.31].forEach(dy => {
   const drum = new THREE.Mesh(new THREE.CylinderGeometry(0.19, 0.19, 0.04, 20), MAT.darkMetal);
   drum.rotation.z = Math.PI / 2; drum.position.set(14.74, dy, 10.40); furnGroup.add(drum);
 });
-addBox(furnGroup, 0.55, 0.05, 0.62, 15.05, 0.84, 11.15, MAT.graniteBlack);
+addBox(furnGroup, 0.55, 0.05, 0.62, 15.05, 0.84, 11.15, MAT.graniteBlack, {
+  tag: 'UTILITY · SERVICE SINK & PLUMBING', title: 'Utility Black Granite Service Counter & Deep Scrub Sink',
+  desc: 'Heavy-duty utility scrub sink beside stacked Bosch laundry; P-SHAFT-74 metered feed tested for Zoloto Art. 1040B forged brass PRV if line pressure >4.5 bar.',
+  meta: '3–5mm underside capillary drip groove · DZR brass stopcocks'
+});
 addBox(furnGroup, 0.50, 1.45, 0.92, 15.25, 0.72, 6.92, MAT.steel, {
   tag: 'SERVICE BALCONY · HVAC', title: 'Daikin 10 HP VRV Outdoor Unit (ODU)',
   desc: 'Drives 10.76 TR across 7 indoor units.',
@@ -1819,24 +1931,39 @@ addBox(furnGroup, 0.50, 1.45, 0.92, 15.25, 0.72, 6.92, MAT.steel, {
 
 // ---------- E. MASTER BEDROOM SUITE (x: 0..4.08 + NE NOOK x: 4.08..5.78, z: 7.52..8.95) ----------
 addBox(furnGroup, 2.06, 0.34, 1.92, 1.12, 0.17, 9.35, MAT.cpTeak, {
-  tag: 'MASTER SUITE · KING BED', title: 'Custom Seasoned CP Teak King Bed (72×78 in)',
-  desc: 'Native Indian king mortise-and-tenon frame + Sunday Latex Plus 8" Belgian Dunlop organic latex mattress.',
-  meta: 'Bed ₹68k + Mattress ₹58k · Master: 4000×4000 mm'
+  tag: 'MASTER SUITE · KING BED (TIER 1 RECOMMENDED)', title: 'Custom Seasoned CP Teak King Bed (72×78 in) + Sunday Latex Plus 8"',
+  desc: 'Native Indian king mortise-and-tenon frame + 18mm BWP ply slatted deck + Sunday Latex Plus 8" (100% Belgian Dunlop organic pin-core latex, GOTS organic cotton zip cover).',
+  meta: 'Bed ₹68,000 + Mattress ₹57,999 · Master: 4000×4000 mm'
 });
 addBox(furnGroup, 0.10, 1.05, 1.96, 0.14, 0.58, 9.35, MAT.cpTeak);
 addBox(furnGroup, 1.96, 0.22, 1.82, 1.15, 0.45, 9.35, MAT.bedLinen);
 addBox(furnGroup, 0.90, 0.24, 1.84, 1.62, 0.46, 9.35, MAT.bedThrow);
-addBox(furnGroup, 0.38, 0.18, 0.46, 0.28, 0.48, 8.10, MAT.oakLight);
-addBox(furnGroup, 0.38, 0.18, 0.46, 0.28, 0.48, 10.60, MAT.oakLight);
+const bedsideMeta = {
+  tag: 'MASTER SUITE · FLOATING BEDSIDEPAIR', title: 'Spin Float Solid Ash Wall-Hung Shelf / Homz 3163 SI Drawer Box (Pair)',
+  desc: 'Cantilevered at 480mm AFF via 8×50mm Fischer DuoPower nylon wall plugs (zero leg clutter for Roborock Qrevo S Pro under-bed sweep).',
+  meta: 'Budget: ₹14,000 pair · Tier 1 Recommended'
+};
+addBox(furnGroup, 0.38, 0.18, 0.46, 0.28, 0.48, 8.10, MAT.oakLight, bedsideMeta);
+addBox(furnGroup, 0.38, 0.18, 0.46, 0.28, 0.48, 10.60, MAT.oakLight, bedsideMeta);
+// Owned GL.iNet Beryl AX (GL-MT3000) in 1-Click Wired AP Mode + SwitchBot Meter Pro NDIR CO2 Monitor on Master Bedside
+addBox(decorGroup, 0.10, 0.032, 0.08, 0.26, 0.586, 10.52, MAT.offWhite, {
+  tag: 'MASTER SUITE · WIRED WI-FI 6 AP & NDIR CO₂', title: 'Owned GL.iNet Beryl AX (Wired AP Mode) + SwitchBot Meter Pro NDIR CO₂',
+  desc: 'Patched directly to Master Bedroom Cat6 wall drop (LAN 2 from Flint 2) in 1-click Wired AP mode (zero double-NAT) beside SwitchBot Meter Pro (Swiss Sensirion NDIR CO₂ sensor for closed-door AC sleep).',
+  meta: 'Beryl AX: Owned · SwitchBot NDIR CO₂: ₹6,499'
+});
 
-// 2× Low-Sensory Bedtime Framed Serigraphs above West Headboard
+// 2× Low-Sensory Bedtime Framed Serigraphs above West Headboard (recessed cleanly inside solid oak frames)
+const serigraphMeta = {
+  tag: 'MASTER SUITE · BEDTIME WALL ART', title: 'Dessine Art 315 GSM Cotton-Rag Serigraphs (Pair)',
+  desc: 'Lightweight non-reflective matte acrylic in solid oak frames (zero glass shatter hazard over bed).',
+  meta: 'Budget: ₹9.5k–₹14k pair'
+};
 [[8.85, MAT.serigraph0], [9.85, MAT.serigraph1]].forEach(([az, mat]) => {
-  addBox(decorGroup, 0.03, 0.72, 0.56, 0.09, 1.62, az, MAT.oakLight);
-  addBox(decorGroup, 0.04, 0.64, 0.48, 0.10, 1.62, az, mat, {
-    tag: 'MASTER SUITE · BEDTIME WALL ART', title: 'Dessine Art 315 GSM Cotton-Rag Serigraphs (Pair)',
-    desc: 'Lightweight non-reflective matte acrylic in solid oak frames (zero glass shatter hazard over bed).',
-    meta: 'Budget: ₹9.5k–₹14k pair'
-  });
+  addBox(decorGroup, 0.038, 0.72, 0.56, 0.095, 1.62, az, MAT.oakLight, serigraphMeta);
+  const sPlane = new THREE.Mesh(new THREE.PlaneGeometry(0.48, 0.64), mat);
+  sPlane.position.set(0.116, 1.62, az); sPlane.rotation.y = Math.PI / 2;
+  sPlane.userData.meta = serigraphMeta;
+  inspectables.push(sPlane); decorGroup.add(sPlane);
 });
 // 2× EGLO SERAS Brushed-Brass Bedside Reading Sconces (1,300mm AFF, clear of West window)
 [8.46, 10.60].forEach(sz => {
@@ -1852,24 +1979,34 @@ addCowayPurifier(3.68, 9.65, 'MASTER SUITE');
 
 // South Wall 4-Door Wardrobe (beside SD2 slider — Docket pp. 17–19)
 addBox(furnGroup, 1.96, 2.45, 0.60, 1.12, 1.225, 11.24, MAT.beigeWool, {
-  tag: 'MASTER SUITE · SOUTH WARDROBE (DOCKET P. 18)', title: 'Homz 4-Door Wardrobe (3163 SI Beige Wool)',
-  desc: 'South wall beside South Balcony Slider SD2. 4 mid swing doors (Claro Satin Brass pulls), 2 Gold G-profile bottom drawers, 4 Tip-On lofts (zero loft handles).',
-  meta: 'Docket pp. 17–19 · Finish: 3163 SI Beige Wool'
+  tag: 'MASTER SUITE · SOUTH WARDROBE (DOCKET P. 18)', title: 'Homz 4-Door Wardrobe (3163 SI Beige Wool) + Claro Satin Brass',
+  desc: 'South wall beside South Balcony Slider SD2 (Aqara C3 / CD-M01D motorized drapery track ₹24,500). 4 mid swing doors (4× 256mm CC Spruce & Pop Claro Brushed Satin Brass PVD pulls, ₹2,275 ea), 2 bottom external drawers (Gold G-profile + 2× 128mm CC Claro pulls, ₹1,275 ea), 4 Tip-On lofts.',
+  meta: 'Docket pp. 17–19 · Century Club Prime BWP + Blum BLUMOTION'
 });
 addBox(furnGroup, 1.96, 0.03, 0.03, 1.12, 0.46, 10.93, MAT.goldProfile); // Gold G-profile bottom drawer rail
 addBox(furnGroup, 1.96, 0.012, 0.012, 1.12, 1.90, 10.935, MAT.seamDark); // Loft horizontal datum seam
 [0.63, 1.12, 1.61].forEach(sx => addBox(furnGroup, 0.012, 2.45, 0.012, sx, 1.225, 10.935, MAT.seamDark));
-[0.57, 0.69, 1.55, 1.67].forEach(px => addBox(furnGroup, 0.016, 0.28, 0.025, px, 1.08, 10.925, MAT.brass)); // 4× Claro Satin Brass pulls
+[0.57, 0.69, 1.55, 1.67].forEach(px => addBox(furnGroup, 0.016, 0.28, 0.025, px, 1.08, 10.925, MAT.brass)); // 4× 256mm CC Claro Satin Brass mid pulls
+[0.63, 1.61].forEach(px => addBox(furnGroup, 0.165, 0.016, 0.025, px, 0.24, 10.925, MAT.brass)); // 2× 128mm CC Claro Satin Brass bottom drawer pulls
 
 // MOVED PER OWNER: NE DRESSING NOOK BEHIND DOOR (x: 4.08..5.78, z: 7.52..8.95)
-// Dresser console + Backlit Dome Mirror + Brushed-Gold Brown-Tinted Glass Cabinet on East wall of NE Nook!
-addBox(furnGroup, 0.44, 0.50, 1.28, 5.48, 0.25, 8.24, MAT.beigeWool, {
-  tag: 'MASTER SUITE · NE DRESSING NOOK (BEHIND DOOR)', title: 'Homz NE Nook Tall Dresser + Backlit Dome Mirror + Glass Cabinet',
-  desc: 'Positioned inside the NE Dressing Nook behind the MBR entrance door (facing West): 3163 SI Beige Wool 2-drawer vanity console + full-height backlit dome mirror + brushed-gold brown-tinted glass display cabinet.',
-  meta: '24V CRI 95+ Mirror Halo · Claro Satin Brass Knobs'
+// Dresser console (3 drawers) + Backlit Dome Mirror + Brushed-Gold Brown-Tinted Glass Cabinet on East wall of NE Nook!
+addBox(furnGroup, 0.44, 0.56, 1.28, 5.48, 0.28, 8.24, MAT.beigeWool, {
+  tag: 'MASTER SUITE · NE DRESSING NOOK (BEHIND DOOR)', title: 'Homz NE Nook 3-Drawer Dresser + Backlit Dome Mirror + Glass Cabinet',
+  desc: 'Positioned inside the NE Dressing Nook behind the MBR entrance door (facing West): 3163 SI Beige Wool 3-drawer vanity console (3× Spruce & Pop Claro 28mm Ø Brushed Satin Brass PVD knobs, ₹675 ea) + full-height backlit dome mirror + brushed-gold brown-tinted glass display cabinet.',
+  meta: '24V CRI 95+ Mirror Halo · 3× Claro Satin Brass Knobs (₹2,025)'
 });
-addBox(furnGroup, 0.012, 0.48, 0.012, 5.255, 0.25, 8.24, MAT.seamDark); // 2-drawer center seam
-[7.92, 8.56].forEach(kz => addBox(furnGroup, 0.025, 0.025, 0.025, 5.245, 0.34, kz, MAT.brass)); // Claro brass knobs
+[8.02, 8.46].forEach(sz => addBox(furnGroup, 0.012, 0.54, 0.012, 5.255, 0.28, sz, MAT.seamDark)); // 3-drawer vertical seams
+[7.82, 8.24, 8.66].forEach(kz => addBox(furnGroup, 0.025, 0.028, 0.028, 5.245, 0.36, kz, MAT.brass)); // 3× 28mm Ø Claro brass knobs
+// MBR Door Floor Pillar Stopper + Acoustic Drop Seal (at x=4.18, z=8.42 behind door swing; zero 90° backing wall)
+const mbrStop = new THREE.Mesh(new THREE.CylinderGeometry(0.022, 0.022, 0.075, 16), MAT.steel);
+mbrStop.position.set(4.18, 0.0375, 8.42);
+mbrStop.userData.meta = {
+  tag: 'MASTER SUITE · DOOR RESTRAINT & ACOUSTIC SEAL', title: 'Ozone / Godrej SS304 Floor Pillar Stopper + Häfele Planet FT Drop Seal',
+  desc: '75mm heavy SS304 floor-mounted magnetic pillar stopper (M8×30mm brass drop-in anchor, ₹1,250; zero 90° backing wall behind MBR door) + mortised Häfele Planet FT automatic drop-down acoustic bottom seal (-42dB) & Raven RP120 perimeter gaskets (₹7,050).',
+  meta: 'Wind-Slam & 42dB Acoustic Isolation · ₹8,300 total'
+};
+inspectables.push(mbrStop); decorGroup.add(mbrStop);
 addDomeMirror(5.68, 1.38, 7.95, 0.58, 1.56, 'x', {
   tag: 'MASTER SUITE · NE NOOK MIRROR', title: 'Full-Height Backlit Saint-Gobain Dome Mirror',
   desc: 'Mounted on neutral-cure alkoxy silicone inside NE Dressing Nook with 24V CRI 95+ COB halo (Mean Well LPV-60-24).',
@@ -1881,7 +2018,12 @@ addBox(furnGroup, 0.36, 1.50, 0.50, 5.52, 1.28, 8.60, MAT.tintedGlass);
 [0.88, 1.28, 1.66].forEach(sy => addBox(furnGroup, 0.32, 0.022, 0.46, 5.54, sy, 8.60, MAT.internalLinen)); // 5133 SD shelves
 
 // Master South Balcony Chairs
-[[1.05, 12.40], [2.95, 12.40]].forEach(([bx, bz]) => addBox(furnGroup, 0.58, 0.42, 0.58, bx, 0.21, bz, MAT.cpTeak));
+const sBalcMeta = {
+  tag: 'MASTER SOUTH BALCONY · LOUNGE PAIR', title: 'Seasoned CP Teak South Balcony Lounge Chairs (Pair)',
+  desc: 'Protected by full-height SS316 marine invisible grilles (50mm pitch), Ozone/Dorset keyed sliding deadbolt on SD2, and 3M Prestige 70 solar film.',
+  meta: 'South Balcony: 13\'1" × 4\'11"'
+};
+[[1.05, 12.40], [2.95, 12.40]].forEach(([bx, bz]) => addBox(furnGroup, 0.58, 0.42, 0.58, bx, 0.21, bz, MAT.cpTeak, sBalcMeta));
 
 // ---------- F. BR-01 STUDY & GUEST ROOM (x: 5.78..10.00, z: 7.52..11.60) ----------
 // Exact 1880 W × 1040 D mm Closed Sofa-Bed
@@ -1892,31 +2034,33 @@ addBox(furnGroup, 1.88, 0.42, 1.04, 7.20, 0.21, 8.15, MAT.fabricCharcoal, {
 });
 addBox(furnGroup, 1.88, 0.40, 0.18, 7.20, 0.58, 7.72, MAT.fabricCharcoal);
 
-// East Wall Standing Desk (Exact 1500×750mm): 1/4 (84cm) from South Window, 3/4 (236cm) from NE Entrance
-addBox(furnGroup, 1.50, 0.04, 0.75, 9.08, 0.74, 10.25, MAT.oakLight, {
-  tag: 'BR-01 · EXECUTIVE DESK (1/4 FROM WINDOW)', title: 'Owned Dual-Motor Standing Desk + Steelcase Amia',
-  desc: 'Exact 1500×750mm top positioned 1/4 (84cm) from South window curtain and 3/4 (236cm) from NE entrance. Samar sits facing North with BenQ ScreenBar Pro + mechanical monitor arm + 3" PU rollerblade castors.',
-  meta: 'Dedicated wall 6A/16A socket'
-});
-addBox(furnGroup, 0.06, 0.72, 0.55, 8.44, 0.36, 10.25, MAT.darkMetal);
-addBox(furnGroup, 0.06, 0.72, 0.55, 9.72, 0.36, 10.25, MAT.darkMetal);
-addBox(furnGroup, 0.78, 0.42, 0.04, 9.10, 1.12, 10.00, MAT.tvScreen);
-addBox(furnGroup, 0.56, 0.48, 0.54, 9.10, 0.28, 10.88, MAT.darkMetal);
-// Rustle 8-Strip Solid Teak Wall Menu / Task Board aligned beside desk at z = 10.25
+// East Wall Standing Desk (Exact 1500×750mm): 1/4 (~84cm) from South Window curtain (z=11.46) -> desk center z=10.42, chair z=10.95
+const deskMeta = {
+  tag: 'BR-01 · EXECUTIVE DESK (1/4 FROM SOUTH WINDOW)', title: 'Owned Dual-Motor Standing Desk (150×75cm) + Steelcase Amia + BenQ ScreenBar Pro',
+  desc: 'Exact 1500×750mm top positioned along East wall 1/4 (~84cm) from South window curtain and 3/4 (~236cm) from NE entrance. Samar sits facing North (command view) with owned Steelcase Amia on 3" Soft PU Rollerblade Castors (₹1,499), BenQ ScreenBar Pro (₹14,490), and Brateck/Jin Mechanical Spring Monitor Arm (₹3,999).',
+  meta: 'Desk & Amia: Owned (₹0) · Upgrades: ₹19,988 total'
+};
+addBox(furnGroup, 1.50, 0.04, 0.75, 9.08, 0.74, 10.42, MAT.oakLight, deskMeta);
+addBox(furnGroup, 0.06, 0.72, 0.55, 8.44, 0.36, 10.42, MAT.darkMetal);
+addBox(furnGroup, 0.06, 0.72, 0.55, 9.72, 0.36, 10.42, MAT.darkMetal);
+addBox(furnGroup, 0.78, 0.42, 0.04, 9.10, 1.12, 10.17, MAT.tvScreen, deskMeta);
+addBox(decorGroup, 0.50, 0.022, 0.035, 9.10, 1.345, 10.18, MAT.darkMetal, deskMeta); // BenQ ScreenBar Pro asymmetric task bar
+addBox(furnGroup, 0.56, 0.48, 0.54, 9.10, 0.28, 10.98, MAT.darkMetal, deskMeta);
+// Rustle 8-Strip Solid Teak Wall Menu / Task Board aligned beside desk at z = 10.42
 for (let r = 0; r < 8; r++) {
   const ry = 1.20 + r * 0.105;
-  addBox(decorGroup, 0.024, 0.022, 0.68, 9.915, ry, 10.25, MAT.cpTeak, r === 3 ? {
+  addBox(decorGroup, 0.024, 0.022, 0.68, 9.915, ry, 10.42, MAT.cpTeak, r === 3 ? {
     tag: 'BR-01 · EAST WALL BOARD (8-STRIP TEAK)', title: 'Rustle Stylish Wooden Wall Menu / Task Board (Large)',
     desc: '8 solid teak channel rails + removable birch ply letter tiles mounted directly on Morning Glory paint via Fischer DuoPower plugs.',
     meta: '680 × 880 mm · Budget: ₹7.5k–₹8.5k'
   } : null);
   for (let t = 0; t < 6 + (r % 3); t++) {
-    addBox(decorGroup, 0.008, 0.045, 0.036, 9.92, ry + 0.032, 9.98 + t * 0.062, MAT.offWhite);
+    addBox(decorGroup, 0.008, 0.045, 0.036, 9.92, ry + 0.032, 10.15 + t * 0.062, MAT.offWhite);
   }
 }
 // Brother HL-L2440DW Laser Printer on compact side stand within reach of desk & clear of NE door
-addBox(decorGroup, 0.38, 0.48, 0.38, 9.68, 0.24, 9.45, MAT.oakLight);
-addBox(decorGroup, 0.36, 0.20, 0.36, 9.68, 0.58, 9.45, MAT.darkMetal, {
+addBox(decorGroup, 0.38, 0.48, 0.38, 9.68, 0.24, 9.55, MAT.oakLight);
+addBox(decorGroup, 0.36, 0.20, 0.36, 9.68, 0.58, 9.55, MAT.darkMetal, {
   tag: 'BR-01 · LASER PRINTER (DECIDED)', title: 'Brother HL-L2440DW Dual-Band Wi-Fi Auto-Duplex Laser',
   desc: 'Dry toner never clogs when idle. Plugged directly into wall socket (920W fuser spike, never UPS).',
   meta: '₹14,990 · Centralized home printing'
@@ -1925,13 +2069,15 @@ addCowayPurifier(6.12, 8.05, 'BR-01 STUDY');
 
 // South Wall 4-Door Wardrobe (West) + Open 424 1D Bookshelf with Books (East beside W2)
 addBox(furnGroup, 1.56, 2.45, 0.58, 6.68, 1.225, 11.24, MAT.beigeWool, {
-  tag: 'BR-01 · SOUTH WARDROBE & LIBRARY (DOCKET P. 25)', title: 'Homz 4-Door Wardrobe + East Open Cinnamon Hickory Bookshelf',
-  desc: '4-door 3163 SI Beige Wool wardrobe extends West to SW toilet wall (Tip-On lofts, zero loft handles); open 424 1D Cinnamon Hickory bookshelf sits directly beside South Window W2.',
-  meta: 'Docket pp. 25–27 · Claro Antique Smoked Bronze pulls'
+  tag: 'BR-01 · SOUTH WARDROBE & LIBRARY (DOCKET P. 25)', title: 'Homz South Wardrobe (3163 SI) + East Open Cinnamon Hickory Bookshelf',
+  desc: '3163 SI Beige Wool wardrobe extends West to SW toilet wall (3× 256mm CC ₹2,275 ea + 2× 128mm CC bottom drawer ₹1,275 ea Spruce & Pop Claro Antique Smoked Bronze pulls + Tip-On lofts); open 424 1D Cinnamon Hickory bookshelf sits directly beside South Window W2.',
+  meta: 'Docket pp. 25–27 · Claro Antique Smoked Bronze + Häfele Planet -42dB Door Seal'
 });
 addBox(furnGroup, 1.56, 0.012, 0.012, 6.68, 1.90, 10.945, MAT.seamDark); // Loft seam
+addBox(furnGroup, 1.56, 0.012, 0.012, 6.68, 0.46, 10.945, MAT.seamDark); // Bottom external drawer seam
 [6.29, 6.68, 7.07].forEach(sx => addBox(furnGroup, 0.012, 2.45, 0.012, sx, 1.225, 10.945, MAT.seamDark));
-[6.23, 6.35, 7.01, 7.13].forEach(px => addBox(furnGroup, 0.016, 0.28, 0.025, px, 1.08, 10.935, MAT.bronze)); // 4× Claro Smoked Bronze pulls
+[6.23, 6.35, 7.01, 7.13].forEach(px => addBox(furnGroup, 0.016, 0.28, 0.025, px, 1.08, 10.935, MAT.bronze)); // Claro Smoked Bronze mid pulls
+[6.29, 7.07].forEach(px => addBox(furnGroup, 0.165, 0.016, 0.025, px, 0.24, 10.935, MAT.bronze)); // 2× 128mm CC Claro Smoked Bronze bottom drawer pulls
 // Open Bookshelf Carcass + Shelves + Books
 addBox(furnGroup, 0.04, 2.45, 0.58, 7.47, 1.225, 11.24, MAT.cinnHickory);
 addBox(furnGroup, 0.04, 2.45, 0.58, 7.88, 1.225, 11.24, MAT.cinnHickory);
@@ -1942,20 +2088,21 @@ addBox(furnGroup, 0.42, 2.45, 0.04, 7.67, 1.225, 11.51, MAT.cinnHickory);
 });
 
 // Reading Nook beside Open Bookshelf & South Window W2 (clear of desk & Amia chair)
-addBox(furnGroup, 0.68, 0.42, 0.72, 7.15, 0.24, 10.05, MAT.fabricOat, {
-  tag: 'BR-01 · READING NOOK', title: 'IKEA POÄNG Armchair & Footstool (Kelinge Beige)',
-  desc: 'Birch veneer high-back reading chair + detached footstool angled beside open bookshelf & South window W2, keeping 103cm West bath corridor and 84cm desk clearance.',
-  meta: 'Budget: ₹14.5k–₹18.9k'
-});
-addBox(furnGroup, 0.52, 0.34, 0.44, 7.52, 0.17, 10.48, MAT.fabricOat);
-addFloorLamp(7.98, 11.12, 'Orange Tree Ayra Reading Floor Lamp', '2700K CRI 90+ warm reading lamp beside open bookshelf and South window W2.', 'Budget: ₹12,399');
+const poangMeta = {
+  tag: 'BR-01 · READING NOOK', title: 'IKEA POÄNG Armchair & Footstool (Birch / Kelinge Beige)',
+  desc: 'Birch veneer high-back reading chair + detached footstool angled beside open bookshelf & South window W2, keeping 120cm West bath corridor and 110cm desk clearance.',
+  meta: 'Budget: ₹14,480–₹18,880 · Tier 1 Recommended'
+};
+addBox(furnGroup, 0.68, 0.42, 0.72, 7.15, 0.24, 10.05, MAT.fabricOat, poangMeta);
+addBox(furnGroup, 0.52, 0.34, 0.44, 7.52, 0.17, 10.48, MAT.fabricOat, poangMeta);
+addFloorLamp(8.08, 10.92, 'Orange Tree Ayra Reading Floor Lamp', '2700K CRI 90+ warm reading lamp beside open bookshelf and South window W2.', 'Budget: ₹12,399');
 
 // ---------- G. BR-02 KABIR'S ROOM (x: 5.78..9.92, z: 0..3.78) ----------
 // East Wall Wardrobe: North Open 424 1D Book Niche (with real shelves + books!) + 3163 SI + 3267 SI Indigo Drawers
 addBox(furnGroup, 0.58, 2.45, 0.04, 9.54, 1.225, 0.14, MAT.cinnHickory, {
-  tag: 'BR-02 KABIR · EAST WARDROBE (DOCKET P. 22)', title: 'Locked KBR Wardrobe (Beige Wool + Hickory Niche + Vintage Indigo)',
-  desc: 'North bay: open 424 1D Cinnamon Hickory book niche. Main shutters: 3163 SI Beige Wool + Mantara beech elephant knobs. Base: 3267 SI Vintage Indigo tandem drawers.',
-  meta: 'Wall Paint: Misty Breeze (8307) #B2C2CC'
+  tag: 'BR-02 KABIR · EAST WARDROBE (DOCKET P. 22)', title: 'Locked KBR Wardrobe (3163 SI + 424 1D Niche + 3267 SI Indigo Drawers)',
+  desc: 'North bay: open 424 1D Cinnamon Hickory book niche. Main shutters: 3163 SI Beige Wool + Mantara W-0024 50mm Ø solid beech elephant knobs (₹649 ea, single M4 center bolt). Base: 4× 3267 SI Vintage Indigo tandem drawers + 3× Tip-On lofts.',
+  meta: 'Wall Paint: Misty Breeze (8307) #B2C2CC · Blum Soft-Close'
 });
 addBox(furnGroup, 0.58, 2.45, 0.04, 9.54, 1.225, 0.88, MAT.cinnHickory);
 addBox(furnGroup, 0.04, 2.45, 0.76, 9.81, 1.225, 0.51, MAT.cinnHickory);
@@ -1964,21 +2111,36 @@ addBox(furnGroup, 0.04, 2.45, 0.76, 9.81, 1.225, 0.51, MAT.cinnHickory);
   if (idx < 4) addBooksRow(9.52, sy, 0.51, 0.60, true);
 });
 addBox(furnGroup, 0.58, 0.52, 2.45, 9.54, 0.26, 2.12, MAT.vintageIndigo);
+addBox(furnGroup, 0.012, 0.012, 2.45, 9.245, 0.26, 2.12, MAT.seamDark); // Horizontal seam between top & bottom rows of 2×2 Vintage Indigo tandem drawers
 addBox(furnGroup, 0.58, 1.93, 2.45, 9.54, 1.485, 2.12, MAT.beigeWool);
 addBox(furnGroup, 0.012, 0.012, 2.45, 9.245, 1.90, 2.12, MAT.seamDark); // Loft horizontal seam
-[1.51, 2.12, 2.73].forEach(sz => addBox(furnGroup, 0.012, 2.45, 0.012, 9.245, 1.225, sz, MAT.seamDark));
-[1.42, 1.60, 2.64, 2.82].forEach(kz => addBox(furnGroup, 0.028, 0.055, 0.055, 9.235, 1.06, kz, MAT.oakLight)); // Mantara natural beech knobs on 3163 SI doors
-[1.51, 2.73].forEach(kz => [0.16, 0.40].forEach(ky => addBox(furnGroup, 0.028, 0.048, 0.048, 9.235, ky, kz, MAT.oakLight))); // Mantara beech knobs on 3267 SI drawers
+addBox(furnGroup, 0.012, 2.45, 0.012, 9.245, 1.225, 2.12, MAT.seamDark); // Center vertical seam (full height)
+[1.51, 2.73].forEach(sz => addBox(furnGroup, 0.012, 1.93, 0.012, 9.245, 1.485, sz, MAT.seamDark)); // Outer shutter seams stop at y=0.52 above wide indigo drawers!
+[1.42, 1.60, 2.64, 2.82].forEach(kz => addBox(furnGroup, 0.028, 0.055, 0.055, 9.235, 1.06, kz, MAT.oakLight)); // Mantara W-0024 beech elephant knobs on 3163 SI doors
+[1.51, 2.73].forEach(kz => [0.14, 0.39].forEach(ky => addBox(furnGroup, 0.028, 0.050, 0.050, 9.235, ky, kz, MAT.oakLight))); // 4× Mantara W-0024 beech elephant knobs centered on 2×2 indigo drawers
 
-// North Study Desk (Exact 1200×700mm, age-6 step height 550mm) + Orange Tree Semer Task Lamp (58cm H)
+// North Study Desk (Exact 1200×700mm, age-6 step height 550mm) + Removable Wood Easel + Slotted Growth Chair + Orange Tree Semer Lamp
 addBox(furnGroup, 1.20, 0.04, 0.70, 8.20, 0.53, 0.46, MAT.oakLight, {
-  tag: 'BR-02 KABIR · STUDY DESK (EXACT 120×70×55cm)', title: 'Magari Solid Ash Growth Desk + Slotted Chair',
-  desc: 'Exact 1200×700mm set at 550mm age-6 step height. Kabir faces North; glare-free daylight over left shoulder. Zero wheels, zero swivel.',
-  meta: 'Desk ₹45k / Slotted Chair ₹24k'
+  tag: 'BR-02 KABIR · STUDY DESK (EXACT 120×70×55cm)', title: 'Magari / Alankaram Custom Solid Ash/Teak Step-Height Desk + Easel',
+  desc: 'Exact 1200×700mm solid ash/teak desk set at 550mm age-6 step height (53/59/65/74cm bolted legs) with removable 15°–45° wooden reading/drawing easel. Kabir faces North; glare-free daylight over left shoulder (Tier 1 alt: IKEA BERGLÄRKA crank desk ₹14,990).',
+  meta: 'Tier 2 Recommended · ~₹45,000'
 });
 addBox(furnGroup, 0.05, 0.51, 0.62, 7.65, 0.255, 0.46, MAT.oakLight);
 addBox(furnGroup, 0.05, 0.51, 0.62, 8.75, 0.255, 0.46, MAT.oakLight);
-addBox(furnGroup, 0.42, 0.36, 0.42, 8.20, 0.18, 1.02, MAT.cpTeak);
+// Removable Solid-Wood Desktop Reading/Drawing Easel (angled at 25° on Kabir's desk)
+const easel = new THREE.Mesh(new THREE.BoxGeometry(0.42, 0.02, 0.30), MAT.cpTeak);
+easel.position.set(8.26, 0.60, 0.38); easel.rotation.x = 0.42; furnGroup.add(easel);
+// Magari / Alankaram Custom Solid Ash/Teak Slotted Growth Chair (zero wheels, zero swivel, slotted seat + adjustable footrest)
+const kChairMeta = {
+  tag: 'BR-02 KABIR · SLOTTED GROWTH CHAIR (ZERO WHEELS)', title: 'Magari / Alankaram Custom Solid Ash/Teak Slotted Growth Chair',
+  desc: '100% stationary solid hardwood frame (zero wheels, zero swivel) with slotted seat channels (34–52cm) and load-bearing footrest plate so Kabir sits at 90°–90°–90° knee/ankle posture (Tier 1 alt: Custom CP Teak Slotted Chair ₹11,500).',
+  meta: 'Tier 2 Recommended · ~₹24,000'
+};
+addBox(furnGroup, 0.04, 0.66, 0.44, 7.99, 0.33, 1.02, MAT.cpTeak, kChairMeta); // Left slotted side cheek
+addBox(furnGroup, 0.04, 0.66, 0.44, 8.41, 0.33, 1.02, MAT.cpTeak, kChairMeta); // Right slotted side cheek
+addBox(furnGroup, 0.38, 0.035, 0.36, 8.20, 0.34, 0.98, MAT.cpTeak, kChairMeta); // Slotted seat plate (34cm age-6 height)
+addBox(furnGroup, 0.38, 0.030, 0.26, 8.20, 0.14, 0.88, MAT.cpTeak, kChairMeta); // Adjustable footrest plate
+addBox(furnGroup, 0.38, 0.22, 0.035, 8.20, 0.54, 1.18, MAT.cpTeak, kChairMeta); // Ergonomic backrest
 // Orange Tree Semer Task Lamp on rear-left corner of Kabir's desk
 addBox(decorGroup, 0.14, 0.03, 0.14, 7.72, 0.565, 0.24, MAT.offWhite, {
   tag: 'BR-02 KABIR · DESK TASK LAMP', title: 'Orange Tree Semer Study Table Lamp',
@@ -1994,7 +2156,7 @@ addBox(furnGroup, 0.80, 0.36, 0.68, 6.55, 0.18, 0.52, MAT.fabricSand, {
   desc: 'Tri-fold 80×68 cm reading pouffe by North window; preserves 900mm clear walk to NW washroom.',
   meta: 'Budget: ₹12,990'
 });
-addFloorLamp(6.04, 0.34, 'IKEA RÖDFLIK Light-Beige Floor Reading Lamp', '25 cm Ø slim base + rotatable light-beige enameled shade with brass accents, 2700K CRI 90+.', 'Leaves 650mm clear on NW path · ₹8,980');
+addFloorLamp(6.04, 0.34, 'IKEA RÖDFLIK Light-Beige Floor Reading Lamp', '25 cm Ø slim base + rotatable light-beige enameled shade with brass accents, 2700K CRI 90+ (Non-standing wall option: Whispering Homes Nordic Wall Light LA-WL-07-127, ₹3,399).', 'Leaves 650mm clear on NW path · ₹8,980');
 
 // South Daybed + Henka Wall Sconce + South Wall 3D World Map (Alpha-keyed wood continents direct on Misty Breeze paint!) + Coway
 addBox(furnGroup, 1.95, 0.40, 0.96, 7.55, 0.20, 3.18, MAT.oakLight, {
@@ -2024,33 +2186,57 @@ addCowayPurifier(6.14, 3.40, 'BR-02 KABIR');
 // Faces West (-X) into the open 4/5 Sangat zone so Sangat sitting on the Dhurrie faces East toward Sri Guru Granth Sahib Ji
 const pkX = 14.74, pkZ = 1.85;
 addBox(furnGroup, 0.76, 0.62, 0.92, pkX, 0.31, pkZ, MAT.cpTeak, {
-  tag: 'BR-03 · HOME GURUDWARA (EXACT 3FT · 1/5 FROM EAST)', title: 'Handcrafted Solid Teak Palki Sahib (920×760×1950mm)',
-  desc: 'Positioned 1/5 (52cm) from East wall/curtain and 4/5 (210cm) from West wardrobe shutter, facing West (-X) so Sangat sits facing East. Seasoned teak in natural matte beeswax finish; strictly zero speakers.',
-  meta: '1/5 from East Wall · 2700K Indirect Cove Only'
+  tag: 'BR-03 · HOME GURUDWARA (EXACT 3FT · 1/5 FROM EAST)', title: 'Handcrafted Solid Teak Palki Sahib / Manji Sahib + Chandoa (920×760×1950mm)',
+  desc: 'Positioned 1/5 (52cm) from East wall/curtain and 4/5 (210cm) from West wardrobe shutter, facing West (-X) so Sangat sits facing East. Seasoned teak in natural matte beeswax finish with KD bolted corner pillars for service lift clearance; strictly zero speakers.',
+  meta: 'Budget: ~₹28,000–₹32,000 · Tier 1 Recommended'
 });
 [[-0.32,-0.40],[0.32,-0.40],[-0.32,0.40],[0.32,0.40]].forEach(([px,pz]) =>
   addBox(furnGroup, 0.055, 1.30, 0.055, pkX+px, 1.27, pkZ+pz, MAT.cpTeak));
 addBox(furnGroup, 0.84, 0.11, 1.00, pkX, 1.92, pkZ, MAT.cpTeak);
 addBox(furnGroup, 0.72, 0.08, 0.88, pkX, 0.66, pkZ, MAT.brass);
 addBox(furnGroup, 0.045, 0.64, 0.88, pkX + 0.35, 0.94, pkZ, MAT.cpTeak); // East backrest panel
-// 18" (457mm Ø) Circular Handcrafted Solid Brass Ik Onkar Medallion on North sacred wall
-const ikDisc = new THREE.Mesh(new THREE.CylinderGeometry(0.228, 0.228, 0.025, 32), [MAT.brass, MAT.ikOnkar, MAT.brass]);
+// Embroidered Pure Silk Rumala Sahib Set + Artisan Turned Brass Chaur Sahib on Palki Sahib
+const rumalaMeta = {
+  tag: 'BR-03 · SACRED TEXTILES & CHAUR SAHIB', title: 'Artisan Turned Brass Chaur Sahib + Pure Silk Embroidered Rumala Sahib Set',
+  desc: 'Pure silk embroidered Rumala Sahib + Palki cushion set (₹4,500) paired with solid turned brass handle Chaur Sahib with cruelty-free synthetic/yak-grade fiber (₹2,450).',
+  meta: 'Budget: ₹6,950 total · Tier 1 Recommended'
+};
+addBox(decorGroup, 0.56, 0.05, 0.72, pkX - 0.02, 0.725, pkZ, MAT.goldProfile, rumalaMeta); // Silk Rumala Sahib drape
+addBox(decorGroup, 0.025, 0.025, 0.34, pkX - 0.18, 0.76, pkZ + 0.32, MAT.brass, rumalaMeta); // Turned brass Chaur Sahib handle
+addBox(decorGroup, 0.04, 0.035, 0.22, pkX - 0.18, 0.76, pkZ + 0.04, MAT.bedLinen, rumalaMeta); // White Chaur Sahib plume
+// 24V CRI 90+ 2700K FCOB Indirect Sacred Cove Channel (Mean Well LPV-100-24 Potted Class-II Driver, zero hum)
+addBox(decorGroup, 3.60, 0.028, 0.045, 13.70, 2.66, 0.15, MAT.goldProfile, {
+  tag: 'BR-03 · SACRED INDIRECT COVE (2700K CRI 90+)', title: '24V 2700K CRI 90+ FCOB Cove Strip + Mean Well LPV-100-24 Potted Driver',
+  desc: 'High-density dot-free 24V FCOB LED strip in 16×16mm anodized aluminum channel with opal diffuser and epoxy-potted Mean Well LPV-100-24 driver on zero-hum Aqara T1 relay (strictly zero phase-cut trailing-edge dimmers).',
+  meta: 'Budget: ₹6,500 · Tier 1 Recommended'
+});
+// 18" (457mm Ø) Circular Handcrafted Solid Brass Ik Onkar Medallion on North sacred wall (Upright CircleGeometry UV fix!)
+const ikMeta = {
+  tag: 'BR-03 · SACRED CALLIGRAPHY (EXACT 18" Ø)', title: '18" (457 mm Ø) Handcrafted Solid Brass Ik Onkar Medallion',
+  desc: 'Circular brushed antique brass disc passivated with natural beeswax (zero synthetic gloss), washed by 2700K perimeter cove.',
+  meta: 'Budget: ₹4,500 · Tier 1 Recommended'
+};
+const ikDisc = new THREE.Mesh(new THREE.CylinderGeometry(0.2285, 0.2285, 0.024, 32), MAT.brass);
 ikDisc.rotation.x = Math.PI / 2;
 ikDisc.position.set(13.85, 2.02, 0.095);
 ikDisc.castShadow = true;
-ikDisc.userData.meta = {
-  tag: 'BR-03 · SACRED CALLIGRAPHY (EXACT 18" Ø)', title: '18" (457 mm Ø) Handcrafted Solid Brass Ik Onkar Medallion',
-  desc: 'Circular brushed antique brass disc passivated with natural beeswax (zero synthetic gloss), washed by 2700K perimeter cove.',
-  meta: 'Budget: ₹4,500'
-};
+ikDisc.userData.meta = ikMeta;
 inspectables.push(ikDisc); decorGroup.add(ikDisc);
-// Framed Golden Temple Heritage Archival Print on East wall
-addBox(decorGroup, 0.04, 0.66, 0.88, 15.68, 1.52, 3.16, MAT.cpTeak);
-addBox(decorGroup, 0.05, 0.58, 0.80, 15.67, 1.52, 3.16, MAT.goldenTemple, {
+const ikFace = new THREE.Mesh(new THREE.CircleGeometry(0.226, 32), MAT.ikOnkar);
+ikFace.position.set(13.85, 2.02, 0.109);
+ikFace.userData.meta = ikMeta;
+inspectables.push(ikFace); decorGroup.add(ikFace);
+// Framed Golden Temple Heritage Archival Print on East wall (recessed cleanly inside CP Teak frame)
+const gtMeta = {
   tag: 'BR-03 · SACRED ART', title: 'Sikh Virasat Framed Golden Temple Heritage Print',
   desc: 'Acid-free museum mount in natural matte oiled solid wood frame.',
-  meta: 'Budget: ₹6,800'
-});
+  meta: 'Budget: ₹6,800 · Tier 1 Recommended'
+};
+addBox(decorGroup, 0.045, 0.66, 0.88, 15.68, 1.52, 3.16, MAT.cpTeak, gtMeta);
+const gtPlane = new THREE.Mesh(new THREE.PlaneGeometry(0.80, 0.58), MAT.goldenTemple);
+gtPlane.position.set(15.655, 1.52, 3.16); gtPlane.rotation.y = -Math.PI / 2;
+gtPlane.userData.meta = gtMeta;
+inspectables.push(gtPlane); decorGroup.add(gtPlane);
 // Exact 6×9 ft (1830×2740mm) Sangat Cotton Dhurrie in open 4/5 West-center zone (Sangat faces East toward Palki Sahib)
 addBox(furnGroup, 1.83, 0.015, 2.74, 13.32, 0.01, 1.90, MAT.dhurrie, {
   tag: 'BR-03 · SANGAT FLOOR (EXACT 6×9 FT)', title: 'Heavy Panja 100% Pure Cotton Dhurrie + White Khes',
@@ -2062,8 +2248,8 @@ addCowayPurifier(15.32, 0.36, 'BR-03 GURUDWARA');
 // West Wall 5-Bay GBR Wardrobe (Docket pp. 29–31)
 addBox(furnGroup, 0.56, 2.45, 0.92, 11.98, 1.225, 0.52, MAT.beigeWool, {
   tag: 'BR-03 · 5-BAY WEST WARDROBE (DOCKET P. 29)', title: 'GBR-2 5-Bay Wardrobe (3163 SI + Center Gold Tinted-Glass Bay)',
-  desc: 'Full 2.35m West run: 2 Beige Wool doors + center brushed-gold brown-tinted glass display bay with 5133 SD linen shelves for Rumala Sahib + 2 Beige Wool doors + 5 Tip-On lofts (zero loft handles).',
-  meta: 'Docket pp. 29–31 · 4× Claro Warm Gold PVD Pulls'
+  desc: 'Full 2.35m West run: 2 Beige Wool doors + center 5mm toughened brown-tinted glass display bay (silicone perimeter gasket + integrated 20mm warm gold profile edge pull + 5133 SD linen shelves for Rumala Sahib) + 2 Beige Wool doors + 5 Tip-On lofts. Fitted with Häfele Planet -42dB door drop seal.',
+  meta: 'Docket pp. 29–31 · 4× 256mm CC Claro Warm Gold PVD Pulls (₹2,275 ea)'
 });
 addBox(furnGroup, 0.56, 0.55, 0.48, 11.98, 2.175, 1.22, MAT.beigeWool);
 addBox(furnGroup, 0.56, 1.90, 0.48, 11.98, 0.95, 1.22, MAT.tintedGlass);
@@ -2075,15 +2261,64 @@ addBox(furnGroup, 0.012, 0.012, 2.32, 12.265, 1.90, 1.22, MAT.seamDark); // Cont
 [0.52, 1.92].forEach(sz => addBox(furnGroup, 0.012, 2.45, 0.012, 12.265, 1.225, sz, MAT.seamDark));
 [0.46, 0.58, 1.86, 1.98].forEach(pz => addBox(furnGroup, 0.025, 0.28, 0.016, 12.275, 1.08, pz, MAT.brass)); // 4× Claro Warm Gold pulls
 
-// ---------- I. BATHROOMS (4 WASHROOMS) ----------
-function addBathSet(cx, cz, isMaster = false) {
-  addBox(furnGroup, 0.42, 0.42, 0.62, cx, 0.21, cz, MAT.offWhite);
-  addBox(furnGroup, 0.55, 0.78, 0.44, cx + (isMaster ? 0.95 : 0), 0.39, cz + (isMaster ? 0 : 0.85), MAT.beigeWool);
+// ---------- I. BATHROOMS (4 WASHROOMS — FULL BIFL HARDWARE, LHS GEYSERS & ALUFURN VANITIES) ----------
+function addBathSet(cx, cz, isMaster, bathName, winPos) {
+  // 1. Porcelain WC + Kohler Cuff ABS Health Faucet Set (98100IN-0, ₹999–₹1,350) + Chilly/Nirali SS304 Weighted Cockroach Trap (₹549)
+  addBox(furnGroup, 0.42, 0.42, 0.62, cx, 0.21, cz, MAT.offWhite, {
+    tag: `${bathName} · WC & HEALTH FAUCET`, title: 'Wall-Hung WC + Kohler Cuff Health Faucet (98100IN-0) + SS304 Drain Trap',
+    desc: 'Fitted with Kohler Cuff high-impact ABS health faucet (zero tile chip hazard, brass valve, 1.2m metal hose, ₹999–₹1,350) on forged DZR brass angle valve + Chilly/Nirali 100% AISI 304 weighted cockroach-trap floor drain insert (₹549).',
+    meta: 'Tier 1 Recommended · Zero zinc-alloy valves'
+  });
+  // 2. Wall-Hung Alufurn 600/750mm Powder-Coated Aluminium Vanity Base Unit (mounted ≥250mm off floor, zero wood/plywood!)
+  const vx = cx + (isMaster ? 0.95 : 0), vz = cz + (isMaster ? 0 : 0.85);
+  const vanityMeta = {
+    tag: `${bathName} · 100% WATERPROOF VANITY`, title: 'Alufurn 600/750mm Powder-Coated Aluminium Wall-Hung Vanity Base',
+    desc: '100% waterproof powder-coated aluminium frame & ACP liner (zero wood/BWP plywood rot) wall-hung ≥250mm above floor under builder granite counter with top U-notch for 32mm bottle trap.',
+    meta: 'Budget: ₹9,500–₹13,500 ea · Tier 1 Recommended'
+  };
+  addBox(furnGroup, isMaster ? 0.72 : 0.58, 0.48, 0.44, vx, 0.54, vz, MAT.offWhite, vanityMeta); // Wall-hung y=0.30..0.78m (≥250mm floor clearance!)
+  addBox(furnGroup, isMaster ? 0.75 : 0.60, 0.035, 0.46, vx, 0.80, vz, MAT.graniteBlack, vanityMeta); // Builder granite counter
+  // 3. Locked Horizontal LHS False-Ceiling Geyser (1× 15L Master HAS-X1-015 + 3× 10L Secondary HAS-X1-010)
+  const geyserMeta = isMaster ? {
+    tag: `${bathName} · FALSE CEILING GEYSER (15L HORIZONTAL LHS)`,
+    title: 'A. O. Smith Elegance Slim 15L Horizontal LHS (HAS-X1-015)',
+    desc: 'Locked Horizontal + Left-Hand Side (LHS) piping orientation above false ceiling (338–355mm slim profile), Blue Diamond glass-lined tank, mechanical thermostat capped at 50°C, factory MFV with clamped 10mm vinyl drain tube.',
+    meta: 'Budget: ₹11,999–₹12,600 · BEE 5★ · 600×600mm Access Hatch'
+  } : {
+    tag: `${bathName} · FALSE CEILING GEYSER (10L HORIZONTAL LHS)`,
+    title: 'A. O. Smith Elegance Slim Neo 10L Horizontal LHS (HAS-X1-010)',
+    desc: 'Locked Horizontal + Left-Hand Side (LHS) piping orientation above false ceiling (ultra-slim 310mm Ø profile), Blue Diamond glass-lined tank, mechanical thermostat capped at 50°C, factory MFV with clamped 10mm vinyl drain tube.',
+    meta: 'Budget: ₹9,200 ea · Tier 1 Recommended'
+  };
+  const geyser = new THREE.Mesh(new THREE.CylinderGeometry(isMaster ? 0.17 : 0.155, isMaster ? 0.17 : 0.155, isMaster ? 0.56 : 0.48, 18), MAT.offWhite);
+  geyser.rotation.z = Math.PI / 2;
+  geyser.position.set(cx, 2.20, cz);
+  geyser.userData.meta = geyserMeta;
+  inspectables.push(geyser); decorGroup.add(geyser);
+  // 4. Wall-Flanged 25mm SS304 Shower Curtain Rod + 25mm Bonded Floor Water Threshold Bar + Plantex SS304 No-Drill Caddy
+  const rodMeta = {
+    tag: `${bathName} · SHOWER SEPARATION & CADDY`,
+    title: 'Wall-Flanged 25mm SS304 Curtain Rod + IKEA Drape + Floor Water Bar',
+    desc: 'Screw-mounted wall-flanged 25mm OD SS304 rod + IKEA JÄMTSTARR/STRANDLUMMER hydrophobic polyester drape + 25mm epoxy-bonded floor water threshold bar (₹3,200/bath; glass partition struck) + Plantex electropolished SS304 no-drill corner caddy (₹799).',
+    meta: 'Budget: ₹3,200 + ₹799 Caddy · Tier 1 Recommended'
+  };
+  const rodX = isMaster ? 0.72 : cx, rodZ = isMaster ? 6.50 : cz + 1.42;
+  addBox(decorGroup, isMaster ? 1.38 : 1.56, 0.025, 0.025, rodX, 2.05, rodZ, MAT.steel, rodMeta);
+  addBox(decorGroup, isMaster ? 1.38 : 1.56, 0.025, 0.035, rodX, 0.015, rodZ, MAT.graniteIvory, rodMeta); // 25mm bonded floor threshold water bar
+  // 5. Cata B-15 Plus / X-Mart 15 (150mm) Exhaust Fan + Phifer Black-Oxidized SS304 Window Mesh
+  if (winPos) {
+    addBox(decorGroup, 0.18, 0.18, 0.06, winPos[0], 2.02, winPos[1], MAT.offWhite, {
+      tag: `${bathName} · 150MM EXHAUST & SS304 MESH`,
+      title: 'Cata B-15 Plus / X-Mart 15 (150mm) Exhaust Fan + Phifer SS304 Mesh',
+      desc: 'Native 148mm circular spigot for builder Ø150mm round cutout (320 m³/h, 41 dB, integrated mechanical backdraft shutter, ₹4,800–₹5,800) paired with Phifer SeeVue black-oxidized SS304 insect mesh (₹450–₹650/sq ft).',
+      meta: 'Tier 1 Recommended · Wired to Aqara T1 relay'
+    });
+  }
 }
-addBathSet(1.15, 6.05, true);
-addBathSet(4.92, 0.65, false);
-addBathSet(10.75, 0.65, false);
-addBathSet(4.92, 9.75, false);
+addBathSet(1.15, 6.05, true,  'MASTER BATH', [0.09, 6.50]);
+addBathSet(4.92, 0.65, false, 'BR-02 BATH',  [4.90, 0.09]);
+addBathSet(10.75, 0.65, false,'BR-03 BATH',  [10.80, 0.09]);
+addBathSet(4.92, 9.75, false, 'BR-01 BATH',  [4.90, 11.51]);
 
 // ============================================================================
 // 8. CIRCULATION OVERLAY, LIGHTING, WALK-MODE CEILING & FLOOR 42 SKY DOME
@@ -2386,7 +2621,7 @@ NAV_EDGES.forEach(([a, b]) => {
 // 16 Curated, Collision-Free Hero Stops (ordered as a natural continuous home tour)
 const WALK_NODES = [
   { id: 'drawing',   navKey: 'R_foyer',    group: 'social',  label: 'Foyer Entrance',       dim: 'West Main Entry',   pos: [1.10, 1.45], look: [2.45, 3.80] },
-  { id: 'drawing',   navKey: 'R_drawing',  group: 'social',  label: 'Drawing Room',         dim: '13\'1" × 17\'9"',   pos: [2.45, 4.35], look: [0.30, 2.82] },
+  { id: 'drawing',   navKey: 'R_drawing',  group: 'social',  label: 'Drawing Room',         dim: '13\'1" × 17\'8"',   pos: [2.45, 4.35], look: [0.30, 2.82] },
   { id: 'living',    navKey: 'R_living_w', group: 'social',  label: 'Living Archway',       dim: 'Teak Arch & Spine', pos: [4.85, 4.65], look: [8.50, 5.30] },
   { id: 'living',    navKey: 'R_living',   group: 'social',  label: 'Living Spine',         dim: '19\'8" × 11\'10"',  pos: [7.05, 4.65], look: [11.20, 5.40] },
   { id: 'living',    navKey: 'R_hall',     group: 'social',  label: 'Central Hall',         dim: 'Bedroom Hub',       pos: [9.25, 4.65], look: [12.10, 5.20] },

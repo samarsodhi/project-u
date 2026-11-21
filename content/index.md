@@ -35,10 +35,10 @@ Pre-ceiling and pre-flooring infrastructure. Failure to sequence these before ar
 
 Core spatial planning, room ergonomics, bespoke furniture, and functional daily habitats:
 
-* **[[rooms/living-dining|Living & Dining Spaces]]** — Low platform sofas, solid teak dining, foyer storage, and media joinery.
+* **[[rooms/living-dining|Living & Dining Spaces]]** — Top-grain leather 3+2 suite, slipcovered family sofa, solid CP teak 8-seat dining, foyer storage, and media joinery.
 * **[[rooms/master-bedroom|Master Bedroom Suite]]** — Solid timber king bed, gas-strut storage, full-height dome dresser, and bedside units.
 * **[[rooms/study-guest-room|Study & Guest Room]]** — Ergonomic standing desk, Steelcase seating, 5-zone pocket-sprung sofa-bed, and library.
-* **[[rooms/kabir-room|Kabir's Room (Study & Play)]]** — ErgoYou manual crank growth desk, posture-lock chair, daybed, and 3D world map.
+* **[[rooms/kabir-room|Kabir's Room (Study & Play)]]** — Magari/Alankaram solid ash growth desk (or IKEA BERGLÄRKA crank desk), non-rolling slotted timber chair, trundle daybed, and South wall 3D world map.
 * **[[rooms/home-gurudwara|Home Gurudwara]]** — Handcrafted teak Palki Sahib, washable cotton sangat durries, and sacred joinery.
 
 ---
@@ -47,8 +47,8 @@ Core spatial planning, room ergonomics, bespoke furniture, and functional daily 
 
 Building envelope resilience, indoor environmental quality, and child safety:
 
-* **[[safety-security|Safety & Security]]** — SS316 marine invisible grilles, interlinked smoke alarms, kitchen gas cutoff, and smart locks.
-* **[[air-water-cleaning|Air, Water & Cleaning]]** — True HEPA purifiers, SenseAir NDIR CO₂ monitoring, water softening, and robot vacuum bay.
+* **[[safety-security|Safety & Security]]** — SS316 marine invisible grilles, interlinked smoke alarms, Zigbee methane & water leak detection, and Aqara A100 smart lock.
+* **[[air-water-cleaning|Air, Water & Cleaning]]** — 5× Coway True HEPA purifiers, Sensirion NDIR CO₂ monitoring, ZeroB/Kent water softening, and plumbed robot vacuum bay.
 * **[[curtains-paint-finishes|Curtains, Paint & Finishes]]** — Ceiling-recessed double drapery, 3M Prestige 70 solar film, and Royale Luxury paint.
 * **[[audio-entertainment|Audio & Entertainment]]** — Sonos Arc Ultra Dolby Atmos soundbar, Era 300 spatial music, and acoustic isolation.
 
@@ -59,3 +59,4 @@ Building envelope resilience, indoor environmental quality, and child safety:
 Permanent cultural heritage and final aesthetic curation:
 
 * **[[art-wall-decor|Art & Wall Decor]]** — GI-tagged Swamimalai Chola bronzes, Persian wall carpet, and museum-grade UV glazing.
+* **[Interactive 2D/3D Architectural Model (Unit B4206)](https://samarsodhi.github.io/project-u/static/visualizer/b4206-model.html?v=13)** — Full-scale 2D blueprint, 3D dollhouse, and first-person walkthrough of Unit B4206.

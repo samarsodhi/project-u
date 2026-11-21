@@ -46,7 +46,7 @@ Configured layout: SE entrance door, NW washroom door, NE wardrobe, North wall d
 * **Reading Nook (North-West, Left of Window):** Low-profile IKEA KOMPISHÄNG tri-fold pouffe/mattress positioned in the NW zone by the glazing. Natural reading light; preserves clear 900 mm walk to NW washroom door.
 * **Wardrobe (North-East, Along East Wall):** Homz full-length East run (shutters open West) with leftmost North open book niche beside desk, 4 indigo base tandem drawers, and push-to-open top lofts per matrix above.
 
-![Kabir Wardrobe Locked North Niche](assets/decor/kabir-wardrobe-final-north-niche.png)
+![Kabir Wardrobe Locked North Niche](../assets/decor/kabir-wardrobe-final-north-niche.png)
 * **Activity Zone & World Map (South Wall Above Daybed):** Clear floor area in South-West for play and movement; Woodsify 3D Birch World Map (150×90 cm) mounted directly on cured **South wall** Royale paint above the daybed (20 cm clear of East Henka sconce) via factory double-sided foam tape + pea-sized neutral silicone dabs (no 6mm BWP ply backer).
 * **Circadian & Task Lighting:** 2× 3000K deep-recessed CRI 95+ COB spots in circulation paths (never over pillows) + 1× 3000K CRI 90+ gimbal spot grazing the South wall 3D World Map ([[lighting-ambience]]). Task lamp on rear-left of North desk ($\ge 650\text{ mm}$ niche clearance if tilting); floor or wall reading lamp in NW nook + 1× 2700K headboard sconce at East end of South daybed; 2700K indirect bedtime strip (`Aqara LED Strip T1` via M3) with 20-min fade-to-off.
 * **Clear North & Brahmasthan:** Central room floor remains 100% open and unweighted for free circulation.

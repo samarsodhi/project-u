@@ -44,7 +44,7 @@ Configured layout: NE entrance door, SW washroom door, North wall sofa-bed, East
 * **Bathroom Circulation (West Wall):** Direct, unencumbered 120 cm walking corridor runs from the NE entrance down the West wall straight into the SW ensuite washroom.
 * **Brahmasthan:** Generous 180×160 cm open central floor zone kept clear of static furniture.
 
-![BR-01 Wardrobe Option 1 Curved Fluted Oak](assets/decor/study-wardrobe-option-1-curved-oak.png)
+![BR-01 Wardrobe Option 1 Curved Fluted Oak](../assets/decor/study-wardrobe-option-1-curved-oak.png)
 
 ```
                                       [ NORTH ]
