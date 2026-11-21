@@ -1418,23 +1418,23 @@ addBox(furnGroup, 2.50, 0.015, 3.50, 2.18, 0.01, 2.55, MAT.rugWool, {
   desc: 'Exact 250×350 cm handwoven wool rug paired with 2× STOPP FILT 4mm anti-slip underlays.',
   meta: 'Budget: ₹36,580 · Tier 1 Recommended'
 });
-// South-East Foyer Zone (Drawing South wall, x: 1.58..3.86 — clear of Living archway at x: 4.08)
-// 1. Louvered CP Teak Shoe Credenza (1000×360×780mm, x: 2.86..3.86, 22cm clear of Living archway jamb)
-addBox(furnGroup, 1.00, 0.78, 0.36, 3.36, 0.39, 5.23, MAT.cpTeak, {
+// South-East Foyer Zone (Drawing South wall, x: 1.33..3.61 — shifted 25cm West/right for 47cm clear of Living archway at x: 4.08)
+// 1. Louvered CP Teak Shoe Credenza (1000×360×780mm, x: 2.61..3.61, 47cm clear of Living archway jamb)
+addBox(furnGroup, 1.00, 0.78, 0.36, 3.11, 0.39, 5.23, MAT.cpTeak, {
   tag: 'SOUTH FOYER · SHOE CREDENZA', title: 'Custom Seasoned CP Teak Louvered Shoe Credenza (100×36cm)',
-  desc: 'Relocated to Drawing South wall (East side, 22cm clear of Living passage). Slotted ventilation & flat shelves for UK 10+ sneakers + Outer Entrance Niche Godrej Interio CRCA Steel Rack (₹6,500).',
+  desc: 'Relocated to Drawing South wall (47cm clear of Living passage). Slotted ventilation & flat shelves for UK 10+ sneakers + Outer Entrance Niche Godrej Interio CRCA Steel Rack (₹6,500).',
   meta: 'Budget: ₹26k–₹32k (+ ₹6.5k Outer Steel Rack) · Tier 1 Recommended'
 });
-// 2. Solid CP Teak Slatted Entry Bench beside Credenza (1150×380×450mm, x: 1.58..2.73)
+// 2. Solid CP Teak Slatted Entry Bench beside Credenza (1150×380×450mm, x: 1.33..2.48)
 const benchMeta = {
   tag: 'SOUTH FOYER · ENTRY BENCH', title: 'Custom CP Teak Slatted Entry Bench (115×38×45cm)',
   desc: 'Solid mortise-and-tenon CP teak bench with removable washable seat cushion placed beside shoe credenza beneath the Persian wall carpet.',
   meta: 'Budget: ₹14k–₹18k · Tier 1 Recommended'
 };
-addBox(furnGroup, 1.15, 0.05, 0.38, 2.155, 0.36, 5.22, MAT.cpTeak, benchMeta);
-addBox(furnGroup, 1.11, 0.07, 0.36, 2.155, 0.42, 5.22, MAT.fabricOat, benchMeta);
-addBox(furnGroup, 1.07, 0.03, 0.30, 2.155, 0.14, 5.22, MAT.cpTeak);
-[[1.63, 5.07], [2.68, 5.07], [1.63, 5.37], [2.68, 5.37]].forEach(([lx, lz]) => {
+addBox(furnGroup, 1.15, 0.05, 0.38, 1.905, 0.36, 5.22, MAT.cpTeak, benchMeta);
+addBox(furnGroup, 1.11, 0.07, 0.36, 1.905, 0.42, 5.22, MAT.fabricOat, benchMeta);
+addBox(furnGroup, 1.07, 0.03, 0.30, 1.905, 0.14, 5.22, MAT.cpTeak);
+[[1.38, 5.07], [2.43, 5.07], [1.38, 5.37], [2.43, 5.37]].forEach(([lx, lz]) => {
   addBox(furnGroup, 0.05, 0.35, 0.05, lx, 0.175, lz, MAT.cpTeak);
 });
 // 3. Antique Brass/Bronze Cast-Iron Sparrow Wall Hooks mounted above South-East Shoe Credenza (exact match to sparrow-wall-hook.jpg)
@@ -1443,7 +1443,7 @@ const hookMeta = {
   desc: 'Antique brass/bronze finish cast-iron sparrow silhouette hooks on vertical stem with lower J-hook above shoe credenza via Fischer DuoPower plugs (<5kg load).',
   meta: 'Aesthetic Exception · ₹1,700 set'
 };
-[3.02, 3.24, 3.46, 3.68].forEach(hx => {
+[2.77, 2.99, 3.21, 3.43].forEach(hx => {
   addBox(decorGroup, 0.012, 0.11, 0.010, hx, 1.47, 5.402, MAT.bronze, hookMeta); // Vertical stem
   addBox(decorGroup, 0.038, 0.022, 0.012, hx, 1.465, 5.40, MAT.bronze); // 2-screw middle mounting plate
   addBox(decorGroup, 0.012, 0.022, 0.038, hx, 1.425, 5.382, MAT.brass); // Lower J-hook projection
@@ -1454,7 +1454,7 @@ const hookMeta = {
 });
 // 4. Pierced Brass Pendant Lantern above South-East Foyer Credenza
 const lantern = new THREE.Mesh(new THREE.CylinderGeometry(0.14, 0.18, 0.34, 12), MAT.brass);
-lantern.position.set(3.36, 2.02, 5.02);
+lantern.position.set(3.11, 2.02, 5.02);
 lantern.userData.meta = {
   tag: 'SOUTH FOYER · AMBIENT LANTERN', title: 'Fos / Moradabad Hand-Pierced Solid Brass Pendant (16")',
   desc: 'Suspended at 2,020mm AFF above South-East foyer credenza, clear of Living archway; wired to Shelly Dimmer Gen3.',
@@ -2373,7 +2373,7 @@ const eveningPoints = [
   [2.0, 2.45, 2.6, 0xFFC074, 2.35, 7.5],    // Drawing Room 2700K COBs + Velar Arc
   [1.80, 2.05, 4.75, 0xFFC074, 1.85, 3.8],  // Drawing South Track 2700K Wash on Persian Carpet (30° aim)
   [3.25, 2.15, 2.25, 0xFFC074, 1.35, 3.6],  // Drawing East Track 2700K Wash on 3-Seater Sofa Wall
-  [3.36, 2.02, 5.02, 0xFFB460, 1.75, 4.8],  // SE Foyer Pierced Brass Pendant
+  [3.11, 2.02, 5.02, 0xFFB460, 1.75, 4.8],  // SE Foyer Pierced Brass Pendant
   [6.8, 2.48, 5.6, 0xFFC074, 2.85, 8.2],    // Living Spine COBs + Track Spots + Cove
   [12.15, 1.55, 5.65, 0xFFB864, 2.75, 6.8], // Dining Over-Table Pendant + COBs
   [12.2, 2.48, 9.6, 0xFFD9A6, 2.65, 7.4],   // Kitchen 3000K COBs + L-Profiles

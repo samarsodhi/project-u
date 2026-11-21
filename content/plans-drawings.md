@@ -19,7 +19,7 @@ Definitive Good-For-Construction (GFC) engineering records for Unit B-6 (B4206, 
 
 | Discipline | Drawing Title | Source File (Vector PDF) | High-Res Preview (PNG / JPG) | Sheet Size & Scale | GFC Date | Key Focus |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Interactive 2D/3D Model** | Unit B4206 Live 3D Visualizer | [Open Interactive 2D/3D Model](https://samarsodhi.github.io/project-u/static/visualizer/b4206-model.html?v=19) | — | Interactive (Three.js) | 2026-11-21 | True-scale rooms, Homz finishes, Day/2700K lighting, click-to-inspect |
+| **Interactive 2D/3D Model** | Unit B4206 Live 3D Visualizer | [Open Interactive 2D/3D Model](https://samarsodhi.github.io/project-u/static/visualizer/b4206-model.html?v=20) | — | Interactive (Three.js) | 2026-11-21 | True-scale rooms, Homz finishes, Day/2700K lighting, click-to-inspect |
 | **Brochure Floor Plan (2880 SFT)** | Sumadhura Olympus 2880 Plan | — | [house-plan-2880.jpeg](assets/builder-drawings/house-plan-2880.jpeg) | JPEG (High-Res) | 2021 | Marketing layout with furniture circulation |
 | **Architectural GFC Plan** | 100-TOWER-A&B TYPICAL PLANS | [floor-b6.pdf](assets/builder-drawings/floor-b6.pdf) | [floor-b6.png](assets/builder-drawings/floor-b6.png) | A3 (ZWCAD) | 2024-04-19 | Clear room mm dimensions, doors, windows, balconies |
 | **HVAC (VRV Layout)** | MEP DRAWING TOWER-B FLOOR PLAN | [hvac-b6.pdf](assets/builder-drawings/hvac-b6.pdf) | [hvac-b6.png](assets/builder-drawings/hvac-b6.png) | A3 (AutoCAD) | 2023-08-24 | 10 HP Daikin VRV, 7 IDUs, copper sizes, condensate drains |
