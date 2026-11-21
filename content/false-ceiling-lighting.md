@@ -13,7 +13,7 @@ updated: 2026-11-21
 
 Comprehensive specification for ~1,600 sq ft of net reflected ceiling plan (RCP) illumination across the 4BHK flat (reconciled from Homz's inflated 2,261 sq ft billing against the flat's 2,045 sq ft total carpet area). Covers anti-glare recessed downlights, perimeter cove illumination, trimless mud-in linear slots, centralized Class-II potted drivers, and accessible ceiling hatches.
 
-> **Lighting Principles:** Unified **2700K** across all social and bedroom ceilings (Drawing, Living, Dining, MBR, BR-02, BR-03: coves, recessed COBs, trimless linear slots, track spots, and lamps) so adjacent fixtures never clash on `Morning Glory (0765)` planes. Reserve **3000K** (`CRI ≥ 90`) strictly for **Kitchen, Utility, Bathrooms, Study (`BR-01`) dimmable task zones, vanity mirror halos, and fine-art spots**. Deep-recessed darklight baffles (UGR < 19) prevent bare diode glare. Sealed Class-II drivers group near magnetic inspection hatches.
+> **Lighting Principles:** Unified **2700K** across all social and bedroom ceilings (Drawing, Living, Dining, MBR, BR-02, BR-03: coves, recessed COBs, trimless linear slots, track spots, and Drawing art spots) so adjacent fixtures never clash on `Morning Glory (0765)` planes. Reserve **3000K** (`CRI ≥ 90`) strictly for **Kitchen, Utility, Bathrooms, Study (`BR-01`) dimmable task zones, and vanity mirror halos**. Deep-recessed darklight baffles (UGR < 19) prevent bare diode glare. Sealed Class-II drivers group near magnetic inspection hatches.
 
 ---
 

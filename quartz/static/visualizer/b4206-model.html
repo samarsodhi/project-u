@@ -1605,7 +1605,7 @@ ct2Base.position.set(1.74, 0.15, 2.82); furnGroup.add(ct2Base);
 // Recessed cleanly inside CP Teak frame (zero side-edge texture smearing!)
 const carpetMeta = {
   tag: 'DRAWING · SOUTH WALL ART (EXACT 1.52:1)', title: 'Owned Framed Persian Pictorial Wall Carpet (184×121cm)',
-  desc: 'Mounted on Drawing South wall above the entry bench, flanked by the SW floor vase and South-East foyer hooks (exact 1.52:1 aspect). 5mm archival breathing spacer + Z-bar aluminum French cleat + 3000K gimbal spot.',
+  desc: 'Mounted on Drawing South wall above the entry bench, flanked by the SW floor vase and South-East foyer hooks (exact 1.52:1 aspect). 5mm archival breathing spacer + Z-bar aluminum French cleat + 2700K CRI 95+ track wash (70cm setback, 30° aim).',
   meta: 'Drawing Room South Wall · Protected from UV'
 };
 addBox(decorGroup, 1.96, 1.33, 0.048, 1.80, 1.52, 5.385, MAT.cpTeak, carpetMeta);
@@ -2370,7 +2370,9 @@ dayWindowBays.forEach(([x, y, z, col, intensity, dist]) => {
 
 // Practical 2700K Evening (3000K Kitchen/Baths) anchored to Homzinterio Docket Ceiling & Lamp Zones
 const eveningPoints = [
-  [2.0, 2.45, 2.6, 0xFFC278, 2.55, 7.5],    // Drawing Room COBs + Velar Arc
+  [2.0, 2.45, 2.6, 0xFFC074, 2.35, 7.5],    // Drawing Room 2700K COBs + Velar Arc
+  [1.80, 2.05, 4.75, 0xFFC074, 1.85, 3.8],  // Drawing South Track 2700K Wash on Persian Carpet (30° aim)
+  [3.25, 2.15, 2.25, 0xFFC074, 1.35, 3.6],  // Drawing East Track 2700K Wash on 3-Seater Sofa Wall
   [3.36, 2.02, 5.02, 0xFFB460, 1.75, 4.8],  // SE Foyer Pierced Brass Pendant
   [6.8, 2.48, 5.6, 0xFFC074, 2.85, 8.2],    // Living Spine COBs + Track Spots + Cove
   [12.15, 1.55, 5.65, 0xFFB864, 2.75, 6.8], // Dining Over-Table Pendant + COBs
@@ -2471,27 +2473,35 @@ cobCoords.forEach(([cx, cz]) => {
   strip.position.set(px, WALL_FULL_H - 0.003, pz);
   ceilingGroup.add(strip);
 });
-// Black Track-Light Rails with 4 Spots (Drawing p.3, Living p.32 & Dining p.33)
-function addTrackRail(cx, cz, len, isNS) {
+// Black Track-Light Rails with 4 Spots tilted 30° toward target walls (Drawing p.3, Living p.32 & Dining p.33)
+function addTrackRail(cx, cz, len, isNS, aimDir) {
   const rail = new THREE.Mesh(new THREE.BoxGeometry(isNS ? 0.035 : len, 0.028, isNS ? len : 0.035), cobBaffleMat);
   rail.position.set(cx, WALL_FULL_H - 0.016, cz);
   ceilingGroup.add(rail);
+  const tilt = Math.PI / 6; // 30-degree museum aiming angle
   for (let i = -1.5; i <= 1.5; i += 1) {
     const off = i * (len * 0.24);
     const sx = isNS ? cx : cx + off, sz = isNS ? cz + off : cz;
-    const head = new THREE.Mesh(new THREE.CylinderGeometry(0.028, 0.028, 0.06, 10), cobBaffleMat);
-    head.position.set(sx, WALL_FULL_H - 0.045, sz);
+    const pivot = new THREE.Group();
+    pivot.position.set(sx, WALL_FULL_H - 0.026, sz);
+    if (aimDir === 'S') pivot.rotation.x = -tilt;
+    else if (aimDir === 'N') pivot.rotation.x = tilt;
+    else if (aimDir === 'E') pivot.rotation.z = tilt;
+    else if (aimDir === 'W') pivot.rotation.z = -tilt;
+    const head = new THREE.Mesh(new THREE.CylinderGeometry(0.028, 0.028, 0.065, 10), cobBaffleMat);
+    head.position.set(0, -0.022, 0);
     const glow = new THREE.Mesh(new THREE.CircleGeometry(0.022, 10), cobCoreMat);
     glow.rotation.x = Math.PI / 2;
-    glow.position.set(sx, WALL_FULL_H - 0.076, sz);
-    ceilingGroup.add(head, glow);
+    glow.position.set(0, -0.055, 0);
+    pivot.add(head, glow);
+    ceilingGroup.add(pivot);
   }
 }
-addTrackRail(1.80, 4.90, 1.50, false);  // Drawing South-wall E-W track over Persian Wall Carpet (p.3)
-addTrackRail(3.15, 2.25, 1.80, true);   // Drawing East-wall N-S track over 3-Seater Sofa (p.3)
-addTrackRail(4.55, 5.65, 1.80, true);   // Living West-side N-S track (p.32)
-addTrackRail(7.20, 6.75, 1.80, false);  // Living South-side E-W track (p.32)
-addTrackRail(11.40, 6.65, 1.50, false); // Dining South-side E-W track (p.33)
+addTrackRail(1.80, 4.68, 1.50, false, 'S'); // Drawing South E-W track at 70cm setback aimed 30° at Persian Carpet (p.3)
+addTrackRail(3.36, 2.25, 1.80, true,  'E'); // Drawing East N-S track at 70cm setback aimed 30° at Sofa Wall (p.3)
+addTrackRail(4.55, 5.65, 1.80, true,  'W'); // Living West-side N-S track aimed 30° at Archway/Art (p.32)
+addTrackRail(7.20, 6.75, 1.80, false, 'S'); // Living South-side E-W track aimed 30° at Sofa Wall (p.32)
+addTrackRail(11.40, 6.65, 1.50, false, 'S'); // Dining South-side E-W track (p.33)
 // Central Ceiling Fans (Kitchen, MBR, BR-01, BR-02, BR-03 per Docket pp.34-38)
 [[12.2, 9.55], [2.15, 9.55], [7.90, 9.55], [7.85, 1.90], [13.70, 1.90]].forEach(([fx, fz]) => {
   const hub = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.09, 0.14, 14), MAT.beigeWool);
