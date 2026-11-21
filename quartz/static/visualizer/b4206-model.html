@@ -2026,13 +2026,13 @@ const sBalcMeta = {
 [[1.05, 12.40], [2.95, 12.40]].forEach(([bx, bz]) => addBox(furnGroup, 0.58, 0.42, 0.58, bx, 0.21, bz, MAT.cpTeak, sBalcMeta));
 
 // ---------- F. BR-01 STUDY & GUEST ROOM (x: 5.78..10.00, z: 7.52..11.60) ----------
-// Exact 1880 W × 1040 D mm Closed Sofa-Bed
-addBox(furnGroup, 1.88, 0.42, 1.04, 7.20, 0.21, 8.15, MAT.fabricCharcoal, {
+// Exact 1880 W × 1040 D mm Closed Sofa-Bed along West wall (north of SW bath door z=10.20)
+addBox(furnGroup, 1.04, 0.42, 1.88, 6.37, 0.21, 8.68, MAT.fabricCharcoal, {
   tag: 'BR-01 · GUEST SOFA-BED (188×104cm)', title: 'Custom CP Teak Pull-Out Sofa-Bed / Gulmohar Lane Berlin',
-  desc: 'Exact 188×104 cm closed (193 cm open) along North wall. Leaves 203 cm clear walk to South wardrobe.',
+  desc: 'Exact 188×104 cm closed (193 cm open) along West wall north of SW bath doorway. Leaves 215 cm clear walk to East wall in open bed mode.',
   meta: 'Budget: ₹68k (CP Teak) · BR-01: 4000×4000 mm'
 });
-addBox(furnGroup, 1.88, 0.40, 0.18, 7.20, 0.58, 7.72, MAT.fabricCharcoal);
+addBox(furnGroup, 0.18, 0.40, 1.88, 5.94, 0.58, 8.68, MAT.fabricCharcoal);
 
 // East Wall Standing Desk (Exact 1500×750mm): 1/4 (~84cm) from South Window curtain (z=11.46) -> desk center z=10.42, chair z=10.95
 const deskMeta = {
@@ -2065,7 +2065,7 @@ addBox(decorGroup, 0.36, 0.20, 0.36, 9.68, 0.58, 9.55, MAT.darkMetal, {
   desc: 'Dry toner never clogs when idle. Plugged directly into wall socket (920W fuser spike, never UPS).',
   meta: '₹14,990 · Centralized home printing'
 });
-addCowayPurifier(6.12, 8.05, 'BR-01 STUDY');
+addCowayPurifier(7.35, 7.82, 'BR-01 STUDY');
 
 // South Wall 4-Door Wardrobe (West) + Open 424 1D Bookshelf with Books (East beside W2)
 addBox(furnGroup, 1.56, 2.45, 0.58, 6.68, 1.225, 11.24, MAT.beigeWool, {

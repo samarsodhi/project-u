@@ -34,14 +34,14 @@ Primary workspace for Samar (SDM at Amazon) and flexible guest suite. Houses the
 
 ## [Suggestions] Room Layout & Spatial Architecture
 
-Configured layout: NE entrance door, SW washroom door, North wall sofa-bed, East wall standing desk (facing North), and South wall library (left, next to window) with wardrobe run (right):
+Configured layout: NE entrance door, SW washroom door, West wall sofa-bed, East wall standing desk (facing North), and South wall library (left, next to window) with wardrobe run (right):
 
 * **Executive Workspace (East Wall, Samar Sits Facing North):** Standing desk positioned against the East wall with Samar seated south of it facing North toward the entrance door. This command orientation provides direct visual control over entry without camera exposure to bed areas. Dual-layer drapery (sheer + blackout) on the South window stops midday screen reflection.
-* **Guest Sleeping Zone (North Wall):** Custom Seasoned CP Teak Pull-Out Sofa-Bed (or Gulmohar Lane Berlin Sofa Cum Bed, 188 cm wide) placed flush along the North wall. Fits cleanly within the 296 cm stretch west of the NE entrance swing. Expanding to 193 cm bed mode leaves 203 cm of walk clearance to the South wardrobe.
+* **Guest Sleeping Zone (West Wall):** Custom Seasoned CP Teak Pull-Out Sofa-Bed (or Gulmohar Lane Berlin Sofa Cum Bed, 188 cm wide) placed flush along the solid West wall north of the SW washroom doorway. Fits cleanly within the 261 cm stretch from the NW corner to the bath opening. Expanding to 193 cm bed mode leaves 215 cm of walk clearance to the East wall.
 * **Bookshelf Library (South Wall, Left / Next to Window):** Fluted `424 1D Cinnamon Hickory` open bookshelf (35 cm return) positioned on the left adjacent to the South window reveal. Eliminates a flat laminate gable end next to glazing while housing 80+ books in direct natural daylight.
 * **Wardrobe Run (South Wall, Right):** Homz 4-door wardrobe finished in `3163 SI Beige Wool` extending West from the East-side Cinnamon Hickory bookshelf toward the SW toilet wall.
 * **Window Reading Nook (South Wall Alcove):** Lounge armchair placed by the South window and bookshelf library. Natural South daylight for reading, direct arm-reach access to books, and 110 cm clearance from the desk chair.
-* **Bathroom Circulation (West Wall):** Direct, unencumbered 120 cm walking corridor runs from the NE entrance down the West wall straight into the SW ensuite washroom.
+* **Bathroom Circulation (Central-West Spine):** Unencumbered walking path runs from the NE entrance across the open center straight into the SW ensuite washroom, clearing the West-wall sofa-bed.
 * **Brahmasthan:** Generous 180×160 cm open central floor zone kept clear of static furniture.
 
 ![BR-01 Wardrobe Option 1 Curved Fluted Oak](../assets/decor/study-wardrobe-option-1-curved-oak.png)
@@ -51,22 +51,21 @@ Configured layout: NE entrance door, SW washroom door, North wall sofa-bed, East
                   [ North Wall (296 cm Clear Stretch) ]          [ NE Entrance Door ]
 +-----------------------------------------------------------------------------------+
 | [ Guest Lounge & Sleeper ]                                     | (Inward Door     |
-| Custom CP Teak / Gulmohar Lane Berlin Sofa-Bed                 |  Swing along     |
-| 188 cm W × 104 cm D (Closed) / 193 cm D (Open Bed)             |  East Wall)      |
-|                                                                +------------------+
-|                                                                                   |
+| West Wall (261 cm Clear)                                       |  Swing along     |
+| Custom CP Teak / Berlin                                        |  East Wall)      |
+| Sofa-Bed (188 × 104 cm,                                        +------------------+
+|  193 cm Open Bed East)                                                            |
 |                                                                [ Study Station ]  |
-|                                                                Executive Sit-Stand|
-| [ WEST ]                                                       SAMAR SITS FACING  |
-| Clear Circulation Corridor                                     NORTH              |
-| Direct access to SW Bathroom                                   (Command View)     | [ EAST ]
+| [ WEST ]                                                       Executive Sit-Stand|
+|                                                                SAMAR SITS FACING  |
+|                                                                NORTH              |
+|                                                                (Command View)     | [ EAST ]
 |                                                                Screens face South |
 |                                                                                   |
 |                                                                [ SE Reading Nook ]|
-|                                                                Lounge Armchair    |
-| [ SW Bathroom Door ]                                           (IKEA POÄNG + Ott. |
-| (Ensuite 5'0" × 7'11")   [ Book Shelf ]        [ South Wardrobe ] Natural light      |
-| Door swings West         35cm Oak Return       Homz 3163 Beige |                  |
+| [ SW Bathroom Door ]                                           Lounge Armchair    |
+| (Ensuite 5'0" × 7'11")   [ Book Shelf ]        [ South Wardrobe ] (IKEA POÄNG + Ott.)
+| Door swings West         35cm Oak Return       Homz 3163 Beige |  Natural light   |
 +--------------------------+---------------+======================+------------------+
                            [ South Window (3'11" Glazing) ]
                                       [ SOUTH ]
