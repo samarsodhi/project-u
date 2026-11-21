@@ -14,6 +14,7 @@ updated: 2026-11-21
 Primary workspace for Samar (SDM at Amazon) and flexible guest suite. Houses the owned standing desk, Steelcase Amia ergonomic chair, integrated wardrobe end-shelf library, monitor task lighting, and a solid-wood guest sofa-bed (Custom CP Teak pull-out or Gulmohar Lane Berlin).
 
 > **Clearance Rule:** Position the standing desk along the East wall facing North, **1/4 (~84 cm) from the South window curtain and 3/4 (~236 cm) from the NE room entrance**, with South window blackout drapery eliminating screen backlight glare.
+> **Dual-Mode Lighting Rule:** Keep ceiling COBs/linear profiles at **3000K** (dimmable) + `BenQ ScreenBar Pro` at **4000K–4500K** during daytime/monsoon WFH calls so skin tones stay natural on camera; switch `ScreenBar Pro` to `3000K` after 7 PM and rely on the **2700K** `Orange Tree Ayra` floor lamp when BR-01 operates as a guest bedroom.
 > **Finishes Reference:** Wall finish references [[curtains-paint-finishes#definitive-room-by-room-color-palette]].
 
 ---
