@@ -2335,10 +2335,10 @@ addPath([[9.2, 5.6], [9.2, 7.8], [6.3, 9.2], [6.3, 10.6]]);
 addPath([[12.2, 5.6], [12.2, 3.6], [13.6, 2.2]]);
 pathGroup.visible = false;
 
-const hemiLight = new THREE.HemisphereLight(0xFFFDF8, 0x7A8290, 0.95);
+const hemiLight = new THREE.HemisphereLight(0xEAF2FA, 0x7A746C, 0.58);
 scene.add(hemiLight);
 
-const sunLight = new THREE.DirectionalLight(0xFFF6E6, 1.55);
+const sunLight = new THREE.DirectionalLight(0xFFF3DE, 1.05);
 sunLight.position.set(22, 24, 16);
 sunLight.castShadow = true;
 sunLight.shadow.mapSize.set(2048, 2048);
@@ -2347,39 +2347,65 @@ sunLight.shadow.camera.top = 16; sunLight.shadow.camera.bottom = -16;
 sunLight.shadow.bias = -0.0005;
 scene.add(sunLight);
 
+// Practical Floor 42 Daylight Window-Bay Sky Bounce (active in Walk Mode Daylight only)
+const dayWindowLightsGroup = new THREE.Group();
+dayWindowLightsGroup.visible = false;
+scene.add(dayWindowLightsGroup);
+const dayWindowBays = [
+  [2.25, 1.85, 0.45, 0xF0F6FF, 1.50, 6.2],   // Drawing North Window
+  [14.15, 1.95, 5.05, 0xFFF9EE, 2.30, 8.2],  // Dining / Living East Sit-Out Balcony
+  [12.20, 1.85, 11.15, 0xF2F7FF, 1.25, 5.4], // Kitchen South Window
+  [15.40, 1.90, 9.55, 0xF2F7FF, 1.35, 5.5],  // Utility East uPVC
+  [2.80, 1.95, 11.15, 0xFFF9EE, 2.10, 7.2],  // Master South Balcony Slider
+  [0.45, 1.75, 7.97, 0xF0F6FF, 0.75, 4.0],   // Master West Window
+  [8.62, 1.85, 11.15, 0xFFF9EE, 1.55, 6.0],  // BR-01 Study South Window W2
+  [6.75, 1.85, 0.45, 0xF0F6FF, 1.55, 6.0],   // BR-02 Kabir North Window
+  [15.30, 1.85, 1.85, 0xFFF8EC, 1.65, 6.0],  // BR-03 Gurudwara East Window
+];
+dayWindowBays.forEach(([x, y, z, col, intensity, dist]) => {
+  const wl = new THREE.PointLight(col, intensity, dist, 1.85);
+  wl.position.set(x, y, z);
+  dayWindowLightsGroup.add(wl);
+});
+
+// Practical 2700K Evening (3000K Kitchen/Baths) anchored to Homzinterio Docket Ceiling & Lamp Zones
 const eveningPoints = [
-  [2.0, 2.35, 2.6, 0xFFBC6E, 1.55, 6.2],
-  [3.36, 2.02, 5.02, 0xFFB058, 1.15, 4.2], // SE Foyer Pendant over Bench/Credenza
-  [7.2, 2.35, 5.6, 0xFFBC6B, 1.65, 6.8],
-  [12.15, 1.55, 5.65, 0xFFB45C, 1.90, 5.8], // Dining Over-Table Pendant
-  [12.2, 2.35, 9.6, 0xFFD6A0, 1.50, 6.2],
-  [2.1, 2.25, 9.5, 0xFFBA68, 1.45, 5.6],
-  [5.1, 2.1, 8.2, 0xFFC57C, 1.00, 3.6], // MBR NE Dressing Nook Halo
-  [8.2, 2.25, 9.5, 0xFFD098, 1.30, 5.4],
-  [7.8, 2.25, 1.9, 0xFFC882, 1.30, 5.4],
-  [13.85, 2.35, 1.6, 0xFFAE52, 1.85, 5.8], // BR-03 Warm Palki Glow
-  [10.75, 2.30, 3.15, 0xFFC57C, 0.90, 3.6], // Common Vanity Lobby
-  [3.48, 2.30, 6.50, 0xFFC274, 0.85, 3.2],  // Puja Walk-in
-  [15.05, 2.30, 9.55, 0xFFD8A8, 1.10, 4.2], // Kitchen Utility
-  [1.85, 2.30, 6.50, 0xFFD6A2, 0.95, 3.6],  // Master Bath
-  [15.05, 2.20, 5.05, 0xFFB058, 0.95, 4.0], // East Sit-Out Warm Sconce
-  [2.10, 2.20, 12.25, 0xFFB058, 0.95, 4.0], // South Balcony Warm Sconce
+  [2.0, 2.45, 2.6, 0xFFC278, 2.55, 7.5],    // Drawing Room COBs + Velar Arc
+  [3.36, 2.02, 5.02, 0xFFB460, 1.75, 4.8],  // SE Foyer Pierced Brass Pendant
+  [6.8, 2.48, 5.6, 0xFFC074, 2.85, 8.2],    // Living Spine COBs + Track Spots + Cove
+  [12.15, 1.55, 5.65, 0xFFB864, 2.75, 6.8], // Dining Over-Table Pendant + COBs
+  [12.2, 2.48, 9.6, 0xFFD9A6, 2.65, 7.4],   // Kitchen 3000K COBs + L-Profiles
+  [2.1, 2.42, 9.5, 0xFFBE70, 2.45, 6.8],    // MBR Master COBs + L-Cove
+  [4.95, 2.35, 8.2, 0xFFCC88, 1.40, 4.2],   // MBR NE Dressing Nook Halo
+  [7.9, 2.42, 9.5, 0xFFD29C, 2.35, 6.6],    // BR-01 Study COBs + L-Profile
+  [7.85, 2.42, 1.9, 0xFFCA86, 2.35, 6.6],   // BR-02 Kabir COBs + 4 Linear Profiles
+  [13.70, 2.42, 1.9, 0xFFB45C, 2.55, 6.8],  // BR-03 Gurudwara COBs + Stepped Profiles + Palki Cove
+  [10.75, 2.35, 3.15, 0xFFC880, 1.25, 4.2], // Common Vanity Lobby
+  [3.48, 2.35, 6.50, 0xFFC478, 1.15, 3.6],  // Puja Walk-in
+  [15.05, 2.35, 9.55, 0xFFDAA8, 1.50, 4.8], // Kitchen Utility 3000K
+  [1.85, 2.35, 6.50, 0xFFD8A4, 1.35, 4.2],  // Master Bath 3000K
+  [4.92, 2.35, 10.2, 0xFFD8A4, 1.30, 4.2],  // BR-01 Bath 3000K
+  [10.75, 2.35, 1.9, 0xFFD8A4, 1.30, 4.2],  // BR-02 / Common Bath 3000K
+  [15.05, 2.20, 5.05, 0xFFB25C, 1.30, 4.6], // East Sit-Out Warm Sconce
+  [2.10, 2.20, 12.25, 0xFFB25C, 1.30, 4.6], // South Balcony Warm Sconce
 ];
 eveningPoints.forEach(([x, y, z, col, intensity, dist]) => {
-  const pl = new THREE.PointLight(col, intensity, dist, 2.0);
+  const pl = new THREE.PointLight(col, intensity, dist, 1.8);
   pl.position.set(x, y, z);
   nightLightsGroup.add(pl);
 });
-addBox(nightLightsGroup, 3.6, 0.03, 0.05, 13.7, 2.68, 0.16, MAT.coveGlow);
-addBox(nightLightsGroup, 0.05, 0.03, 3.2, 0.16, 2.68, 3.0, MAT.coveGlow);
-addBox(nightLightsGroup, 5.2, 0.03, 0.05, 7.1, 2.68, 7.36, MAT.coveGlow); // Living South perimeter cove
-addBox(nightLightsGroup, 3.4, 0.03, 0.05, 2.1, 2.68, 7.68, MAT.coveGlow); // Master North cove
+addBox(nightLightsGroup, 3.6, 0.03, 0.05, 13.7, 2.68, 0.16, MAT.coveGlow);  // BR-03 North Cove
+addBox(nightLightsGroup, 0.05, 0.03, 3.2, 0.16, 2.68, 3.0, MAT.coveGlow);   // Drawing West Cove
+addBox(nightLightsGroup, 5.2, 0.03, 0.05, 7.1, 2.68, 7.36, MAT.coveGlow);   // Living South Cove
+addBox(nightLightsGroup, 3.4, 0.03, 0.05, 2.1, 2.68, 7.68, MAT.coveGlow);   // MBR North Cove
+addBox(nightLightsGroup, 0.05, 0.03, 3.4, 0.18, 2.68, 9.55, MAT.coveGlow);  // MBR West L-Cove (Docket p.35)
 nightLightsGroup.visible = false;
 
-// Walk-Mode Architectural Gypsum False Ceiling + Hybec Deep-Recessed COB Downlights
+// Walk-Mode Architectural Gypsum False Ceiling + Homzinterio Docket pp.32-38 COBs, Profiles, Tracks & Fans
 const ceilingMat = new THREE.MeshStandardMaterial({ color: 0xF5F3EE, roughness: 0.92, metalness: 0.0, side: THREE.DoubleSide });
 const cobBaffleMat = new THREE.MeshStandardMaterial({ color: 0x20232A, roughness: 0.55, metalness: 0.35 });
-const cobCoreMat = new THREE.MeshStandardMaterial({ color: 0xFFF2D6, emissive: 0xFFCE84, emissiveIntensity: 0.25, roughness: 0.3 });
+const cobCoreMat = new THREE.MeshStandardMaterial({ color: 0xFFF2D6, emissive: 0xFFCE84, emissiveIntensity: 0.06, roughness: 0.3 });
+const linearProfileMat = new THREE.MeshStandardMaterial({ color: 0xEAE6DD, emissive: 0xFFD290, emissiveIntensity: 0.05, roughness: 0.4 });
 floorRects.forEach(r => {
   // Open sky above East Sit-Out, South Balcony & Service Balcony; keep slab over interior + Utility uPVC
   const isOpenBalcony = r.isBalcony && !(r.x1 >= 14.3 && r.z1 >= 7.5);
@@ -2388,19 +2414,32 @@ floorRects.forEach(r => {
   const slab = new THREE.Mesh(new THREE.PlaneGeometry(w, d), ceilingMat);
   slab.rotation.x = Math.PI / 2;
   slab.position.set((r.x1 + r.x2) * 0.5, WALL_FULL_H, (r.z1 + r.z2) * 0.5);
+  slab.castShadow = true; // Block overhead sun in Walk Mode so daylight enters through real windows/balconies
   slab.receiveShadow = true;
   ceilingGroup.add(slab);
 });
+// Exact COB Downlight Placements per Homzinterio Docket pp. 32-38
 const cobCoords = [
-  [1.2, 1.5], [2.9, 1.5], [1.2, 3.9], [2.9, 3.9],
-  [5.4, 4.7], [7.2, 4.7], [9.1, 4.7], [5.4, 6.4], [9.1, 6.4],
-  [11.2, 4.6], [13.2, 4.6], [11.2, 6.6], [13.2, 6.6],
-  [11.3, 8.6], [13.1, 8.6], [11.3, 10.3], [13.1, 10.3],
-  [1.3, 8.6], [3.1, 8.6], [1.3, 10.4], [3.1, 10.4], [4.9, 8.2],
-  [6.9, 8.6], [8.8, 8.6], [6.9, 10.4], [8.8, 10.4],
-  [6.9, 1.2], [8.6, 1.2], [6.9, 2.8], [8.6, 2.8],
-  [12.8, 1.2], [14.6, 1.2], [12.8, 2.7], [14.6, 2.7],
-  [10.8, 3.1], [3.5, 6.5], [15.1, 8.8], [15.1, 10.4],
+  // Drawing & Foyer
+  [1.0, 1.2], [3.1, 1.2], [1.0, 4.1], [3.1, 4.1], [3.4, 4.8],
+  // Living Spine (Docket p. 32: 4 North/TV + 3 South/Sofa + 1 Window)
+  [4.7, 4.25], [6.4, 4.25], [8.1, 4.25], [9.6, 4.25],
+  [5.2, 7.05], [7.2, 7.05], [9.2, 7.05], [10.0, 5.65],
+  // Dining (Docket p. 33: 5 North + 4 South)
+  [10.6, 4.25], [11.6, 4.25], [12.6, 4.25], [13.5, 4.25], [14.1, 4.25],
+  [10.8, 7.05], [12.0, 7.05], [13.1, 7.05], [14.0, 7.05],
+  // Kitchen (Docket p. 34: 3 North + 3 South)
+  [10.8, 8.15], [12.2, 8.15], [13.6, 8.15], [10.8, 10.95], [12.2, 10.95], [13.6, 10.95],
+  // MBR Master Suite (Docket p. 35: 6 main + 1 NE Dressing Nook)
+  [0.6, 8.15], [2.1, 8.15], [3.5, 8.15], [0.6, 11.00], [2.1, 11.00], [3.5, 11.00], [4.9, 8.2],
+  // BR-01 Study / Guest GBR (Docket p. 38: 5 perimeter COBs)
+  [6.45, 8.15], [7.95, 8.15], [9.40, 8.15], [6.45, 10.85], [9.40, 10.85],
+  // BR-02 Kabir KBR (Docket p. 36: 4 corner COBs)
+  [6.55, 0.70], [9.10, 0.70], [6.55, 3.15], [9.10, 3.15],
+  // BR-03 Home Gurudwara KBR 2 (Docket p. 37: 6 COBs, 2 rows of 3)
+  [12.35, 0.75], [13.70, 0.75], [15.05, 0.75], [12.35, 3.05], [13.70, 3.05], [15.05, 3.05],
+  // Baths, Puja, Vanity & Utility
+  [10.8, 3.1], [3.5, 6.5], [15.1, 8.8], [15.1, 10.4], [4.9, 9.8], [1.9, 6.4], [10.6, 1.9],
 ];
 const cobTrimGeo = new THREE.RingGeometry(0.036, 0.056, 16);
 const cobCoreGeo = new THREE.CircleGeometry(0.035, 16);
@@ -2412,6 +2451,57 @@ cobCoords.forEach(([cx, cz]) => {
   core.rotation.x = Math.PI / 2;
   core.position.set(cx, WALL_FULL_H - 0.003, cz);
   ceilingGroup.add(trim, core);
+});
+// Trimless Mud-In Linear Profiles (Docket pp. 34-38)
+[
+  // Kitchen (p.34): 2 L-shaped linear profiles
+  [1.00, 0.025, 11.20, 8.95], [0.025, 0.90, 10.70, 9.40],
+  [1.00, 0.025, 13.20, 10.20], [0.025, 0.90, 13.70, 9.75],
+  // MBR (p.35): L-shaped linear edge
+  [2.80, 0.025, 2.00, 7.80], [0.025, 2.80, 0.45, 9.20],
+  // KBR BR-02 (p.36): 4 parallel linear strips (2 West, 2 East)
+  [0.025, 2.10, 6.80, 1.90], [0.025, 1.50, 7.05, 1.90],
+  [0.025, 2.10, 8.85, 1.90], [0.025, 1.50, 8.60, 1.90],
+  // BR-03 KBR 2 (p.37): 2 stepped linear profiles
+  [2.10, 0.025, 13.70, 1.15], [2.10, 0.025, 13.70, 2.65],
+  // BR-01 Study GBR (p.38): L-shaped profile
+  [2.50, 0.025, 7.90, 8.55], [0.025, 2.10, 6.75, 9.60],
+].forEach(([w, d, px, pz]) => {
+  const strip = new THREE.Mesh(new THREE.BoxGeometry(w, 0.006, d), linearProfileMat);
+  strip.position.set(px, WALL_FULL_H - 0.003, pz);
+  ceilingGroup.add(strip);
+});
+// Black Track-Light Rails with 4 Spots (Living p.32 & Dining p.33)
+function addTrackRail(cx, cz, len, isNS) {
+  const rail = new THREE.Mesh(new THREE.BoxGeometry(isNS ? 0.035 : len, 0.028, isNS ? len : 0.035), cobBaffleMat);
+  rail.position.set(cx, WALL_FULL_H - 0.016, cz);
+  ceilingGroup.add(rail);
+  for (let i = -1.5; i <= 1.5; i += 1) {
+    const off = i * (len * 0.24);
+    const sx = isNS ? cx : cx + off, sz = isNS ? cz + off : cz;
+    const head = new THREE.Mesh(new THREE.CylinderGeometry(0.028, 0.028, 0.06, 10), cobBaffleMat);
+    head.position.set(sx, WALL_FULL_H - 0.045, sz);
+    const glow = new THREE.Mesh(new THREE.CircleGeometry(0.022, 10), cobCoreMat);
+    glow.rotation.x = Math.PI / 2;
+    glow.position.set(sx, WALL_FULL_H - 0.076, sz);
+    ceilingGroup.add(head, glow);
+  }
+}
+addTrackRail(4.55, 5.65, 1.80, true);   // Living West-side N-S track (p.32)
+addTrackRail(7.20, 6.75, 1.80, false);  // Living South-side E-W track (p.32)
+addTrackRail(11.40, 6.65, 1.50, false); // Dining South-side E-W track (p.33)
+// Central Ceiling Fans (Kitchen, MBR, BR-01, BR-02, BR-03 per Docket pp.34-38)
+[[12.2, 9.55], [2.15, 9.55], [7.90, 9.55], [7.85, 1.90], [13.70, 1.90]].forEach(([fx, fz]) => {
+  const hub = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.09, 0.14, 14), MAT.beigeWool);
+  hub.position.set(fx, WALL_FULL_H - 0.08, fz);
+  ceilingGroup.add(hub);
+  for (let b = 0; b < 3; b++) {
+    const blade = new THREE.Mesh(new THREE.BoxGeometry(0.52, 0.012, 0.11), MAT.beigeWool);
+    const ang = (b * Math.PI * 2) / 3;
+    blade.rotation.y = ang;
+    blade.position.set(fx + Math.cos(ang) * 0.30, WALL_FULL_H - 0.11, fz - Math.sin(ang) * 0.30);
+    ceilingGroup.add(blade);
+  }
 });
 
 // Walk-Mode Floor 42 Hyderabad Skyline Sky Dome (Daylight & Twilight 2700K)
@@ -3543,6 +3633,7 @@ function exitWalkMode(returnToOverview = false) {
   waypointGroup.visible = false;
   ceilingGroup.visible = false;
   skyDome.visible = false;
+  applyLightingIntensities();
   wpTooltipEl.style.display = 'none';
   Object.keys(walkKeys).forEach(k => walkKeys[k] = false);
   // Close any proximity-opened doors smoothly back to rest
@@ -3972,14 +4063,21 @@ document.querySelectorAll('[data-wall]').forEach(b => b.onclick = () => setWallM
 function applyLightingIntensities() {
   if (isNightMode) {
     scene.environment = null; // Disable bright white studio IBL so 2700K lamps & coves actually glow!
-    hemiLight.intensity = walkMode ? 0.11 : 0.12;
-    sunLight.intensity = 0.04;
-    renderer.toneMappingExposure = walkMode ? 0.96 : 1.02;
+    dayWindowLightsGroup.visible = false;
+    hemiLight.color.setHex(0xFFE3BD);
+    hemiLight.groundColor.setHex(0x4A3A2B);
+    hemiLight.intensity = walkMode ? 0.22 : 0.26;
+    sunLight.intensity = 0.02;
+    renderer.toneMappingExposure = walkMode ? 0.94 : 0.98;
   } else {
-    scene.environment = dayEnvTexture;
-    hemiLight.intensity = walkMode ? 0.76 : 0.88;
-    sunLight.intensity = walkMode ? 1.12 : 1.38;
-    renderer.toneMappingExposure = walkMode ? 0.96 : 1.02;
+    // Disable studio IBL in Walk Mode so window-bay bounce + ceiling shadows create real indoor depth
+    scene.environment = walkMode ? null : dayEnvTexture;
+    dayWindowLightsGroup.visible = walkMode;
+    hemiLight.color.setHex(0xEAF2FA);
+    hemiLight.groundColor.setHex(0x7A746C);
+    hemiLight.intensity = walkMode ? 0.34 : 0.58;
+    sunLight.intensity = walkMode ? 1.65 : 1.05;
+    renderer.toneMappingExposure = walkMode ? 0.90 : 0.92;
   }
 }
 function setLighting(isNight) {
@@ -3992,10 +4090,12 @@ function setLighting(isNight) {
   scene.background.set(isNight ? 0x0B0D12 : 0x1A202C);
   skyDomeMat.map = isNight ? skyNightTex : skyDayTex;
   skyDomeMat.needsUpdate = true;
-  cobCoreMat.emissiveIntensity = isNight ? 1.65 : 0.20;
-  MAT.lampShade.emissiveIntensity = isNight ? 1.15 : 0.16;
+  cobCoreMat.emissiveIntensity = isNight ? 2.20 : 0.06;
+  linearProfileMat.emissiveIntensity = isNight ? 1.85 : 0.05;
+  MAT.lampShade.emissiveIntensity = isNight ? 1.35 : 0.0;
   applyLightingIntensities();
 }
+setLighting(false);
 document.getElementById('mode-day').onclick = () => setLighting(false);
 document.getElementById('mode-night').onclick = () => setLighting(true);
 
