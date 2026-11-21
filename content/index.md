@@ -20,6 +20,7 @@ Pre-ceiling and pre-flooring infrastructure. Failure to sequence these before ar
 
 * **[[gotchas-and-tips|Gotchas & Field Protips]]** — Pressure Reducing Valves (PRV 3.0–3.5 bar), Type 2 Surge Protection (SPD), DG harmonics, local sourcing, and FM rules.
 * **[[cabinetry-woodwork|Cabinetry & Woodwork]]** — IS 710 BWP plywood, calibrated cores, wardrobe hardware schedule, and ceiling plasterboard.
+* **[[wardrobe-internal-storage|Wardrobe & Utility Storage]]** — Bay-by-bay wardrobe internals (MBR, Kabir, Study/Guest, Home Gurudwara) and Utility janitor 65:35 layout.
 * **[[plans-drawings|Plans & Drawings]]** — Unit B4206 architectural floor plan, Daikin VRV 10 HP HVAC, plumbing shafts, and electrical DB.
 * **[[kitchen-laundry|Kitchen & Laundry]]** — Modular cabinetry, light Indian granite, undermount sinks, hybrid domino hob, 32A lines, and stacked laundry.
 * **[[finalized-purchases|Finalized Purchases]]** — Committed major appliances, AV envelope (₹4.59L), dedicated 16A radials, and joinery clearances.

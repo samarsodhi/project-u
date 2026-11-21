@@ -11,7 +11,7 @@ updated: 2026-10-31
 
 # Cabinetry & Woodwork
 
-Definitive material schedule for fixed millwork substrates and bedroom wardrobe hardware executed by Homz Interio. Scan every delivered sheet with the CenturyPromise app to eliminate commercial-grade substitution.
+Definitive material schedule for fixed millwork substrates and bedroom wardrobe hardware executed by Homz Interio. Scan every delivered sheet with the CenturyPromise app to eliminate commercial-grade substitution. See [[wardrobe-internal-storage|Wardrobe & Utility Storage]] for bay-by-bay shelf, hanging, and janitor layouts.
 
 ---
 
