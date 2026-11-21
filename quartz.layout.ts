@@ -39,6 +39,7 @@ const explorerConfig = {
       "study-guest-room": 83,
       "kabir-room": 84,
       "home-gurudwara": 85,
+      "utility": 86,
 
       // Phase 3: Environmental Protection, Comfort & Safety
       "safety-security": 90,

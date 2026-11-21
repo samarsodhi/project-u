@@ -41,6 +41,7 @@ Core spatial planning, room ergonomics, bespoke furniture, and functional daily 
 * **[[rooms/study-guest-room|Study & Guest Room]]** — Ergonomic standing desk, Steelcase seating, 5-zone pocket-sprung sofa-bed, and library.
 * **[[rooms/kabir-room|Kabir's Room (Study & Play)]]** — Magari/Alankaram solid ash growth desk (or IKEA BERGLÄRKA crank desk), non-rolling slotted timber chair, trundle daybed, and South wall 3D world map.
 * **[[rooms/home-gurudwara|Home Gurudwara]]** — Handcrafted teak Palki Sahib, washable cotton sangat durries, and sacred joinery.
+* **[[rooms/utility|Utility & Laundry Balcony]]** — Side-by-side Bosch washer & heat-pump dryer, Ivory Fantasy granite folding counter, external South-gable mesh ironing dock, valet rod, and White uPVC 3-track slider.
 
 ---
 
