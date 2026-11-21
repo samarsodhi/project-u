@@ -2471,7 +2471,7 @@ cobCoords.forEach(([cx, cz]) => {
   strip.position.set(px, WALL_FULL_H - 0.003, pz);
   ceilingGroup.add(strip);
 });
-// Black Track-Light Rails with 4 Spots (Living p.32 & Dining p.33)
+// Black Track-Light Rails with 4 Spots (Drawing p.3, Living p.32 & Dining p.33)
 function addTrackRail(cx, cz, len, isNS) {
   const rail = new THREE.Mesh(new THREE.BoxGeometry(isNS ? 0.035 : len, 0.028, isNS ? len : 0.035), cobBaffleMat);
   rail.position.set(cx, WALL_FULL_H - 0.016, cz);
@@ -2487,6 +2487,8 @@ function addTrackRail(cx, cz, len, isNS) {
     ceilingGroup.add(head, glow);
   }
 }
+addTrackRail(1.80, 4.90, 1.50, false);  // Drawing South-wall E-W track over Persian Wall Carpet (p.3)
+addTrackRail(3.15, 2.25, 1.80, true);   // Drawing East-wall N-S track over 3-Seater Sofa (p.3)
 addTrackRail(4.55, 5.65, 1.80, true);   // Living West-side N-S track (p.32)
 addTrackRail(7.20, 6.75, 1.80, false);  // Living South-side E-W track (p.32)
 addTrackRail(11.40, 6.65, 1.50, false); // Dining South-side E-W track (p.33)
