@@ -94,5 +94,5 @@ System driven by a single **10 HP Daikin VRV Outdoor Unit (ODU)** on the Service
 * **Distribution Board (DB):** Surface-recessed in entrance lobby corridor. Fed with 3-phase supply. Feeds 25 mm Ø lighting conduits and 25 mm Ø power conduits.
 * **Communication Junction Box (CJB):** Recessed next to DB. Terminates Cat6 internet drops, TV coax, and building intercom lines.
 * **Geyser Circuits:** Dedicated 20A isolator switches wired to 20A 3-pin sockets in Master Toilet, BR-01 Toilet, BR-02 Toilet, and BR-03 Toilet.
-* **Power Outlets (15A/16A):** Kitchen counter loop (hob, chimney, oven, microwave), Utility laundry stack (washer/dryer), and refrigerator niche.
+* **Power Outlets (15A/16A):** Kitchen counter loop (hob, chimney, oven, microwave), Utility side-by-side laundry (washer/dryer), and refrigerator niche.
 * **Lighting & Fans:** 1200 mm sweep fan hooks centered in all bedrooms and living zones; 150 mm exhaust fan cutouts in all 4 washrooms.

@@ -1895,31 +1895,30 @@ addBox(decorGroup, 0.06, 0.065, 0.24, 14.35, 2.24, 8.64, MAT.steel, {
   meta: 'Tier 2 Recommended · ₹7,500–₹9,500 (Tier 1: Häfele DCL 110 ₹4.5k)'
 });
 
-// Utility + Service Balcony (Docket p. 15 + Locked Stacked Bosch Laundry)
+// Utility + Service Balcony (Docket p. 15 + Side-by-Side Bosch Laundry)
 addBox(furnGroup, 0.56, 1.64, 0.52, 15.05, 0.90, 9.65, MAT.taupeGloss, {
-  tag: 'UTILITY · DOCKET P. 15', title: 'Utility Tall Storage & Overhead (158 LU) + Stacked Bosch Laundry',
-  desc: 'Tall storage cabinet with Gold PVC skirting + wall overhead cabinet beside Kitchen door + stacked Bosch Serie 6 10kg washer & Serie 4 10kg heat-pump dryer via WTZ27400 kit + black granite service sink.',
+  tag: 'UTILITY · DOCKET P. 15', title: 'Utility Tall Storage & Overhead (158 LU) + Side-by-Side Bosch Laundry',
+  desc: 'Tall storage cabinet with Gold PVC skirting + wall overhead cabinet beside Kitchen door + side-by-side Bosch Serie 6 10kg washer & Serie 4 10kg heat-pump dryer + black granite service sink.',
   meta: 'Utility Width: 1500 mm · White uPVC Enclosure'
 });
 addBox(furnGroup, 0.56, 0.08, 0.52, 15.05, 0.04, 9.65, MAT.goldProfile); // Utility Tall Cabinet Gold PVC skirting
 addBox(furnGroup, 0.02, 0.26, 0.02, 14.76, 1.02, 9.84, MAT.goldProfile); // Utility vertical gold pull
-addBox(furnGroup, 0.38, 0.46, 1.18, 15.14, 2.08, 10.75, MAT.taupeGloss); // Utility 2-door wall overhead cabinet (Docket p. 15, clears 1.71m stack)
-// Utility Stacked Bosch Serie 6 Washer (WGA254ZSIN, 600×850×600) + WTZ27400 Kit + Serie 4 Heat-Pump Dryer (WQG2520XIN, 600×850×600)
+addBox(furnGroup, 0.38, 0.46, 1.18, 15.14, 1.65, 10.53, MAT.taupeGloss); // Utility 2-door wall overhead cabinet above side-by-side laundry
+// Utility Side-by-Side Bosch Serie 6 Washer (WGA254ZSIN, 600×850×600) + Serie 4 Heat-Pump Dryer (WQG2520XIN, 600×850×600)
 const laundryMeta = {
-  tag: 'UTILITY · STACKED BOSCH LAUNDRY (EXACT 600×1710mm)', title: 'Bosch WGA254ZSIN (10kg Washer) + WTZ27400 + WQG2520XIN (10kg Heat-Pump Dryer)',
-  desc: 'Two stacked 600×850×600mm Bosch machines on structural tile with rubber anti-vibration pads, 20-bar SS304 braided inlet hose, inline polyphosphate scale filter on cold inlet, and 2× dedicated 16A radial drops.',
-  meta: 'Decided · ₹44k Washer + ₹64k Dryer + ₹5.5k Stack Kit'
+  tag: 'UTILITY · SIDE-BY-SIDE BOSCH LAUNDRY (1200×850mm)', title: 'Bosch WGA254ZSIN (10kg Washer) + WQG2520XIN (10kg Heat-Pump Dryer) Side-by-Side',
+  desc: 'Two side-by-side 600×850×600mm Bosch machines on structural tile with rubber anti-vibration pads, 20-bar SS304 braided inlet hose, inline polyphosphate scale filter on cold inlet, and 2× dedicated 16A radial drops.',
+  meta: 'Decided · ₹44k Washer + ₹64k Dryer (Side-by-Side)'
 };
-addBox(furnGroup, 0.60, 0.84, 0.60, 15.05, 0.42, 10.40, MAT.offWhite, laundryMeta);
-addBox(furnGroup, 0.61, 0.03, 0.61, 15.05, 0.855, 10.40, MAT.darkMetal, laundryMeta); // WTZ27400 stacking kit seam
-addBox(furnGroup, 0.60, 0.84, 0.60, 15.05, 1.29, 10.40, MAT.offWhite, laundryMeta);
-[0.44, 1.31].forEach(dy => {
+addBox(furnGroup, 0.60, 0.84, 0.60, 15.05, 0.42, 10.22, MAT.offWhite, laundryMeta);
+addBox(furnGroup, 0.60, 0.84, 0.60, 15.05, 0.42, 10.84, MAT.offWhite, laundryMeta);
+[10.22, 10.84].forEach(dz => {
   const drum = new THREE.Mesh(new THREE.CylinderGeometry(0.19, 0.19, 0.04, 20), MAT.darkMetal);
-  drum.rotation.z = Math.PI / 2; drum.position.set(14.74, dy, 10.40); furnGroup.add(drum);
+  drum.rotation.z = Math.PI / 2; drum.position.set(14.74, 0.44, dz); furnGroup.add(drum);
 });
-addBox(furnGroup, 0.55, 0.05, 0.62, 15.05, 0.84, 11.15, MAT.graniteBlack, {
+addBox(furnGroup, 0.55, 0.05, 0.62, 15.05, 0.84, 11.50, MAT.graniteBlack, {
   tag: 'UTILITY · SERVICE SINK & PLUMBING', title: 'Utility Black Granite Service Counter & Deep Scrub Sink',
-  desc: 'Heavy-duty utility scrub sink beside stacked Bosch laundry; P-SHAFT-74 metered feed tested for Zoloto Art. 1040B forged brass PRV if line pressure >4.5 bar.',
+  desc: 'Heavy-duty utility scrub sink beside side-by-side Bosch laundry; P-SHAFT-74 metered feed tested for Zoloto Art. 1040B forged brass PRV if line pressure >4.5 bar.',
   meta: '3–5mm underside capillary drip groove · DZR brass stopcocks'
 });
 addBox(furnGroup, 0.50, 1.45, 0.92, 15.25, 0.72, 6.92, MAT.steel, {

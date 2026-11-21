@@ -22,7 +22,7 @@ Pre-ceiling and pre-flooring infrastructure. Failure to sequence these before ar
 * **[[cabinetry-woodwork|Cabinetry & Woodwork]]** — IS 710 BWP plywood, calibrated cores, wardrobe hardware schedule, and ceiling plasterboard.
 * **[[wardrobe-internal-storage|Wardrobe & Utility Storage]]** — Bay-by-bay wardrobe internals (MBR, Kabir, Study/Guest, Home Gurudwara) and Utility janitor 65:35 layout.
 * **[[plans-drawings|Plans & Drawings]]** — Unit B4206 architectural floor plan, Daikin VRV 10 HP HVAC, plumbing shafts, and electrical DB.
-* **[[kitchen-laundry|Kitchen & Laundry]]** — Modular cabinetry, light Indian granite, undermount sinks, hybrid domino hob, 32A lines, and stacked laundry.
+* **[[kitchen-laundry|Kitchen & Laundry]]** — Modular cabinetry, light Indian granite, undermount sinks, hybrid domino hob, 32A lines, and side-by-side laundry.
 * **[[finalized-purchases|Finalized Purchases]]** — Committed major appliances, AV envelope (₹4.59L), dedicated 16A radials, and joinery clearances.
 * **[[bathrooms|Bathrooms]]** — 10L/15L horizontal geysers, SS304 flanged curtain rods, floor threshold water bars, silent exhaust CFM, and insect mesh.
 * **[[lighting-ambience|Lighting & Ambience]]** — Architectural CRI 95+ COB spots, 3000K CCT zoning, remote driver enclosures, and 24V dot-free mirror halos.

@@ -71,6 +71,6 @@ Strikes Homz Docket `p. 15` horizontal shelves inside the `560 mm` tall unit in 
 
 * **Left Tall Bay (`330 mm` clear × `1,550 mm` H):** Zero horizontal shelves. Gives the `250 mm` **Dyson V15** cleaner head clean clearance past `110°` hinge arms, with an internal `6A` dock socket + SS304 gripper strip for mop, floor wiper, and *jhadu*.
 * **Right Supply Bay (`180 mm` clear × `1,550 mm` H):** Fixed open shelves (zero pull-out runner width loss) for slim `1L–2L` bottles, Roborock pads, and `10"` RO candles; top tier (`1,300+ mm` AFF, child-safe) holds harsh cleaners. Store bulk `5L` detergent cans in the `1,180 mm` laundry overhead or under-sink.
-* **Moisture & Fire-Egress Guardrails:** Include a `50 mm` top/back louvered vent for damp mops and seal the `80 mm` Gold PVC skirting to tile with neutral silicone. Mount the **8" SS316 wire cutter** by the bedroom corridor egress window (not inside the Utility cabinet). Overhead `1,180 × 380 × 460 mm` unit clears the `1,710 mm` Bosch washer/dryer stack.
+* **Moisture & Fire-Egress Guardrails:** Include a `50 mm` top/back louvered vent for damp mops and seal the `80 mm` Gold PVC skirting to tile with neutral silicone. Mount the **8" SS316 wire cutter** by the bedroom corridor egress window (not inside the Utility cabinet). Overhead `1,180 × 380 × 460 mm` unit mounts cleanly above the side-by-side Bosch washer and heat-pump dryer (`850 mm` H each).
 
-![Utility Janitor Tall Unit & Stacked Laundry Scheme](assets/decor/utility-janitor-internal.png)
+![Utility Janitor Tall Unit & Side-by-Side Laundry Scheme](assets/decor/utility-janitor-internal.png)
