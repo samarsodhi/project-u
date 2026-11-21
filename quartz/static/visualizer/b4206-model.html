@@ -481,7 +481,6 @@
 
 <div id="palette">
   <div class="swatch"><span class="dot" style="background:#F0EFE8"></span>0765 Morning Glory</div>
-  <div class="swatch"><span class="dot" style="background:#B2C2CC"></span>8307 Misty Breeze</div>
   <div class="swatch"><span class="dot" style="background:#D8CFBC"></span>3163 SI Beige Wool</div>
   <div class="swatch"><span class="dot" style="background:#F4F2EB"></span>158 LU Wall/Lofts</div>
   <div class="swatch"><span class="dot" style="background:#7B5238"></span>3174 LU Brown Sugar</div>
@@ -807,7 +806,7 @@ function makeDhurrieTex() {
 // ============================================================================
 const MAT = {
   wallBase:      new THREE.MeshStandardMaterial({ color: 0xF0EFE8, roughness: 0.88 }),
-  wallKabir:     new THREE.MeshStandardMaterial({ color: 0xB2C2CC, roughness: 0.86 }),
+  wallKabir:     new THREE.MeshStandardMaterial({ color: 0xF0EFE8, roughness: 0.88 }),
   wallLimewash:  new THREE.MeshStandardMaterial({ map: makeLimewashTex(), bumpMap: makeLimewashBump(), bumpScale: 0.008, roughness: 0.94 }),
   wallBotanical: new THREE.MeshStandardMaterial({ map: makeBotanicalTex(), roughness: 0.85 }),
   hiddenGrooved: new THREE.MeshStandardMaterial({ map: makeGroovedDoorTex(), roughness: 0.60 }),
@@ -2007,15 +2006,16 @@ mbrStop.userData.meta = {
   meta: 'Wind-Slam & 42dB Acoustic Isolation · ₹8,300 total'
 };
 inspectables.push(mbrStop); decorGroup.add(mbrStop);
-addDomeMirror(5.68, 1.38, 7.95, 0.58, 1.56, 'x', {
+// MBR NE Dressing Nook: Glass Cabinet on LEFT (z=7.90) + Backlit Dome Mirror on RIGHT (z=8.55)
+addBox(furnGroup, 0.36, 1.50, 0.50, 5.52, 1.28, 7.90, MAT.tintedGlass);
+[2.04, 0.52].forEach(gy => addBox(furnGroup, 0.38, 0.032, 0.52, 5.52, gy, 7.90, MAT.goldProfile));
+[7.65, 8.15].forEach(gz => addBox(furnGroup, 0.38, 1.54, 0.03, 5.52, 1.28, gz, MAT.goldProfile)); // 4-sided gold frame
+[0.88, 1.28, 1.66].forEach(sy => addBox(furnGroup, 0.32, 0.022, 0.46, 5.54, sy, 7.90, MAT.internalLinen)); // 5133 SD shelves
+addDomeMirror(5.68, 1.38, 8.55, 0.58, 1.56, 'x', {
   tag: 'MASTER SUITE · NE NOOK MIRROR', title: 'Full-Height Backlit Saint-Gobain Dome Mirror',
-  desc: 'Mounted on neutral-cure alkoxy silicone inside NE Dressing Nook with 24V CRI 95+ COB halo (Mean Well LPV-60-24).',
+  desc: 'Mounted on neutral-cure alkoxy silicone on the right side of NE Dressing Nook with 24V CRI 95+ COB halo (Mean Well LPV-60-24).',
   meta: 'Zero facial shadows'
 });
-addBox(furnGroup, 0.36, 1.50, 0.50, 5.52, 1.28, 8.60, MAT.tintedGlass);
-[2.04, 0.52].forEach(gy => addBox(furnGroup, 0.38, 0.032, 0.52, 5.52, gy, 8.60, MAT.goldProfile));
-[8.35, 8.85].forEach(gz => addBox(furnGroup, 0.38, 1.54, 0.03, 5.52, 1.28, gz, MAT.goldProfile)); // 4-sided gold frame
-[0.88, 1.28, 1.66].forEach(sy => addBox(furnGroup, 0.32, 0.022, 0.46, 5.54, sy, 8.60, MAT.internalLinen)); // 5133 SD shelves
 
 // Master South Balcony Chairs
 const sBalcMeta = {
@@ -2102,7 +2102,7 @@ addFloorLamp(8.08, 10.92, 'Orange Tree Ayra Reading Floor Lamp', '2700K CRI 90+ 
 addBox(furnGroup, 0.58, 2.45, 0.04, 9.54, 1.225, 0.14, MAT.cinnHickory, {
   tag: 'BR-02 KABIR · EAST WARDROBE (DOCKET P. 22)', title: 'Locked KBR Wardrobe (3163 SI + 424 1D Niche + 3267 SI Indigo Drawers)',
   desc: 'North bay: open 424 1D Cinnamon Hickory book niche. Main shutters: 3163 SI Beige Wool + Mantara W-0024 50mm Ø solid beech elephant knobs (₹649 ea, single M4 center bolt). Base: 4× 3267 SI Vintage Indigo tandem drawers + 3× Tip-On lofts.',
-  meta: 'Wall Paint: Misty Breeze (8307) #B2C2CC · Blum Soft-Close'
+  meta: 'Wall Paint: Morning Glory (0765) #F0EFE8 · Blum Soft-Close'
 });
 addBox(furnGroup, 0.58, 2.45, 0.04, 9.54, 1.225, 0.88, MAT.cinnHickory);
 addBox(furnGroup, 0.04, 2.45, 0.76, 9.81, 1.225, 0.51, MAT.cinnHickory);
@@ -2175,7 +2175,7 @@ const mapPlane = new THREE.Mesh(new THREE.PlaneGeometry(1.50, 0.90), MAT.worldMa
 mapPlane.position.set(7.35, 1.52, 3.695); mapPlane.rotation.y = Math.PI;
 mapPlane.userData.meta = {
   tag: 'BR-02 KABIR · SOUTH WALL (EXACT 150×90cm)', title: 'Woodsify 3D Multilayer Birch World Map (Size L)',
-  desc: 'Exact 1500×900mm wood continents mounted directly on cured South wall Misty Breeze 8307 Royale paint above daybed (20cm clear of East Henka sconce, no BWP backer); grazed by 3000K CRI 90+ gimbal spot.',
+  desc: 'Exact 1500×900mm wood continents mounted directly on cured South wall Morning Glory 0765 Royale paint above daybed (20cm clear of East Henka sconce, no BWP backer); grazed by 3000K CRI 90+ gimbal spot.',
   meta: 'South Wall Above Daybed · ₹5,689–₹9,540'
 };
 inspectables.push(mapPlane); decorGroup.add(mapPlane);

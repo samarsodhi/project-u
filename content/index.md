@@ -59,4 +59,4 @@ Building envelope resilience, indoor environmental quality, and child safety:
 Permanent cultural heritage and final aesthetic curation:
 
 * **[[art-wall-decor|Art & Wall Decor]]** — GI-tagged Swamimalai Chola bronzes, Persian wall carpet, and museum-grade UV glazing.
-* **[Interactive 2D/3D Architectural Model (Unit B4206)](https://samarsodhi.github.io/project-u/static/visualizer/b4206-model.html?v=15)** — Full-scale 2D blueprint, 3D dollhouse, and first-person walkthrough of Unit B4206.
+* **[Interactive 2D/3D Architectural Model (Unit B4206)](https://samarsodhi.github.io/project-u/static/visualizer/b4206-model.html?v=16)** — Full-scale 2D blueprint, 3D dollhouse, and first-person walkthrough of Unit B4206.
