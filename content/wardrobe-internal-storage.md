@@ -19,13 +19,17 @@ Internal partition, shelf-pitch, and ergonomic layout schedule for all bedroom w
 
 ## 1. Master Bedroom (`MBR`) — South 4-Door Wardrobe (`1,960 × 600 × 2,450 mm`)
 
-Pairs maximum hanging on Samar's bay with Sonia's handbag shelves, `2×` parallel hanging column, and calm **drawer-in-a-drawer** bottom fronts (`460 mm` single external band):
+Pairs maximum hanging on Samar's bay with Sonia's handbag shelves, `2×` parallel hanging column, and a calm `460 mm` drawer base (`3163 SI Beige Wool` + single Gold G-profile horizon line at `460 mm` AFF):
 
 * **Samar Bay (Left, `980 mm` W):** **2× Full-Width `950 mm` Stacked Hanging Rods** (`~750 mm` upper + `~690 mm` lower clear drop) for shirts, trousers, and jackets.
 * **Sonia Bay (Right, `980 mm` W):** Left `500 mm` has a top scarf/clutch shelf, **1× ergonomic rod** (`~1,720 mm` AFF, `~900 mm` drop for tops/blouses), and **`2×` adjustable `32 mm`-pin shelves** below for handbags, sweaters, and denim; Right `450 mm` uses **2× stacked parallel rods** (`~750 mm` upper + `~690 mm` lower clear drop) for kurtis, blouses, and hanger-folded sarees.
-* **Single `460 mm` External Drawer-in-a-Drawer (`2×` bays):** Keeps one clean `3163 SI` drawer front + Gold G-profile outside, with a hidden **`150 mm` inner pull-out tray** (`Blum/Hettich`) inside for innerwear/socks/tees above the deep `~240 mm` box for jeans, bedsheets, and muslin-wrapped sarees; store jewelry in the NE Dressing Nook `3`-drawer vanity. See [[rooms/master-bedroom]].
+* **Bottom `460 mm` Drawer Base (`2×` bays — Seamless 2-External-Drawer Options vs. Baseline Drawer-in-a-Drawer):** Rejects dual horizontal Gold G-profiles (`6.5/10`, creates three parallel brass stripes in the bottom `500 mm`) and protruding `35 mm` ankle-height handles (`7.6/10`, shin/saree snag at `200 mm` AFF). Gives `1`-step daily access to both drawers via an **asymmetric `160 mm` top + `300 mm` bottom split** (`1 : 1.85` ratio; top `160 mm` daily socks/innerwear/tees opens via the single `460 mm` AFF Brushed Gold G-profile; bottom `300 mm` holds folded jeans, bedsheets, and muslin sarees on `40 kg` Blum undermount runners; store jewelry in the NE Dressing Nook `3`-drawer vanity). See [[rooms/master-bedroom]]:
+  * **`[Recommended]` Option A (`9.5/10` — Single Gold G-Profile + Hidden `45°` Bevel Seam at `300 mm` AFF):** Lower `300 mm` drawer omits metal hardware and uses an inward **`45°` chamfered top edge** (`22 mm` finger pocket behind a `3 mm` shadow seam, edge-banded in matching `3163 SI Beige Wool`). From standing eye level (`1,650 mm` AFF looking down at `65°`), the upper drawer overhangs the bevel for a `100%` flush, zero-metal lower joint.
+  * **Option B (`9.1/10` — Modular Factory Easy, `90°` Standard Shutters):** If Homz's factory CNC edge-bander only presses `90°` flat edges, either (**Option B1, `9.1/10`**) fit a slim Aluminum J-profile at `300 mm` AFF **powder-coated in Matte Warm Beige (`RAL 1013 / 1015`)** to camouflage into `3163 SI Beige Wool`, or (**Option B2, `8.9/10`**) use a `2 mm` zero-handle seam with genuine **`Blum Tip-On Bluemotion`** push-to-open + soft-close strictly on the lower infrequent `300 mm` drawer. *(Baseline fallback `8.8/10`: single `460 mm` external front + hidden `150 mm` inner pull-out tray.)*
 
 ![MBR South 4-Door Wardrobe Internal Scheme](assets/decor/wardrobe-internal-mbr.png)
+
+![MBR South Wardrobe Seamless 2-External-Drawer Options A & B](assets/decor/wardrobe-mbr-drawer-options.png)
 
 ---
 
